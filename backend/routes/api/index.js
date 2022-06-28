@@ -6,7 +6,7 @@ router.post('/test', function (req, res) {
 });
 
 
-//{"XSRF-Token":"WrrIzk3h-XAUiLTIoZ2FB7qs5741RDiPA2wk"}
+
 
 /*
 phase 1 - Test the API Router
