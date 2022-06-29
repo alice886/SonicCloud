@@ -29,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       })
+      if (user && user.validatePassword(password)) {
+        return await User.scope('currentUser').findByPk(user.id);
+      }
     };
     static async signup({ username, email, pasword }) {
       const hashedPassword = bcrypt.hashSync(password);
