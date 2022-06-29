@@ -1,7 +1,8 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model, Validator } = require('sequelize');
+const bcrypt = require('bcryptjs');
+const { Op } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -9,9 +10,38 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    tosafeObject() {
+      const { id, username, email } = this;
+      return { id, username, email };
+    };
+    validatePassword(password) {
+      return bcrypt.compareSync(password, this.hashedPassword.toString());
+    };
+    static getCurrentUserById(id) {
+      return User.scope('currentUser').findByPk(id);
+    };
+    static async login({ credential, password }) {
+      const user = await User.scope('loginUser').findOne({
+        where: {
+          [Op.or]: {
+            username: credential,
+            email: credential
+          }
+        }
+      })
+    };
+    static async signup({ username, email, pasword }) {
+      const hashedPassword = bcrypt.hashSync(password);
+      const user = await User.create({
+        username,
+        email,
+        hashedPassword
+      })
+      return await User.scope('currentUser').findByPk(user.id)
+    };
     static associate(models) {
       // define association here
-    }
+    };
   }
   User.init({
     username: {
@@ -20,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [2, 50],
         isNotAnEmail(value) {
-          if (validator.isEmail(value)) {
+          if (Validator.isEmail(value)) {
             throw new Error('Unsername cannot be an email!');
           }
         }
@@ -32,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [5, 300],
         isAnEmail(value) {
-          if (!validator.isEmail(value)) {
+          if (!Validator.isEmail(value)) {
             throw new Error("Plz enter an email");
           }
         }
@@ -49,6 +79,19 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    defaultScope: {
+      attributes: {
+        exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
+      }
+    },
+    scopes: {
+      currentUser: {
+        attributes: { exclude: ['hashedPassword'] }
+      },
+      loginUser: {
+        attributes: {}
+      }
+    }
   });
   return User;
 };
