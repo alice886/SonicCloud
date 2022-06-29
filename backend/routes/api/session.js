@@ -20,9 +20,10 @@ router.post('/', async (req, res, next) => {
     return res.json({ user });
 })
 
-
-
-// fXTAedTz-BzoZlHj2c7Rx_m2JqxabS1dLkgQ
+router.delete('/', (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+})
 
 
 
