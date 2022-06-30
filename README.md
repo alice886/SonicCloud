@@ -1,4 +1,4 @@
-# ` API-docs-SoundCloud 🎶🌩️`
+# API-docs-SoundCloud 🎶🌩️
 
 ## Database Schema Design
 
