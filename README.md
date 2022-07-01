@@ -2,8 +2,7 @@
 
 ## Database Schema Design
 
-
-![Screen Shot 2022-07-01 at 10 15 09 AM](https://user-images.githubusercontent.com/93701088/176940610-e8d1aa5a-d5ed-4faa-9ad6-c343d6801858.png)
+![Screen Shot 2022-07-01 at 1 33 49 PM](https://user-images.githubusercontent.com/93701088/176964637-f7798c75-18b9-4145-b517-d03afed6b0b0.png)
 
 
 ## API Documentation
@@ -23,8 +22,6 @@ All endpoints that require a current user to be logged in.
     {
       "message": "Authentication required",
       "statusCode": 401
-    }
-    ```
 
 ## All endpoints that require proper authorization
 
