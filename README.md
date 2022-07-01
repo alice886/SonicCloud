@@ -2,7 +2,8 @@
 
 ## Database Schema Design
 
-![Screen Shot 2022-06-30 at 10 20 23 PM](https://user-images.githubusercontent.com/93701088/176828931-16b05b39-2c97-4774-86ea-4be833bb950a.png)
+
+![Screen Shot 2022-07-01 at 9 56 57 AM](https://user-images.githubusercontent.com/93701088/176938169-d67d64ae-fa3c-4450-9fd4-a7793c49146d.png)
 
 
 ## API Documentation
@@ -51,7 +52,7 @@ Returns the information about the current user that is logged in.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: '/users/:userId'
+  * URL: '/users/current'
   * Body: none
 
 * Successful Response
@@ -269,7 +270,7 @@ Returns all the songs created by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: '/users/:artistId/songs'
+  * URL: '/users/current/songs'
   * Body: none
 
 * Successful Response
@@ -569,7 +570,7 @@ Returns all the Albums created by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: '/users/:artistId/albums'
+  * URL: '/users/current/albums'
   * Body: none
 
 * Successful Response
@@ -819,7 +820,7 @@ Returns all the comments that belong to a song specified by id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/comments/:commentId/:songId'
+  * URL: '/songs/:songId/comments'
   * Body: none
 
 * Successful Response
@@ -867,7 +868,7 @@ Create and return a new comment for a song specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: '/comments/:songId'
+  * URL: '/songs/:songId/comments'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -932,7 +933,7 @@ Update and return an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: PUT/PATCH
-  * URL: '/comments/:commentId'
+  * URL: '/songs/"songId/comments/:commentId'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1033,7 +1034,7 @@ Returns the details of an artist specified by their id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/artists/:artistId'
+  * URL: '/users/:artistId'
   * Body: none
 
 * Successful Response
@@ -1072,7 +1073,7 @@ Returns all the songs created by the specified artist.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/artist/:artistId/songs'
+  * URL: '/users/:artistId/songs'
   * Body: none
 
 * Successful Response
@@ -1119,7 +1120,7 @@ Returns all the albums created by the specified artist.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/artist/:artistId/albums'
+  * URL: '/users/:artistId/albums'
   * Body: none
 
 * Successful Response
@@ -1164,7 +1165,7 @@ Returns all the playlists created by the specified artist.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/artist/:artistId/playlists'
+  * URL: '/users/:userId/playlists'
   * Body: none
 
 * Successful Response
@@ -1261,7 +1262,7 @@ Add a song to a playlist specified by the playlist's id.
 * Require proper authorization: Playlist must belong to the current user
 * Request
   * Method: POST
-  * URL: '/playlists/:playlistId'
+  * URL: '/playlists/:playlistId/songs/:songId'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1475,7 +1476,7 @@ Returns all the playlists created by the current user.
 * Require Authentication: true
 * Request
   * Method: GET
-  * URL: '/users/:userId/playlists'
+  * URL: '/users/current/playlists'
   * Body: none
 
 * Successful Response
