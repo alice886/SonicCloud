@@ -357,7 +357,7 @@ Creates and returns a new song.
 * Require proper authorization: Album must belong to the current user
 * Request
   * Method: POST
-  * URL: '/albums/:albumId'
+  * URL: '/albums/:albumId/songs'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -714,7 +714,7 @@ Updates and returns an existing album.
 * Require Authentication: true
 * Require proper authorization: Album must belong to the current user
 * Request
-  * Method: PUT
+  * Method: PUT/PATCH
   * URL: '/albums/:albumId'
   * Headers:
     * Content-Type: application/json
@@ -819,7 +819,7 @@ Returns all the comments that belong to a song specified by id.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/songs/:songId/comments'
+  * URL: '/comments/:commentId/:songId'
   * Body: none
 
 * Successful Response
@@ -867,7 +867,7 @@ Create and return a new comment for a song specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: 'songs/:songId'
+  * URL: '/comments/:songId'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -931,7 +931,7 @@ Update and return an existing comment.
 * Require Authentication: true
 * Require proper authorization: Comment must belong to the current user
 * Request
-  * Method: PUT
+  * Method: PUT/PATCH
   * URL: '/comments/:commentId'
   * Headers:
     * Content-Type: application/json
@@ -1208,7 +1208,7 @@ Creates and returns a new playlist.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: '/playlist'
+  * URL: '/playlists'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1372,7 +1372,7 @@ Updates and returns an existing playlist.
 * Require Authentication: true
 * Require proper authorization: Playlist must belong to the current user
 * Request
-  * Method: PUT
+  * Method: PUT/PATCH
   * URL: '/paylist/:playlistId'
   * Headers:
     * Content-Type: application/json
