@@ -1165,7 +1165,7 @@ Returns all the playlists created by the specified artist.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/users/:userId/playlists'
+  * URL: '/users/:artistId/playlists'
   * Body: none
 
 * Successful Response
