@@ -1,8 +1,9 @@
-# API-docs-SoundCloud 🎶🌩️
+# API-docs-SoundCloud  🎶🌩️
 
 ## Database Schema Design
 
-![Screen Shot 2022-06-30 at 5 01 45 PM](https://user-images.githubusercontent.com/93701088/176797534-df25a33f-337a-47aa-ac01-47cc8e7ce52c.png)
+![Screen Shot 2022-06-30 at 5 02 57 PM](https://user-images.githubusercontent.com/93701088/176797638-f8c79af2-88a3-4832-8124-d67ed49d3f41.png)
+
 
 ## API Documentation
 
