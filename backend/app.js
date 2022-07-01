@@ -15,6 +15,7 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
+const { ValidationError } = require('sequelize');
 
 if (!isProduction) app.use(cors());
 app.use(
@@ -45,7 +46,7 @@ app.use((_req, _res, next) => {
     next(err);
 });
 // 2/3 Sequelize Error-Handler
-const { ValidationError } = require('sequelize');
+// const { ValidationError } = require('sequelize');
 app.use((err, _req, _res, next) => {
     // app.use((err, req, res, next) => {
     if (err instanceof ValidationError) {
