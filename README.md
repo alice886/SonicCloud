@@ -933,7 +933,7 @@ Update and return an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: PUT/PATCH
-  * URL: '/songs/"songId/comments/:commentId'
+  * URL: '/songs/:songId/comments/:commentId'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -998,7 +998,7 @@ Delete an existing comment.
 * Require proper authorization: Comment must belong to the current user
 * Request
   * Method: DELETE
-  * URL: '/comments/:commentId'
+  * URL: 'comments/:commentId'
   * Body: none
 
 * Successful Response
