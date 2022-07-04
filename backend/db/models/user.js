@@ -44,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
     };
     static associate(models) {
       // define association here
+      User.hasMany(models.Playlist, { foreignKey: 'userId', hooks: true });
+      User.belongsToMany(models.Song, { through: models.artistSong });
+      User.belongsToMany(models.Album, { through: models.artistAlbum });
+      // User.belongsToMany(models.Comment, { foreignKey: 'userId' , onDelete:'CASCADE',hooks:true});
+
     };
   }
   User.init({
