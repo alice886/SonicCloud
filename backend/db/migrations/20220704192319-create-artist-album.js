@@ -11,20 +11,22 @@ module.exports = {
       artistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{model:'User'}
+        references: { model: 'User' }
       },
       AlbumId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references:{model:'Album'}
+        references: { model: 'Album' }
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

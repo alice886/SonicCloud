@@ -9,32 +9,39 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(80),
+        allowNull: false,
+        unique: true,
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200),
+        allowNull: true
       },
       albumId: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: 'Album',
         },
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(200),
+        allowNull: true
       },
       previewImage: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(200),
         allowNull: true,
         defaultValue: 'image url'
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },

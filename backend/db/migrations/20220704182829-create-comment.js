@@ -10,26 +10,31 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
         references: {
           model: 'User',
         },
       },
       songId: {
         type: Sequelize.INTEGER,
+        allowNull:false,
         references: {
           model: 'Songs',
         },
       },
       body: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100),
+        allowNull:false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },
