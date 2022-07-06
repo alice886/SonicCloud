@@ -9,16 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING(80),
+        type: Sequelize.STRING,
         unique: true,
         allowNull: false
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'User',
-        },
       },
       previewImage: {
         type: Sequelize.STRING,

@@ -25,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
         where: {
           [Op.or]: {
             username: credential,
+            firstName: credential,
+            lastName: credential,
             email: credential
           }
         }
@@ -33,10 +35,12 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope('currentUser').findByPk(user.id);
       }
     };
-    static async signup({ username, email, password }) {
+    static async signup({ username, firstName, lastName, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
+        firstName,
+        lastName,
         email,
         hashedPassword
       });
@@ -45,14 +49,37 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Playlist, { foreignKey: 'userId', hooks: true });
-      User.belongsToMany(models.Song, { through: models.artistSong });
-      User.belongsToMany(models.Album, { through: models.artistAlbum });
-      // User.belongsToMany(models.Comment, { foreignKey: 'userId' , onDelete:'CASCADE',hooks:true});
+      User.hasMany(models.Album, { foreignKey: 'userId', hooks: true });
+      User.hasMany(models.Comment, { foreignKey: 'userId', hooks: true });
 
     };
   }
   User.init({
     username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 50],
+        isNotAnEmail(value) {
+          if (Validator.isEmail(value)) {
+            throw new Error('Unsername cannot be an email!');
+          }
+        }
+      }
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 50],
+        isNotAnEmail(value) {
+          if (Validator.isEmail(value)) {
+            throw new Error('Unsername cannot be an email!');
+          }
+        }
+      }
+    },
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {

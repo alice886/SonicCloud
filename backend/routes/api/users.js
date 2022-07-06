@@ -26,17 +26,38 @@ const validateSignup = [
     handleValidationErrors
 ]
 
+
 router.post('/', validateSignup, async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+    const { username, firstName, lastName, email, password } = req.body;
+    try {
+        const user = await User.signup({ username, firstName, lastName, email, password });
 
-    await setTokenCookie(res, user);
+        await setTokenCookie(res, user);
 
-    return res.json({ user });
+        return res.json({ user });
+    } catch (err) {
+        if (await User.findAllByUsername(username)) {
+            const err = new Error('username already exists');
+            err.title = 'username already exists';
+            err.errors = ['username already exists'];
+            err.status = 422;
+            return next(err);
+        }
+    }
 });
 
-router.get('/', async (req, res) => {
-    res.send('hi users');  // ok it works!!
+router.get('/current', async (req, res) => {
+    try {
+        const { id, username, email } = await User.toSafeObject();
+        return res.json(User.getCurrentUserById(id));
+    } catch (e) {
+        const err = new Error('could not find current user');
+        err.title = 'could not find current user';
+        err.errors = ['could not find current user'];
+        err.status = 404;
+        return next(err);
+    }
+
 })
 
 

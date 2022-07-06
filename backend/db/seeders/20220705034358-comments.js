@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('People', [
+    await queryInterface.bulkInsert('Comments', [
       {
         userId: 1,
         songId: 2,
@@ -42,5 +42,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Comments', null, {});
   }
 };

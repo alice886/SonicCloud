@@ -13,13 +13,12 @@ module.exports = {
         allowNull: false,
         unique: true
       },
-      songId: {
+      userId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Songs',
-          key: 'songId'
-        },
+        allowNull: false,
+        // references: {
+        //   model: 'Users',
+        // },
       },
       previewImage: {
         type: Sequelize.STRING,

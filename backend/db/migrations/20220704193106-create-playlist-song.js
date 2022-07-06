@@ -11,12 +11,16 @@ module.exports = {
       songId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Song' }
+        references: {
+          model: 'Songs'
+        }
       },
       playlistId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Playlist' }
+        references: {
+          model: 'Playlists'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -29,6 +33,13 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
+    // await queryInterface.addIndex(
+    //   'playlistSongs',
+    //   ['songId', 'playlistId'],
+    //   {
+    //     unique: true
+    //   }
+    // );
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('playlistSongs');

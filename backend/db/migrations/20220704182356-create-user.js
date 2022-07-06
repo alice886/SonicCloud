@@ -24,7 +24,7 @@ module.exports = {
         unique: false
       },
       email: {
-        type: Sequelize.STRING(300),
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true
       },
@@ -39,7 +39,7 @@ module.exports = {
       previewImage: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: 'image url'
+        // defaultValue: 'image url'
       },
       createdAt: {
         allowNull: false,

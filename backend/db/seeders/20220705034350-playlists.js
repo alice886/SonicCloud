@@ -7,25 +7,25 @@ module.exports = {
         name: 'playlist NO.1',
         userId: 2,
         previewImage: '1111111111',
-        songId: 3
+
       },
       {
-        name: 'playlist NO.1',
+        name: 'playlist NO.2',
         userId: 2,
         previewImage: '222222222',
-        songId: 2
+
       },
       {
         name: 'iHeartRadio',
         userId: 3,
         previewImage: '3333333333',
-        songId: 4
+
       },
       {
-        name: 'iHeartRadio',
+        name: 'iHeartRadio2',
         userId: 3,
         previewImage: '444444444',
-        songId: 4
+
       },
     ], {});
   },
@@ -37,5 +37,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Playlists', null, {});
   }
 };

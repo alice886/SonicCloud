@@ -10,13 +10,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Song.hasMany(models.Comment, { foreignKey: 'songId', onDelete: 'CASCADE', hooks: true });
+      Song.hasMany(models.Comment, { foreignKey: 'songId', hooks: true });
       Song.belongsTo(models.Album, { foreignKey: 'albumId' });
-      Song.belongsToMany(models.User, { through: models.artistSong })
+      Song.belongsTo(models.User, { foreignKey: 'userId' });
+      Song.belongsToMany(models.Playlist, { through: models.playlistSong });
     }
   }
   Song.init({
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    albumId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false
@@ -27,10 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [2, 60]
       }
-    },
-    albumId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     },
     url: {
       type: DataTypes.STRING,

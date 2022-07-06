@@ -8,6 +8,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        // references: {
+        //   model: 'User',
+        // },
+      },
+      albumId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        // references: {
+        //   model: 'Album',
+        // },
+      },
       title: {
         type: Sequelize.STRING(80),
         allowNull: false,
@@ -16,13 +30,6 @@ module.exports = {
       description: {
         type: Sequelize.STRING(200),
         allowNull: true
-      },
-      albumId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Album',
-        },
       },
       url: {
         type: Sequelize.STRING(200),

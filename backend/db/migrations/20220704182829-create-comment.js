@@ -11,16 +11,16 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull:false,
-        references: {
-          model: 'User',
-        },
+        // references: {
+        //   model: 'User',
+        // },
       },
       songId: {
         type: Sequelize.INTEGER,
         allowNull:false,
-        references: {
-          model: 'Songs',
-        },
+        // references: {
+        //   model: 'Songs',
+        // },
       },
       body: {
         type: Sequelize.STRING(100),
