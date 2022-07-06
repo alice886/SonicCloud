@@ -76,14 +76,14 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: '/'
+  * URL: '/api/session/login'
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "email": "kermitz@user.io",
+      "credential": "kermitz@user.io",
       "password": "password1"
     }
     ```
