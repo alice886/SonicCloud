@@ -10,21 +10,21 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        // references: {
-        //   model: 'User',
-        // },
+        allowNull: false,
+        references: {
+          model: 'Users',
+        },
       },
       songId: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        // references: {
-        //   model: 'Songs',
-        // },
+        allowNull: false,
+        references: {
+          model: 'Songs',
+        },
       },
       body: {
         type: Sequelize.STRING(100),
-        allowNull:false,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
