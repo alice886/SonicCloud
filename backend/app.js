@@ -1,10 +1,13 @@
 const express = require('express');
 require('express-async-errors');
+const fs = require('fs');
 const morgan = require('morgan');
 const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+
+require('dotenv').config();
 
 const { environment } = require('./config');
 const isProduction = environment === 'production';
@@ -16,6 +19,17 @@ app.use(cookieParser());
 app.use(express.json());
 
 const { ValidationError } = require('sequelize');
+
+const userRouter = require('./routes/api/users');
+app.use('/users', userRouter);
+const albumRouter = require('./routes/api/albums');
+app.use('/albums', albumRouter);
+const songRouter = require('./routes/api/songs');
+app.use('/songs', songRouter);
+const commentRouter = require('./routes/api/comments');
+app.use('/comments', commentRouter);
+const playlistRouter = require('./routes/api/playlists');
+app.use('/playlists', playlistRouter);
 
 if (!isProduction) app.use(cors());
 app.use(
@@ -67,6 +81,7 @@ app.use((err, _req, res, _next) => {
         stack: isProduction ? null : err.stack
     });
 });
+
 
 
 

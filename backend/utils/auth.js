@@ -53,5 +53,10 @@ const requireAuth = (req, _res, next) => {
     return next(err);
 }
 
+const signinValidation = (req, res, next) => {
+    // if(req.user)
+    }
+
+
 
 module.exports = { setTokenCookie, restoreUser, requireAuth };

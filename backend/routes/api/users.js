@@ -1,10 +1,10 @@
 const express = require('express')
+const router = express.Router();
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const router = express.Router();
 
 const validateSignup = [
     check('email')
@@ -26,14 +26,42 @@ const validateSignup = [
     handleValidationErrors
 ]
 
-router.post('/', validateSignup, async (req, res) => {
-    const { email, password, username } = req.body;
-    const user = await User.signup({ email, username, password });
+const validateLogin = [
+    check('credential')
+        .exists({ checkFalsy: true })
+        .notEmpty()
+        .withMessage('Please provide a valid email or username.'),
+    check('password')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a password.'),
+    handleValidationErrors
+];
+
+router.get('/', async (req, res) => {
+    const allUsers = await User.findAll({
+        where: {},
+        include: [],
+    });
+    res.json(allUsers);
+});
+
+router.post('/signup', validateSignup, async (req, res) => {
+    const { username, firstName, lastName, email, password } = req.body;
+
+    const user = await User.signup({ username, firstName, lastName, email, password });
 
     await setTokenCookie(res, user);
 
     return res.json({ user });
 });
+
+
+router.get('/:userId', async (req, res, next) => {
+    const { userId } = req.params;
+    const theUser = await User.findByPk(userId);
+    if (!theUser) res.status(404).send('User not found');
+    res.json(theUser);
+})
 
 
 

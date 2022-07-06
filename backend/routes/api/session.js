@@ -17,8 +17,9 @@ const validateLogin = [
 ];
 
 router.post('/', validateLogin, async (req, res, next) => {
+    // url -- http://localhost:8000/api/session/login
+    // token url -- http://localhost:8000/api/csrf/restore
     const { credential, password } = req.body;
-
     const user = await User.login({ credential, password });
 
     if (!user) {
@@ -35,7 +36,7 @@ router.post('/', validateLogin, async (req, res, next) => {
 
 router.delete('/', (_req, res) => {
     res.clearCookie('token');
-    return res.json({ message: 'success' });
+    return res.json({ message: 'logout success' });
 });
 
 
