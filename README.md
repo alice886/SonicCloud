@@ -83,8 +83,8 @@ information.
 
     ```json
     {
-      "email": "john.smith@gmail.com",
-      "password": "secret password"
+      "email": "kermitz@user.io",
+      "password": "password1"
     }
     ```
 
@@ -97,10 +97,11 @@ information.
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
-      "email": "john.smith@gmail.com",
-      "username": "JohnSmith",
+      "username": "kermitZ",
+      "firstName": "Jay",
+      "lastName": "kermit-Z",
+      "email": "kermitz@user.io",
+      
       "token": ""
     }
     ```
