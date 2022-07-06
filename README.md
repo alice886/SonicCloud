@@ -1,4 +1,4 @@
-# API-docs-SoundCloud  🎶🌩️
+# API-docs-SonicCloud  🎶🌩️
 
 ## Database Schema Design
 
@@ -143,18 +143,18 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: '/users'
+  * URL: '/users/signup'
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "firstName": "John",
-      "lastName": "Smith",
-      "username": "JohnSmith",
-      "email": "john.smith@gmail.com",
-      "password": "secret password"
+      "username": "ladygaga",
+      "firstName": "Lady",
+      "lastName": "Gaga",
+      "email": "gaga@user.io",
+      "password": "password5"
     }
     ```
 
@@ -166,11 +166,11 @@ user's information.
 
     ```json
     {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
-      "username": "JohnSmith",
-      "email": "john.smith@gmail.com",
+      "id": 5,
+      "firstName": "Lady",
+      "lastName": "Gaga",
+      "username": "ladygaga",
+      "email": "gaga@user.io",
       "token": ""
     }
     ```
