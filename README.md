@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![Screen Shot 2022-07-01 at 1 33 49 PM](https://user-images.githubusercontent.com/93701088/176964637-f7798c75-18b9-4145-b517-d03afed6b0b0.png)
+![Screen Shot 2022-07-06 at 7 26 48 AM](https://user-images.githubusercontent.com/93701088/177573937-29b94797-7532-46b7-88b6-ddc866dbeabd.png)
 
 
 ## API Documentation
