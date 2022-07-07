@@ -19,20 +19,22 @@ const { handleValidationErrors } = require('../../utils/validation');
 // 
 
 const validatePagination = (req, res, next) => {
-    const { page, size, title } = req.query;
+    const { page, size } = req.query;
     const e = new Error('Validation Error');
     e.status = 400;
+    e.errors = {};
     e.errors.page = "Page must be greater than or equal to 0";
     e.errors.size = "Size must be greater than or equal to 0";
     e.errors.createAt = "CreatedAt is invalid";
 
-    if (page < 0 && size < 0) return next(e);
+    if (parseInt(page) < 0 && parseInt(page) < 0) return next(e);
+    return next();
 }
 
 
-router.get('/', restoreUser, requireAuth, validatePagination, async (req, res) => {
+router.get('/', restoreUser, requireAuth, validatePagination, async (req, res, next) => {
     let pagination = {};
-    const { page, size, title } = req.query;
+    let { page, size } = req.query;
 
     page = page === undefined ? 0 : parseInt(page);
     size = size === undefined ? 20 : parseInt(size);
@@ -49,7 +51,7 @@ router.get('/', restoreUser, requireAuth, validatePagination, async (req, res) =
     });
 
 
-    return res.json({ paged });
+    return res.json(paged);
 });
 
 // getting songs created by current user
