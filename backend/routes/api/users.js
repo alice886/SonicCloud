@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Song, Album, Playlist, Comment } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -37,6 +37,7 @@ const validateLogin = [
     handleValidationErrors
 ];
 
+// getting all users
 router.get('/', async (req, res) => {
     const allUsers = await User.findAll({
         where: {},
@@ -45,6 +46,8 @@ router.get('/', async (req, res) => {
     res.json(allUsers);
 });
 
+// signing up 
+// DONE
 router.post('/signup', validateSignup, async (req, res) => {
     const { username, firstName, lastName, email, password } = req.body;
 
@@ -55,8 +58,9 @@ router.post('/signup', validateSignup, async (req, res) => {
     return res.json({ user });
 });
 
-
-router.get('/:userId', async (req, res, next) => {
+// getting details for a specific user base on Id
+// DONE
+router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
     const { userId } = req.params;
     const theUser = await User.findByPk(userId);
     if (!theUser) res.status(404).send('User not found');
