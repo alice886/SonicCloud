@@ -8,11 +8,11 @@ https://soniccloud.herokuapp.com/
 ## Users Table
 ![Screen Shot 2022-07-07 at 4 28 33 PM](https://user-images.githubusercontent.com/93701088/177888236-a0c2fefa-c454-4077-b894-c5872c727c7f.png)
 
-*id   username   firstName   lastName   email               password
-*1    kermitZ    Jay         kermit-Z   kermitz@user.io     password1
-*2    C-Monster  Cookie      Monster    c-monster@user.io   password2
-*3    Riri       Rihanna     Fanta      riri@user.io        password3
-*4    AKeys      Alexa       Keys       akeys@user.io       password4
+* id   username   firstName   lastName   email               password
+* 1    kermitZ    Jay         kermit-Z   kermitz@user.io     password1
+* 2    C-Monster  Cookie      Monster    c-monster@user.io   password2
+* 3    Riri       Rihanna     Fanta      riri@user.io        password3
+* 4    AKeys      Alexa       Keys       akeys@user.io       password4
 
 ## API Documentation
 
