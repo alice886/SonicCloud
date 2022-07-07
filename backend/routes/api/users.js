@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment, playlistSong } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -60,7 +60,7 @@ router.get('/artists/:artistId', async (req, res) => {
         },
         include: [Album, Song, Playlist]
     });
-    res.json(allArtists);
+    res.json({ allArtists });
 });
 
 // signing up 
@@ -81,7 +81,7 @@ router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) =>
     const { userId } = req.params;
     const theUser = await User.findByPk(userId);
     if (!theUser) res.status(404).send('User not found');
-    res.json(theUser);
+    res.json({ theUser });
 })
 
 
@@ -103,7 +103,7 @@ router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res
         }
     })
     if (!artistSongs) res.status(404).send('no songs found');
-    res.json(artistSongs);
+    res.json({ artistSongs });
 })
 
 
@@ -125,7 +125,7 @@ router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, re
         }
     })
     if (!artistAlbums) res.status(404).send('no albums found');
-    res.json(artistAlbums);
+    res.json({ artistAlbums });
 })
 
 
@@ -147,7 +147,7 @@ router.get('/artists/:artistId/playlists', restoreUser, requireAuth, async (req,
         },
     })
     if (!artistPlaylists) res.status(404).send('no playlists found');
-    res.json(artistPlaylists);
+    res.json({ artistPlaylists });
 })
 
 

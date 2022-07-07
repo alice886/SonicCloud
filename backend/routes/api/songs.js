@@ -1,17 +1,55 @@
 const express = require('express');
 const router = express.Router();
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment } = require('../../db/models');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 
-
-// getting all songs
+// getting all users
 // DONE
-router.get('/', restoreUser, requireAuth, async (req, res) => {
-    const allSongs = await Song.findAll({
+// router.get('/', async (req, res) => {
+//     const allUsers = await User.findAll({
+//         where: {},
+//         include: [],
+//     });
+//     res.json(allUsers);
+// });
+
+// paging all users
+// 
+
+const validatePagination = (req, res, next) => {
+    const { page, size, title } = req.query;
+    const e = new Error('Validation Error');
+    e.status = 400;
+    e.errors.page = "Page must be greater than or equal to 0";
+    e.errors.size = "Size must be greater than or equal to 0";
+    e.errors.createAt = "CreatedAt is invalid";
+
+    if (page < 0 && size < 0) return next(e);
+}
+
+
+router.get('/', restoreUser, requireAuth, validatePagination, async (req, res) => {
+    let pagination = {};
+    const { page, size, title } = req.query;
+
+    page = page === undefined ? 0 : parseInt(page);
+    size = size === undefined ? 20 : parseInt(size);
+
+    if (size >= 1 && page >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
+    const paged = await Song.findAll({
         where: {},
-        include: [],
+        // include: [page, size],
+        ...pagination
     });
-    return res.json(allSongs);
+
+
+    return res.json({ paged });
 });
 
 // getting songs created by current user
@@ -46,27 +84,21 @@ router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
 
 
 // deleting a song
-// 
-router.delete('/:songId', restoreUser, requireAuth, async (req, res) => {
+// DONE
+router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
-    const { id } = req.body;
-    const thesong = await Song.findByPk(id);
+    const songId = req.params.songId;
+    const thesong = await Song.findByPk(songId);
 
-    if (!id) { return res.json('please enter the song id to proceed') };
     if (!thesong) {
         res.status(404);
         return res.json('song not found, please try again')
     }
     if (thesong.userId !== userId) {
-        return res.send('you may only delete songs of yours')
+        return next(authorizationRequire());
     }
 
-    await thesong.destroy()
-    // await Song.destroy({
-    //     where: {
-    //         id,
-    //     }
-    // });
+    await thesong.destroy();
     return res.json('song deleted');
 
 })
@@ -82,7 +114,7 @@ router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
         }
     })
     if (!allComments) res.json('song not found, plz try again')
-    return res.json(allComments)
+    return res.json({ allComments })
 
 })
 
@@ -102,13 +134,13 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
         res.status(404);
         return res.json('song not found, plz try again')
     }
-    return res.json(newComment)
+    return res.json({ newComment })
 
 })
 
 // editing a song
 // DONE
-router.put('/mysongs', restoreUser, requireAuth, async (req, res) => {
+router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id, albumId, title, description, url, previewImage } = req.body
 
@@ -117,7 +149,7 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res) => {
 
     if (userId !== thesong.userId) {
         res.status(404);
-        return res.json('you many only modify songs of yours')
+        return next(authorizationRequire());
     }
     if (albumId) { thesong.albumId = albumId; }
     if (title) { thesong.title = title; };
@@ -126,16 +158,18 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res) => {
     if (previewImage) { thesong.previewImage = previewImage; };
 
     await thesong.save();
-    return res.json(thesong)
+    return res.json({ thesong })
 
 })
-
-
 
 
 const editSongHandler = async (req, res) => {
     const { songId } = req.params;
     const { userId, albumId, title, description, url, previewImae } = req.body;
 }
+
+
+
+
 
 module.exports = router;

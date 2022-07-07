@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Artist, Album, Playlist, Comment } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -11,7 +11,7 @@ router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const thealbumId = req.params.albumId;
     const thatAlbums = await Album.findByPk(thealbumId);
     if (!thatAlbums) res.status(404).send('album does not exist')
-    res.json(thatAlbums);
+    res.json({thatAlbums});
 });
 
 // getting all albums
@@ -21,7 +21,7 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
         where: {},
         include: [],
     });
-    res.json(allAlbums);
+    res.json({allAlbums});
 });
 
 // getting albums created by current user
@@ -38,7 +38,7 @@ router.get('/myalbums', restoreUser, requireAuth, async (req, res) => {
         res.status(404);
         return res.json('dont have a record of your album yet!')
     }
-    return res.json(myAlbums);
+    return res.json({myAlbums});
 
 
 })
@@ -59,12 +59,12 @@ router.post('/', restoreUser, requireAuth, async (req, res) => {
         previewImage,
     })
     res.status(201);
-    return res.json(newAlbum);
+    return res.json({newAlbum});
 })
 
 // delete a album
 // DONE
-router.delete('/', restoreUser, requireAuth, async (req, res) => {
+router.delete('/', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id } = req.body;
     const thealbum = await Album.findByPk(id)
@@ -74,7 +74,7 @@ router.delete('/', restoreUser, requireAuth, async (req, res) => {
         return res.json('album not found, please try again')
     }
     if (thealbum.userId !== userId) {
-        return res.send('you may only delete albums of yours')
+        return next(authorizationRequire());
     }
 
     await Album.destroy({
@@ -88,7 +88,7 @@ router.delete('/', restoreUser, requireAuth, async (req, res) => {
 
 // edit an album
 // DONE
-router.put('/myalbums', restoreUser, requireAuth, async (req, res) => {
+router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id, name, previewImage } = req.body
 
@@ -96,21 +96,20 @@ router.put('/myalbums', restoreUser, requireAuth, async (req, res) => {
     const thealbum = await Album.findByPk(id)
 
     if (userId !== thealbum.userId) {
-        res.status(404);
-        return res.json('you many only modify albums of yours')
+        return next(authorizationRequire());
     }
     if (name) { thealbum.name = name; };
     if (previewImage) { thealbum.previewImage = previewImage; };
 
     await thealbum.save();
-    return res.json(thealbum)
+    return res.json({thealbum})
 
 })
 
 
 // creating a song for an album
 // DONE
-router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res) => {
+router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const albumId = req.params.albumId;
     const { title, description, url, previewImage } = req.body;
@@ -120,7 +119,7 @@ router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res) => {
         return res.send(e);
     }
     const thealbum = await Album.findByPk(albumId);
-    if (userId !== thealbum.userId) return res.json('you can only modify albums of your own')
+    if (userId !== thealbum.userId) return next(authorizationRequire());
     let newSong = await Song.create({
         userId,
         albumId,
@@ -130,7 +129,7 @@ router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res) => {
         previewImage
     })
     res.status(201);
-    return res.json(newSong);
+    return res.json({newSong});
 })
 
 module.exports = router;

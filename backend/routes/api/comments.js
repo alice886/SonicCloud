@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment } = require('../../db/models');
 
 
@@ -11,7 +11,7 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
         where: {},
         include: [],
     });
-    res.json(allComments);
+    res.json({allComments});
 });
 
 
@@ -39,26 +39,26 @@ router.get('/mycomments', restoreUser, requireAuth, async (req, res) => {
 router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { id, body } = req.body
-    if (!body) return res.json('plz enter your comment')
+    if (!body) return res.json('please enter your comment')
 
     const thecomment = await Comment.findByPk(id)
 
     if (!thecomment) {
         res.status(404);
-        return res.json('comment not found, plz try again')
+        return res.json('comment not found, please try again')
     }
 
     thecomment.body = body;
     await thecomment.save();
 
-    return res.json(thecomment)
+    return res.json({thecomment})
 
 })
 
 
 // delete a comment
 // DONE
-router.delete('/mycomments', restoreUser, requireAuth, async (req, res) => {
+router.delete('/mycomments', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id } = req.body;
     const thecomment = await Comment.findByPk(id)
@@ -66,10 +66,10 @@ router.delete('/mycomments', restoreUser, requireAuth, async (req, res) => {
     if (!id) { return res.json('please enter the comment id to proceed') };
     if (!thecomment) {
         res.status(404);
-        return res.json('comment not found, plz try again')
+        return res.json('comment not found, please try again')
     }
     if (thecomment.userId !== userId) {
-        return res.send('you may only delete comments of yours')
+        return next(authorizationRequire());
     }
 
     await Comment.destroy({
