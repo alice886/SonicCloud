@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { Comment } = require('../../db/models');
+const { Comment, User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -16,35 +16,21 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-router.get('/currentUser', validateLogin, async (req, res) => {
+router.get('/mycomments', validateLogin, restoreUser, async (req, res) => {
     const { user } = req;
-    let userId;
     if (user) {
-        userId = user.toSafeObject().id
-    };
-    const allComments = await Comment.findAll({
-        where: {
-            userId,
-        }
-    });
-    res.json(allComments);
+        const mycomments = await Comment.findAll({
+            where: {
+                userId: user.dataValues.id,
+            }
+        })
+        return res.json(mycomments);
+    } else {
+        res.status(404);
+        return res.json('user is not found');
+    }
 })
 
-
-// router.get('/', restoreUser, (req, res) => {
-//     const { user } = req;
-//     if (user) {
-//         return res.json({
-//             await Comment.findAll({
-//                 where: {
-//                     id: user.toSafeObject().id
-//                 }
-
-//             }
-//             )
-//         });
-//     } else return res.json({});
-// })
 
 
 module.exports = router;

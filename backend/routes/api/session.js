@@ -36,7 +36,7 @@ router.post('/login', validateLogin, async (req, res, next) => {
 });
 
 // logging out from current account
-router.delete('/logout', validateLogin, (_req, res) => {
+router.delete('/logout', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'logout success' });
 });
@@ -46,16 +46,10 @@ router.get('/', restoreUser, (req, res) => {
     const { user } = req;
     if (user) {
         return res.json({
-            // user: user.toSafeObject()
-            data: user.toSafeObject().id
+            user: user.toSafeObject()
         });
     } else return res.json({});
 })
-
-
-
-
-
 
 
 
