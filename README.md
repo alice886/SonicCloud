@@ -5,15 +5,9 @@
 https://soniccloud.herokuapp.com/
 ![Screen Shot 2022-07-06 at 7 26 48 AM](https://user-images.githubusercontent.com/93701088/177573937-29b94797-7532-46b7-88b6-ddc866dbeabd.png)
 
-db for Users:
-┌────┬───────────┬───────────┬──────────┬───────────────────┬──────────────────────────────────────────────────────────────┬────────────┐
-│ id │ username  │ firstName │ lastName │       email       │                        hashedPassword                        │ isAnArtist │
-├────┼───────────┼───────────┼──────────┼───────────────────┼──────────────────────────────────────────────────────────────┼────────────┤
-│ 1  │ kermitZ   │ Jay       │ kermit-Z │ kermitz@user.io   │                           password1                          │ 1          │
-│ 2  │ C-Monster │ Cookie    │ Monster  │ c-monster@user.io │                           password2                          │ 0          │
-│ 3  │ Riri      │ Rihanna   │ Fanta    │ riri@user.io      │                           password3                          │ 1          │
-│ 4  │ AKeys     │ Alexa     │ Keys     │ akeys@user.io     │                           password4                          │ 1          │
-└────┴───────────┴───────────┴──────────┴───────────────────┴──────────────────────────────────────────────────────────────┴────────────┘
+
+![Screen Shot 2022-07-07 at 4 25 43 PM](https://user-images.githubusercontent.com/93701088/177887660-d5dd77fb-907c-485c-aa53-6c1c05508ec7.png)
+
 
 ## API Documentation
 
