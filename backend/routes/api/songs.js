@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment } = require('../../db/models');
-const { handleValidationErrors } = require('../../utils/validation');
-const { check } = require('express-validator');
-// const { validateSignup, validateLogin } = require('../../routes/api/users');
 
 
 // getting all songs
@@ -16,6 +13,25 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
     });
     return res.json(allSongs);
 });
+
+// getting songs created by current user
+// DONE
+router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
+    const currentuserId = req.user.id;
+    const mySongs = await Song.findAll({
+        where: {
+            userId: currentuserId,
+        }
+    })
+    if (!mySongs) {
+        res.status(404);
+        return res.json('dont have a record of your song yet!')
+    }
+    return res.json(mySongs);
+
+
+})
+
 
 // getting a song by it's id
 // DONE
@@ -30,33 +46,28 @@ router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
 
 
 // deleting a song
-router.delete(':/songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
-    const { user } = req;
-    const theSong = await Song.findAll({
-        where: {
-            id: user.dataValues.id,
-        }
-    })
+// 
+router.delete('/', restoreUser, requireAuth, async (req, res) => {
+    const userId = req.user.id;
+    const { id } = req.body;
+    const thesong = await Song.findByPk(id);
 
-    if (theSong) {
-        await Song.destory({
-            where: {
-                id: songId
-            }
-        })
-        return res.json('song deleted');
-    } else return res.json({});
-    // const { songId } = req.params;
+    if (!id) { return res.json('please enter the song id to proceed') };
+    if (!thesong) {
+        res.status(404);
+        return res.json('song not found, please try again')
+    }
+    if (thesong.userId !== userId) {
+        return res.send('you may only delete songs of yours')
+    }
 
-    // if (!theSong) res.status(404).send('Song not found');
-    // if (theSong.userId === user.dataValues.id) {
-    //     await Song.destroy({
-    //         where: {
-    //             id: songId
-    //         }
-    //     });
-    //     return res.json({ message: 'Successfuly deleted' });
-    // } else return res.json('you could only edit songs created by you')
+    await thesong.destroy()
+    // await Song.destroy({
+    //     where: {
+    //         id,
+    //     }
+    // });
+    return res.json('song deleted');
 
 })
 
@@ -95,25 +106,30 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
 
 })
 
-
-// edit a comment
+// edit a song
 // DONE
-router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
+router.put('/mysongs', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
-    const { songId, body } = req.body
-    const editComment = await Comment.create({
-        userId,
-        songId,
-        body,
-    })
-    const thesongtobecommented = await Song.findByPk(songId);
-    if (!thesongtobecommented) {
+    const { id, albumId, title, description, url, previewImage } = req.body
+
+    if (!id) res.json('please specify the song id to proceed')
+    const thesong = await Song.findByPk(id)
+
+    if (userId !== thesong.userId) {
         res.status(404);
-        return res.json('song not found, plz try again')
+        return res.json('you many only modify songs of yours')
     }
-    return res.json(editComment)
+    if (albumId) { thesong.albumId = albumId; }
+    if (title) { thesong.title = title; };
+    if (description) { thesong.description = description; };
+    if (url) { thesong.url = url; };
+    if (previewImage) { thesong.previewImage = previewImage; };
+
+    await thesong.save();
+    return res.json(thesong)
 
 })
+
 
 
 

@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Song, Album, Playlist, Comment } = require('../../db/models');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-
-
+const { User, Song, Album, Playlist, Comment, playlistSong } = require('../../db/models');
 
 
 // getting all Playlists
@@ -37,7 +33,8 @@ router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
         const myplaylists = await Playlist.findAll({
             where: {
                 userId: user.dataValues.id,
-            }
+            },
+            include: Song
         })
         return res.json(myplaylists);
     } else {
@@ -65,10 +62,74 @@ router.post('/', restoreUser, requireAuth, async (req, res) => {
     return res.json(newPlaylist);
 })
 
+// delete a playlist
+// DONE
+router.delete('/', restoreUser, requireAuth, async (req, res) => {
+    const userId = req.user.id;
+    const { id } = req.body;
+    const theplaylist = await Playlist.findByPk(id)
 
+    if (!id) { return res.json('please enter the playlist id to proceed') };
+    if (!theplaylist) {
+        res.status(404);
+        return res.json('playlist not found, please try again')
+    }
+    if (theplaylist.userId !== userId) {
+        return res.send('you may only delete playlists of yours')
+    }
 
+    await Playlist.destroy({
+        where: {
+            id,
+        }
+    });
+    return res.json('playlist deleted');
 
+})
 
+// edit an playlist
+// DONE
+router.put('/myplaylists', restoreUser, requireAuth, async (req, res) => {
+    const userId = req.user.id;
+    const { id, name, previewImage } = req.body
 
+    if (!id) res.json('please specify the playlist id to proceed')
+    const theplaylist = await Playlist.findByPk(id)
+
+    if (userId !== theplaylist.userId) {
+        res.status(404);
+        return res.json('you many only modify playlists of yours')
+    }
+    if (name) { theplaylist.name = name; };
+    if (previewImage) { thealbum.previewImage = previewImage; };
+
+    await theplaylist.save();
+    return res.json(theplaylist)
+
+})
+
+// adding a song to playlist based on the playlist's id
+// DONE
+router.post('/myplaylists', restoreUser, requireAuth, async (req, res) => {
+    const userId = req.user.id;
+    const { songId, playlistId } = req.body
+
+    if (!playlistId) res.json('please specify the playlist id to proceed')
+    const theplaylist = await Playlist.findByPk(playlistId);
+    const thesong = await Song.findByPk(songId);
+
+    if (!thesong) return res.json('song does not exit')
+    if (userId !== theplaylist.userId) {
+        res.status(404);
+        return res.json('you many only modify playlists of yours')
+    }
+    const songtoPlaylist = await playlistSong.create({
+        songId,
+        playlistId
+    })
+
+    await songtoPlaylist.save();
+    return res.json(songtoPlaylist)
+})
 
 module.exports = router;

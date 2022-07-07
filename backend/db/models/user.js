@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Playlist, { foreignKey: 'userId', hooks: true });
       User.hasMany(models.Album, { foreignKey: 'userId', hooks: true });
       User.hasMany(models.Comment, { foreignKey: 'userId', hooks: true });
+      User.hasMany(models.Song, { foreignKey: 'userId', hooks: true });
 
     };
   }
