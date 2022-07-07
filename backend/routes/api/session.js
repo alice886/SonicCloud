@@ -16,9 +16,10 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-router.post('/', validateLogin, async (req, res, next) => {
-    // url -- http://localhost:8000/api/session/login
-    // token url -- http://localhost:8000/api/csrf/restore
+// logging in to an existing account
+// url -- http://localhost:8000/api/session/login
+// token url -- http://localhost:8000/api/csrf/restore
+router.post('/login', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
 
@@ -34,17 +35,19 @@ router.post('/', validateLogin, async (req, res, next) => {
     return res.json({ user });
 });
 
-router.delete('/', (_req, res) => {
+// logging out from current account
+router.delete('/logout', validateLogin, (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'logout success' });
 });
 
-
+// getting current user info
 router.get('/', restoreUser, (req, res) => {
     const { user } = req;
     if (user) {
         return res.json({
-            user: user.toSafeObject()
+            // user: user.toSafeObject()
+            data: user.toSafeObject().id
         });
     } else return res.json({});
 })
