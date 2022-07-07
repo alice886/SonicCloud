@@ -7,7 +7,14 @@ https://soniccloud.herokuapp.com/
 
 
 ![Screen Shot 2022-07-07 at 4 25 43 PM](https://user-images.githubusercontent.com/93701088/177887660-d5dd77fb-907c-485c-aa53-6c1c05508ec7.png)
-
+┌────┬───────────┬───────────┬──────────┬───────────────────┬────────────┐
+│ id │ username  │ firstName │ lastName │       email       │  password  │
+├────┼───────────┼───────────┼──────────┼───────────────────┼────────────┤
+│ 1  │ kermitZ   │ Jay       │ kermit-Z │ kermitz@user.io   │ password1  │
+│ 2  │ C-Monster │ Cookie    │ Monster  │ c-monster@user.io │ password2  │
+│ 3  │ Riri      │ Rihanna   │ Fanta    │ riri@user.io      │ password3  │
+│ 4  │ AKeys     │ Alexa     │ Keys     │ akeys@user.io     │ password4  │
+└────┴───────────┴───────────┴──────────┴───────────────────┴────────────┘
 
 ## API Documentation
 
