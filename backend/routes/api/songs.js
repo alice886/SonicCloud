@@ -47,7 +47,7 @@ router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
 
 // deleting a song
 // 
-router.delete('/', restoreUser, requireAuth, async (req, res) => {
+router.delete('/:songId', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { id } = req.body;
     const thesong = await Song.findByPk(id);
@@ -106,7 +106,7 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
 
 })
 
-// edit a song
+// editing a song
 // DONE
 router.put('/mysongs', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;

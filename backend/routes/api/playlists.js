@@ -64,7 +64,7 @@ router.post('/', restoreUser, requireAuth, async (req, res) => {
 
 // delete a playlist
 // DONE
-router.delete('/', restoreUser, requireAuth, async (req, res) => {
+router.delete('/myplaylists', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { id } = req.body;
     const theplaylist = await Playlist.findByPk(id)
