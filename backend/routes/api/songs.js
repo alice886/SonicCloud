@@ -2,21 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment } = require('../../db/models');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
 
-// getting all users
-// DONE
-// router.get('/', async (req, res) => {
-//     const allUsers = await User.findAll({
-//         where: {},
-//         include: [],
-//     });
-//     res.json(allUsers);
-// });
-
-// paging all users
-// 
 
 const validatePagination = (req, res, next) => {
     const { page, size } = req.query;
@@ -31,30 +17,19 @@ const validatePagination = (req, res, next) => {
     return next();
 }
 
-
-router.get('/', restoreUser, requireAuth, validatePagination, async (req, res, next) => {
-    let pagination = {};
-    let { page, size } = req.query;
-
-    page = page === undefined ? 0 : parseInt(page);
-    size = size === undefined ? 20 : parseInt(size);
-
-    if (size >= 1 && page >= 1) {
-        pagination.limit = size;
-        pagination.offset = size * (page - 1);
-    }
-
-    const paged = await Song.findAll({
+// Get all Songs
+// DONE
+router.get('/', async (req, res) => {
+    const allUsers = await User.findAll({
         where: {},
-        // include: [page, size],
-        ...pagination
+        include: [],
     });
-
-
-    return res.json(paged);
+    res.json(allUsers);
 });
 
-// getting songs created by current user
+
+
+// Get all Songs created by the Current User
 // DONE
 router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
     const currentuserId = req.user.id;
@@ -73,7 +48,7 @@ router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
 })
 
 
-// getting a song by it's id
+// Get details of a Song from an id
 // DONE
 router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const { songId } = req.params;
@@ -83,29 +58,7 @@ router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     return res.json(theSong);
 });
 
-
-
-// deleting a song
-// DONE
-router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
-    const userId = req.user.id;
-    const songId = req.params.songId;
-    const thesong = await Song.findByPk(songId);
-
-    if (!thesong) {
-        res.status(404);
-        return res.json('song not found, please try again')
-    }
-    if (thesong.userId !== userId) {
-        return next(authorizationRequire());
-    }
-
-    await thesong.destroy();
-    return res.json('song deleted');
-
-})
-
-// getting all comments by a song's ID
+// Get all Comments by a Song's id
 // DONE
 router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     const thesongId = req.params.songId;
@@ -117,10 +70,10 @@ router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     })
     if (!allComments) res.json('song not found, plz try again')
     return res.json({ allComments })
-
 })
 
-// creating a comment for a song based on song's id
+
+// Create a Comment for a Song based on the Song's id
 // DONE
 router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     const songId = req.params.songId;
@@ -140,7 +93,9 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
 
 })
 
-// editing a song
+
+
+// Edit a Song
 // DONE
 router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
@@ -165,13 +120,55 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
 })
 
 
+
+// Delete a Song
+// DONE
+router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+    const songId = req.params.songId;
+    const thesong = await Song.findByPk(songId);
+
+    if (!thesong) {
+        res.status(404);
+        return res.json('song not found, please try again')
+    }
+    if (thesong.userId !== userId) {
+        return next(authorizationRequire());
+    }
+
+    await thesong.destroy();
+    return res.json('song deleted');
+
+})
+
+
+// Add Query Filters to Get All Songs
+// DONE
+
 const editSongHandler = async (req, res) => {
     const { songId } = req.params;
     const { userId, albumId, title, description, url, previewImae } = req.body;
 }
 
+router.get('/', restoreUser, requireAuth, validatePagination, async (req, res, next) => {
+    let pagination = {};
+    let { page, size } = req.query;
 
+    page = page === undefined ? 0 : parseInt(page);
+    size = size === undefined ? 20 : parseInt(size);
 
+    if (size >= 1 && page >= 1) {
+        pagination.limit = size;
+        pagination.offset = size * (page - 1);
+    }
+
+    const paged = await Song.findAll({
+        where: {},
+        // include: [page, size],
+        ...pagination
+    });
+    return res.json(paged);
+});
 
 
 module.exports = router;

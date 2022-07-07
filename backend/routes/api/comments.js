@@ -11,8 +11,9 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
         where: {},
         include: [],
     });
-    res.json({allComments});
+    res.json({ allComments });
 });
+
 
 
 // getting my comments
@@ -33,8 +34,7 @@ router.get('/mycomments', restoreUser, requireAuth, async (req, res) => {
     }
 })
 
-
-// edit a comment
+// Edit a Comment
 // DONE
 router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
@@ -51,12 +51,13 @@ router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
     thecomment.body = body;
     await thecomment.save();
 
-    return res.json({thecomment})
+    return res.json({ thecomment })
 
 })
 
 
-// delete a comment
+
+// Delete a Comment
 // DONE
 router.delete('/mycomments', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;

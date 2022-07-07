@@ -58,7 +58,6 @@ const authorizationRequire = (req, res, next) => {
     // e.title = 'Authorization Required';
     // e.errors = ['Authorization Required'];
     e.status = 403;
-    e.statusCode = 403;
     return e;
 }
 

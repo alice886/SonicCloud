@@ -16,6 +16,20 @@ const validateLogin = [
     handleValidationErrors
 ];
 
+
+// Get the Current User
+router.get('/', restoreUser, (req, res) => {
+    const { user } = req;
+    if (user) {
+        return res.json({
+            user: user.toSafeObject()
+        });
+    } else return res.json({});
+})
+
+
+
+// Log In a User
 // logging in to an existing account
 // url -- http://localhost:8000/api/session/login
 // token url -- http://localhost:8000/api/csrf/restore
@@ -35,21 +49,14 @@ router.post('/login', validateLogin, async (req, res, next) => {
     return res.json({ user });
 });
 
+
+
+
 // logging out from current account
 router.delete('/logout', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'logout success' });
 });
-
-// getting current user info
-router.get('/', restoreUser, (req, res) => {
-    const { user } = req;
-    if (user) {
-        return res.json({
-            user: user.toSafeObject()
-        });
-    } else return res.json({});
-})
 
 
 

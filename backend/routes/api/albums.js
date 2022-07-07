@@ -5,26 +5,44 @@ const { User, Song, Artist, Album, Playlist, Comment } = require('../../db/model
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-// getting details of an album from an ID
+// Create a Song for an Album based on the Album's id
 // DONE
-router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
-    const thealbumId = req.params.albumId;
-    const thatAlbums = await Album.findByPk(thealbumId);
-    if (!thatAlbums) res.status(404).send('album does not exist')
-    res.json({thatAlbums});
-});
+router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+    const albumId = req.params.albumId;
+    const { title, description, url, previewImage } = req.body;
+    if (!title) {
+        const e = new Error('please set a title for the new album');
+        res.status(400);
+        return res.send(e);
+    }
+    const thealbum = await Album.findByPk(albumId);
+    if (userId !== thealbum.userId) return next(authorizationRequire());
+    let newSong = await Song.create({
+        userId,
+        albumId,
+        title,
+        description,
+        url,
+        previewImage
+    })
+    res.status(201);
+    return res.json({ newSong });
+})
 
-// getting all albums
+
+// Get all Albums
 // DONE
 router.get('/', restoreUser, requireAuth, async (req, res) => {
     const allAlbums = await Album.findAll({
         where: {},
         include: [],
     });
-    res.json({allAlbums});
+    res.json({ allAlbums });
 });
 
-// getting albums created by current user
+
+// Get all Albums created by the Current User
 // DONE
 router.get('/myalbums', restoreUser, requireAuth, async (req, res) => {
     const currentuserId = req.user.id;
@@ -38,12 +56,23 @@ router.get('/myalbums', restoreUser, requireAuth, async (req, res) => {
         res.status(404);
         return res.json('dont have a record of your album yet!')
     }
-    return res.json({myAlbums});
-
-
+    return res.json({ myAlbums });
 })
 
-// creating a new album
+
+
+// Get details of an Album from an id
+// DONE
+router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
+    const thealbumId = req.params.albumId;
+    const thatAlbums = await Album.findByPk(thealbumId);
+    if (!thatAlbums) res.status(404).send('album does not exist')
+    res.json({ thatAlbums });
+});
+
+
+
+// Create an Album
 // DONE
 router.post('/', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
@@ -59,10 +88,34 @@ router.post('/', restoreUser, requireAuth, async (req, res) => {
         previewImage,
     })
     res.status(201);
-    return res.json({newAlbum});
+    return res.json({ newAlbum });
 })
 
-// delete a album
+
+
+// Edit an Album
+// DONE
+router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+    const { id, name, previewImage } = req.body
+
+    if (!id) res.json('please specify the album id to proceed')
+    const thealbum = await Album.findByPk(id)
+
+    if (userId !== thealbum.userId) {
+        return next(authorizationRequire());
+    }
+    if (name) { thealbum.name = name; };
+    if (previewImage) { thealbum.previewImage = previewImage; };
+
+    await thealbum.save();
+    return res.json({ thealbum })
+
+})
+
+
+
+// Delete an Album
 // DONE
 router.delete('/', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
@@ -86,50 +139,5 @@ router.delete('/', restoreUser, requireAuth, async (req, res, next) => {
 
 })
 
-// edit an album
-// DONE
-router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
-    const userId = req.user.id;
-    const { id, name, previewImage } = req.body
-
-    if (!id) res.json('please specify the album id to proceed')
-    const thealbum = await Album.findByPk(id)
-
-    if (userId !== thealbum.userId) {
-        return next(authorizationRequire());
-    }
-    if (name) { thealbum.name = name; };
-    if (previewImage) { thealbum.previewImage = previewImage; };
-
-    await thealbum.save();
-    return res.json({thealbum})
-
-})
-
-
-// creating a song for an album
-// DONE
-router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res, next) => {
-    const userId = req.user.id;
-    const albumId = req.params.albumId;
-    const { title, description, url, previewImage } = req.body;
-    if (!title) {
-        const e = new Error('please set a title for the new album');
-        res.status(400);
-        return res.send(e);
-    }
-    const thealbum = await Album.findByPk(albumId);
-    if (userId !== thealbum.userId) return next(authorizationRequire());
-    let newSong = await Song.create({
-        userId,
-        albumId,
-        title,
-        description,
-        url,
-        previewImage
-    })
-    res.status(201);
-    return res.json({newSong});
-})
 
 module.exports = router;

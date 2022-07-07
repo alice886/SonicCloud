@@ -37,6 +37,21 @@ const validateLogin = [
     handleValidationErrors
 ];
 
+
+// Sign Up a User 
+// DONE
+router.post('/signup', validateSignup, async (req, res) => {
+    const { username, firstName, lastName, email, password } = req.body;
+
+    const user = await User.signup({ username, firstName, lastName, email, password });
+
+    await setTokenCookie(res, user);
+
+    return res.json({ user });
+});
+
+
+
 // getting all users
 // DONE
 router.get('/', async (req, res) => {
@@ -47,7 +62,7 @@ router.get('/', async (req, res) => {
     res.json(allUsers);
 });
 
-// getting details of an artist from an id
+// Get details of an Artist from an id
 // getting only those who registered as artists
 // DONE
 router.get('/artists/:artistId', async (req, res) => {
@@ -63,18 +78,6 @@ router.get('/artists/:artistId', async (req, res) => {
     res.json({ allArtists });
 });
 
-// signing up 
-// DONE
-router.post('/signup', validateSignup, async (req, res) => {
-    const { username, firstName, lastName, email, password } = req.body;
-
-    const user = await User.signup({ username, firstName, lastName, email, password });
-
-    await setTokenCookie(res, user);
-
-    return res.json({ user });
-});
-
 // getting details for a specific user base on Id
 // DONE
 router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
@@ -85,7 +88,7 @@ router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) =>
 })
 
 
-// getting all songs of a an artist base on Id
+// Get all Songs of an Artist from an id
 // DONE
 router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res, next) => {
     const artistId = req.params.artistId;
@@ -107,7 +110,7 @@ router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res
 })
 
 
-// getting all albums of a an artist base on Id
+// Get all Albums of an Artist from an id
 // DONE
 router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, res, next) => {
     const artistId = req.params.artistId;
@@ -129,7 +132,7 @@ router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, re
 })
 
 
-// getting all playlists of a an artist base on Id
+// Get all Playlists of an Artist from an id
 // DONE
 router.get('/artists/:artistId/playlists', restoreUser, requireAuth, async (req, res, next) => {
     const artistId = req.params.artistId;
