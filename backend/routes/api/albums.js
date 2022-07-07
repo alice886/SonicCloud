@@ -28,23 +28,23 @@ router.get('/', validateLogin, async (req, res) => {
 });
 
 // getting albums created by current user
-/*
+
 router.get('/myalbums', validateLogin, restoreUser, async (req, res) => {
     const { user } = req;
     if (user) {
-        const myalbums = await Album.findAll({
+        const myAlbums = await Album.findAll({
             where: {
                 userId: user.dataValues.id,
             }
         })
-        if (!myalbums) return res.json('dont have a record of your album yet!')
-        return res.json(myalbums);
+        if (!myAlbums) return res.json('dont have a record of your album yet!')
+        return res.json(myAlbums);
     } else {
         res.status(404);
         return res.json('user/user album not found');
     }
 })
-
+/*
 // creating a new album
 
 router.post('/albums', validateLogin, restoreUser, async (req, res) => {

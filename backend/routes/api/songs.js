@@ -27,7 +27,7 @@ router.get('/', validateLogin, async (req, res) => {
     res.json(allSongs);
 });
 
-router.get('/:songId',validateLogin, async (req, res) => {
+router.get('/:songId', validateLogin, async (req, res) => {
     const { songId } = req.params;
     const theSong = await Song.findByPk(songId);
     if (!theSong) res.status(404).send('Song not found');
@@ -35,7 +35,8 @@ router.get('/:songId',validateLogin, async (req, res) => {
     return res.json(theSong);
 });
 
-router.delete(':/songId',validateLogin, async (req, res) => {
+
+router.delete(':/songId', validateLogin, async (req, res) => {
     const { songId } = req.params;
     const theSong = await Song.findByPk(songId);
     if (!theSong) res.status(404).send('Song not found');
