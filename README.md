@@ -447,10 +447,11 @@ Updates and returns an existing song.
 
     ```json
     {
-      "title": "Yesterday",
-      "description": "A song about the past.",
-      "url": "audio url",
-      "imageUrl": "image url"
+    "id":1,
+    "title":"love the way you hike",
+    "description":"2022 version of Love The Way You Lie",
+    "url":"www.love.the.way.you.hike",
+    "previewImage":"youhiking.jpg"
     }
     ```
 
@@ -462,15 +463,13 @@ Updates and returns an existing song.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "albumId": 1,
-      "title": "Yesterday",
-      "description": "A song about the past.",
-      "url": "audio url",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 20:00:00", 
-      "previewImage": "image url"
+    "id": 1,
+    "userId": 3,
+    "albumId": 2,
+    "title": "love the way you hike",
+    "description": "2022 version of Love The Way You Lie",
+    "url": "www.love.the.way.you.hike",
+    "previewImage": "youhiking.jpg"
     }
     ```
 
