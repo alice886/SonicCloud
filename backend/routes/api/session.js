@@ -33,7 +33,7 @@ router.get('/', restoreUser, (req, res) => {
 // logging in to an existing account
 // url -- http://localhost:8000/api/session/login
 // token url -- http://localhost:8000/api/csrf/restore
-router.post('/login', validateLogin, async (req, res, next) => {
+router.post('/', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
 
@@ -53,7 +53,7 @@ router.post('/login', validateLogin, async (req, res, next) => {
 
 
 // logging out from current account
-router.delete('/logout', (_req, res) => {
+router.delete('/', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'logout success' });
 });
