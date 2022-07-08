@@ -79,6 +79,13 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { body } = req.body
     const thesong = await Song.findByPk(songId);
+    if (!body) return res.status(400).json({
+        "message": "Validation error",
+        "statusCode": 400,
+        "errors": {
+            "body": "Comment body text is required"
+        }
+    });
     if (!thesong) {
         res.status(404);
         return res.send(songnotfound);
