@@ -1400,7 +1400,7 @@ Updates and returns an existing playlist.
 * Require proper authorization: Playlist must belong to the current user
 * Request
   * Method: PUT/PATCH
-  * URL: '/paylists/myplaylists'
+  * URL: '/playlists/myplaylists'
   * Headers:
     * Content-Type: application/json
   * Body:
