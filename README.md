@@ -68,13 +68,15 @@ Returns the information about the current user that is logged in.
   * Body:
 
     ```json
-    {
-      "id": 1,
-      "username":"kermitZ"
-      "firstName": "Jay",
-      "lastName": "kermit-Z",
-      "email": "kermitz@user.io",
+{
+    "user": {
+        "id": 3,
+        "username": "Riri",
+        "firstName": "Rihanna",
+        "lastName": "Fanta",
+        "email": "riri@user.io"
     }
+}
     ```
 
 ## Log In a User
@@ -92,8 +94,8 @@ information.
 
     ```json
     {
-      "credential": "kermitz@user.io",
-      "password": "password1"
+      "credential": "Riri",
+      "password": "password3"
     }
     ```
 
@@ -104,15 +106,17 @@ information.
   * Body:
 
     ```json
-    {
-      "id": 1,
-      "username": "kermitZ",
-      "firstName": "Jay",
-      "lastName": "kermit-Z",
-      "email": "kermitz@user.io",
-      
-      "token": ""
+{
+    "user": {
+        "id": 3,
+        "username": "Riri",
+        "firstName": "Rihanna",
+        "lastName": "Fanta",
+        "email": "riri@user.io",
+        "createdAt": "2022-07-06T21:20:53.336Z",
+        "updatedAt": "2022-07-06T21:20:53.336Z"
     }
+}
     ```
 
 * Error Response: Invalid credentials
@@ -160,11 +164,11 @@ user's information.
 
     ```json
     {
-      "username": "ladygaga",
+      "username": "ladygaga9",
       "firstName": "Lady",
       "lastName": "Gaga",
-      "email": "gaga@user.io",
-      "password": "password5"
+      "email": "gaga9@user.io",
+      "password": "password9"
     }
     ```
 
@@ -179,8 +183,8 @@ user's information.
       "id": 5,
       "firstName": "Lady",
       "lastName": "Gaga",
-      "username": "ladygaga",
-      "email": "gaga@user.io",
+      "username": "ladygaga9",
+      "email": "gaga9@user.io",
       "token": ""
     }
     ```
