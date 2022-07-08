@@ -4,19 +4,6 @@ const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = requi
 const { User, Song, Album, Playlist, Comment } = require('../../db/models');
 
 
-const validatePagination = (req, res, next) => {
-    const { page, size } = req.query;
-    const e = new Error('Validation Error');
-    e.status = 400;
-    e.errors = {};
-    e.errors.page = "Page must be greater than or equal to 0";
-    e.errors.size = "Size must be greater than or equal to 0";
-    e.errors.createAt = "CreatedAt is invalid";
-
-    if (parseInt(page) < 0 && parseInt(page) < 0) return next(e);
-    return next();
-}
-
 // Get all Songs
 // DONE
 router.get('/', async (req, res) => {
@@ -98,12 +85,12 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
 // Edit a Song
 // DONE
 router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
+
     const userId = req.user.id;
     const { id, albumId, title, description, url, previewImage } = req.body
 
     if (!id) res.json('please specify the song id to proceed')
     const thesong = await Song.findByPk(id)
-
     if (userId !== thesong.userId) {
         res.status(404);
         return next(authorizationRequire());
@@ -115,8 +102,45 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     if (previewImage) { thesong.previewImage = previewImage; };
 
     await thesong.save();
-    return res.json({ thesong })
+    return res.json(thesong)
 
+
+    /*
+    const userId = req.user.id;
+    const { id, albumId, title, description, url, previewImage } = req.body
+ 
+    if (!id) res.json('please specify the song id to proceed')
+    const thesong = await Song.findByPk(id)
+ 
+    console.log(thesong)
+    if (userId !== thesong.userId) {
+        res.status(404);
+        return next(authorizationRequire());
+    }
+ 
+    const e = new Error('Validation Error');
+    // e.message = 'Validation Error';
+    e.status = 400;
+    e.errors = {};
+    e.errors.title = "Song title is required";
+    e.errors.url = "Audio is required";
+    if (!title || !url) return res.send(e);
+ 
+    const thatsong = await Song.findByPk(id);
+    if (!thatsong) {
+        res.status(404);
+        res.json({ "message": "Song couldn't be found" })
+    }
+ 
+    if (albumId) { thesong.albumId = albumId; }
+    if (title) { thesong.title = title; };
+    if (description) { thesong.description = description; };
+    if (url) { thesong.url = url; };
+    if (previewImage) { thesong.previewImage = previewImage; };
+ 
+    await thesong.save();
+    return res.json(thesong)
+*/
 })
 
 
@@ -137,13 +161,25 @@ router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next)
     }
 
     await thesong.destroy();
-    return res.json('song deleted');
+    return res.status(200).json('Successfully deleted');
 
 })
 
 
 // Add Query Filters to Get All Songs
 // DONE
+const validatePagination = (req, res, next) => {
+    const { page, size } = req.query;
+    const e = new Error('Validation Error');
+    e.status = 400;
+    e.errors = {};
+    e.errors.page = "Page must be greater than or equal to 0";
+    e.errors.size = "Size must be greater than or equal to 0";
+    e.errors.createAt = "CreatedAt is invalid";
+
+    if (parseInt(page) < 0 && parseInt(page) < 0) return next(e);
+    return next();
+}
 
 const editSongHandler = async (req, res) => {
     const { songId } = req.params;

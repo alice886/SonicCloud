@@ -11,7 +11,7 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
         where: {},
         include: [],
     });
-    res.json({ allComments });
+    res.json(allComments);
 });
 
 
@@ -51,7 +51,7 @@ router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
     thecomment.body = body;
     await thecomment.save();
 
-    return res.json({ thecomment })
+    return res.json(thecomment)
 
 })
 
