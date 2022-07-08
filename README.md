@@ -837,7 +837,7 @@ Returns all the comments that belong to a song specified by id.
 * Request
   * Method: GET
   * URL: '/songs/:songId/comments'
-  * try: '/songs/2/comments'
+  * try: /songs/2/comments
   * Body: none
 
 * Successful Response
@@ -884,7 +884,7 @@ Create and return a new comment for a song specified by id.
 * Request
   * Method: POST
   * URL: '/songs/:songId/comments'
-  * try: '/songs/3/comments'
+  * try: /songs/3/comments
   * Headers:
     * Content-Type: application/json
   * Body:
