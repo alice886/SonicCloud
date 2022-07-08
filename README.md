@@ -368,7 +368,7 @@ Creates and returns a new song.
 * Require proper authorization: Album must belong to the current user
 * Request
   * Method: POST
-  * URL: '/albums/:albumId/songs'
+  * URL: '/albums/:albumId'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -511,8 +511,11 @@ Deletes an existing song.
 * Require proper authorization: Song must belong to the current user
 * Request
   * Method: DELETE
-  * URL: '/songs/:songId'
-  * Body: none
+  * URL: '/songs/mysongs'
+  * Body: 
+    {
+    "id":1
+    }
 
 * Successful Response
   * Status Code: 200
@@ -732,7 +735,8 @@ Updates and returns an existing album.
 
     ```json
     {
-      "title": "Time",
+      "id": 1
+      "name": "Time",
       "description": "An album about time.",
       "imageUrl": "image url"
     }
@@ -793,8 +797,11 @@ Deletes an existing album.
 * Require proper authorization: Album must belong to the current user
 * Request
   * Method: DELETE
-  * URL: '/albums'
-  * Body: none
+  * URL: '/myalbums'
+  * Body: 
+    {
+     "id":1
+    }
 
 * Successful Response
   * Status Code: 200
@@ -949,6 +956,7 @@ Update and return an existing comment.
 
     ```json
     {
+      "id": 5,
       "body": "I love this song!"
     }
     ```
@@ -1008,7 +1016,10 @@ Delete an existing comment.
 * Request
   * Method: DELETE
   * URL: 'comments/mycomments'
-  * Body: none
+  * Body: 
+    {
+    "id":3
+    }
 
 * Successful Response
   * Status Code: 200
@@ -1044,7 +1055,9 @@ Returns the details of an artist specified by their id.
 * Request
   * Method: GET
   * URL: '/users/artists/:artistId'
+          (try 3 for artistId)
   * Body: none
+    
 
 * Successful Response
   * Status Code: 200
@@ -1083,6 +1096,7 @@ Returns all the songs created by the specified artist.
 * Request
   * Method: GET
   * URL: '/users/artist/:artistId/songs'
+          (try 3 for artistId)
   * Body: none
 
 * Successful Response
@@ -1130,6 +1144,7 @@ Returns all the albums created by the specified artist.
 * Request
   * Method: GET
   * URL: '/users/artist/:artistId/albums'
+            (try 3 for artistId)
   * Body: none
 
 * Successful Response
@@ -1175,6 +1190,7 @@ Returns all the playlists created by the specified artist.
 * Request
   * Method: GET
   * URL: '/users/artist/:artistId/playlists'
+              (try 3 for artistId)
   * Body: none
 
 * Successful Response
@@ -1226,7 +1242,7 @@ Creates and returns a new playlist.
     ```json
     {
       "name": "Current Favorites",
-      "imageUrl": "image url"
+      "previewImage": "image url"
     }
     ```
 
@@ -1278,7 +1294,8 @@ Add a song to a playlist specified by the playlist's id.
 
     ```json
     {
-      "songId": 1
+      "playlistId":2,
+      "songId": 2
     }
     ```
 
@@ -1290,9 +1307,10 @@ Add a song to a playlist specified by the playlist's id.
 
     ```json
     {
-      "id": 1,
       "playlistId": 1,
-      "songId": 1
+      "songId": 1,
+      "createdAt": "2021-11-19 20:39:36",
+      "updatedAt": "2021-11-19 20:39:36",
     }
     ```
 
@@ -1391,7 +1409,7 @@ Updates and returns an existing playlist.
     ```json
     {
       "name": "Current Favorites",
-      "imageUrl": "image url"
+      "previewImage": "image url"
     }
     ```
 
