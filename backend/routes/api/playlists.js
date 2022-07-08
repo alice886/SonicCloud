@@ -133,7 +133,7 @@ router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
             },
             include: Song
         })
-        return res.json(myplaylists);
+        return res.json({ myplaylists });
     } else {
         res.status(404);
         return res.json('playlist not found');

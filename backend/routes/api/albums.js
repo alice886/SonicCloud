@@ -8,7 +8,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // Create a Song for an Album based on the Album's id
 // DONE
-router.post('/:albumId/songs', restoreUser, requireAuth, async (req, res, next) => {
+router.post('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const albumId = req.params.albumId;
     const { title, description, url, previewImage } = req.body;
@@ -86,7 +86,7 @@ router.get('/myalbums', restoreUser, requireAuth, async (req, res) => {
 
 // Create an Album
 // DONE
-router.post('/', restoreUser, requireAuth, async (req, res) => {
+router.post('/myalbums', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { name, previewImage } = req.body;
     if (name === undefined) {
@@ -118,7 +118,11 @@ router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
 
     if (!id) res.json('please specify the album id to proceed')
     const thealbum = await Album.findByPk(id)
-
+    if (!thealbum) return res.status(404).send({
+        "message": "Album couldn't be found",
+        "statusCode": 404
+    }
+    );
     if (userId !== thealbum.userId) {
         return next(authorizationRequire());
     }
@@ -134,25 +138,21 @@ router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
 
 // Delete an Album
 // DONE
-router.delete('/', restoreUser, requireAuth, async (req, res, next) => {
+router.delete('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id } = req.body;
     const thealbum = await Album.findByPk(id)
 
-    if (!thealbum) {
-        res.status(404);
-        return res.json('album not found, please try again')
-    }
+    if (!thealbum) return res.status(404).send({
+        "message": "Album couldn't be found",
+        "statusCode": 404
+    });
     if (thealbum.userId !== userId) {
         return next(authorizationRequire());
     }
 
-    await Album.destroy({
-        where: {
-            id,
-        }
-    });
-    return res.json('album deleted');
+    await thealbum.destroy();
+    return res.status(200).send("Successfully deleted");
 
 })
 

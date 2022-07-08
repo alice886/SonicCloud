@@ -14,6 +14,7 @@ module.exports = {
         references: {
           model: 'Users',
         },
+        onDelete: 'cascade'
       },
       songId: {
         type: Sequelize.INTEGER,
@@ -21,6 +22,7 @@ module.exports = {
         references: {
           model: 'Songs',
         },
+        onDelete: 'cascade'
       },
       body: {
         type: Sequelize.STRING(100),

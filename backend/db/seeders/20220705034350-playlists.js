@@ -4,27 +4,39 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Playlists', [
       {
-        name: 'playlist NO.1',
-        userId: 2,
-        previewImage: '1111111111',
+        name: "Riri's playlist NO.1",
+        userId: 3,
+        previewImage: '1111111111.jpg',
 
       },
       {
-        name: 'playlist NO.2',
-        userId: 2,
-        previewImage: '222222222',
+        name: "Riri's playlist NO.2",
+        userId: 3,
+        previewImage: '222222222.jpg',
 
       },
       {
         name: 'iHeartRadio',
-        userId: 3,
-        previewImage: '3333333333',
+        userId: 2,
+        previewImage: '3333333333.jpg',
 
       },
       {
         name: 'iHeartRadio2',
-        userId: 3,
-        previewImage: '444444444',
+        userId: 2,
+        previewImage: '444444444.jpg',
+
+      },
+      {
+        name: 'Z100-1',
+        userId: 1,
+        previewImage: '55555555.jpg',
+
+      },
+      {
+        name: 'Z100-2',
+        userId: 1,
+        previewImage: '66666666.jpg',
 
       },
     ], {});
@@ -40,5 +52,3 @@ module.exports = {
     await queryInterface.bulkDelete('Playlists', null, {});
   }
 };
-
-

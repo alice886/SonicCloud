@@ -12,11 +12,11 @@ const songnotfound = {
 // Get all Songs
 // DONE
 router.get('/', async (req, res) => {
-    const allUsers = await User.findAll({
+    const allSongs = await Song.findAll({
         where: {},
         include: [],
     });
-    res.json(allUsers);
+    res.json(allSongs);
 });
 
 
@@ -101,8 +101,22 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id, albumId, title, description, url, previewImage } = req.body
 
-    if (!id) res.json('please specify the song id to proceed')
+    if (!id) return res.json('please specify the song id to proceed')
+    if (!title || !url) return res.status(400).send({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {
+            "title": "Song title is required",
+            "url": "Audio is required"
+        }
+    });
+
     const thesong = await Song.findByPk(id)
+    if (!thesong) return res.status(404).send({
+        "message": "Song couldn't be found",
+        "statusCode": 404
+    }
+    );
     if (userId !== thesong.userId) {
         res.status(404);
         return next(authorizationRequire());
@@ -159,10 +173,10 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
 
 // Delete a Song
 // DONE
-router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
+router.delete('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
-    const songId = req.params.songId;
-    const thesong = await Song.findByPk(songId);
+    const { id } = req.body;
+    const thesong = await Song.findByPk(id);
 
     if (!thesong) {
         res.status(404);
@@ -173,9 +187,13 @@ router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next)
     }
 
     await thesong.destroy();
-    return res.status(200).json('Successfully deleted');
+    return res.json({
+        message: "Successfully deleted",
+        statusCode: 200
+    });
 
 })
+
 
 
 // Add Query Filters to Get All Songs

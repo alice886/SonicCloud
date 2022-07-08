@@ -67,7 +67,7 @@ router.get('/', async (req, res) => {
 // DONE
 router.get('/artists/:artistId', async (req, res) => {
     const artistId = req.params.artistId;
-    const allArtists = await User.findAll({
+    const theArtists = await User.findAll({
         where: {
             isAnArtist: true,
             id: artistId,
@@ -75,7 +75,14 @@ router.get('/artists/:artistId', async (req, res) => {
         },
         include: [Album, Song, Playlist]
     });
-    res.json(allArtists);
+    if (!theArtists.length) {
+        res.status(404);
+        return res.send({
+            "message": "Artist couldn't be found",
+            "statusCode": 404
+        });
+    }
+    res.json(theArtists);
 });
 
 // getting details for a specific user base on Id
@@ -98,7 +105,13 @@ router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res
             isAnArtist: true
         }
     });
-    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+    if (!theArtist.length) {
+        res.status(404);
+        return res.send({
+            "message": "Artist couldn't be found",
+            "statusCode": 404
+        });
+    }
 
     const artistSongs = await Song.findAll({
         where: {

@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
-      // playlistSong.belongsTo(models.Playlist, { onDelete: 'CASCADE' });
-      // playlistSong.belongsTo(models.Song, { onDelete: 'CASCADE' });
+      playlistSong.belongsTo(models.Playlist, { onDelete: 'CASCADE' });
+      playlistSong.belongsTo(models.Song, { onDelete: 'CASCADE' });
 
     }
   }

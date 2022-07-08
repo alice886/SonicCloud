@@ -12,12 +12,32 @@ module.exports = {
         playlistId: 1,
       },
       {
+        songId: 4,
+        playlistId: 1,
+      },
+      {
         songId: 1,
         playlistId: 2,
       },
       {
         songId: 4,
         playlistId: 2,
+      },
+      {
+        songId: 4,
+        playlistId: 3,
+      },
+      {
+        songId: 6,
+        playlistId: 4,
+      },
+      {
+        songId: 4,
+        playlistId: 5,
+      },
+      {
+        songId: 5,
+        playlistId: 6,
       },
     ], {});
   },
