@@ -736,10 +736,9 @@ Updates and returns an existing album.
 
     ```json
     {
-      "id": 1
-      "name": "Time",
-      "description": "An album about time.",
-      "imageUrl": "image url"
+      "id": 2,
+      "name": "Good Girl Gone Good",
+      "previewImage": "image url"
     }
     ```
 
@@ -751,13 +750,13 @@ Updates and returns an existing album.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "title": "Time",
-      "description": "An album about time.",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "thealbum": {
+        "id": 2,
+        "name": "Good Girl Gone Good",
+        "userId": 3,
+        "previewImage": "image url",
+        "updatedAt": "2022-07-08T21:44:05.594Z"
+    }
     }
     ```
 
@@ -838,6 +837,7 @@ Returns all the comments that belong to a song specified by id.
 * Request
   * Method: GET
   * URL: '/songs/:songId/comments'
+  * try: '/songs/2/comments'
   * Body: none
 
 * Successful Response
@@ -848,20 +848,18 @@ Returns all the comments that belong to a song specified by id.
 
     ```json
     {
-      "Comments": [
-        {
-          "id": 1,
-          "userId": 1,
-          "songId": 1,
-          "body": "I love this song!",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
-          "User": {
-            "id": 1,
-            "username": "JohnSmith"
-          },
-        }
-      ]
+       {
+        "id": 1,
+        "userId": 1,
+        "songId": 2,
+        "body": "we should collab again"
+    },
+    {
+        "id": 3,
+        "userId": 4,
+        "songId": 2,
+        "body": "all time fav, 10/10"
+    }
     }
     ```
 
@@ -886,6 +884,7 @@ Create and return a new comment for a song specified by id.
 * Request
   * Method: POST
   * URL: '/songs/:songId/comments'
+  * try: '/songs/3/comments'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -904,12 +903,12 @@ Create and return a new comment for a song specified by id.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "songId": 1,
-      "body": "I love this song!",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36" ,
+    "id": 6,
+    "userId": 3,
+    "songId": 3,
+    "body": "I love this song!",
+    "updatedAt": "2022-07-08T21:47:41.110Z",
+    "createdAt": "2022-07-08T21:47:41.110Z"
     }
     ```
 
@@ -957,8 +956,8 @@ Update and return an existing comment.
 
     ```json
     {
-      "id": 5,
-      "body": "I love this song!"
+      "id": 4,
+      "body": "H to the izz-O"
     }
     ```
 
@@ -970,12 +969,11 @@ Update and return an existing comment.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "songId": 1,
-      "body": "I love this song!",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 20:00:00"
+      "id": 4,
+      "userId": 3,
+      "songId": 3,
+      "body": "H to the izz-O",
+      "updatedAt": "2022-07-08T21:50:59.184Z"
     }
     ```
 
@@ -1019,7 +1017,7 @@ Delete an existing comment.
   * URL: 'comments/mycomments'
   * Body: 
     {
-    "id":3
+    "id":4
     }
 
 * Successful Response
@@ -1056,7 +1054,7 @@ Returns the details of an artist specified by their id.
 * Request
   * Method: GET
   * URL: '/users/artists/:artistId'
-          (try 3 for artistId)
+  * try: /users/artists/1
   * Body: none
     
 
@@ -1068,11 +1066,19 @@ Returns the details of an artist specified by their id.
 
     ```json
     {
-      "id": 1,
-      "username": "JohnSmith",
-      "totalSongs": 10,
-      "totalAlbums": 2,
-      "previewImage": "image url"
+        "id": 1,
+        "username": "kermitZ",
+        "firstName": "Kermit",
+        "lastName": "JayZ",
+        "Albums": [
+        ...
+                ],
+        "Songs": [
+        ...
+                ],
+        "Playlists": [
+        ...
+        ]
     }
     ```
 
@@ -1097,7 +1103,7 @@ Returns all the songs created by the specified artist.
 * Request
   * Method: GET
   * URL: '/users/artist/:artistId/songs'
-          (try 3 for artistId)
+  * try: /users/artists/1/songs
   * Body: none
 
 * Successful Response
@@ -1108,19 +1114,26 @@ Returns all the songs created by the specified artist.
 
     ```json
     {
-      "Songs": [
-        {
-          "id": 1,
-          "userId": 1,
-          "albumId": 1,
-          "title": "Yesterday",
-          "description": "A song about the past.",
-          "url": "audio url",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ]
+[
+    {
+        "id": 3,
+        "userId": 1,
+        "albumId": 1,
+        "title": "Empire State of Mind",
+        "description": "...",
+        "url": "www.empire.state.of.mind",
+        "previewImage":...
+    },
+    {
+        "id": 4,
+        "userId": 1,
+        "albumId": 1,
+        "title": "Izzo (H.O.V.A.)",
+        "description": "...",
+        "url": "www.encore.song",
+        "previewImage": "..."
+    }
+]
     }
     ```
 
@@ -1145,7 +1158,7 @@ Returns all the albums created by the specified artist.
 * Request
   * Method: GET
   * URL: '/users/artist/:artistId/albums'
-            (try 3 for artistId)
+  * try: /users/artists/1/albums
   * Body: none
 
 * Successful Response
@@ -1156,17 +1169,12 @@ Returns all the albums created by the specified artist.
 
     ```json
     {
-      "Albums": [
-        {
+      {
           "id": 1,
+          "name": "The Hits Collection, Volume One",
           "userId": 1,
-          "title": "Time",
-          "description": "An album about time.",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ]
+          "previewImage": "..."
+      }
     }
     ```
 
@@ -1191,7 +1199,7 @@ Returns all the playlists created by the specified artist.
 * Request
   * Method: GET
   * URL: '/users/artist/:artistId/playlists'
-              (try 3 for artistId)
+  * try: /users/artists/1/playlists
   * Body: none
 
 * Successful Response
@@ -1202,16 +1210,18 @@ Returns all the playlists created by the specified artist.
 
     ```json
     {
-      "Playlists": [
-        {
-          "id": 1,
+      {
+          "id": 5,
+          "name": "Z100-1",
           "userId": 1,
-          "name": "Current Favorites",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ]
+          "previewImage": "55555555.jpg"
+      },
+      {
+          "id": 6,
+          "name": "Z100-2",
+          "userId": 1,
+          "previewImage": "66666666.jpg"
+      }
     }
     ```
 
@@ -1255,12 +1265,14 @@ Creates and returns a new playlist.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "name": "Current Favorites",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "newPlaylist": {
+          "id": 7,
+          "name": "Current Favorites",
+          "userId": 3,
+          "previewImage": "image url",
+          "updatedAt": "2022-07-08T21:59:59.070Z",
+          "createdAt": "2022-07-08T21:59:59.070Z"
+      }
     }
     ```
 
@@ -1308,10 +1320,10 @@ Add a song to a playlist specified by the playlist's id.
 
     ```json
     {
+      "songId": 2,
       "playlistId": 1,
-      "songId": 1,
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
+      "updatedAt": "2022-07-08T22:13:21.289Z",
+      "createdAt": "2022-07-08T22:13:21.289Z"
     }
     ```
 
@@ -1349,6 +1361,7 @@ Returns the details of a playlist specified by its id.
 * Request
   * Method: GET
   * URL: '/playlists/:playlistId(\\d+)'
+  * try: /playlists/1
   * Body: none
 
 * Successful Response
@@ -1359,25 +1372,10 @@ Returns the details of a playlist specified by its id.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "name": "Current Favorites",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url",
-      "Songs": [
-        {
-          "id": 1,
-          "userId": 1,
-          "albumId": 1,
-          "title": "Yesterday",
-          "description": "A song about the past.",
-          "url": "audio url",
-          "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
-        }
-      ]
+       "id": 2,
+      "name": "Riri's playlist NO.2",
+      "userId": 3,
+      "previewImage": "222222222.jpg"
     }
     ```
 
@@ -1408,9 +1406,10 @@ Updates and returns an existing playlist.
   * Body:
 
     ```json
-    {
-      "name": "Current Favorites",
-      "previewImage": "image url"
+     {
+         "id":2,
+          "name": "Riri's playlist NO.5",
+          "previewImage": "image url"
     }
     ```
 
@@ -1422,12 +1421,11 @@ Updates and returns an existing playlist.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "name": "Current Favorites",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 20:00:00",
-      "previewImage": "image url"
+      "id": 2,
+      "name": "Riri's playlist NO.5",
+      "userId": 3,
+      "previewImage": "image url",
+      "updatedAt": "2022-07-08T22:21:37.155Z"
     }
     ```
 
@@ -1469,7 +1467,13 @@ Deletes an existing playlist.
 * Request
   * Method: DELETE
   * URL: '/playlist/myplaylists'
-  * Body: none
+  * Body: 
+    ```json
+       {
+         "id":2
+       }
+    ```
+
 
 * Successful Response
   * Status Code: 200
