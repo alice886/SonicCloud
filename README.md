@@ -243,7 +243,7 @@ Returns all the songs.
 * Require Authentication: false
 * Request
   * Method: GET
-  * URL: '/songs'
+  * URL: '/songs/all'
   * Body: none
 
 * Successful Response
