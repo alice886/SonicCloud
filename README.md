@@ -68,9 +68,8 @@ Returns the information about the current user that is logged in.
   * Body:
 
     ```json
-    
-   {
-    "user": {
+    {
+      "user": {
         "id": 3,
         "username": "Riri",
         "firstName": "Rihanna",
@@ -79,6 +78,7 @@ Returns the information about the current user that is logged in.
              }
     }
     ```
+
 
 ## Log In a User
 
