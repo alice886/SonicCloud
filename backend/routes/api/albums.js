@@ -117,18 +117,18 @@ router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
     const { id, name, previewImage } = req.body
 
     if (!id) res.json('please specify the album id to proceed')
-    if (name === undefined) return res.status(404).send({
-        "message": "Album title is required",
-        "statusCode": 404
-    }
-    );
-    const thealbum = await Album.findByPk(id)
-    if (!thealbum) return res.status(400).send({
+    if (name === undefined) return res.status(400).send({
         "message": "Validation Error",
         "statusCode": 400,
         "errors": {
-            "title": "Album couldn't be found"
+            "title": "Album title is required"
         }
+    }
+    );
+    const thealbum = await Album.findByPk(id)
+    if (!thealbum) return res.status(404).send({
+        "message": "Album couldn't be found",
+        "statusCode": 404
     }
     );
     if (userId !== thealbum.userId) {
