@@ -371,6 +371,7 @@ Creates and returns a new song.
 * Request
   * Method: POST
   * URL: '/albums/:albumId'
+  * you may use '/albums/2'
   * Headers:
     * Content-Type: application/json
   * Body:
