@@ -65,7 +65,13 @@ router.get('/:playlistId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const theplaylistId = req.params.playlistId;
     const thatPlaylist = await Playlist.findByPk(theplaylistId);
     if (!thatPlaylist) res.status(404).send('playlist does not exist')
-    res.json({ thatPlaylist });
+    const thatPlaylistdetail = await Playlist.findAll({
+        where: {
+            playlistId: theplaylistId,
+        },
+        include: Song
+    });
+    res.json(thatPlaylistdetail);
 });
 
 
