@@ -1307,7 +1307,7 @@ Add a song to a playlist specified by the playlist's id.
 
     ```json
     {
-      "playlistId":2,
+      "playlistId":1,
       "songId": 2
     }
     ```
