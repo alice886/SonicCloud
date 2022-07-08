@@ -11,7 +11,7 @@ const songnotfound = {
 
 // Get all Songs
 // DONE
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
     const allSongs = await Song.findAll({
         where: {},
         include: [],
@@ -227,12 +227,14 @@ router.get('/', restoreUser, requireAuth, validatePagination, async (req, res, n
         pagination.limit = size;
         pagination.offset = size * (page - 1);
     }
-
-    const paged = await Song.findAll({
+    const paged = {};
+    paged.songs = await Song.findAll({
         where: {},
         // include: [page, size],
         ...pagination
     });
+    paged.page = page;
+    paged.size = paged.songs.length;
     return res.json(paged);
 });
 
