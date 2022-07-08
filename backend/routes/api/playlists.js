@@ -11,7 +11,7 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
         where: {},
         include: [],
     });
-    res.json({ allPlaylist });
+    res.json(allPlaylist);
 });
 
 
@@ -93,11 +93,11 @@ router.put('/myplaylists', restoreUser, requireAuth, async (req, res, next) => {
 
     if (!id) res.json('please specify the playlist id to proceed')
     const theplaylist = await Playlist.findByPk(id)
-    if (!theplaylist) res.status(404).json({
+    if (!theplaylist) return res.status(404).json({
         "message": "Playlist couldn't be found",
         "statusCode": 404
     });
-    if (!name) res.status(400).json({
+    if (!name) return res.status(400).json({
         "message": "Validation Error",
         "statusCode": 400,
         "errors": {
@@ -124,10 +124,10 @@ router.delete('/myplaylists', restoreUser, requireAuth, async (req, res, next) =
     const theplaylist = await Playlist.findByPk(id)
 
     if (!id) { return res.json('please enter the playlist id to proceed') };
-    if (!theplaylist) {
-        res.status(404);
-        return res.json('playlist not found, please try again')
-    }
+    if (!theplaylist) return res.status(404).json({
+        "message": "Playlist couldn't be found",
+        "statusCode": 404
+    });
     if (theplaylist.userId !== userId) {
         return next(authorizationRequire());
     }
@@ -151,7 +151,7 @@ router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
             where: {
                 userId: user.dataValues.id,
             },
-            include: Song
+            // include: Song
         })
         return res.json(myplaylists);
     } else {
