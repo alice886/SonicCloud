@@ -1470,7 +1470,7 @@ Deletes an existing playlist.
   * Body: 
     ```json
        {
-         "id":2
+         "id":1
        }
     ```
 
