@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
-const { User, Song, Album, Playlist, Comment } = require('../../db/models');
+const { User, Song, Playlist, Comment } = require('../../db/models');
 
 
 // getting all comments
