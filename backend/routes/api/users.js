@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
 
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
+const { User, Song, Album, Playlist, Comment, playlistSong } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -37,14 +37,9 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-router.get('/', async (req, res) => {
-    const allUsers = await User.findAll({
-        where: {},
-        include: [],
-    });
-    res.json(allUsers);
-});
 
+// Sign Up a User 
+// DONE
 router.post('/signup', validateSignup, async (req, res) => {
     const { username, firstName, lastName, email, password } = req.body;
 
@@ -56,11 +51,106 @@ router.post('/signup', validateSignup, async (req, res) => {
 });
 
 
-router.get('/:userId', async (req, res, next) => {
+
+// getting all users
+// DONE
+router.get('/', async (req, res) => {
+    const allUsers = await User.findAll({
+        where: {},
+        include: [],
+    });
+    res.json(allUsers);
+});
+
+// Get details of an Artist from an id
+// getting only those who registered as artists
+// DONE
+router.get('/artists/:artistId', async (req, res) => {
+    const artistId = req.params.artistId;
+    const allArtists = await User.findAll({
+        where: {
+            isAnArtist: true,
+            id: artistId,
+
+        },
+        include: [Album, Song, Playlist]
+    });
+    res.json({ allArtists });
+});
+
+// getting details for a specific user base on Id
+// DONE
+router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
     const { userId } = req.params;
     const theUser = await User.findByPk(userId);
     if (!theUser) res.status(404).send('User not found');
-    res.json(theUser);
+    res.json({ theUser });
+})
+
+
+// Get all Songs of an Artist from an id
+// DONE
+router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res, next) => {
+    const artistId = req.params.artistId;
+    const theArtist = await User.findAll({
+        where: {
+            id: artistId,
+            isAnArtist: true
+        }
+    });
+    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+
+    const artistSongs = await Song.findAll({
+        where: {
+            userId: artistId
+        }
+    })
+    if (!artistSongs) res.status(404).send('no songs found');
+    res.json({ artistSongs });
+})
+
+
+// Get all Albums of an Artist from an id
+// DONE
+router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, res, next) => {
+    const artistId = req.params.artistId;
+    const theArtist = await User.findAll({
+        where: {
+            id: artistId,
+            isAnArtist: true
+        }
+    });
+    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+
+    const artistAlbums = await Album.findAll({
+        where: {
+            userId: artistId
+        }
+    })
+    if (!artistAlbums) res.status(404).send('no albums found');
+    res.json({ artistAlbums });
+})
+
+
+// Get all Playlists of an Artist from an id
+// DONE
+router.get('/artists/:artistId/playlists', restoreUser, requireAuth, async (req, res, next) => {
+    const artistId = req.params.artistId;
+    const theArtist = await User.findAll({
+        where: {
+            id: artistId,
+            isAnArtist: true
+        }
+    });
+    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+
+    const artistPlaylists = await Playlist.findAll({
+        where: {
+            userId: artistId
+        },
+    })
+    if (!artistPlaylists) res.status(404).send('no playlists found');
+    res.json({ artistPlaylists });
 })
 
 
@@ -71,6 +161,5 @@ router.get('/:userId', async (req, res, next) => {
 
 
 
-
-
 module.exports = router;
+// module.exports = { validateSignup, validateLogin };

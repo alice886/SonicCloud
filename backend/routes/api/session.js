@@ -1,5 +1,5 @@
 const express = require('express');
-const { setTokenCookie, requireAuth, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -16,9 +16,24 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-router.post('/', validateLogin, async (req, res, next) => {
-    // url -- http://localhost:8000/api/session/login
-    // token url -- http://localhost:8000/api/csrf/restore
+
+// Get the Current User
+router.get('/', restoreUser, (req, res) => {
+    const { user } = req;
+    if (user) {
+        return res.json({
+            user: user.toSafeObject()
+        });
+    } else return res.json({});
+})
+
+
+
+// Log In a User
+// logging in to an existing account
+// url -- http://localhost:8000/api/session/login
+// token url -- http://localhost:8000/api/csrf/restore
+router.post('/login', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
     const user = await User.login({ credential, password });
 
@@ -34,25 +49,14 @@ router.post('/', validateLogin, async (req, res, next) => {
     return res.json({ user });
 });
 
-router.delete('/', (_req, res) => {
+
+
+
+// logging out from current account
+router.delete('/logout', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: 'logout success' });
 });
-
-
-router.get('/', restoreUser, (req, res) => {
-    const { user } = req;
-    if (user) {
-        return res.json({
-            user: user.toSafeObject()
-        });
-    } else return res.json({});
-})
-
-
-
-
-
 
 
 

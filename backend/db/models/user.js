@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     toSafeObject() {
-      const { id, username, email } = this;
-      return { id, username, email };
+      const { id, username, firstName, lastName, email } = this;
+      return { id, username, firstName, lastName, email };
     };
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
@@ -51,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Playlist, { foreignKey: 'userId', hooks: true });
       User.hasMany(models.Album, { foreignKey: 'userId', hooks: true });
       User.hasMany(models.Comment, { foreignKey: 'userId', hooks: true });
+      User.hasMany(models.Song, { foreignKey: 'userId', hooks: true });
 
     };
   }

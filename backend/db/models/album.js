@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Album extends Model {
     static associate(models) {
       Album.belongsTo(models.User, { foreignKey: 'userId', as: 'Artist' });
-      // Album.hasMany(models.Song, { foreignKey: 'songId' });
+      Album.hasMany(models.Song, { foreignKey: 'albumId' });
 
     }
   }
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      
+
     },
     userId: {
       type: DataTypes.INTEGER,

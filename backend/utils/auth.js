@@ -53,10 +53,14 @@ const requireAuth = (req, _res, next) => {
     return next(err);
 }
 
-const signinValidation = (req, res, next) => {
-    // if(req.user)
-    }
+const authorizationRequire = (req, res, next) => {
+    const e = new Error('Forbidden');
+    e.title = 'Authorization Required';
+    // e.errors = ['Authorization Required'];
+    e.status = 403;
+    return e;
+}
 
 
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+module.exports = { setTokenCookie, restoreUser, requireAuth, authorizationRequire };
