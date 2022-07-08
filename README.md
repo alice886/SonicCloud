@@ -5,10 +5,7 @@
 https://soniccloud.herokuapp.com/
 ![Screen Shot 2022-07-06 at 7 26 48 AM](https://user-images.githubusercontent.com/93701088/177573937-29b94797-7532-46b7-88b6-ddc866dbeabd.png)
 
-## Users Table
-![Screen Shot 2022-07-07 at 4 28 33 PM](https://user-images.githubusercontent.com/93701088/177888236-a0c2fefa-c454-4077-b894-c5872c727c7f.png)
-
-* sample user:
+## sample user:
 * id : 3
 * username : Riri
 * firstName : Rihanna
