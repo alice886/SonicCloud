@@ -68,16 +68,17 @@ Returns the information about the current user that is logged in.
   * Body:
 
     ```json
-{
-    "user": {
+    {
+      "user": {
         "id": 3,
         "username": "Riri",
         "firstName": "Rihanna",
         "lastName": "Fanta",
         "email": "riri@user.io"
+             }
     }
-}
     ```
+
 
 ## Log In a User
 
@@ -370,6 +371,7 @@ Creates and returns a new song.
 * Request
   * Method: POST
   * URL: '/albums/:albumId'
+  * you may use '/albums/2'
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -674,16 +676,15 @@ Creates and returns a new album.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: '/albums'
+  * URL: '/albums/myalbums'
   * Headers:
     * Content-Type: application/json
   * Body:
 
     ```json
     {
-      "title": "Time",
-      "description": "An album about time.",
-      "imageUrl": "image url"
+      "name": "Time",
+      "previewImage": "image url"
     }
     ```
 
@@ -695,13 +696,12 @@ Creates and returns a new album.
 
     ```json
     {
-      "id": 1,
-      "userId": 1,
-      "title": "Time",
-      "description": "An album about time.",
-      "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36",
-      "previewImage": "image url"
+      "id": 4,
+      "name": "Time",
+      "userId": 3,
+      "previewImage": "image url",
+      "updatedAt": "2022-07-08T21:40:53.989Z",
+      "createdAt": "2022-07-08T21:40:53.989Z"
     }
     ```
 
