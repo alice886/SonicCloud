@@ -32,6 +32,11 @@ module.exports = {
         songId: 3,
         body: 'Confused, Izzo or Lizzo ??'
       },
+      {
+        userId: 3,
+        songId: 6,
+        body: 'my jam!'
+      },
     ], {});
   },
 

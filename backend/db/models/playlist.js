@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Playlist.belongsTo(models.User, { foreignKey: 'userId', as: 'Artist', onDelete: 'CASCADE' });
-      Playlist.belongsToMany(models.Song, { through: models.playlistSong, onDelete: 'CASCADE' });
+      Playlist.belongsToMany(models.Song, { through: models.playlistSong, foreignKey: 'playlistId', otherKey: 'songId', onDelete: 'CASCADE' });
     }
   }
   Playlist.init({

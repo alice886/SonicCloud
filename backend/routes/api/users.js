@@ -67,7 +67,7 @@ router.get('/', async (req, res) => {
 // DONE
 router.get('/artists/:artistId', async (req, res) => {
     const artistId = req.params.artistId;
-    const allArtists = await User.findAll({
+    const theArtists = await User.findAll({
         where: {
             isAnArtist: true,
             id: artistId,
@@ -75,7 +75,14 @@ router.get('/artists/:artistId', async (req, res) => {
         },
         include: [Album, Song, Playlist]
     });
-    res.json({ allArtists });
+    if (!theArtists.length) {
+        res.status(404);
+        return res.send({
+            "message": "Artist couldn't be found",
+            "statusCode": 404
+        });
+    }
+    res.json(theArtists);
 });
 
 // getting details for a specific user base on Id
@@ -84,7 +91,7 @@ router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) =>
     const { userId } = req.params;
     const theUser = await User.findByPk(userId);
     if (!theUser) res.status(404).send('User not found');
-    res.json({ theUser });
+    res.json(theUser);
 })
 
 
@@ -98,7 +105,13 @@ router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res
             isAnArtist: true
         }
     });
-    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+    if (!theArtist.length) {
+        res.status(404);
+        return res.send({
+            "message": "Artist couldn't be found",
+            "statusCode": 404
+        });
+    }
 
     const artistSongs = await Song.findAll({
         where: {
@@ -106,7 +119,7 @@ router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res
         }
     })
     if (!artistSongs) res.status(404).send('no songs found');
-    res.json({ artistSongs });
+    res.json(artistSongs);
 })
 
 
@@ -120,7 +133,10 @@ router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, re
             isAnArtist: true
         }
     });
-    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+    if (!theArtist.length) return res.send({
+        "message": "Artist couldn't be found",
+        "statusCode": 404
+    });
 
     const artistAlbums = await Album.findAll({
         where: {
@@ -128,7 +144,7 @@ router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, re
         }
     })
     if (!artistAlbums) res.status(404).send('no albums found');
-    res.json({ artistAlbums });
+    res.json(artistAlbums);
 })
 
 
@@ -142,7 +158,10 @@ router.get('/artists/:artistId/playlists', restoreUser, requireAuth, async (req,
             isAnArtist: true
         }
     });
-    if (!theArtist.length) return res.send('user not found / the user is not an artist')
+    if (!theArtist.length) return res.send({
+        "message": "Artist couldn't be found",
+        "statusCode": 404
+    });
 
     const artistPlaylists = await Playlist.findAll({
         where: {
@@ -150,7 +169,7 @@ router.get('/artists/:artistId/playlists', restoreUser, requireAuth, async (req,
         },
     })
     if (!artistPlaylists) res.status(404).send('no playlists found');
-    res.json({ artistPlaylists });
+    res.json(artistPlaylists);
 })
 
 

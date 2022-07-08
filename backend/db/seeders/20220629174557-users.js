@@ -7,21 +7,21 @@ module.exports = {
     await queryInterface.bulkInsert('Users', [
       {
         username: 'kermitZ',
-        firstName: 'Jay',
-        lastName: 'kermit-Z',
+        firstName: 'Kermit',
+        lastName: 'JayZ',
         email: 'kermitz@user.io',
         hashedPassword: bcrypt.hashSync('password1'),
         isAnArtist: true,
-        previewImage: 'xxxxxxxx'
+        previewImage: 'xxxxxxxx.jpg'
       },
       {
-        username: 'C-Monster',
+        username: 'CMonster',
         firstName: 'Cookie',
         lastName: 'Monster',
         email: 'c-monster@user.io',
         hashedPassword: bcrypt.hashSync('password2'),
         isAnArtist: false,
-        previewImage: 'xxxxxxxx'
+        previewImage: 'xxxxxxxx.jpg'
       },
       {
         username: 'Riri',
@@ -30,7 +30,7 @@ module.exports = {
         email: 'riri@user.io',
         hashedPassword: bcrypt.hashSync('password3'),
         isAnArtist: true,
-        previewImage: 'xxxxxxxx'
+        previewImage: 'xxxxxxxx.jpg'
       },
       {
         username: 'AKeys',
@@ -39,7 +39,7 @@ module.exports = {
         email: 'akeys@user.io',
         hashedPassword: bcrypt.hashSync('password4'),
         isAnArtist: true,
-        previewImage: 'xxxxxxxx'
+        previewImage: 'xxxxxxxx.jpg'
       }
     ], {})
   },

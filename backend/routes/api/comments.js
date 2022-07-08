@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
-const { User, Song, Album, Playlist, Comment } = require('../../db/models');
+const { User, Song, Playlist, Comment } = require('../../db/models');
 
 
 // getting all comments
@@ -30,22 +30,33 @@ router.get('/mycomments', restoreUser, requireAuth, async (req, res) => {
         return res.json(mycomments);
     } else {
         res.status(404);
-        return res.json('user is not found');
+        return res.json({
+            "message": "Comment couldn't be found",
+            "statusCode": 404
+        });
     }
 })
 
 // Edit a Comment
 // DONE
-router.put('/:commentId', restoreUser, requireAuth, async (req, res) => {
+router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
-    const id = req.params.commentId;
-    const { body } = req.body
-    if (!body) return res.send('please enter your comment')
+    const { id, body } = req.body
+    if (!body) return res.status(400).send({
+        "message": "Validation error",
+        "statusCode": 400,
+        "errors": {
+            "body": "Comment body text is required",
+        }
+    })
 
     const thecomment = await Comment.findByPk(id)
     if (!thecomment) {
         res.status(404);
-        return res.json('comment not found, please try again')
+        return res.send({
+            "message": "Comment couldn't be found",
+            "statusCode": 404
+        })
     }
     if (thecomment.userId !== userId) {
         return res.json(authorizationRequire())

@@ -1,5 +1,6 @@
 'use strict';
 module.exports = {
+<<<<<<< HEAD
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Comments', {
       id: {
@@ -14,6 +15,7 @@ module.exports = {
         references: {
           model: 'Users',
         },
+        onDelete: 'cascade'
       },
       songId: {
         type: Sequelize.INTEGER,
@@ -21,6 +23,7 @@ module.exports = {
         references: {
           model: 'Songs',
         },
+        onDelete: 'cascade'
       },
       body: {
         type: Sequelize.STRING(100),
@@ -42,3 +45,12 @@ module.exports = {
     await queryInterface.dropTable('Comments');
   }
 };
+=======
+    async up(queryInterface, Sequelize) {
+
+    },
+    async down(queryInterface, Sequelize) {
+
+    }
+}
+>>>>>>> dev
