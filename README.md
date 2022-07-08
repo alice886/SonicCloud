@@ -68,15 +68,16 @@ Returns the information about the current user that is logged in.
   * Body:
 
     ```json
-{
+    
+   {
     "user": {
         "id": 3,
         "username": "Riri",
         "firstName": "Rihanna",
         "lastName": "Fanta",
         "email": "riri@user.io"
+             }
     }
-}
     ```
 
 ## Log In a User
