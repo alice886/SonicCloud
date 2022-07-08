@@ -20,11 +20,13 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
 router.post('/', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { name, previewImage } = req.body;
-    if (!name) {
-        const e = new Error('please set a name for the new playlist');
-        res.status(400);
-        return res.send(e);
-    }
+    if (name === undefined) return res.status(404).json({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {
+            "name": "Playlist name is required"
+        }
+    })
     let newPlaylist = await Playlist.create({
         name,
         userId,
@@ -41,11 +43,16 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
     const userId = req.user.id;
     const { songId, playlistId } = req.body
 
-    if (!playlistId) res.json('please specify the playlist id to proceed')
     const theplaylist = await Playlist.findByPk(playlistId);
+    if (!theplaylist) return res.status(404).json({
+        "message": "Playlist couldn't be found",
+        "statusCode": 404
+    });
     const thesong = await Song.findByPk(songId);
-
-    if (!thesong) return res.json('song does not exit')
+    if (!thesong) return res.status(404).json({
+        "message": "Song couldn't be found",
+        "statusCode": 404
+    });
     if (userId !== theplaylist.userId) {
         res.status(404);
         return next(authorizationRequire());
@@ -55,7 +62,7 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
         playlistId
     })
     await songtoPlaylist.save();
-    return res.json({ songtoPlaylist })
+    return res.json(songtoPlaylist)
 })
 
 
@@ -133,7 +140,7 @@ router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
             },
             include: Song
         })
-        return res.json({ myplaylists });
+        return res.json(myplaylists);
     } else {
         res.status(404);
         return res.json('playlist not found');
