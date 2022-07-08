@@ -36,18 +36,20 @@ router.get('/mycomments', restoreUser, requireAuth, async (req, res) => {
 
 // Edit a Comment
 // DONE
-router.put('/mycomments', restoreUser, requireAuth, async (req, res) => {
+router.put('/:commentId', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
-    const { id, body } = req.body
-    if (!body) return res.json('please enter your comment')
+    const id = req.params.commentId;
+    const { body } = req.body
+    if (!body) return res.send('please enter your comment')
 
     const thecomment = await Comment.findByPk(id)
-
     if (!thecomment) {
         res.status(404);
         return res.json('comment not found, please try again')
     }
-
+    if (thecomment.userId !== userId) {
+        return res.json(authorizationRequire())
+    }
     thecomment.body = body;
     await thecomment.save();
 

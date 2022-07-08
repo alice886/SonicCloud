@@ -3,6 +3,11 @@ const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment } = require('../../db/models');
 
+const songnotfound = {
+    "message": "Song couldn't be found",
+    "statusCode": 404
+};
+
 
 // Get all Songs
 // DONE
@@ -40,23 +45,30 @@ router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
 router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const { songId } = req.params;
     const theSong = await Song.findByPk(songId);
-    if (!theSong) res.status(404).send('Song not found');
+    if (!theSong) {
+        res.status(404);
+        return res.send(songnotfound);
+    }
 
     return res.json(theSong);
 });
+
 
 // Get all Comments by a Song's id
 // DONE
 router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     const thesongId = req.params.songId;
-
+    console.log(thesongId)
     const allComments = await Comment.findAll({
         where: {
             songId: thesongId,
         }
     })
-    if (!allComments) res.json('song not found, plz try again')
-    return res.json({ allComments })
+    if (!allComments.length) {
+        res.status(404);
+        return res.send(songnotfound);
+    }
+    return res.json(allComments)
 })
 
 
@@ -66,17 +78,17 @@ router.post('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     const songId = req.params.songId;
     const userId = req.user.id;
     const { body } = req.body
-    const newComment = await Comment.create({
+    const thesong = await Song.findByPk(songId);
+    if (!thesong) {
+        res.status(404);
+        return res.send(songnotfound);
+    }
+    let newComment = await Comment.create({
         userId,
         songId,
         body,
     })
-    const thesongtobecommented = await Song.findByPk(songId);
-    if (!thesongtobecommented) {
-        res.status(404);
-        return res.json('song not found, plz try again')
-    }
-    return res.json({ newComment })
+    return res.json(newComment)
 
 })
 
@@ -154,7 +166,7 @@ router.delete('/:songId(\\d+)', restoreUser, requireAuth, async (req, res, next)
 
     if (!thesong) {
         res.status(404);
-        return res.json('song not found, please try again')
+        return res.send(songnotfound);
     }
     if (thesong.userId !== userId) {
         return next(authorizationRequire());
