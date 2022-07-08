@@ -109,7 +109,7 @@ router.put('/myplaylists', restoreUser, requireAuth, async (req, res, next) => {
         return next(authorizationRequire());
     }
     if (name) { theplaylist.name = name; };
-    if (previewImage) { thealbum.previewImage = previewImage; };
+    if (previewImage) { theplaylist.previewImage = previewImage; };
 
     await theplaylist.save();
     return res.json(theplaylist)
