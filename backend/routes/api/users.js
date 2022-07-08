@@ -75,7 +75,7 @@ router.get('/artists/:artistId', async (req, res) => {
         },
         include: [Album, Song, Playlist]
     });
-    res.json({ allArtists });
+    res.json(allArtists);
 });
 
 // getting details for a specific user base on Id
@@ -84,7 +84,7 @@ router.get('/:userId(\\d+)', restoreUser, requireAuth, async (req, res, next) =>
     const { userId } = req.params;
     const theUser = await User.findByPk(userId);
     if (!theUser) res.status(404).send('User not found');
-    res.json({ theUser });
+    res.json(theUser);
 })
 
 
@@ -106,7 +106,7 @@ router.get('/artists/:artistId/songs', restoreUser, requireAuth, async (req, res
         }
     })
     if (!artistSongs) res.status(404).send('no songs found');
-    res.json({ artistSongs });
+    res.json(artistSongs);
 })
 
 
@@ -128,7 +128,7 @@ router.get('/artists/:artistId/albums', restoreUser, requireAuth, async (req, re
         }
     })
     if (!artistAlbums) res.status(404).send('no albums found');
-    res.json({ artistAlbums });
+    res.json(artistAlbums);
 })
 
 
@@ -150,7 +150,7 @@ router.get('/artists/:artistId/playlists', restoreUser, requireAuth, async (req,
         },
     })
     if (!artistPlaylists) res.status(404).send('no playlists found');
-    res.json({ artistPlaylists });
+    res.json(artistPlaylists);
 })
 
 
