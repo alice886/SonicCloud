@@ -1372,10 +1372,10 @@ Returns the details of a playlist specified by its id.
 
     ```json
     {
-       "id": 2,
-      "name": "Riri's playlist NO.2",
+       "id": 1,
+      "name": "Riri's playlist NO.1",
       "userId": 3,
-      "previewImage": "222222222.jpg"
+      "previewImage": "111111111.jpg"
     }
     ```
 
@@ -1400,7 +1400,7 @@ Updates and returns an existing playlist.
 * Require proper authorization: Playlist must belong to the current user
 * Request
   * Method: PUT/PATCH
-  * URL: '/paylist/myplaylists'
+  * URL: '/paylists/myplaylists'
   * Headers:
     * Content-Type: application/json
   * Body:
