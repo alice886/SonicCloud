@@ -71,7 +71,10 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
 router.get('/:playlistId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const theplaylistId = req.params.playlistId;
     const thatPlaylist = await Playlist.findByPk(theplaylistId);
-    if (!thatPlaylist) res.status(404).send('playlist does not exist')
+    if (!thatPlaylist) return res.status(404).json({
+        "message": "Playlist couldn't be found",
+        "statusCode": 404
+    });
     // const thatPlaylistdetail = await Playlist.findAll({
     //     where: {
     //         playlistId: theplaylistId,
@@ -90,7 +93,17 @@ router.put('/myplaylists', restoreUser, requireAuth, async (req, res, next) => {
 
     if (!id) res.json('please specify the playlist id to proceed')
     const theplaylist = await Playlist.findByPk(id)
-
+    if (!theplaylist) res.status(404).json({
+        "message": "Playlist couldn't be found",
+        "statusCode": 404
+    });
+    if (!name) res.status(400).json({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {
+            "name": "Playlist name is required"
+        }
+    });
     if (userId !== theplaylist.userId) {
         res.status(404);
         return next(authorizationRequire());
@@ -99,7 +112,7 @@ router.put('/myplaylists', restoreUser, requireAuth, async (req, res, next) => {
     if (previewImage) { thealbum.previewImage = previewImage; };
 
     await theplaylist.save();
-    return res.json({ theplaylist })
+    return res.json(theplaylist)
 })
 
 
