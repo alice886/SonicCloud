@@ -1466,7 +1466,7 @@ Deletes an existing playlist.
 * Require proper authorization: Playlist must belong to the current user
 * Request
   * Method: DELETE
-  * URL: '/playlist/myplaylists'
+  * URL: '/playlists/myplaylists'
   * Body: 
     ```json
        {
