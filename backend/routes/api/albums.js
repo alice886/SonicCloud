@@ -160,7 +160,10 @@ router.delete('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
     }
 
     await thealbum.destroy();
-    return res.status(200).send("Successfully deleted");
+    return res.status(200).json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    });
 
 })
 
