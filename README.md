@@ -107,17 +107,17 @@ information.
   * Body:
 
     ```json
-{
-    "user": {
-        "id": 3,
-        "username": "Riri",
-        "firstName": "Rihanna",
-        "lastName": "Fanta",
-        "email": "riri@user.io",
-        "createdAt": "2022-07-06T21:20:53.336Z",
-        "updatedAt": "2022-07-06T21:20:53.336Z"
+    {
+        "user": {
+            "id": 3, 
+            "username": "Riri",
+            "firstName": "Rihanna",
+            "lastName": "Fanta",
+            "email": "riri@user.io",
+            "createdAt": "2022-07-06T21:20:53.336Z",
+            "updatedAt": "2022-07-06T21:20:53.336Z"
+        }
     }
-}
     ```
 
 * Error Response: Invalid credentials
