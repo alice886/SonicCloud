@@ -51,7 +51,7 @@ router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
             id: thealbumId
         },
         include: [
-            { model: User, as: 'Artist' }, 
+            { model: User, as: 'Artist' }, { model: Song }
         ],
     })
     if (!thatAlbums) res.status(404).send('album does not exist')
