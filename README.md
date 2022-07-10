@@ -803,7 +803,7 @@ Deletes an existing album.
   * URL: '/myalbums'
   * Body: 
     {
-     "id":1
+     "id":11
     }
 
 * Successful Response
