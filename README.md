@@ -31,6 +31,8 @@ All endpoints that require a current user to be logged in.
     {
       "message": "Authentication required",
       "statusCode": 401
+    }
+    ```
 
 ## All endpoints that require proper authorization
 
@@ -618,6 +620,7 @@ Returns the details of an album specified by its id.
 * Request
   * Method: GET
   * URL: '/albums/:albumId(\\d+)'
+  * try: /albums/1
   * Body: none
 
 * Successful Response
