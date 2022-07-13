@@ -73,7 +73,7 @@ router.get('/artists/:artistId', async (req, res) => {
             id: artistId,
 
         },
-        include: [Album, Song, Playlist]
+        // include: [Album, Song, Playlist]
     });
     if (!theArtists.length) {
         res.status(404);
@@ -82,7 +82,23 @@ router.get('/artists/:artistId', async (req, res) => {
             "statusCode": 404
         });
     }
-    res.json(theArtists);
+    const songNums = await Song.count({
+        where: {
+            userId: artistId
+        }
+    })
+    const albumNums = await Album.count({
+        where: {
+            userId: artistId
+        }
+    })
+    const playlistNums = await Playlist.count({
+        where: {
+            userId: artistId
+        }
+    })
+
+    res.json({ Artist: theArtists, Songs: songNums, Albums: albumNums, Playlists: playlistNums });
 });
 
 // getting details for a specific user base on Id
