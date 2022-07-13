@@ -98,7 +98,7 @@ router.get('/artists/:artistId', async (req, res) => {
         }
     })
 
-    res.json({ Artist: theArtists, Songs: songNums, Albums: albumNums, Playlists: playlistNums });
+    res.json({ Artist: theArtists, 'Songs#': songNums, 'Albums#': albumNums, 'Playlists#': playlistNums });
 });
 
 // getting details for a specific user base on Id
