@@ -1,12 +1,16 @@
 {
   "dependencies": {
     "express-validator": "^6.14.2",
-    "pg": "^8.7.3"
+    "js-cookie": "^3.0.1",
+    "pg": "^8.7.3",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^5.3.3",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.1"
   },
   "name": "authenticate-me",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
@@ -25,5 +29,8 @@
     "url": "https://github.com/alice886/authenticate-me/issues"
   },
   "homepage": "https://github.com/alice886/authenticate-me#readme",
-  "description": "## Database Schema Design"
+  "description": "## Database Schema Design",
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
+  }
 }
