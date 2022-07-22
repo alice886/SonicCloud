@@ -1,5 +1,20 @@
-html, body, input, textarea, button, select, a {
-    font-family: 'Open Sans';
-    font-size: 16px;
-    color: green;
-  }
+html,
+body,
+input,
+textarea,
+button,
+select,
+a {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  color: navy;
+}
+
+form {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40%;
+  font-size: larger;
+  padding: 5px;
+}
