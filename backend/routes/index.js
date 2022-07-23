@@ -2,10 +2,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function (req, res) {
-    res.cookie('XSRF-TOKEN', req.csrfToken());
-    res.send('Welcome to SonicCloud!!');
-});
+// router.get('/', function (req, res) {
+//     res.cookie('XSRF-TOKEN', req.csrfToken());
+//     // res.send('Welcome to SonicCloud!!');
+// });
 
 // Add a XSRF-TOKEN cookie
 router.get("/api/csrf/restore", (req, res) => {
