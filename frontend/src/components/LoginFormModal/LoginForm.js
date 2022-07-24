@@ -20,8 +20,8 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
+    <form onSubmit={handleSubmit} > 
+      <ul id='loginform'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
