@@ -1,33 +1,62 @@
+body,
+head,
+ul,
+form,
 body {
-    width: 90%;
+    justify-content: center;
+    margin: auto;
+}
+
+html {
+    height: max-content;
+}
+
+body {
+    width: 100%;
     border-top: 4px solid #f50;
     display: flex;
     align-items: flex-end;
     flex-direction: row;
-    
+    text-align: center;
+
 }
 
 div {
-    height: 800px;
-    top: 10px;
-    align-items: flex-end;
-    
+    height: 100px;
+    top: 30px;
+    justify-content: center;
+    width: 100%;
+
 }
 
 ul {
-    background: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists-8081257b.jpg) 50%/cover no-repeat;
+    background: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists-8081257b.jpg) 100%/cover no-repeat;
     /* border: solid 3px #f50; */
-    /* position: absolute; */
+    position: fixed;
     width: 100%;
-    align-items: flex-end;
+    /* align-items:flex-start; */
     display: inline-block;
+    left: 0px;
+    list-style: none;
+}
+
+form {
+    position: relative;
+    top: 90px;
+    width: 400px;
+    height: max-content;
+    overflow: auto;
+    align-items: center;
+    align-items: center;
+    flex-direction: column;
+
 }
 
 li {
     padding: 5px;
     margin: 5px;
     /* top: 20px; */
-    font-size: 10px;
+    font-size: 20px;
     position: relative;
 
 }
@@ -40,5 +69,5 @@ button {
     font-family: Arial, Helvetica, sans-serif;
     border-style: solid 3px white;
     margin: 5px;
-    height: 10px;
+    /* height: 13px; */
 }

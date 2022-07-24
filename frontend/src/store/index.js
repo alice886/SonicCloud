@@ -1,10 +1,20 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { useReducer } from "react";
+import { legacy_createStore as createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from './session';
+import userReducer from "./user";
+import songReducer from "./song";
+import commentReducer from "./comment";
+import playlistReducer from "./playlist";
+
 
 const rootReducer = combineReducers({
   // add reducer functions here
-  session: sessionReducer
+  session: sessionReducer,
+  user: userReducer,
+  song: songReducer,
+  comment: commentReducer,
+  playlist: playlistReducer
 });
 
 let enhancer;

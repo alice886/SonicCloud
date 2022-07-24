@@ -5,7 +5,7 @@ button,
 select,
 a {
   font-family: 'Open Sans';
-  font-size: 20px;
+  font-size: 80px;
   color: navy;
   margin: 0;
   background-color: hsl(0, 0%, 98%);
@@ -22,7 +22,9 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 5px 3%;
-
+  color: aliceblue;
+  font-size: 200px;
+  font-size: 50px;
 }
 
 form {
