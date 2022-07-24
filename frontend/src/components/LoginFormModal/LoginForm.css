@@ -3,3 +3,6 @@ html, body, input, textarea, button, select, a {
     font-size: 16px;
     color: orangered;
   }
+form{
+  width: 100%;
+}
