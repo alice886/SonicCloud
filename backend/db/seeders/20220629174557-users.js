@@ -12,7 +12,7 @@ module.exports = {
         email: 'kermitz@user.io',
         hashedPassword: bcrypt.hashSync('password1'),
         isAnArtist: true,
-        previewImage: 'xxxxxxxx.jpg'
+        previewImage: 'https://www.tbstat.com/wp/uploads/2021/06/jay-z.png'
       },
       {
         username: 'CMonster',
@@ -21,7 +21,7 @@ module.exports = {
         email: 'c-monster@user.io',
         hashedPassword: bcrypt.hashSync('password2'),
         isAnArtist: false,
-        previewImage: 'xxxxxxxx.jpg'
+        previewImage: 'https://media-exp1.licdn.com/dms/image/C4D03AQFvzZJ7kUFu4w/profile-displayphoto-shrink_200_200/0/1612364507004?e=1659571200&v=beta&t=vZ3CQu-EZNWbO5QL7yyjv1t2uoEPzvptYos2Q3Ukebk'
       },
       {
         username: 'Riri',
@@ -30,7 +30,7 @@ module.exports = {
         email: 'riri@user.io',
         hashedPassword: bcrypt.hashSync('password3'),
         isAnArtist: true,
-        previewImage: 'xxxxxxxx.jpg'
+        previewImage: 'https://ih1.redbubble.net/image.990479598.6272/pp,504x498-pad,600x600,f8f8f8.jpg'
       },
       {
         username: 'AKeys',
@@ -39,7 +39,7 @@ module.exports = {
         email: 'akeys@user.io',
         hashedPassword: bcrypt.hashSync('password4'),
         isAnArtist: true,
-        previewImage: 'xxxxxxxx.jpg'
+        previewImage: 'https://a4-images.myspacecdn.com/images04/4/7e561aaecea44b2d93489487d645d680/300x300.jpg'
       }
     ], {})
   },

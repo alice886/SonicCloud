@@ -1,5 +1,15 @@
-html, body, input, textarea, button, select, a {
-    font-family: 'Open Sans';
-    font-size: 16px;
-    color: orangered;
-  }
+/* html, body, input, textarea, button, select, a {
+  justify-content: center;
+  margin: auto;
+  } */
+/* #loginform {
+  width: 100%;
+  justify-content: center;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+} */

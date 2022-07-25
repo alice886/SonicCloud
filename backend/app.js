@@ -20,16 +20,18 @@ app.use(express.json());
 
 const { ValidationError } = require('sequelize');
 
-const userRouter = require('./routes/api/users');
-app.use('/users', userRouter);
-const albumRouter = require('./routes/api/albums');
-app.use('/albums', albumRouter);
-const songRouter = require('./routes/api/songs');
-app.use('/songs', songRouter);
-const commentRouter = require('./routes/api/comments');
-app.use('/comments', commentRouter);
-const playlistRouter = require('./routes/api/playlists');
-app.use('/playlists', playlistRouter);
+const routes = require('./routes');
+
+// const userRouter = require('./routes/api/users');
+// app.use('/users', userRouter);
+// const albumRouter = require('./routes/api/albums');
+// app.use('/albums', albumRouter);
+// const songRouter = require('./routes/api/songs');
+// app.use('/songs', songRouter);
+// const commentRouter = require('./routes/api/comments');
+// app.use('/comments', commentRouter);
+// const playlistRouter = require('./routes/api/playlists');
+// app.use('/playlists', playlistRouter);
 
 if (!isProduction) app.use(cors());
 app.use(
@@ -47,7 +49,6 @@ app.use(
     })
 )
 
-const routes = require('./routes');
 app.use(routes);
 
 // phase 2 -- Error Handling
@@ -82,8 +83,6 @@ app.use((err, _req, res, _next) => {
         // stack: isProduction ? null : err.stack
     });
 });
-
-
 
 
 
