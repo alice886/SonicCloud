@@ -30,15 +30,16 @@ div {
 }
 
 ul {
-    background: url(https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists-8081257b.jpg) 100%/cover no-repeat;
     /* border: solid 3px #f50; */
     position: fixed;
     width: 100%;
     /* align-items:flex-start; */
-    display: inline-block;
+    justify-content: center;
+    display: flow-root;
     left: 0px;
     list-style: none;
     color: white;
+    background: url(https://miro.medium.com/max/1400/1*FEZUIg9R5gaEKsCCq8VabQ.png) 60%/cover no-repeat;
 }
 
 form {
@@ -52,11 +53,14 @@ form {
     flex-direction: column;
 
 }
-#user-dropdown{
+
+#user-dropdown {
     color: white;
+    position: relative;
 }
 
 li {
+
     padding: 5px;
     margin: 5px;
     /* top: 20px; */
@@ -69,7 +73,7 @@ a,
 button {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    font-size: 15px;
+    font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     border-style: solid 3px white;
     margin: 5px;
