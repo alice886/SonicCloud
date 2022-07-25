@@ -2,10 +2,16 @@
 const express = require('express');
 const router = express.Router();
 
-// router.get('/', function (req, res) {
-//     res.cookie('XSRF-TOKEN', req.csrfToken());
-//     // res.send('Welcome to SonicCloud!!');
-// });
+const apiRouter = require('./api');
+router.use('/api', apiRouter);   // All the URLs of the routes in the api router will be prefixed with /api.
+// apiRouter.get("/csrf/restore", (req, res) => {
+//     res.send('it works');  // apiRouter tester ==> it did work!!
+// }); 
+
+router.get('/', function (req, res) {
+    res.cookie('XSRF-TOKEN', req.csrfToken());
+    // res.send('Welcome to SonicCloud!!');
+});
 
 // Add a XSRF-TOKEN cookie
 router.get("/api/csrf/restore", (req, res) => {
@@ -15,13 +21,6 @@ router.get("/api/csrf/restore", (req, res) => {
         'XSRF-Token': csrfToken
     });
 });
-
-
-const apiRouter = require('./api');
-router.use('/api', apiRouter);   // All the URLs of the routes in the api router will be prefixed with /api.
-// apiRouter.get("/csrf/restore", (req, res) => {
-//     res.send('it works');  // apiRouter tester ==> it did work!!
-// }); 
 
 // Static routes
 // Serve React build files in production
@@ -37,6 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 
     // Serve the static assets in the frontend's build folder
     router.use(express.static(path.resolve("../frontend/build")));
+
 
     // Serve the frontend's index.html file at all other routes NOT starting with /api
     router.get(/^(?!\/?api).*/, (req, res) => {

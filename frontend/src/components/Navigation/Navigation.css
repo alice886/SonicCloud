@@ -38,6 +38,7 @@ ul {
     display: inline-block;
     left: 0px;
     list-style: none;
+    color: white;
 }
 
 form {
@@ -50,6 +51,9 @@ form {
     align-items: center;
     flex-direction: column;
 
+}
+#user-dropdown{
+    color: white;
 }
 
 li {

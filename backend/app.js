@@ -20,6 +20,8 @@ app.use(express.json());
 
 const { ValidationError } = require('sequelize');
 
+const routes = require('./routes');
+
 const userRouter = require('./routes/api/users');
 app.use('/users', userRouter);
 const albumRouter = require('./routes/api/albums');
@@ -47,7 +49,6 @@ app.use(
     })
 )
 
-const routes = require('./routes');
 app.use(routes);
 
 // phase 2 -- Error Handling
@@ -82,8 +83,6 @@ app.use((err, _req, res, _next) => {
         // stack: isProduction ? null : err.stack
     });
 });
-
-
 
 
 
