@@ -1,7 +1,9 @@
+
+
 const LOAD = 'users/LOAD'
 
 const load = (list) => ({
-    type: load,
+    type: LOAD,
     list
 })
 

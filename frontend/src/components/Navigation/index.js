@@ -26,7 +26,7 @@ function Navigation({ isLoaded }) {
     return (
         <ul className='topNav'>
             <li>
-                <NavLink to="/songs/all" className={'nav-songs'}>Songs</NavLink>
+                <NavLink to="/songs" className={'nav-songs'}>Songs</NavLink>
             </li>
             <li>
                 <NavLink to="/playlists/myplaylists" className={'nav-playlists'}>My Playlists</NavLink>

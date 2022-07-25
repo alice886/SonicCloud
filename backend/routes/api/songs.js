@@ -11,11 +11,12 @@ const songnotfound = {
 
 // Get all Songs
 // DONE
-router.get('/all', async (req, res) => {
+router.get('/all', restoreUser, requireAuth,async (req, res) => {
     const allSongs = await Song.findAll({
         where: {},
         include: [],
     });
+    // console.log('/all  -- testing')
     res.json(allSongs);
 });
 
@@ -223,7 +224,11 @@ const editSongHandler = async (req, res) => {
     const { userId, albumId, title, description, url, previewImae } = req.body;
 }
 
-router.get('/', restoreUser, requireAuth, validatePagination, async (req, res, next) => {
+// router.get('/', restoreUser, requireAuth, validatePagination, async (req, res, next) => {
+router.get('/', restoreUser, requireAuth, async (req, res, next) => {
+    console.log('im the backend')
+    const songs = await Song.findAll();
+
     let pagination = {};
     let { page, size } = req.query;
 

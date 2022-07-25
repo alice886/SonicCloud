@@ -1,25 +1,29 @@
+
 const LOAD = 'songs/LOAD'
 
-// const load = (list) => ({
-//     type: load,
-//     list
-// })
+const load = (songs) => ({
+    type: LOAD,
+    payload: songs
+})
 
-// export const getUserDetail = () => async dispatch {
-//     const res = await fetch(`/api`)
-// if (res.ok) {
-//     const list = await res.json();
-//     dispatch(load(list))
-// }
-// }
+export const getAllSongs = () => async dispatch => {
+    const response = await fetch(`/api/songs/all`);
+    console.log('allsongs ---', response);
+    if (response.ok) {
+        const songs = await response.json();
+        await dispatch(load(songs));
+    }
+};
 
 const initialState = {};
+
 
 const songReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD:
-            const currentUserDetail = {}
-            return currentUserDetail;
+            const newState = {};
+            action.payload.forEach(song => newState[song.id] = song);
+            return newState;
         default:
             return state;
     }

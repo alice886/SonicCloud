@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    flex-direction: row;
+}
+#song-container{
+    width: 90%;
+    display: flex;
+    margin: auto;
+    border-style: black 5px solid;
+}
