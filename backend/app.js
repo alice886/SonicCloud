@@ -22,16 +22,16 @@ const { ValidationError } = require('sequelize');
 
 const routes = require('./routes');
 
-const userRouter = require('./routes/api/users');
-app.use('/users', userRouter);
-const albumRouter = require('./routes/api/albums');
-app.use('/albums', albumRouter);
-const songRouter = require('./routes/api/songs');
-app.use('/songs', songRouter);
-const commentRouter = require('./routes/api/comments');
-app.use('/comments', commentRouter);
-const playlistRouter = require('./routes/api/playlists');
-app.use('/playlists', playlistRouter);
+// const userRouter = require('./routes/api/users');
+// app.use('/users', userRouter);
+// const albumRouter = require('./routes/api/albums');
+// app.use('/albums', albumRouter);
+// const songRouter = require('./routes/api/songs');
+// app.use('/songs', songRouter);
+// const commentRouter = require('./routes/api/comments');
+// app.use('/comments', commentRouter);
+// const playlistRouter = require('./routes/api/playlists');
+// app.use('/playlists', playlistRouter);
 
 if (!isProduction) app.use(cors());
 app.use(
