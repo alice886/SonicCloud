@@ -5,7 +5,11 @@ import { getUserDetail } from '../../store/user'
 
 const TestUserHome = () => {
     return (
-        <button>hello user home page</button>
+        <ul>
+            <NavLink to={`/songs`}>Songs on 🌩️</NavLink>
+            <NavLink to={`/albums`}>Albums on 🌩️</NavLink>
+            <NavLink to={`/playlists`}>Playlists on 🌩️</NavLink>
+        </ul>
     )
 }
 

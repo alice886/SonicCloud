@@ -1,4 +1,4 @@
-
+import { csrfFetch } from './csrf';
 const LOAD = 'songs/LOAD'
 
 const load = (songs) => ({
@@ -7,10 +7,10 @@ const load = (songs) => ({
 })
 
 export const getAllSongs = () => async dispatch => {
-    const response = await fetch(`/api/songs/all`);
-    console.log('allsongs ---', response);
+    const response = await csrfFetch(`/api/songs/all`);
     if (response.ok) {
         const songs = await response.json();
+        // console.log('what do we receive here',songs)
         await dispatch(load(songs));
     }
 };

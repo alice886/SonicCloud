@@ -10,24 +10,26 @@ function AllSongs() {
         dispatch(getAllSongs())
     }, [dispatch])
 
-    const allsongs = useSelector(state => state.song)
-    // console.log('allsongs!!!', allsongs.id[1])
-
     // const currentUser = useSelector(state => state.session.user);
     // console.log('current user --',currentUser)
 
-    return (
-        <>
-            <div className="song-container">
-                {/* {allsongs.forEach((song) => {
-                    <NavLink key={song.id} to={`/songs/${song.id}`}>${song.title}</NavLink>
-                })} */}
-                {/* {for(const song in allsongs){ */}
+    const allsongs = useSelector(state => Object.values(state.song))
+    // const allsongs2 = useSelector(state => state.song)
+    // allsongs.forEach(song => songArray.push(song))
+    console.log('allsongs ---1.1---', typeof allsongs)
 
-                }}
-            </div>
-            <button key={'song-button'}>Im a button</button>
-        </>
+
+    return (
+        <div className="song-container"> ...... all songs on SonicCloud ...... 
+            <ul>
+                {allsongs && allsongs.map((song) => {
+                    return <li className="eachsong" key={song.id}>
+                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                    </li>
+                })}
+                
+            </ul>
+        </div>
     )
 }
 

@@ -24,18 +24,16 @@ function Navigation({ isLoaded }) {
     }
 
     return (
-        <ul className='topNav'>
-            <li>
-                <NavLink to="/songs" className={'nav-songs'}>Songs</NavLink>
-            </li>
-            <li>
-                <NavLink to="/playlists/myplaylists" className={'nav-playlists'}>My Playlists</NavLink>
-            </li>
-            <li>
-                <NavLink exact to="/" className={'nav-home'}>Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <div className='topnav'>
+            <NavLink to="/songs" className={'nav-songs'}>Songs</NavLink>
+            <NavLink to="/albums" className={'nav-albums'}>Albums</NavLink>
+            <NavLink to="/songs/mysongs" className={'nav-songs'}>My Songs</NavLink>
+            <NavLink to="/albums/myalbums" className={'nav-albums'}>My Albums</NavLink>
+            <NavLink to="/playlists/myplaylists" className={'nav-playlists'}>My Playlists</NavLink>
+            <NavLink exact to="/" className={'nav-home'}>Home</NavLink>
+            {isLoaded && sessionLinks}
+
+        </div>
     );
 }
 

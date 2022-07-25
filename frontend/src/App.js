@@ -17,6 +17,7 @@ import MyPlaylists from "./components/Playlist/index";
 import TestUserHome from "./components/UserHome/UserHome";
 import Navigation from "./components/Navigation";
 import PageNotFound from "./components/PageNotFound";
+import AllAlbums from "./components/Album";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/playlists/myplaylists">
             <MyPlaylists />
+          </Route>
+          <Route path="/albums">
+            <AllAlbums />
           </Route>
           <Route>
             <PageNotFound />

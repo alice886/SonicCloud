@@ -5,6 +5,7 @@ form,
 body {
     justify-content: center;
     margin: auto;
+    list-style-type: none;
 }
 
 html {
@@ -29,17 +30,28 @@ div {
 
 }
 
-ul {
+#topnav {
     /* border: solid 3px #f50; */
-    position: fixed;
-    width: 100%;
-    /* align-items:flex-start; */
-    justify-content: center;
-    display: flow-root;
-    left: 0px;
+    /* position: fixed;
+    width: 100%; */
+    align-items: flex-start;
+    justify-content: space-evenly;
+    display: flex;
+    /* left: 0px;
     list-style: none;
-    color: white;
-    background: url(https://miro.medium.com/max/1400/1*FEZUIg9R5gaEKsCCq8VabQ.png) 60%/cover no-repeat;
+    color: white; */
+    /* background: url(https://miro.medium.com/max/1400/1*FEZUIg9R5gaEKsCCq8VabQ.png) 60%/cover no-repeat; */
+    background-color: #333;
+    overflow: hidden;
+}
+
+.topnav a {
+    float: none;
+    color: black;
+    text-align: center;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 form {
@@ -54,13 +66,15 @@ form {
 
 }
 
-#user-dropdown {
-    color: white;
+#user-dropdown, #profile-dropdown {
+    color: black;
     position: relative;
+    /* display: flex;
+    align-items: flex-end; */
+    size: 10px;
 }
 
 li {
-
     padding: 5px;
     margin: 5px;
     /* top: 20px; */
@@ -69,10 +83,19 @@ li {
 
 }
 
-a,
 button {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 85, 0, 0.7);
     color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-style: solid 3px white;
+    margin: 5px;
+    /* height: 13px; */
+}
+
+a {
+    background-color: rgba(255, 85, 0, 0.2);
+    color: black;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     border-style: solid 3px white;

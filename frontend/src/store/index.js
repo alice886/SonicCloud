@@ -5,6 +5,7 @@ import userReducer from "./user";
 import songReducer from "./song";
 import commentReducer from "./comment";
 import playlistReducer from "./playlist";
+import albumReducer from "./album"
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   song: songReducer,
   comment: commentReducer,
-  playlist: playlistReducer
+  playlist: playlistReducer,
+  album: albumReducer
 });
 
 let enhancer;
