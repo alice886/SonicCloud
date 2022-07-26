@@ -14,6 +14,14 @@ export const getAllSongs = () => async dispatch => {
         await dispatch(load(songs));
     }
 };
+export const getMySongs = () => async dispatch => {
+    const response = await csrfFetch(`/api/songs/mysongs`);
+    if (response.ok) {
+        const songs = await response.json();
+        // console.log('what do we receive here',songs)
+        await dispatch(load(songs));
+    }
+};
 
 const initialState = {};
 
