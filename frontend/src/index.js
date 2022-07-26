@@ -11,6 +11,7 @@ import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
 import * as songActions from "./store/song";
 import * as albumActions from "./store/album"
+import * as playlistActions from "./store/playlist"
 
 const store = configureStore();
 
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV !== "production") {
   window.sessionActions = sessionActions;
   window.songActions = songActions;
   window.albumActions = albumActions;
+  window.playlistActions = playlistActions;
 }
 
 function Root() {
