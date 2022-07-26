@@ -16,17 +16,27 @@ function AllAlbums() {
     const allAlbums = useSelector(state => Object.values(state.album))
     console.log('current user --', allAlbums)
 
+    const handleEdit = (e)=>{
+        e.preventDefault();
+    }
+    const handleDelete = (e)=>{
+        e.preventDefault();
+    }
+
     return (
-        <div className="album-container"> ...... all albums on SonicCloud ......
-            <ul>
+        <section className="album-container"> ...... all albums on SonicCloud ......
+            <div>
                 {allAlbums && allAlbums.map((album) => {
-                    return <li className="eachalbum" key={album.id}>
+                    return <div className="eachalbum" key={album.id}>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                    </li>
+                        <p>artist Id: {album.userId}</p>
+                        
+                        {/* <img className="albumImage" src={`album.previewImage`} alt={"album Image"} width={50} height={60} > */}
+                    </div>
                 })}
 
-            </ul>
-        </div>
+            </div>
+        </section>
     )
 }
 

@@ -1,0 +1,14 @@
+div #eachalbum {
+    width: 100px;
+    height: 100%;
+    border: brown 1px solid;
+}
+
+
+#album-container {
+    padding: 65px 100px;
+    font-weight: 300;
+    height: fit-content;
+    display: inline-block;
+    width: 90%;
+}

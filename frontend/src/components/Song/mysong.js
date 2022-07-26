@@ -19,6 +19,13 @@ function MySongs() {
     const allmysongs = useSelector(state => Object.values(state.song))
     console.log('mysongs ---1.1---', allmysongs)
 
+    const handleEdit = (e)=>{
+        e.preventDefault();
+    }
+    const handleDelete = (e)=>{
+        e.preventDefault();
+    }
+
     return (
         <div className="song-container"> ...... my songs on SonicCloud ......
             <ul>
@@ -26,9 +33,11 @@ function MySongs() {
                     return <li className="eachsong" key={song.id}>
                         <li key={song.id}>
                             <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink></li>
+                        <button onClick={handleEdit}> edit </button>
+                        <button onClick={handleDelete}> delete </button>
                     </li>
                 })}
-                 {/* <Route path="/albums">
+                {/* <Route path="/albums">
                 <CreateNewSong />
                 </Route> */}
             </ul>

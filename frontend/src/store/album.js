@@ -42,6 +42,18 @@ export const getOneAlbum = () => async dispatch => {
     }
 };
 
+export const deleteOneAlbum = (albumId) => async dispatch => {
+    const response = await csrfFetch(`/api/albums/myalbums`,{
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(albumId)
+    });
+    if (response.ok) {
+        const message = await response.json();
+        await dispatch(removeOneAlbum(albumId));
+    }
+};
+
 export const addNewAlbum = (album) => async dispatch => {
     const response = await csrfFetch(`/api/albums/myalbums`, {
         method: 'POST',
@@ -68,8 +80,8 @@ const albumReducer = (state = initialState, action) => {
         case ADD_ONE:
             {
                 // if(!state[action.album.name]){
-                const newState = {}
-                newState = { ...state, [action.album.id]: action.album }
+                // const newState = {}
+                const newState = { ...state, ...action.album }
                 // }
                 return newState;
             }
