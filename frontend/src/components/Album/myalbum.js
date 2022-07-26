@@ -52,6 +52,7 @@ function MyAlbums() {
 
         }
     }
+
     const handleCancelClick = e => {
         e.preventDefault();
     };
