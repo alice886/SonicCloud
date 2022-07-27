@@ -8,37 +8,37 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 // Create a Song for an Album based on the Album's id
 // DONE
-router.post('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
-    const userId = req.user.id;
-    const albumId = req.params.albumId;
-    const { title, description, url, previewImage } = req.body;
-    const e = new Error('Validation Error');
-    e.status = 400;
-    e.errors = {};
-    e.errors.title = "Song title is required";
-    e.errors.url = "Audio is required";
+// router.post('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
+//     const userId = req.user.id;
+//     const albumId = req.params.albumId;
+//     const { title, description, url, previewImage } = req.body;
+//     const e = new Error('Validation Error');
+//     e.status = 400;
+//     e.errors = {};
+//     e.errors.title = "Song title is required";
+//     e.errors.url = "Audio is required";
 
-    if (!title || !url) return res.send(e);
+//     if (!title || !url) return res.send(e);
 
-    const thealbum = await Album.findByPk(albumId);
-    if (!thealbum) {
-        const e = new Error("Album couldn't be found");
-        e.title = "Album couldn't be found";
-        e.status = 404;
-        return res.send(e);
-    }
-    if (userId !== thealbum.userId) return next(authorizationRequire());
-    let newSong = await Song.create({
-        userId,
-        albumId,
-        title,
-        description,
-        url,
-        previewImage
-    })
-    res.status(201);
-    return res.json(newSong);
-})
+//     const thealbum = await Album.findByPk(albumId);
+//     if (!thealbum) {
+//         const e = new Error("Album couldn't be found");
+//         e.title = "Album couldn't be found";
+//         e.status = 404;
+//         return res.send(e);
+//     }
+//     if (userId !== thealbum.userId) return next(authorizationRequire());
+//     let newSong = await Song.create({
+//         userId,
+//         albumId,
+//         title,
+//         description,
+//         url,
+//         previewImage
+//     })
+//     res.status(201);
+//     return res.json(newSong);
+// })
 
 
 // Get details of an Album from an id

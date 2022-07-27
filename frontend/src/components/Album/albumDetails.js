@@ -15,14 +15,23 @@ function AlbumDetails() {
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
+    
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    }, [dispatch, albumId]);
-
+    },[dispatch, albumId]);
+    
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need for Object.values since it's already an object
     const targetAlbum = useSelector(state => (state.album));
+    const {Artist, Songs, id, userId} = targetAlbum;
+    // console.log('what is Artist and could be go inside of the array??', Artist)
+    // console.log('what is Artist and could be go inside of the array??', Artist.username)
+    // console.log('what is Songs and could be go inside of the array??', Songs)
+    // console.log('what is Songs and could be go inside of the array??', Songs[0].title)
+    // console.log('what is Songs and could be go inside of the array??', Songs[0].description)
+    // console.log('what is Songs and could be go inside of the array??', Songs[0].url)
 
+    
     // const albumSongs = targetAlbum.Songs;
     // const albumArtist = targetAlbum.Artist;
     // console.log('targetAlbum is retrieved -- ', targetAlbum)
@@ -38,10 +47,10 @@ function AlbumDetails() {
         // console.log('id??', payload.id)
 
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
+        history.push(`/albums/myalbums/`); // push to history first then reload
         window.location.reload();
         if (deleteAlbum) {
             alert(`song is now deleted`)
-            history.push(`/albums/myalbums`);
         }
     }
 
@@ -73,12 +82,15 @@ function AlbumDetails() {
             {targetAlbum && (
                 <div>
                     <h2>{targetAlbum.name}</h2>
-                    {/* <h3>artist: {targetAlbum.Artist.username}</h3> */}
                     <img src={targetAlbum.previewImage} alt={targetAlbum.name} width="200" height="200" />
+                    <h3>artist id: {targetAlbum.userId}</h3>
+                    {/* <h3>artist name: {targetAlbum.Artist.username}</h3> */}
+                    <h3>Songs: </h3>
                     {/* <div className="albumSongContainer">
-                        {albumSongs.map((song) => {
+                        {targetAlbum.Songs.forEach((song) => {
                             return <div className="albumSongs" key={song.id}>hello
-                                <Link to={`/songs/${song.id}`}>{song.name}</Link>
+                                <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                                <h4>{song.description}</h4>
                             </div>
                         })
                         }

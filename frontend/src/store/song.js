@@ -67,19 +67,18 @@ export const editOneSong = (song) => async dispatch => {
         await dispatch(updateOneSong(editedSong));
     }
 };
+
 export const deleteOneSong = (songId) => async dispatch => {
     const response = await csrfFetch(`/api/songs/mysongs`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(songId)
     });
-    // console.log('song id --', songId);
     if (response.ok) {
         const message = await response.json();
         await dispatch(removeOneSong(songId));
         return message;
     }
-    console.log('what is the response ---', response.ok)
 };
 
 export const addNewSong = (song) => async dispatch => {
@@ -88,10 +87,11 @@ export const addNewSong = (song) => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(song)
     });
+    console.log(response.ok)
     if (response.ok) {
         const newSong = await response.json();
         await dispatch(addOneSong(newSong));
-        console.log('detail of the new song ---', newSong)
+        // console.log('detail of the new song ---', newSong)
     }
 };
 
@@ -114,7 +114,7 @@ const songReducer = (state = initialState, action) => {
                 // if(!state[action.song.name]){
                 // const newState = {}
                 // }
-                const newState = { ...state, ...action.payload }
+                const newState = { ...state, [action.payload.id]: action.payload }
                 return newState;
             }
         case EDIT_ONE:

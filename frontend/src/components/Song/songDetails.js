@@ -1,11 +1,126 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
-import { getOneAlbum, getAllAlbums } from '../../store/album'
-import { deleteOneAlbum, editOneAlbum } from '../../store/album';
+import {  useParams, useHistory } from "react-router-dom";
+import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 
 function SongDetails() {
-    return null;
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { songId } = useParams();
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [url, setAudioUrl] = useState('');
+    const [previewImage, setPreviewImage] = useState('');
+    const [hideEditform, setHideEditForm] = useState('true');
+
+    const updateTitle = e => setTitle(e.target.value);
+    const updateDescription = e => setDescription(e.target.value);
+    const updateUrl = e => setAudioUrl(e.target.value);
+    const updateImageUrl = e => setPreviewImage(e.target.value);
+
+    useEffect(() => {
+        dispatch(getOneSong(songId))
+    }, [dispatch, songId]);
+
+    const targetSong = useSelector(state => (state.song));
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        const payload = {
+            id: songId
+        }
+        // console.log('id??', payload.id)
+
+        let deleteSong = await dispatch(deleteOneSong(payload))
+        history.push(`/songs/mysongs`); // push to history first then reload
+        window.location.reload();
+        if (deleteSong) {
+            alert(`song is now deleted`)
+        }
+    }
+
+    const handleEdit = async e => {
+        e.preventDefault();
+
+        const payload = {
+            id: songId,
+            title,
+            description,
+            url,
+            previewImage
+        };
+        if (!title) alert('song title is required')
+        let editSong = await dispatch(editOneSong(payload));
+
+        window.location.reload()
+        if (editSong) {
+            history.push(`/api/songs/mysongs/${songId}}`);
+        }
+    }
+
+    const handleCancel = e => {
+        e.preventDefault();
+        setHideEditForm(!hideEditform);
+    };
+
+    return (
+        <>
+            {targetSong && (
+                <div>
+                    <h2>{targetSong.name}</h2>
+                    <img src={targetSong.previewImage} alt={targetSong.title} width="200" height="200" />
+                    <h3>song name: {targetSong.title}</h3>
+                    <h3>artist id: {targetSong.userId}</h3>
+                    <h3>album id: {targetSong.albumId}</h3>
+                    <h3>audio url id: {targetSong.url}</h3>
+                    <h3>description: {targetSong.description}</h3>
+                    <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
+                    <form hidden={hideEditform}>
+                        <label>Song Id:</label>
+                        <input
+                            type="text"
+                            placeholder={targetSong.id}
+                            value={targetSong.id}
+                            disabled={true}
+                        />
+                        <label>title:</label>
+                        <input
+                            type="text"
+                            placeholder={targetSong.title}
+                            min="2"
+                            required
+                            value={title}
+                            onChange={updateTitle} />
+                        <label>audio URL</label>
+                        <input
+                            type="text"
+                            placeholder={targetSong.url}
+                            min="2"
+                            value={url}
+                            onChange={updateUrl} />
+                        <label>image URL</label>
+                        <input
+                            type="text"
+                            placeholder={targetSong.previewImage}
+                            value={previewImage}
+                            onChange={updateImageUrl} />
+                        <label>description:</label>
+                        <input
+                            type="text"
+                            placeholder='edit description here'
+                            min="2"
+                            value={description}
+                            onChange={updateDescription} />
+                        <div className="button-container" id={targetSong.id}>
+                            <button type='submit' onClick={handleEdit}>Update</button>
+                            <button type='button' onClick={handleCancel}>Cancel Edit</button>
+                            <button type='button' onClick={handleDelete}>Delete Song</button>
+                        </div>
+                    </form>
+                </div>
+            )}
+        </>
+    );
 }
 
 export default SongDetails;
