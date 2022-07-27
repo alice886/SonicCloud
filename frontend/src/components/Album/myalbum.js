@@ -59,35 +59,6 @@ function MyAlbums() {
                 {myAlbums && myAlbums.map((album) => {
                     return <div className="eachalbum" id={album.id}>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                        <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
-                        <form hidden={hideEditform}>
-                            <label>Album Id:</label>
-                            <input
-                                type="text"
-                                placeholder={album.id}
-                                disabled={true}
-                            />
-                            <label>name:</label>
-                            <input
-                                type="text"
-                                placeholder={album.name}
-                                min="2"
-                                required
-                                value={name}
-                                onChange={updateName} />
-                            <label>Image URL</label>
-                            <input
-                                type="text"
-                                placeholder={album.previewImage}
-                                value={previewImage}
-                                onChange={updatePreviewImage} />
-                            <div className="button-container" id={album.id}>
-                                <button type='submit' onClick={handleSubmit}>Update</button>
-                                <button type='button' onClick={handleCancelClick}>Cancel Edit</button>
-                                <button type='button' onClick={handleDelete}>Delete Album</button>
-                            </div>
-                        </form>
-
                     </div>
                 })}
             </div>

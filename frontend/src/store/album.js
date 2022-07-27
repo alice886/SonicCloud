@@ -25,9 +25,9 @@ const updateOneAlbum = (album) => ({
     payload: album
 });
 
-const removeOneAlbum = (albumId) => ({
+const removeOneAlbum = (id) => ({
     type: REMOVE_ONE,
-    payload: albumId
+    payload:id
 });
 
 export const getAllAlbums = () => async dispatch => {
@@ -44,6 +44,7 @@ export const getMyAlbums = () => async dispatch => {
         const albums = await response.json();
         await dispatch(load(albums));
     }
+    else return null;
 };
 
 export const getOneAlbum = (albumId) => async dispatch => {
@@ -72,10 +73,13 @@ export const deleteOneAlbum = (albumId) => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(albumId)
     });
+    // console.log('album id --', albumId);
     if (response.ok) {
         const message = await response.json();
         await dispatch(removeOneAlbum(albumId));
+        return message;
     }
+    console.log('what is the response ---',response.ok)
 };
 
 export const addNewAlbum = (album) => async dispatch => {
@@ -125,7 +129,7 @@ const albumReducer = (state = initialState, action) => {
         case REMOVE_ONE:
             {
                 const newState = { ...state };
-                delete newState[action.albumId];
+                delete newState[action.payload];
                 return newState;
             }
         default:

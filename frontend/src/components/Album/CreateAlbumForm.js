@@ -9,12 +9,12 @@ const CreateAlbumForm = ({ hideForm }) => {
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState('');
     const currentUser = useSelector(state => state.session.user)
-    const userId = currentUser.id
-    
+    // const userId = currentUser.id
+
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
-    const handleSubmit = async e => {
+    const handleSubmitNewAlbum = async e => {
         e.preventDefault();
 
         const payload = {
@@ -23,10 +23,9 @@ const CreateAlbumForm = ({ hideForm }) => {
         };
 
         let createNewAlbum = await dispatch(addNewAlbum(payload));
+        window.location.reload();
         if (createNewAlbum) {
-            history.push(`/albums/myalbums/${createNewAlbum.id}`);
-            hideForm();
-
+            history.push(`/albums/myalbums`);
         }
     }
     const handleCancelClick = e => {
@@ -36,7 +35,8 @@ const CreateAlbumForm = ({ hideForm }) => {
 
     return (
         <section className='newalbum-section'>
-            <form className='newalbum-form' onSubmit={handleSubmit}>
+            <form className='newalbum-form' onSubmit={handleSubmitNewAlbum}>
+                Create a New Album:
                 <input
                     type="text"
                     placeholder="name"
