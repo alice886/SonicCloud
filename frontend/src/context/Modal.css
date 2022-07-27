@@ -21,7 +21,8 @@
 
 #modal-content {
   position: absolute;
+  /* z-index: 0; */
   background-color: white;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.7);
+  height: 0px;
+  background-color: rgba(0, 0, 0, 0);
 }

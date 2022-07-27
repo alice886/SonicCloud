@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 
 function LoginForm() {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
+  const [credential, setCredential] = useState("Riri");
+  const [password, setPassword] = useState("password3");
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
@@ -20,7 +20,7 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} > 
+    <form onSubmit={handleSubmit} >
       <ul id='loginform'>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -32,7 +32,9 @@ function LoginForm() {
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
-          required
+          // required
+          placeholder={credential}
+          disabled={true}
         />
       </label>
       <label>
@@ -41,7 +43,9 @@ function LoginForm() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
+          // required
+          placeholder={password}
+          disabled={true}
         />
       </label>
       <button type="submit">Log In</button>

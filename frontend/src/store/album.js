@@ -67,6 +67,7 @@ export const editOneAlbum = (album) => async dispatch => {
         await dispatch(updateOneAlbum(editedAlbum));
     }
 };
+
 export const deleteOneAlbum = (albumId) => async dispatch => {
     const response = await csrfFetch(`/api/albums/myalbums`, {
         method: 'DELETE',

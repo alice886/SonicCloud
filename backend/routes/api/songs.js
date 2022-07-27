@@ -11,7 +11,7 @@ const songnotfound = {
 
 // Get all Songs
 // DONE
-router.get('/all', restoreUser, requireAuth,async (req, res) => {
+router.get('/all', restoreUser, requireAuth, async (req, res) => {
     const allSongs = await Song.findAll({
         where: {},
         include: [],
@@ -175,6 +175,39 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     await thesong.save();
     return res.json(thesong)
 */
+})
+
+// Create a Song for an Album based on the Album's id
+// DONE
+router.post('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+    const { albumId, title, description, url, previewImage } = req.body;
+    const e = new Error('Validation Error');
+    e.status = 400;
+    e.errors = {};
+    e.errors.title = "Song title is required";
+    e.errors.url = "Audio is required";
+
+    if (!title || !url) return res.send(e);
+
+    const thealbum = await Album.findByPk(albumId);
+    if (!thealbum) {
+        const e = new Error("Album couldn't be found");
+        e.title = "Album couldn't be found";
+        e.status = 404;
+        return res.send(e);
+    }
+    if (userId !== thealbum.userId) return next(authorizationRequire());
+    let newSong = await Song.create({
+        userId,
+        albumId,
+        title,
+        description,
+        url,
+        previewImage
+    })
+    res.status(201);
+    return res.json(newSong);
 })
 
 

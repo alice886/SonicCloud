@@ -14,6 +14,7 @@ import * as sessionActions from "./store/session";
 import SignupFormPage from "./components/SignupFormPage/index";
 import AllSongs from "./components/Song/index";
 import MySongs from "./components/Song/mysong";
+import SongDetails from "./components/Song/songDetails";
 import MyPlaylists from "./components/Playlist/index";
 import TestUserHome from "./components/UserHome/UserHome";
 import Navigation from "./components/Navigation";
@@ -48,7 +49,7 @@ function App() {
             <AllSongs />
           </Route>
           <Route path="/songs/:songId">
-            <AllSongs />
+            <SongDetails />
           </Route>
           <Route path="/playlists">
             <AllPlaylists />

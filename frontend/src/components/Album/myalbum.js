@@ -24,44 +24,42 @@ function MyAlbums() {
 
     const [showForm, setShowForm] = useState(false);
 
-    const handleDelete = async (e) => {
-        e.preventDefault();
-        const payload = {
-            id: e.target.id
-        }
-        console.log(payload)
-        dispatch(deleteOneAlbum(payload))
-        // history.push('/api/albums/myalbums')
-    }
+    // const handleDelete = async (e) => {
+    //     e.preventDefault();
+    //     const payload = {
+    //         id: e.target.id
+    //     }
+    //     console.log(payload)
+    //     dispatch(deleteOneAlbum(payload))
+    //     // history.push('/api/albums/myalbums')
+    // }
 
-    const handleSubmit = async e => {
-        e.preventDefault();
+    // const handleSubmit = async e => {
+    //     e.preventDefault();
 
-        const payload = {
-            id: e.target.id,
-            name,
-            previewImage
-        };
+    //     const payload = {
+    //         id: e.target.id,
+    //         name,
+    //         previewImage
+    //     };
 
-        let editAlbum = await dispatch(editOneAlbum(payload));
-        if (editAlbum) {
-            history.push(`/albums/myalbums}`);
-        }
-    }
-
-    const handleCancelClick = e => {
-        e.preventDefault();
-    };
+    //     let editAlbum = await dispatch(editOneAlbum(payload));
+    //     if (editAlbum) {
+    //         history.push(`/albums/myalbums}`);
+    //     }
+    // }
 
     return (
         <div className="album-container"> ...... my albums on SonicCloud ......
-            <div>
-                {myAlbums && myAlbums.map((album) => {
-                    return <div className="eachalbum" id={album.id}>
-                        <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                    </div>
-                })}
-            </div>
+                <button>upload new album</button>
+                <div>
+                    {myAlbums && myAlbums.map((album) => {
+                        return <div className="eachalbum" id={album.id}>
+                            <i>💿</i>
+                            <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
+                        </div>
+                    })}
+                </div>
             <CreateAlbumForm display={() => setHideEditForm(false)} />
         </div>
     )

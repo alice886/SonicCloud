@@ -28,6 +28,11 @@ const CreateAlbumForm = ({ hideForm }) => {
             history.push(`/albums/myalbums`);
         }
     }
+    // const demoAutoFill = e => {
+    //     e.preventDefault();
+    //     name = 'riri-test-demo'
+    //     previewImage = 'https://i0.wp.com/i.pinimg.com/236x/09/ca/27/09ca2737889f26a6006c94a946a4105e.jpg'
+    // };
     const handleCancelClick = e => {
         e.preventDefault();
         hideForm();
@@ -50,6 +55,7 @@ const CreateAlbumForm = ({ hideForm }) => {
                     value={previewImage}
                     onChange={updatePreviewImage} />
                 <button type='submit'>Create new Album</button>
+                {/* <button type='button' onClick={demoAutoFill}>demo album</button> */}
                 <button type='button' onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>
