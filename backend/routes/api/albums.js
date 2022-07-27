@@ -45,17 +45,20 @@ router.post('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res, next) 
 // DONE
 router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const thealbumId = req.params.albumId;
-    const thatAlbums = await Album.findByPk(thealbumId);
-    const albumdetails = await Album.findAll({
-        where: {
-            id: thealbumId
-        },
-        include: [
-            { model: User, as: 'Artist' }, { model: Song }
-        ],
-    })
-    if (!thatAlbums) res.status(404).send('album does not exist')
-    res.json({ albumdetails });
+    // console.log('backend album id', thealbumId);
+    const album = await Album.findByPk(thealbumId, {
+        include: [{ model: User, as: 'Artist' }, { model: Song }]
+    });
+    // const albumdetails = await Album.findAll({
+    //     where: {
+    //         id: thealbumId
+    //     },
+    //     include: [
+    //         { model: User, as: 'Artist' }, { model: Song }
+    //     ],
+    // })
+    if (!album) res.status(404).send('album does not exist');
+    res.json(album);
 });
 
 // Get all Albums

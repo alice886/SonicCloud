@@ -6,6 +6,9 @@ import { getAllSongs } from '../../store/song'
 function AllSongs() {
     const dispatch = useDispatch();
 
+    // const path = window.location.href;
+    // const urlending = path.split("/").reverse()[0];
+
     useEffect(() => {
         dispatch(getAllSongs())
     }, [dispatch])
@@ -14,20 +17,17 @@ function AllSongs() {
     // console.log('current user --',currentUser)
 
     const allsongs = useSelector(state => Object.values(state.song))
-    // const allsongs2 = useSelector(state => state.song)
-    // allsongs.forEach(song => songArray.push(song))
-    console.log('allsongs ---1.1---', typeof allsongs)
-
+    // console.log('allsongs ---1.1---', typeof mysongs)
 
     return (
-        <div className="song-container"> ...... all songs on SonicCloud ...... 
+        <div className="song-container"> ...... all songs on SonicCloud ......
             <ul>
                 {allsongs && allsongs.map((song) => {
                     return <li className="eachsong" key={song.id}>
                         <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
                     </li>
                 })}
-                
+
             </ul>
         </div>
     )

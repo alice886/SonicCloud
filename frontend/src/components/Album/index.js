@@ -17,16 +17,18 @@ function AllAlbums() {
     console.log('current user --', allAlbums)
 
     return (
-        <div className="album-container"> ...... all albums on SonicCloud ......
-            <ul>
+        <section className="album-container"> ...... all albums on SonicCloud ......
+            <div>
                 {allAlbums && allAlbums.map((album) => {
-                    return <li className="eachalbum" key={album.id}>
+                    return <div className="eachalbum" key={album.id}>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                    </li>
+                        <p>album: {album.id}  | artist: {album.userId}</p>
+                        {/* <img className="albumImage" src={`album.previewImage`} alt={"album Image"} width={50} height={60} > */}
+                    </div>
                 })}
 
-            </ul>
-        </div>
+            </div>
+        </section>
     )
 }
 

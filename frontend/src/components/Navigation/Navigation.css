@@ -1,9 +1,10 @@
+
 body,
 head,
 ul,
 form,
 body {
-    justify-content: center;
+    justify-content: left;
     margin: auto;
     list-style-type: none;
 }
@@ -18,15 +19,16 @@ body {
     display: flex;
     align-items: flex-end;
     flex-direction: row;
-    text-align: center;
+    text-align: left;
 
 }
 
 div {
-    height: 100px;
+    /* height: 100px; */
     top: 30px;
-    justify-content: center;
+    justify-content: left;
     width: 100%;
+    padding: 5px;
 
 }
 
@@ -60,13 +62,13 @@ form {
     width: 400px;
     height: max-content;
     overflow: auto;
-    align-items: center;
-    align-items: center;
+    align-items: left;
     flex-direction: column;
 
 }
 
-#user-dropdown, #profile-dropdown {
+#user-dropdown,
+#profile-dropdown {
     color: black;
     position: relative;
     /* display: flex;
