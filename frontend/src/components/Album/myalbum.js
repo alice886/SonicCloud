@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { getMyAlbums } from '../../store/album'
 import CreateAlbumForm from "./CreateAlbumForm";
-import { addNewAlbum, deleteOneAlbum } from '../../store/album';
+import { deleteOneAlbum, editOneAlbum } from '../../store/album';
 
 function MyAlbums() {
     const dispatch = useDispatch();
@@ -24,10 +24,6 @@ function MyAlbums() {
 
     const [showForm, setShowForm] = useState(false);
 
-    const handleEdit = async (e) => {
-        e.preventDefault();
-        setHideEditForm(!hideEditform);
-    }
     const handleDelete = async (e) => {
         e.preventDefault();
         const payload = {
@@ -42,14 +38,14 @@ function MyAlbums() {
         e.preventDefault();
 
         const payload = {
+            id: e.target.id,
             name,
             previewImage
         };
 
-        let createNewAlbum = await dispatch(addNewAlbum(payload));
-        if (createNewAlbum) {
-            history.push(`/albums/${createNewAlbum.id}`);
-
+        let editAlbum = await dispatch(editOneAlbum(payload));
+        if (editAlbum) {
+            history.push(`/albums/myalbums}`);
         }
     }
 
@@ -61,16 +57,17 @@ function MyAlbums() {
         <div className="album-container"> ...... my albums on SonicCloud ......
             <div>
                 {myAlbums && myAlbums.map((album) => {
-                    return <div className="eachalbum" key={album.id}>
+                    return <div className="eachalbum" id={album.id}>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                        <p>album id{album.id}</p>
-                        <form display={hideEditform}>
-                            <label>Album Id</label>
+                        <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
+                        <form hidden={hideEditform}>
+                            <label>Album Id:</label>
                             <input
                                 type="text"
                                 placeholder={album.id}
+                                disabled={true}
                             />
-                            <label>name</label>
+                            <label>name:</label>
                             <input
                                 type="text"
                                 placeholder={album.name}
@@ -84,11 +81,13 @@ function MyAlbums() {
                                 placeholder={album.previewImage}
                                 value={previewImage}
                                 onChange={updatePreviewImage} />
-                            <button type='submit' onClick={handleSubmit}>Update album</button>
-                            <button type='button' onClick={handleCancelClick}>Cancel edit</button>
-                            <button type='button' id={album.id} onClick={handleDelete}>Delete album</button>
+                            <div className="button-container" id={album.id}>
+                                <button type='submit' onClick={handleSubmit}>Update</button>
+                                <button type='button' onClick={handleCancelClick}>Cancel Edit</button>
+                                <button type='button' onClick={handleDelete}>Delete Album</button>
+                            </div>
                         </form>
-                        <button onClick={handleEdit}> Details/Edit </button>
+
                     </div>
                 })}
             </div>

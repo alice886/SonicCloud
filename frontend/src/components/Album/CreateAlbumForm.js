@@ -10,6 +10,7 @@ const CreateAlbumForm = ({ hideForm }) => {
     const [previewImage, setPreviewImage] = useState('');
     const currentUser = useSelector(state => state.session.user)
     const userId = currentUser.id
+    
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
@@ -23,7 +24,7 @@ const CreateAlbumForm = ({ hideForm }) => {
 
         let createNewAlbum = await dispatch(addNewAlbum(payload));
         if (createNewAlbum) {
-            history.push(`/albums/${createNewAlbum.id}`);
+            history.push(`/albums/myalbums/${createNewAlbum.id}`);
             hideForm();
 
         }

@@ -1,7 +1,9 @@
 import { csrfFetch } from './csrf';
 const LOAD = 'albums/LOAD';
+const LOAD_ONE = 'albums/LOAD_ONE';
 const ADD_ONE = 'albums/ADD_ONE';
 const REMOVE_ONE = 'albums/REMOVE_ONE';
+const EDIT_ONE = 'albums/EDIT_ONE';
 
 const load = (albums) => ({
     type: LOAD,
@@ -10,6 +12,16 @@ const load = (albums) => ({
 
 const addOneAlbum = (album) => ({
     type: ADD_ONE,
+    payload: album
+});
+
+const loadOneAlbum = (album) => ({
+    type: LOAD_ONE,
+    payload: album
+});
+
+const updateOneAlbum = (album) => ({
+    type: EDIT_ONE,
     payload: album
 });
 
@@ -34,16 +46,28 @@ export const getMyAlbums = () => async dispatch => {
     }
 };
 
-export const getOneAlbum = () => async dispatch => {
-    const response = await csrfFetch(`/api/albums/:albumId`);
+export const getOneAlbum = (albumId) => async dispatch => {
+    const response = await csrfFetch(`/api/albums/${albumId}`);
+    // console.log('THUNK print albuM ID', albumId)
     if (response.ok) {
         const album = await response.json();
-        await dispatch(load(album));
+        await dispatch(loadOneAlbum(album));
     }
 };
 
+export const editOneAlbum = (album) => async dispatch => {
+    const response = await csrfFetch(`/api/albums/myalbums`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(album)
+    });
+    if (response.ok) {
+        const editedAlbum = await response.json();
+        await dispatch(updateOneAlbum(editedAlbum));
+    }
+};
 export const deleteOneAlbum = (albumId) => async dispatch => {
-    const response = await csrfFetch(`/api/albums/myalbums`,{
+    const response = await csrfFetch(`/api/albums/myalbums`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(albumId)
@@ -77,12 +101,25 @@ const albumReducer = (state = initialState, action) => {
                 action.payload.forEach(album => newState[album.id] = album);
                 return newState
             };
+        case LOAD_ONE:
+            {
+                let newState = { ...action.payload }
+                return newState;
+            }
         case ADD_ONE:
             {
                 // if(!state[action.album.name]){
                 // const newState = {}
-                const newState = { ...state, ...action.album }
                 // }
+                const newState = { ...state, ...action.payload }
+                return newState;
+            }
+        case EDIT_ONE:
+            {
+                // const newState = { ...state }
+                // newState[action.payload.id] = action.payload;
+                // return newState;
+                const newState = { ...state, [action.payload.id]: action.payload }
                 return newState;
             }
         case REMOVE_ONE:

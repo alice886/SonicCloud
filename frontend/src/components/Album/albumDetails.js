@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Link, Route, useParams } from "react-router-dom";
-import { getMyAlbums } from '../../store/album'
-import CreateAlbumForm from "./CreateAlbumForm";
+import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
+import { getOneAlbum, getAllAlbums } from '../../store/album'
+
 
 function AlbumDetails() {
     const dispatch = useDispatch();
+    const { albumId } = useParams();
 
     useEffect(() => {
-        dispatch(getMyAlbums())
-    }, [dispatch])
+        dispatch(getOneAlbum(albumId))
+    }, [dispatch, albumId]);
 
-    const [showForm, setShowForm] = useState(false);
+    // const targetAlbum = useSelector(state => Object.values(state.album));
+    // no need for Object.values since it's already an object
+    const targetAlbum = useSelector(state => (state.album));
+    const albumSongs = targetAlbum.Songs;
+    const albumArtist = targetAlbum.Artist;
 
-    // const currentUser = useSelector(state => state.session.user);
-    // console.log('current user --',currentUser)
-
-    const myAlbums = useSelector(state => Object.values(state.album))
+    // console.log('targetAlbum is retrieved -- ', targetAlbum)
+    console.log('album song is retrieved -- ', targetAlbum.Songs)
+    // console.log('album artist is retrieved -- ', albumArtist.username)
 
     return (
-        <div className="album-container"> ...... my albums on SonicCloud ......
-            <ul>
-                {myAlbums && myAlbums.map((album) => {
-                    return <li className="eachalbum" key={album.id}>
-                        <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                    </li>
-                })}
-            </ul>
-            <CreateAlbumForm hideForm={() => setShowForm(false)} />
-        </div>
+        <>
+            {targetAlbum && (
+                <div>
+                    <h2>{targetAlbum.name}</h2>
+                    {/* <h3>artist: {albumArtist.username}</h3> */}
+                    <img src={targetAlbum.previewImage} alt={targetAlbum.name} />
+                    {/* <div className="albumSongContainer">
+                        {albumSongs.map((song) => {
+                            return <div className="albumSongs" key={song.id}>
+                                <Link to={`/songs/${song.id}`}>{song.name}</Link>
+                            </div>
+                        })
+                        }
+                    </div> */}
+                </div>
+            )
+            }
+        </>
     )
 }
 

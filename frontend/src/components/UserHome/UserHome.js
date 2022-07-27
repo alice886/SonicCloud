@@ -6,9 +6,9 @@ import { getUserDetail } from '../../store/user'
 const TestUserHome = () => {
     return (
         <ul>
-            <NavLink to={`/songs`}>Songs on 🌩️</NavLink>
-            <NavLink to={`/albums`}>Albums on 🌩️</NavLink>
-            <NavLink to={`/playlists`}>Playlists on 🌩️</NavLink>
+            <NavLink to={`/songs`}>Songs on 🎶🌩️</NavLink>
+            <NavLink to={`/albums`}>Albums on 🎶🌩️</NavLink>
+            <NavLink to={`/playlists`}>Playlists on 🎶🌩️</NavLink>
         </ul>
     )
 }
