@@ -1,3 +1,16 @@
+// const songValidator = [
+//     check('title')
+//         .exists({ checkFalsy: true })
+//         .isLength({ min: 2 })
+//         .withMessage('Song title is required'),
+//     check('url')
+//         .exists({ checkFalsy: true })
+//         .isLength({ min: 2 })
+//         .withMessage('Audio is required'),
+//     handleValidationErrors
+// ]
+
+
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');

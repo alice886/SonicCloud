@@ -11,31 +11,23 @@ function MySongs() {
 
 
     const allmysongs = useSelector(state => Object.values(state.song))
-    // console.log('mysongs ---1.1---', allmysongs)
 
     useEffect(() => {
         dispatch(getMySongs())
     }, [dispatch])
 
-    // const currentUser = useSelector(state => state.session.user);
-    // console.log('current user --',currentUser)
+    // const handleEdit = async e => {
+    //     e.preventDefault();
+    //     const payload = null;
 
-    const handleEdit = async e => {
-        e.preventDefault();
-        const payload = null;
-
-        let editSong = await dispatch(editOneSong(payload));
-        if (editSong) {
-            history.push(`/songs/mysongs`);
-        }
-    }
-
-    const handleDelete = (e) => {
-        e.preventDefault();
-    }
+    //     let editSong = await dispatch(editOneSong(payload));
+    //     if (editSong) {
+    //         history.push(`/songs/mysongs`);
+    //     }
+    // }
 
     return (
-        <div className="song-container"> ...... my songs on SonicCloud ......
+        <div className="song-container">
             <button onClick={() => setHideEditForm(!hideEditform)}>upload new song</button>
             <ul>
                 {allmysongs && allmysongs.map((song) => {
@@ -46,9 +38,6 @@ function MySongs() {
                             <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
                     </div>
                 })}
-                {/* <Route path="/albums">
-                <CreateNewSong />
-                </Route> */}
             </ul>
             <CreateSongForm  />
         </div>

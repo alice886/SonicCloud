@@ -7,13 +7,13 @@ import { getMyAlbums } from '../../store/album';
 function CreateSongForm() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { songId } = useParams();
     const [albumId, setAlbumId] = useState();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [url, setAudioUrl] = useState('');
     const [previewImage, setPreviewImage] = useState('');
     const [hideEditform, setHideEditForm] = useState(true);
+    const [errors, setErrors] = useState();
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
@@ -42,20 +42,26 @@ function CreateSongForm() {
             url,
             previewImage
         };
-        console.log('albumId---', albumId)
-        console.log('payload---', payload)
 
-        if (!title) alert('song title is required')
-        if (!url) alert('Audio is required')
+        if (albumId || title || description || url || previewImage) {
+            setErrors([]);
+            return dispatch(addNewSong({ albumId, title, description, url, previewImage }))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+
+        };
 
         let newSong = await dispatch(addNewSong(payload));
-
         // window.location.reload()
         if (newSong) {
             window.alert('new song created!');
-            history.push(`/api/songs/mysongs/${newSong.id}}`);
+            history.push(`/api/songs/mysongs}`);
         }
     }
+
+    console.log('hello errors--- ', errors);
 
     const handleCancel = e => {
         e.preventDefault();
@@ -75,6 +81,10 @@ function CreateSongForm() {
                         })
                         }
                     </select>
+                    <br></br>
+                    <ul>
+                        {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
                     <br></br>
                     <label>song title</label>
                     <input

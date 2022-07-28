@@ -5,22 +5,27 @@ import { getAllSongs } from '../../store/song'
 
 function AllSongs() {
     const dispatch = useDispatch();
-
+    const allsongs = useSelector(state => Object.values(state.song))
+    const sessionUser = useSelector(state => state.session.user);
+    // console.log('allsongs ---1.1---', typeof mysongs)
     // const path = window.location.href;
     // const urlending = path.split("/").reverse()[0];
-
+    // const currentUser = useSelector(state => state.session.user);
+    // console.log('current user --',currentUser)
     useEffect(() => {
         dispatch(getAllSongs())
     }, [dispatch])
 
-    // const currentUser = useSelector(state => state.session.user);
-    // console.log('current user --',currentUser)
-
-    const allsongs = useSelector(state => Object.values(state.song))
-    // console.log('allsongs ---1.1---', typeof mysongs)
+    if (!sessionUser) {
+        return (
+            <div className='notLoggedIn'>
+                <h3>Please log in to browse all songs</h3>
+            </div>
+        )
+    }
 
     return (
-        <div className="song-container"> ...... all songs on SonicCloud ......
+        <div className="song-container">
             <ul>
                 {allsongs && allsongs.map((song) => {
                     return <div className="eachsong" key={song.id}>

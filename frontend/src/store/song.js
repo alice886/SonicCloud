@@ -87,7 +87,6 @@ export const addNewSong = (song) => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(song)
     });
-    console.log(response.ok)
     if (response.ok) {
         const newSong = await response.json();
         await dispatch(addOneSong(newSong));

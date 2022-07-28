@@ -14,10 +14,18 @@ function AllAlbums() {
     // console.log('current user --',currentUser)
 
     const allAlbums = useSelector(state => Object.values(state.album))
-    console.log('current user --', allAlbums)
+    const sessionUser = useSelector(state => state.session.user);
+
+    if (!sessionUser) {   
+        return (
+            <div className='notLoggedIn'>
+                <h3>Please log in to browse all albums</h3>
+            </div>
+        )
+    }
 
     return (
-        <section className="album-container"> ...... all albums on SonicCloud ......
+        <section className="album-container">
             <div>
                 {allAlbums && allAlbums.map((album) => {
                     return <div className="eachalbum" key={album.id}>

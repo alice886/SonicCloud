@@ -49,7 +49,7 @@ function SongDetails() {
             url,
             previewImage
         };
-        if (!title) alert('song title is required')
+        // if (!title) alert('song title is required')
         let editSong = await dispatch(editOneSong(payload));
 
         window.location.reload()

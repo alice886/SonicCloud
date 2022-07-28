@@ -8,6 +8,7 @@ const CreateAlbumForm = ({ hideForm }) => {
     const history = useHistory();
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState('');
+    const [errors, setErrors] = useState([]);
     const currentUser = useSelector(state => state.session.user)
     // const userId = currentUser.id
 
@@ -22,10 +23,20 @@ const CreateAlbumForm = ({ hideForm }) => {
             previewImage
         };
 
+
+        if (name || previewImage) {
+            setErrors([]);
+            return dispatch(addNewAlbum({ name, previewImage }))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
+
         let createNewAlbum = await dispatch(addNewAlbum(payload));
-        window.location.reload();
         if (createNewAlbum) {
-            history.push(`/albums/myalbums`);
+            window.alert('new album created!');
+            history.push(`/albums/myalbums}`);
         }
     }
     // const demoAutoFill = e => {
@@ -42,6 +53,9 @@ const CreateAlbumForm = ({ hideForm }) => {
         <section className='newalbum-section'>
             <form className='new-album-form' onSubmit={handleSubmitNewAlbum}>
                 Create a New Album:
+                <ul>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
                 <input
                     type="text"
                     placeholder="name"
