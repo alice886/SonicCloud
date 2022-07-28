@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 
 function SongDetails() {
@@ -11,7 +11,7 @@ function SongDetails() {
     const [description, setDescription] = useState('');
     const [url, setAudioUrl] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState('true');
+    const [hideEditform, setHideEditForm] = useState(true);
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
@@ -79,11 +79,11 @@ function SongDetails() {
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-                    <h3>song name: {targetSong.title}</h3>
-                    <h3>artist id: {targetSong.userId}</h3>
-                    <h3>album id: {targetSong.albumId}</h3>
-                    <h3>audio url id: {targetSong.url}</h3>
-                    <h3>description: {targetSong.description}</h3>
+                    <h3>{targetSong.title}</h3>
+                    <h4>Artist: {targetSong?.Artist?.username}</h4>
+                    <h4>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
+                    {/* <h3>audio url id: {targetSong.url}</h3> */}
+                    <h4>Description: {targetSong.description}</h4>
                     <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
                     <form hidden={hideEditform} id='song-form'>
                         <label>Song Id:</label>

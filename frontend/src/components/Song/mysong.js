@@ -7,7 +7,7 @@ import CreateSongForm from './CreateSongForm';
 function MySongs() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [hideEditform, setHideEditForm] = useState('false')
+    const [hideEditform, setHideEditForm] = useState(false)
 
 
     const allmysongs = useSelector(state => Object.values(state.song))
@@ -50,7 +50,7 @@ function MySongs() {
                 <CreateNewSong />
                 </Route> */}
             </ul>
-            <CreateSongForm hidden={hideEditform} />
+            <CreateSongForm  />
         </div>
     )
 }

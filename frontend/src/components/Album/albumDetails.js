@@ -85,11 +85,12 @@ function AlbumDetails() {
                     <div>{targetAlbum?.Artist?.username}</div>
                     <h3>Songs: </h3>
                     <div className="album-song-container">
-                        {targetAlbum?.Songs?.map((song) => {
-                            return <div className="albumSongs" key={song.id}>
-                                <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                            </div>
-                        })
+                        {(targetAlbum?.Songs?.length > 0) ?
+                            targetAlbum?.Songs?.map((song) => {
+                                return <div className="albumSongs" key={song.id}>
+                                    <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                                </div>
+                            }) : ' -- no song in this album yet --'
                         }
                     </div>
                     <button onClick={() => setHideEditForm(false)}> See Details/Edit </button>

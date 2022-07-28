@@ -13,7 +13,7 @@ function CreateSongForm() {
     const [description, setDescription] = useState('');
     const [url, setAudioUrl] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState('true');
+    const [hideEditform, setHideEditForm] = useState(true);
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
