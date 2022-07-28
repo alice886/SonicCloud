@@ -23,17 +23,21 @@ function Navigation({ isLoaded }) {
         );
     }
 
+
     return (
         <div className='topnav'>
-            <NavLink to="/songs" className={'nav-songs'}>Songs</NavLink>
-            <NavLink to="/albums" className={'nav-albums'}>Albums</NavLink>
-            <NavLink to="/playlists" className={'nav-playlists'}>Playlists</NavLink>
-            <NavLink to="/songs/mysongs" className={'nav-songs'}>My Songs</NavLink>
-            <NavLink to="/albums/myalbums" className={'nav-albums'}>My Albums</NavLink>
-            <NavLink to="/playlists/myplaylists" className={'nav-playlists'}>My Playlists</NavLink>
-            <NavLink exact to="/" className={'nav-home'}>Home</NavLink>
-            {isLoaded && sessionLinks}
-
+            <a name="top"></a>
+            <div id='topnav-container' > 
+                <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>|
+                <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>| 
+                <NavLink to="/playlists" className={'nav-discover'}>Playlists</NavLink>|
+                <NavLink to="/songs/mysongs" className={'nav-library'}>My Songs</NavLink>| 
+                <NavLink to="/albums/myalbums" className={'nav-library'}>My Albums</NavLink>| 
+                <NavLink to="/playlists/myplaylists" className={'nav-library'}>My Playlists</NavLink>| 
+                <NavLink exact to="/" className={'nav-home'}>Home</NavLink> 
+                {isLoaded && sessionLinks}
+                <input type="text" placeholder="search    "></input>
+            </div>
         </div>
     );
 }

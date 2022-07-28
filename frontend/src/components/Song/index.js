@@ -23,9 +23,14 @@ function AllSongs() {
         <div className="song-container"> ...... all songs on SonicCloud ......
             <ul>
                 {allsongs && allsongs.map((song) => {
-                    return <li className="eachsong" key={song.id}>
+                    return <div className="eachsong" key={song.id}>
+                        <img src={song.previewImage} width='150' ></img>
+                        <br></br>
+                        song name:
                         <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                    </li>
+                        <br></br>
+                        <p>album: {song.albumId}</p>
+                    </div>
                 })}
 
             </ul>

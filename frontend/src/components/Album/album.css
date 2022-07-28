@@ -1,14 +1,22 @@
-div #eachalbum {
-    width: 100px;
-    height: 100%;
-    border: brown 1px solid;
+#eachalbum {
+    size: 20px;
+    border: solid brown 5px;
 }
 
 
 #album-container {
-    padding: 65px 100px;
-    font-weight: 300;
+    width: 80%;
+    display: grid;
+    grid-template-rows: (4, 1fr);
+    gap: 5px;
+    position: fixed;
+    grid-auto-flow: row;
+    margin: 2px;
+    top: 800px;
     height: fit-content;
-    display: inline-block;
-    width: 90%;
+    margin: auto;
+    border-style: black 5px solid;
+    height: 60%;
+    size: 30px;
 }
+

@@ -10,20 +10,20 @@ function AlbumDetails() {
     const history = useHistory();
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState('true')
+    const [hideEditform, setHideEditForm] = useState(true)
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
-    
+
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    },[dispatch, albumId]);
-    
+    }, [dispatch, albumId]);
+
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need for Object.values since it's already an object
     const targetAlbum = useSelector(state => (state.album));
-    const {Artist, Songs, id, userId} = targetAlbum;
+    const { Artist, Songs, id, userId } = targetAlbum;
     // console.log('what is Artist and could be go inside of the array??', Artist)
     // console.log('what is Artist and could be go inside of the array??', Artist.username)
     // console.log('what is Songs and could be go inside of the array??', Songs)
@@ -31,7 +31,7 @@ function AlbumDetails() {
     // console.log('what is Songs and could be go inside of the array??', Songs[0].description)
     // console.log('what is Songs and could be go inside of the array??', Songs[0].url)
 
-    
+
     // const albumSongs = targetAlbum.Songs;
     // const albumArtist = targetAlbum.Artist;
     // console.log('targetAlbum is retrieved -- ', targetAlbum)
@@ -73,7 +73,7 @@ function AlbumDetails() {
 
     const handleCancel = e => {
         e.preventDefault();
-        setHideEditForm(!hideEditform);
+        setHideEditForm(true);
     };
 
 
@@ -95,7 +95,7 @@ function AlbumDetails() {
                         })
                         }
                     </div> */}
-                    <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
+                    <button onClick={() => setHideEditForm(false)}> See Details/Edit </button>
                     <form hidden={hideEditform}>
                         <label>Album Id:</label>
                         <input

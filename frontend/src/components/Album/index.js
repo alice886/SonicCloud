@@ -21,7 +21,10 @@ function AllAlbums() {
             <div>
                 {allAlbums && allAlbums.map((album) => {
                     return <div className="eachalbum" key={album.id}>
+                        <img src={album.previewImage} width='150' ></img>
+                        <br></br>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
+                        <br></br>
                         <p>album: {album.id}  | artist: {album.userId}</p>
                         {/* <img className="albumImage" src={`album.previewImage`} alt={"album Image"} width={50} height={60} > */}
                     </div>

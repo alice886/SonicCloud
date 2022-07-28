@@ -1,8 +1,4 @@
-/* html, body, input, textarea, button, select, a {
-  justify-content: ;
-  margin: auto;
-  } */
-/* #loginform {
+#loginform {
   width: 100%;
   justify-content: center;
   margin: auto;
@@ -12,4 +8,5 @@
   left: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-} */
+  margin: auto;
+}

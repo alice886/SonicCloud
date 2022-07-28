@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 
 function SongDetails() {
@@ -69,6 +69,16 @@ function SongDetails() {
                 <div>
                     <h2>{targetSong.name}</h2>
                     <img src={targetSong.previewImage} alt={targetSong.title} width="200" height="200" />
+                    <br></br>
+                    <audio src="http://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" controls>
+                        {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}
+                        {/* <p>Fallback content goes here.</p> */}
+                    </audio>
+                    <br></br>
+                    {/* <iframe width="187" height="105" src="https://www.youtube.com/embed/BnasLOCpTEs" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
                     <h3>song name: {targetSong.title}</h3>
                     <h3>artist id: {targetSong.userId}</h3>
                     <h3>album id: {targetSong.albumId}</h3>
@@ -89,7 +99,7 @@ function SongDetails() {
                             placeholder={targetSong.title}
                             min="2"
                             required
-                            value={title}
+                            value={targetSong.title}
                             onChange={updateTitle} />
                         <label>audio URL</label>
                         <input

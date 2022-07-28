@@ -39,7 +39,18 @@ function ProfileButton({ user }) {
           <li className="user-dropdown">{user.username}</li>
           <li className="user-dropdown">{user.email}</li>
           <li className="user-dropdown">
-            <Link to='/songs/mysongs'>Profile
+            <Link to='/songs/mysongs'>
+              My Songs
+            </Link>
+          </li>
+          <li className="user-dropdown">
+            <Link to='/albums/myalbums'>
+              My Albums
+            </Link>
+          </li>
+          <li className="user-dropdown">
+            <Link to='/playlists/myplaylists'>
+              My Playlists
             </Link>
           </li>
           <li>

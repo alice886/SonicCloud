@@ -51,16 +51,16 @@ function MyAlbums() {
 
     return (
         <div className="album-container"> ...... my albums on SonicCloud ......
-                <button>upload new album</button>
-                <div>
-                    {myAlbums && myAlbums.map((album) => {
-                        return <div className="eachalbum" id={album.id}>
-                            <i>💿</i>
-                            <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                        </div>
-                    })}
-                </div>
-            <CreateAlbumForm display={() => setHideEditForm(false)} />
+            <button onClick={() => setHideEditForm(true)}>create new album</button>
+            <div>
+                {myAlbums && myAlbums.map((album) => {
+                    return <div className="eachalbum" id={album.id}>
+                        {/* <i>💿</i> */}
+                        <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
+                    </div>
+                })}
+            </div>
+            <CreateAlbumForm />
         </div>
     )
 }
