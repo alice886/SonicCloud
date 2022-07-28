@@ -40,7 +40,7 @@ const CreateAlbumForm = ({ hideForm }) => {
 
     return (
         <section className='newalbum-section'>
-            <form className='newalbum-form' onSubmit={handleSubmitNewAlbum}>
+            <form className='new-album-form' onSubmit={handleSubmitNewAlbum}>
                 Create a New Album:
                 <input
                     type="text"

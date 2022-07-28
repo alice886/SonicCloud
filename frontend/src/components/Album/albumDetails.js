@@ -31,11 +31,11 @@ function AlbumDetails() {
     // console.log('what is Songs and could be go inside of the array??', Songs[0].description)
     // console.log('what is Songs and could be go inside of the array??', Songs[0].url)
 
-
     // const albumSongs = targetAlbum.Songs;
     // const albumArtist = targetAlbum.Artist;
     // console.log('targetAlbum is retrieved -- ', targetAlbum)
     // console.log('album song is retrieved -- ', targetAlbum.Songs)
+    // console.log('album artist is retrieved -- ', targetAlbum?.Artist)
     // console.log('album artist is retrieved -- ', targetAlbum.Artist.username)
     // console.log('album artist is retrieved -- ', targetAlbum.name.Artist.username)
 
@@ -44,8 +44,6 @@ function AlbumDetails() {
         const payload = {
             id: albumId
         }
-        // console.log('id??', payload.id)
-
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
         history.push(`/albums/myalbums/`); // push to history first then reload
         window.location.reload();
@@ -83,20 +81,19 @@ function AlbumDetails() {
                 <div>
                     <h2>{targetAlbum.name}</h2>
                     <img src={targetAlbum.previewImage} alt={targetAlbum.name} width="200" height="200" />
-                    <h3>artist id: {targetAlbum.userId}</h3>
-                    {/* <h3>artist name: {targetAlbum.Artist.username}</h3> */}
+                    <h3>Artist: </h3>
+                    <div>{targetAlbum?.Artist?.username}</div>
                     <h3>Songs: </h3>
-                    {/* <div className="albumSongContainer">
-                        {targetAlbum.Songs.forEach((song) => {
-                            return <div className="albumSongs" key={song.id}>hello
+                    <div className="album-song-container">
+                        {targetAlbum?.Songs?.map((song) => {
+                            return <div className="albumSongs" key={song.id}>
                                 <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                                <h4>{song.description}</h4>
                             </div>
                         })
                         }
-                    </div> */}
+                    </div>
                     <button onClick={() => setHideEditForm(false)}> See Details/Edit </button>
-                    <form hidden={hideEditform}>
+                    <form hidden={hideEditform} id='album-form'>
                         <label>Album Id:</label>
                         <input
                             type="text"

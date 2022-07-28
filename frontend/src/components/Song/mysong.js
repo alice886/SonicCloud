@@ -41,6 +41,8 @@ function MySongs() {
                 {allmysongs && allmysongs.map((song) => {
                     return <div className="eachsong" key={song.id}>
                         {/* <i>🎼</i> */}
+                        <img src={song.previewImage} width='150' ></img>
+                        <br></br>
                             <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
                     </div>
                 })}

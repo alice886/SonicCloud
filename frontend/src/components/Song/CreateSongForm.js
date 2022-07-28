@@ -66,7 +66,7 @@ function CreateSongForm() {
         <>
             {/* {targetSong && ( */}
             <div>
-                <form hidden={false}>
+                <form hidden={false} id='new-song-form'>
                     <label>pick an album</label>
 
                     <select id="mydropdown" className="dropdown-content" onChange={albumSelected}>

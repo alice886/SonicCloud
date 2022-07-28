@@ -15,7 +15,7 @@ a {
 
 div {
   width: 600px;
-  height:fit-content;
+  height: fit-content;
 }
 
 body {
@@ -42,7 +42,6 @@ form {
 }
 
 input,
-select,
 textarea {
   width: 90%;
   padding: 12px;

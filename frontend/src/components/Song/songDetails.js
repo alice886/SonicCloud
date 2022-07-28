@@ -70,7 +70,7 @@ function SongDetails() {
                     <h2>{targetSong.name}</h2>
                     <img src={targetSong.previewImage} alt={targetSong.title} width="200" height="200" />
                     <br></br>
-                    <audio src="http://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" controls>
+                    <audio src="http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" controls>
                         {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}
                         {/* <p>Fallback content goes here.</p> */}
                     </audio>
@@ -85,7 +85,7 @@ function SongDetails() {
                     <h3>audio url id: {targetSong.url}</h3>
                     <h3>description: {targetSong.description}</h3>
                     <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
-                    <form hidden={hideEditform}>
+                    <form hidden={hideEditform} id='song-form'>
                         <label>Song Id:</label>
                         <input
                             type="text"

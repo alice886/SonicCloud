@@ -56,6 +56,8 @@ function MyAlbums() {
                 {myAlbums && myAlbums.map((album) => {
                     return <div className="eachalbum" id={album.id}>
                         {/* <i>💿</i> */}
+                        <img src={album.previewImage} width='150' ></img>
+                        <br></br>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
                     </div>
                 })}

@@ -48,11 +48,11 @@ function ProfileButton({ user }) {
               My Albums
             </Link>
           </li>
-          <li className="user-dropdown">
+          {/* <li className="user-dropdown">
             <Link to='/playlists/myplaylists'>
               My Playlists
             </Link>
-          </li>
+          </li> */}
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
