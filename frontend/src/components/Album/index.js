@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getAllAlbums } from '../../store/album'
 
+
 function AllAlbums() {
     const dispatch = useDispatch();
 
@@ -16,13 +17,7 @@ function AllAlbums() {
     const allAlbums = useSelector(state => Object.values(state.album))
     const sessionUser = useSelector(state => state.session.user);
 
-    // if (!sessionUser) {   
-    //     return (
-    //         <div className='notLoggedIn'>
-    //             <h3>Please log in to browse all albums</h3>
-    //         </div>
-    //     )
-    // }
+
 
     return (
         <section className="album-container">

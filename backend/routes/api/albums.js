@@ -63,7 +63,7 @@ router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
 
 // Get all Albums
 // DONE
-router.get('/', restoreUser, requireAuth, async (req, res) => {
+router.get('/', restoreUser, async (req, res) => {
     const allAlbums = await Album.findAll({
         where: {},
         include: [],
@@ -95,14 +95,18 @@ router.post('/myalbums', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
     const { name, previewImage } = req.body;
     if (name === undefined) {
-        res.status(400);
-        return res.send({
-            "message": "Validation Error",
-            "statusCode": 400,
-            "errors": {
-                "title": "Album title is required"
-            }
-        });
+        const e = new Error("Album title is required");
+        e.title = "Album title is required";
+        e.status = 404;
+        return res.send(e);
+        // res.status(400);
+        // return res.send({
+        //     "message": "Validation Error",
+        //     "statusCode": 400,
+        //     "errors": {
+        //         "title": "Album title is required"
+        //     }
+        // });
     }
     let newAlbum = await Album.create({
         name,

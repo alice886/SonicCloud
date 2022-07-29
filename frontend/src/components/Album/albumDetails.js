@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { getOneAlbum } from '../../store/album';
 import EditAlbumModal from '../AlbumFormModal/edit-index'
+import LoginForm from '../LoginFormModal/LoginForm'
 
 function AlbumDetails() {
     const dispatch = useDispatch();
     const { albumId } = useParams();
+    const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
@@ -15,6 +17,18 @@ function AlbumDetails() {
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object
     const targetAlbum = useSelector(state => (state.album));
+    // console.log('sessionUser is ---', sessionUser)
+
+    if (!sessionUser) {
+        return (
+            <div>
+                <h2>Join SonicCloud to discover more </h2>
+                <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
+                <h3> or log in below </h3>
+                <LoginForm />
+            </div>
+        )
+    }
 
     return (
         <>
@@ -36,7 +50,7 @@ function AlbumDetails() {
                             }) : ' -- no song in this album yet --'
                         }
                     </div>
-            
+
                 </div>
             )
             }

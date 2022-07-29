@@ -4,7 +4,7 @@
 }
 
 
-#album-container {
+div#album-container {
     width: 80%;
     display: grid;
     grid-template-rows: (4, 1fr);
@@ -19,4 +19,3 @@
     height: 60%;
     size: 30px;
 }
-

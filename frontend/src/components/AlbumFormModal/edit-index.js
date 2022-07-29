@@ -93,7 +93,7 @@ const EditAlbumModal = () => {
                             onChange={updatePreviewImage} />
                         <div className="button-container" id={targetAlbum.id}>
                             <button type='submit' onClick={handleEdit}>Update</button>
-                            {/* <button type='button' onClick={handleCancel}>Cancel Edit</button> */}
+                            <button type='button' onClick={() => setShowModal(false)}>Cancel Edit</button>
                             <button type='button' onClick={handleDelete}>Delete Album</button>
                         </div>
                     </form>

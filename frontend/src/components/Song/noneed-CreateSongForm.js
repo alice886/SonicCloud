@@ -13,6 +13,7 @@ function CreateSongForm() {
     const [url, setAudioUrl] = useState('');
     const [previewImage, setPreviewImage] = useState('');
     const [errors, setErrors] = useState();
+    const [showModal, setShowModal] = useState(false);
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
@@ -57,7 +58,7 @@ function CreateSongForm() {
         let newSong = await dispatch(addNewSong(payload));
         if (newSong) {
             window.alert('new song created!');
-            history.push(`/api/songs/mysongs/`);
+            history.push(`/songs/mysongs`);
         }
     }
 
@@ -65,58 +66,56 @@ function CreateSongForm() {
     // console.log('hello album default--- ', albumId);
 
     return (
-        <form id='new-song-form'>
-            <ul>
-                {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
-            </ul>
-            <br></br>
-            <label>pick an album</label>
-            <select id="mydropdown" className="dropdown-content" onChange={albumSelected} >
-                <option value='' selected disabled hidden> Choose your album</option>
-                {myAlbums && myAlbums.map(album => {
+        <>
+            <form id='new-song-form' onClose={() => setShowModal(false)}>
+                <ul>
+                    {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+                <br></br>
+                <label>pick an album</label>
+                <select id="mydropdown" className="dropdown-content" onChange={albumSelected} >
+                    <option value='' selected disabled hidden> Choose your album</option>
+                    {myAlbums && myAlbums.map(album => {
 
-                    return <option key={album.id} value={album.id}>{album.name}</option>
-                })
-                }
-            </select>
-            <br></br>
-            <label>song title</label>
-            <input
-                type="text"
-                placeholder='name your song here'
-                min="2"
-                required
-                value={title}
-                onChange={updateTitle} />
-            <label>audio URL</label>
-            <input
-                type="text"
-                placeholder='add audio link here'
-                min="2"
-                value={url}
-                onChange={updateUrl} />
-            <label>image URL</label>
-            <input
-                type="text"
-                placeholder='add image link here'
-                value={previewImage}
-                onChange={updateImageUrl} />
-            <label>description:</label>
-            <input
-                type="text"
-                placeholder='add description here'
-                min="2"
-                value={description}
-                onChange={updateDescription} />
-            <div className="button-container" id='buttons'>
-                <button type='submit' onClick={handleCreateSong}>Upload</button>
-                {/* <button type='button' onClick={() => {
-                    return <Redirect to='/songs/mysongs' />
-                }
-                }>Cancel</button> */}
-            </div>
-        </form>
-
+                        return <option key={album.id} value={album.id}>{album.name}</option>
+                    })
+                    }
+                </select>
+                <br></br>
+                <label>song title</label>
+                <input
+                    type="text"
+                    placeholder='name your song here'
+                    min="2"
+                    required
+                    value={title}
+                    onChange={updateTitle} />
+                <label>audio URL</label>
+                <input
+                    type="text"
+                    placeholder='add audio link here'
+                    min="2"
+                    value={url}
+                    onChange={updateUrl} />
+                <label>image URL</label>
+                <input
+                    type="text"
+                    placeholder='add image link here'
+                    value={previewImage}
+                    onChange={updateImageUrl} />
+                <label>description:</label>
+                <input
+                    type="text"
+                    placeholder='add description here'
+                    min="2"
+                    value={description}
+                    onChange={updateDescription} />
+                <div className="button-container" id='buttons'>
+                    <button type='submit' onClick={handleCreateSong}>Upload</button>
+                    <button type='button' onClick={() => setShowModal(false)}>Cancel</button>
+                </div>
+            </form>
+        </>
     );
 }
 

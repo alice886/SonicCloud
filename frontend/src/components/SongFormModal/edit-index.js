@@ -58,17 +58,12 @@ const EditSongModal = () => {
         console.log('what is id', songId)
 
 
+        history.push(`/songs/${songId}`);
         if (editSong) {
             alert('song is now updated!')
-            history.push(`/api/songs/mysongs/${songId}/}`);
-            // window.location.reload()
+            // history.go()
         }
     }
-
-    const handleCancel = e => {
-        e.preventDefault();
-        setHideEditForm(!hideEditform);
-    };
 
     return (
         <>
@@ -76,14 +71,9 @@ const EditSongModal = () => {
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={hideEditform} id='song-form'>
-                        <label>Song Id:</label>
-                        <input
-                            type="text"
-                            placeholder={targetSong.id}
-                            value={targetSong.id}
-                            disabled={true}
-                        />
-                        <label>title:</label>
+                        <label>Song Id: {targetSong.id}</label>
+                        <label>Song name: {targetSong.title}</label>
+                        <label>new title</label>
                         <input
                             type="text"
                             placeholder={targetSong.title}
@@ -113,7 +103,7 @@ const EditSongModal = () => {
                             onChange={updateDescription} />
                         <div className="button-container" id={targetSong.id}>
                             <button type='submit' onClick={handleEdit}>Update</button>
-                            {/* <button type='button' onClick={handleCancel}>Cancel Edit</button> */}
+                            <button type='button' onClick={() => setShowModal(false)}>Cancel Edit</button>
                             <button type='button' onClick={handleDelete}>Delete Song</button>
                         </div>
                     </form>
