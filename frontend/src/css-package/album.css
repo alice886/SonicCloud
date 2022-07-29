@@ -1,0 +1,22 @@
+#eachalbum {
+    size: 20px;
+    border: solid brown 5px;
+}
+
+
+#album-container {
+    width: 80%;
+    display: grid;
+    grid-template-rows: (4, 1fr);
+    gap: 5px;
+    position: fixed;
+    grid-auto-flow: row;
+    margin: 2px;
+    top: 800px;
+    height: fit-content;
+    margin: auto;
+    border-style: black 5px solid;
+    height: 60%;
+    size: 30px;
+}
+

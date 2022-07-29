@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams, useHistory } from "react-router-dom";
+import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 
 function SongDetails() {
@@ -11,7 +11,7 @@ function SongDetails() {
     const [description, setDescription] = useState('');
     const [url, setAudioUrl] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState('true');
+    const [hideEditform, setHideEditForm] = useState(true);
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
@@ -20,7 +20,7 @@ function SongDetails() {
 
     useEffect(() => {
         dispatch(getOneSong(songId))
-    }, [dispatch, songId]);
+    }, [dispatch]);
 
     const targetSong = useSelector(state => (state.song));
 
@@ -29,11 +29,11 @@ function SongDetails() {
         const payload = {
             id: songId
         }
-        // console.log('id??', payload.id)
 
         let deleteSong = await dispatch(deleteOneSong(payload))
-        history.push(`/songs/mysongs`); // push to history first then reload
-        window.location.reload();
+        history.push(`/songs/mysongs`);
+        // push to history first then reload
+        // window.location.reload();
         if (deleteSong) {
             alert(`song is now deleted`)
         }
@@ -50,11 +50,16 @@ function SongDetails() {
             previewImage
         };
         if (!title) alert('song title is required')
+        if (!url) alert('song url is required')
         let editSong = await dispatch(editOneSong(payload));
+        console.log('what is payload.id', payload.id)
+        console.log('what is id', songId)
 
-        window.location.reload()
+
         if (editSong) {
-            history.push(`/api/songs/mysongs/${songId}}`);
+            alert('song is now updated!')
+            history.push(`/api/songs/mysongs/${songId}/}`);
+            // window.location.reload()
         }
     }
 
@@ -69,13 +74,23 @@ function SongDetails() {
                 <div>
                     <h2>{targetSong.name}</h2>
                     <img src={targetSong.previewImage} alt={targetSong.title} width="200" height="200" />
-                    <h3>song name: {targetSong.title}</h3>
-                    <h3>artist id: {targetSong.userId}</h3>
-                    <h3>album id: {targetSong.albumId}</h3>
-                    <h3>audio url id: {targetSong.url}</h3>
-                    <h3>description: {targetSong.description}</h3>
+                    <br></br>
+                    <audio src="http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3" controls>
+                        {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}
+                        {/* <p>Fallback content goes here.</p> */}
+                    </audio>
+                    <br></br>
+                    {/* <iframe width="187" height="105" src="https://www.youtube.com/embed/BnasLOCpTEs" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
+                    <h3>{targetSong.title}</h3>
+                    <h4>Artist: {targetSong?.Artist?.username}</h4>
+                    <h4>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
+                    {/* <h3>audio url id: {targetSong.url}</h3> */}
+                    <h4>Description: {targetSong.description}</h4>
                     <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
-                    <form hidden={hideEditform}>
+                    <form hidden={hideEditform} id='song-form'>
                         <label>Song Id:</label>
                         <input
                             type="text"

@@ -14,14 +14,25 @@ function AllAlbums() {
     // console.log('current user --',currentUser)
 
     const allAlbums = useSelector(state => Object.values(state.album))
-    console.log('current user --', allAlbums)
+    const sessionUser = useSelector(state => state.session.user);
+
+    // if (!sessionUser) {   
+    //     return (
+    //         <div className='notLoggedIn'>
+    //             <h3>Please log in to browse all albums</h3>
+    //         </div>
+    //     )
+    // }
 
     return (
-        <section className="album-container"> ...... all albums on SonicCloud ......
+        <section className="album-container">
             <div>
                 {allAlbums && allAlbums.map((album) => {
                     return <div className="eachalbum" key={album.id}>
+                        <img src={album.previewImage} width='150' ></img>
+                        <br></br>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
+                        <br></br>
                         <p>album: {album.id}  | artist: {album.userId}</p>
                         {/* <img className="albumImage" src={`album.previewImage`} alt={"album Image"} width={50} height={60} > */}
                     </div>

@@ -1,3 +1,16 @@
+// const songValidator = [
+//     check('title')
+//         .exists({ checkFalsy: true })
+//         .isLength({ min: 2 })
+//         .withMessage('Song title is required'),
+//     check('url')
+//         .exists({ checkFalsy: true })
+//         .isLength({ min: 2 })
+//         .withMessage('Audio is required'),
+//     handleValidationErrors
+// ]
+
+
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
@@ -45,7 +58,9 @@ router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
 // DONE
 router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const { songId } = req.params;
-    const theSong = await Song.findByPk(songId);
+    const theSong = await Song.findByPk(songId, {
+        include: [{ model: User, as: 'Artist' }, { model: Album }]
+    });
     if (!theSong) {
         res.status(404);
         return res.send(songnotfound);
@@ -182,13 +197,20 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
 router.post('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { albumId, title, description, url, previewImage } = req.body;
-    const e = new Error('Validation Error');
-    e.status = 400;
-    e.errors = {};
-    e.errors.title = "Song title is required";
-    e.errors.url = "Audio is required";
+    // const e = new Error('Validation Error');
+    // e.status = 400;
+    // e.errors = {};
+    // e.errors.title = "Song title is required";
+    // e.errors.url = "Audio is required";
 
-    if (!title || !url) return res.send(e);
+    if (!title || !url) return res.send({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {
+            "title": "Song title is required",
+            "url": "url is required"
+        }
+    });
 
     const thealbum = await Album.findByPk(albumId);
     if (!thealbum) {

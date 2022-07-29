@@ -2,53 +2,44 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { editOneSong, getMySongs } from '../../store/song'
-import CreateSongForm from './CreateSongForm';
+import CreateSongModal from '../SongFormModal/index';
 
 function MySongs() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [hideEditform, setHideEditForm] = useState('false')
+    const [hideEditform, setHideEditForm] = useState(false)
 
 
     const allmysongs = useSelector(state => Object.values(state.song))
-    // console.log('mysongs ---1.1---', allmysongs)
 
     useEffect(() => {
         dispatch(getMySongs())
     }, [dispatch])
 
-    // const currentUser = useSelector(state => state.session.user);
-    // console.log('current user --',currentUser)
+    // const handleEdit = async e => {
+    //     e.preventDefault();
+    //     const payload = null;
 
-    const handleEdit = async e => {
-        e.preventDefault();
-        const payload = null;
-
-        let editSong = await dispatch(editOneSong(payload));
-        if (editSong) {
-            history.push(`/songs/mysongs`);
-        }
-    }
-
-    const handleDelete = (e) => {
-        e.preventDefault();
-    }
+    //     let editSong = await dispatch(editOneSong(payload));
+    //     if (editSong) {
+    //         history.push(`/songs/mysongs`);
+    //     }
+    // }
 
     return (
-        <div className="song-container"> ...... my songs on SonicCloud ......
-            <button onClick={() => setHideEditForm(!hideEditform)}>upload new song</button>
+        <div className="song-container">
+            <CreateSongModal />
             <ul>
                 {allmysongs && allmysongs.map((song) => {
                     return <div className="eachsong" key={song.id}>
-                        <i>🎼</i>
-                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                        {/* <i>🎼</i> */}
+                        <img src={song.previewImage} width='150' ></img>
+                        <br></br>
+                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
                     </div>
                 })}
-                {/* <Route path="/albums">
-                <CreateNewSong />
-                </Route> */}
             </ul>
-            <CreateSongForm hidden={hideEditform} />
+
         </div>
     )
 }

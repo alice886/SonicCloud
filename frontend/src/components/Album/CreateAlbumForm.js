@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { addNewAlbum } from '../../store/album';
 
-const CreateAlbumForm = ({ hideForm }) => {
+const CreateAlbumForm = ({ onClose }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [showModal, setShowModal] = useState(false);
     const currentUser = useSelector(state => state.session.user)
     // const userId = currentUser.id
 
@@ -22,43 +24,50 @@ const CreateAlbumForm = ({ hideForm }) => {
             previewImage
         };
 
+
+        if (name || previewImage) {
+            setErrors([]);
+            return dispatch(addNewAlbum({ name, previewImage }))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
+
         let createNewAlbum = await dispatch(addNewAlbum(payload));
-        window.location.reload();
+        history.push(`/albums/myalbums}`);
         if (createNewAlbum) {
-            history.push(`/albums/myalbums`);
+            window.alert('new album created!');
         }
     }
-    // const demoAutoFill = e => {
-    //     e.preventDefault();
-    //     name = 'riri-test-demo'
-    //     previewImage = 'https://i0.wp.com/i.pinimg.com/236x/09/ca/27/09ca2737889f26a6006c94a946a4105e.jpg'
-    // };
+
     const handleCancelClick = e => {
         e.preventDefault();
-        hideForm();
+        // hideForm();
     };
 
     return (
-        <section className='newalbum-section'>
-            <form className='newalbum-form' onSubmit={handleSubmitNewAlbum}>
-                Create a New Album:
-                <input
-                    type="text"
-                    placeholder="name"
-                    min="2"
-                    required
-                    value={name}
-                    onChange={updateName} />
-                <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={previewImage}
-                    onChange={updatePreviewImage} />
-                <button type='submit'>Create new Album</button>
-                {/* <button type='button' onClick={demoAutoFill}>demo album</button> */}
-                <button type='button' onClick={handleCancelClick}>Cancel</button>
-            </form>
-        </section>
+        <form className='new-album-form' onSubmit={handleSubmitNewAlbum} hidden={showModal}> 
+            Create a New Album:
+            <ul>
+                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+            <input
+                type="text"
+                placeholder="name"
+                min="2"
+                required
+                value={name}
+                onChange={updateName} />
+            <input
+                type="text"
+                placeholder="Image URL"
+                value={previewImage}
+                onChange={updatePreviewImage} />
+            <button type='submit'>Create new Album</button>
+            {/* <button type='button' onClick={demoAutoFill}>demo album</button> */}
+            {/* <button type='button' onClick={()=>setShowModal(true)}>Cancel</button> */}
+        </form>
     )
 
 }

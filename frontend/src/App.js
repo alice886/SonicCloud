@@ -17,7 +17,8 @@ import MySongs from "./components/Song/mysong";
 import SongDetails from "./components/Song/songDetails";
 import MyPlaylists from "./components/Playlist/index";
 import TestUserHome from "./components/UserHome/UserHome";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation/index";
+import ButtomNavigation from "./components/Navigation/buttomNav";
 import PageNotFound from "./components/PageNotFound";
 import AllAlbums from "./components/Album/index";
 import MyAlbums from "./components/Album/myalbum";
@@ -68,13 +69,14 @@ function App() {
             <MyPlaylists />
           </Route> 
           */}
-          <Route>
-            <PageNotFound />
-          </Route>
-        </Switch>
+              <Route>
+                <PageNotFound />
+              </Route>
+            </Switch>
       )}
-    </>
-  );
+      <ButtomNavigation />
+          </>
+          );
 }
 
-export default App;
+          export default App;

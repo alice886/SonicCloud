@@ -6,7 +6,7 @@
   bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: left;
 }
 
 #modal-background {
@@ -16,13 +16,16 @@
   left: 0;
   bottom: 0;
   height: 100%;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
 #modal-content {
-  position: absolute;
+  position: relative;
+  align-items: center;
   /* z-index: 0; */
   background-color: white;
   height: 0px;
   background-color: rgba(0, 0, 0, 0);
+  list-style-type: none;
 }

@@ -1,4 +1,4 @@
-import './PageNotFound.css'
+import '../../css-package/PageNotFound.css'
 
 function PageNotFound (){
     return (

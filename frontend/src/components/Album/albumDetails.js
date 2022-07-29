@@ -10,47 +10,31 @@ function AlbumDetails() {
     const history = useHistory();
     const [name, setName] = useState('');
     const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState('true')
+    const [hideEditform, setHideEditForm] = useState(true)
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
-    
+
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    },[dispatch, albumId]);
-    
-    // const targetAlbum = useSelector(state => Object.values(state.album));
-    // no need for Object.values since it's already an object
-    const targetAlbum = useSelector(state => (state.album));
-    const {Artist, Songs, id, userId} = targetAlbum;
-    // console.log('what is Artist and could be go inside of the array??', Artist)
-    // console.log('what is Artist and could be go inside of the array??', Artist.username)
-    // console.log('what is Songs and could be go inside of the array??', Songs)
-    // console.log('what is Songs and could be go inside of the array??', Songs[0].title)
-    // console.log('what is Songs and could be go inside of the array??', Songs[0].description)
-    // console.log('what is Songs and could be go inside of the array??', Songs[0].url)
+    }, [dispatch, albumId]);
 
-    
-    // const albumSongs = targetAlbum.Songs;
-    // const albumArtist = targetAlbum.Artist;
-    // console.log('targetAlbum is retrieved -- ', targetAlbum)
-    // console.log('album song is retrieved -- ', targetAlbum.Songs)
-    // console.log('album artist is retrieved -- ', targetAlbum.Artist.username)
-    // console.log('album artist is retrieved -- ', targetAlbum.name.Artist.username)
+    // const targetAlbum = useSelector(state => Object.values(state.album));
+    // no need of Object.values since it's already an object
+    const targetAlbum = useSelector(state => (state.album));
 
     const handleDelete = async (e) => {
         e.preventDefault();
         const payload = {
             id: albumId
         }
-        // console.log('id??', payload.id)
-
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
-        history.push(`/albums/myalbums/`); // push to history first then reload
-        window.location.reload();
+        history.push(`/albums/myalbums/`);
+        // push to history first then reload
+        // window.location.reload();
         if (deleteAlbum) {
-            alert(`song is now deleted`)
+            alert(`album is now deleted`)
         }
     }
 
@@ -73,7 +57,7 @@ function AlbumDetails() {
 
     const handleCancel = e => {
         e.preventDefault();
-        setHideEditForm(!hideEditform);
+        setHideEditForm(true);
     };
 
 
@@ -83,20 +67,20 @@ function AlbumDetails() {
                 <div>
                     <h2>{targetAlbum.name}</h2>
                     <img src={targetAlbum.previewImage} alt={targetAlbum.name} width="200" height="200" />
-                    <h3>artist id: {targetAlbum.userId}</h3>
-                    {/* <h3>artist name: {targetAlbum.Artist.username}</h3> */}
+                    <h3>Artist: </h3>
+                    <div>{targetAlbum?.Artist?.username}</div>
                     <h3>Songs: </h3>
-                    {/* <div className="albumSongContainer">
-                        {targetAlbum.Songs.forEach((song) => {
-                            return <div className="albumSongs" key={song.id}>hello
-                                <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                                <h4>{song.description}</h4>
-                            </div>
-                        })
+                    <div className="album-song-container">
+                        {(targetAlbum?.Songs?.length > 0) ?
+                            targetAlbum?.Songs?.map((song) => {
+                                return <div className="albumSongs" key={song.id}>
+                                    <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                                </div>
+                            }) : ' -- no song in this album yet --'
                         }
-                    </div> */}
-                    <button onClick={() => setHideEditForm(!hideEditform)}> See Details/Edit </button>
-                    <form hidden={hideEditform}>
+                    </div>
+                    <button onClick={() => setHideEditForm(false)}> See Details/Edit </button>
+                    <form hidden={hideEditform} id='album-form'>
                         <label>Album Id:</label>
                         <input
                             type="text"

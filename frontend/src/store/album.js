@@ -27,7 +27,7 @@ const updateOneAlbum = (album) => ({
 
 const removeOneAlbum = (id) => ({
     type: REMOVE_ONE,
-    payload:id
+    payload: id
 });
 
 export const getAllAlbums = () => async dispatch => {
@@ -80,7 +80,7 @@ export const deleteOneAlbum = (albumId) => async dispatch => {
         await dispatch(removeOneAlbum(albumId));
         return message;
     }
-    console.log('what is the response ---',response.ok)
+    console.log('what is the response ---', response.ok)
 };
 
 export const addNewAlbum = (album) => async dispatch => {

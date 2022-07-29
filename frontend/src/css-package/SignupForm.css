@@ -10,11 +10,12 @@ a {
   margin: 0;
   background-color: hsl(0, 0%, 98%);
   padding: 1px;
+  align-items: left;
 }
 
 div {
   width: 600px;
-  height:fit-content;
+  height: fit-content;
 }
 
 body {
@@ -25,6 +26,7 @@ body {
   padding: 5px 3%;
   color: navy;
   padding: 5px;
+  align-items: left;
 }
 
 form {
@@ -36,14 +38,14 @@ form {
   height: 100%;
   padding: 10px;
   margin: 5px;
-
+  align-items: left;
 }
 
 input,
-select,
 textarea {
   width: 90%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  align-items: left;
 }
