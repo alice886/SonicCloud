@@ -35,19 +35,19 @@ const CreateAlbumForm = ({ onClose }) => {
         }
 
         let createNewAlbum = await dispatch(addNewAlbum(payload));
-        history.push(`/albums/myalbums}`);
+        history.push(`/albums/myalbums/`);
         if (createNewAlbum) {
-            window.alert('new album created!');
+            alert('new album created!');
         }
     }
 
-    const handleCancelClick = e => {
-        e.preventDefault();
-        // hideForm();
-    };
+    // const handleCancelClick = e => {
+    //     e.preventDefault();
+    //     // hideForm();
+    // };
 
     return (
-        <form className='new-album-form' onSubmit={handleSubmitNewAlbum} hidden={showModal}> 
+        <form className='new-album-form' onSubmit={handleSubmitNewAlbum} hidden={showModal}>
             Create a New Album:
             <ul>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
