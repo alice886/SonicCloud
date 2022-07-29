@@ -16,13 +16,13 @@ function AllAlbums() {
     const allAlbums = useSelector(state => Object.values(state.album))
     const sessionUser = useSelector(state => state.session.user);
 
-    if (!sessionUser) {   
-        return (
-            <div className='notLoggedIn'>
-                <h3>Please log in to browse all albums</h3>
-            </div>
-        )
-    }
+    // if (!sessionUser) {   
+    //     return (
+    //         <div className='notLoggedIn'>
+    //             <h3>Please log in to browse all albums</h3>
+    //         </div>
+    //     )
+    // }
 
     return (
         <section className="album-container">

@@ -21,23 +21,8 @@ function AlbumDetails() {
     }, [dispatch, albumId]);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
-    // no need for Object.values since it's already an object
+    // no need of Object.values since it's already an object
     const targetAlbum = useSelector(state => (state.album));
-    const { Artist, Songs, id, userId } = targetAlbum;
-    // console.log('what is Artist and could be go inside of the array??', Artist)
-    // console.log('what is Artist and could be go inside of the array??', Artist.username)
-    // console.log('what is Songs and could be go inside of the array??', Songs)
-    // console.log('what is Songs and could be go inside of the array??', Songs[0].title)
-    // console.log('what is Songs and could be go inside of the array??', Songs[0].description)
-    // console.log('what is Songs and could be go inside of the array??', Songs[0].url)
-
-    // const albumSongs = targetAlbum.Songs;
-    // const albumArtist = targetAlbum.Artist;
-    // console.log('targetAlbum is retrieved -- ', targetAlbum)
-    // console.log('album song is retrieved -- ', targetAlbum.Songs)
-    // console.log('album artist is retrieved -- ', targetAlbum?.Artist)
-    // console.log('album artist is retrieved -- ', targetAlbum.Artist.username)
-    // console.log('album artist is retrieved -- ', targetAlbum.name.Artist.username)
 
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -45,10 +30,11 @@ function AlbumDetails() {
             id: albumId
         }
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
-        history.push(`/albums/myalbums/`); // push to history first then reload
-        window.location.reload();
+        history.push(`/albums/myalbums/`);
+        // push to history first then reload
+        // window.location.reload();
         if (deleteAlbum) {
-            alert(`song is now deleted`)
+            alert(`album is now deleted`)
         }
     }
 

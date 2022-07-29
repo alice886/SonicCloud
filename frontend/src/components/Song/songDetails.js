@@ -20,7 +20,7 @@ function SongDetails() {
 
     useEffect(() => {
         dispatch(getOneSong(songId))
-    }, [dispatch, songId]);
+    }, [dispatch]);
 
     const targetSong = useSelector(state => (state.song));
 
@@ -29,11 +29,11 @@ function SongDetails() {
         const payload = {
             id: songId
         }
-        // console.log('id??', payload.id)
 
         let deleteSong = await dispatch(deleteOneSong(payload))
-        history.push(`/songs/mysongs`); // push to history first then reload
-        window.location.reload();
+        history.push(`/songs/mysongs`);
+        // push to history first then reload
+        // window.location.reload();
         if (deleteSong) {
             alert(`song is now deleted`)
         }
@@ -49,12 +49,17 @@ function SongDetails() {
             url,
             previewImage
         };
-        // if (!title) alert('song title is required')
+        if (!title) alert('song title is required')
+        if (!url) alert('song url is required')
         let editSong = await dispatch(editOneSong(payload));
+        console.log('what is payload.id', payload.id)
+        console.log('what is id', songId)
 
-        window.location.reload()
+
         if (editSong) {
-            history.push(`/api/songs/mysongs/${songId}}`);
+            alert('song is now updated!')
+            history.push(`/api/songs/mysongs/${songId}/}`);
+            // window.location.reload()
         }
     }
 
@@ -99,7 +104,7 @@ function SongDetails() {
                             placeholder={targetSong.title}
                             min="2"
                             required
-                            value={targetSong.title}
+                            value={title}
                             onChange={updateTitle} />
                         <label>audio URL</label>
                         <input

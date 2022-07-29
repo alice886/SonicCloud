@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { editOneSong, getMySongs } from '../../store/song'
-import CreateSongForm from './CreateSongForm';
+import CreateSongModal from '../SongFormModal/index';
 
 function MySongs() {
     const dispatch = useDispatch();
@@ -28,18 +28,18 @@ function MySongs() {
 
     return (
         <div className="song-container">
-            <button onClick={() => setHideEditForm(!hideEditform)}>upload new song</button>
+            <CreateSongModal />
             <ul>
                 {allmysongs && allmysongs.map((song) => {
                     return <div className="eachsong" key={song.id}>
                         {/* <i>🎼</i> */}
                         <img src={song.previewImage} width='150' ></img>
                         <br></br>
-                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
                     </div>
                 })}
             </ul>
-            <CreateSongForm  />
+
         </div>
     )
 }

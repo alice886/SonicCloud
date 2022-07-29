@@ -197,13 +197,20 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
 router.post('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { albumId, title, description, url, previewImage } = req.body;
-    const e = new Error('Validation Error');
-    e.status = 400;
-    e.errors = {};
-    e.errors.title = "Song title is required";
-    e.errors.url = "Audio is required";
+    // const e = new Error('Validation Error');
+    // e.status = 400;
+    // e.errors = {};
+    // e.errors.title = "Song title is required";
+    // e.errors.url = "Audio is required";
 
-    if (!title || !url) return res.send(e);
+    if (!title || !url) return res.send({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {
+            "title": "Song title is required",
+            "url": "url is required"
+        }
+    });
 
     const thealbum = await Album.findByPk(albumId);
     if (!thealbum) {

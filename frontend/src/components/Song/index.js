@@ -16,13 +16,13 @@ function AllSongs() {
         dispatch(getAllSongs())
     }, [dispatch])
 
-    if (!sessionUser) {
-        return (
-            <div className='notLoggedIn'>
-                <h3>Please log in to browse all songs</h3>
-            </div>
-        )
-    }
+    // if (!sessionUser) {
+    //     return (
+    //         <div className='notLoggedIn'>
+    //             <h3>Please log in to browse all songs</h3>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div className="song-container">

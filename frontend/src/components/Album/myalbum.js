@@ -2,25 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { getMyAlbums } from '../../store/album'
-import CreateAlbumForm from "./CreateAlbumForm";
-import { deleteOneAlbum, editOneAlbum } from '../../store/album';
+import CreateAlbumModal from '../AlbumFormModal/index'
 
 function MyAlbums() {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const [hideEditform, setHideEditForm] = useState('true')
 
     const myAlbums = useSelector(state => Object.values(state.album));
-    
+
     useEffect(() => {
         dispatch(getMyAlbums())
     }, [dispatch])
 
-    const [showForm, setShowForm] = useState(false);
 
     return (
         <div className="album-container">
-            <button onClick={() => setHideEditForm(true)}>create new album</button>
+            <CreateAlbumModal />
             <div>
                 {myAlbums && myAlbums.map((album) => {
                     return <div className="eachalbum" id={album.id}>
@@ -30,7 +26,7 @@ function MyAlbums() {
                     </div>
                 })}
             </div>
-            <CreateAlbumForm />
+
         </div>
     )
 }

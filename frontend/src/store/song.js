@@ -62,6 +62,8 @@ export const editOneSong = (song) => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(song)
     });
+
+    console.log('response should be false', response);
     if (response.ok) {
         const editedSong = await response.json();
         await dispatch(updateOneSong(editedSong));
