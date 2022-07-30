@@ -11,13 +11,13 @@ const EditSongModal = ({ targetSong }) => {
     const history = useHistory();
     const [title, setTitle] = useState(targetSong?.title);
     const [description, setDescription] = useState(targetSong?.description);
-    const [url, setAudioUrl] = useState(targetSong?.url);
+    const [url, setUrl] = useState(targetSong?.url);
     const [previewImage, setPreviewImage] = useState(targetSong?.previewImage);
     const [showModal, setShowModal] = useState(false);
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
-    const updateUrl = e => setAudioUrl(e.target.value);
+    const updateUrl = e => setUrl(e.target.value);
     const updateImageUrl = e => setPreviewImage(e.target.value);
 
     useEffect(() => {
