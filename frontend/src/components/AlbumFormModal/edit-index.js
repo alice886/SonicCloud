@@ -32,7 +32,7 @@ const EditAlbumModal = () => {
             id: albumId
         }
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
-        history.push(`/albums/myalbums/`);
+        history.push(`/albums/myalbums/${albumId}`);
         // push to history first then reload
         // window.location.reload();
         if (deleteAlbum) {
@@ -51,10 +51,11 @@ const EditAlbumModal = () => {
 
         if (!name) alert('album title is required')
         let editAlbum = await dispatch(editOneAlbum(payload));
+        // history.push(`/albums/myalbums/${editAlbum.id}`);
         history.push(`/albums/myalbums/`);
         // history.push(`/albums/myalbums/${editAlbum.id}/`);
         if (editAlbum) {
-            alert('album was edited')
+            window.alert('album was edited')
         }
     }
 

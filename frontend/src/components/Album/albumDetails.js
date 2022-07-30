@@ -9,14 +9,14 @@ function AlbumDetails() {
     const dispatch = useDispatch();
     const { albumId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
+    const targetAlbum = useSelector(state => (state.album));
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    }, [dispatch, albumId]);
+    }, [dispatch, albumId, targetAlbum]);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object
-    const targetAlbum = useSelector(state => (state.album));
     // console.log('sessionUser is ---', sessionUser)
 
     if (!sessionUser) {

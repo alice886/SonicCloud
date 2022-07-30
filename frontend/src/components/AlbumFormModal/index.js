@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { addNewAlbum } from '../../store/album';
+import { addNewAlbum, getMyAlbums } from '../../store/album';
 
 
 const CreateAlbumModal = () => {
@@ -17,6 +17,11 @@ const CreateAlbumModal = () => {
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
+    useEffect(() => {
+        dispatch(getMyAlbums())
+    }, [dispatch])
+
+
     const handleSubmitNewAlbum = async e => {
         e.preventDefault();
 
@@ -24,7 +29,6 @@ const CreateAlbumModal = () => {
             name,
             previewImage
         };
-
 
         if (name || previewImage) {
             setErrors([]);
@@ -36,10 +40,12 @@ const CreateAlbumModal = () => {
         }
 
         let createNewAlbum = await dispatch(addNewAlbum(payload));
-        history.push(`/albums/myalbums/`);
         if (createNewAlbum) {
-            alert('new album created!');
+            window.alert('new album created!');
+            history.push(`/albums/myalbums`);
+            setShowModal(false);
         }
+        // https://i.pinimg.com/originals/24/63/b9/2463b906bc43583f0c86681bb166782b.jpg
     }
 
     return (
@@ -65,7 +71,7 @@ const CreateAlbumModal = () => {
                             placeholder="Image URL"
                             value={previewImage}
                             onChange={updatePreviewImage} />
-                        <button type='submit'>Create new Album</button>
+                        <button type='submit' onClick={handleSubmitNewAlbum}>Create new Album</button>
                         <button type='button' onClick={() => setShowModal(false)}>Cancel</button>
                     </form>
                 </Modal>
