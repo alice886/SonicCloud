@@ -17,10 +17,6 @@ const EditSongModal = ({ targetSong }) => {
     const [previewImage, setPreviewImage] = useState(targetSong?.previewImage);
     const [showModal, setShowModal] = useState(false);
 
-    useEffect(() => {
-        dispatch(getMyAlbums())
-    }, [dispatch]);
-
     const myAlbums = useSelector(state => Object.values(state.album));
 
     const updateTitle = e => setTitle(e.target.value);
@@ -31,7 +27,12 @@ const EditSongModal = ({ targetSong }) => {
 
     useEffect(() => {
         dispatch(getOneSong(songId))
-    }, [dispatch, title, description, url, previewImage]);
+    }, [dispatch, title, albumId, description, url, previewImage, showModal]);
+
+    useEffect(() => {
+        dispatch(getMyAlbums())
+    }, [dispatch]);
+
 
     console.log('target song is ---', targetSong)
     console.log('target song name is ---', targetSong?.title)
@@ -56,7 +57,8 @@ const EditSongModal = ({ targetSong }) => {
 
     const albumSelected = async e => {
         e.preventDefault();
-        setAlbumId(e.target.value);
+        // setAlbumId(e.target.value);
+        updateAlbum();
     }
 
     const handleEdit = async e => {
@@ -90,11 +92,11 @@ const EditSongModal = ({ targetSong }) => {
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={showModal} id='song-form'>
                         {/* <label>Song Id: {targetSong.id}</label> */}
-                        <label>Song name: {targetSong.title}</label>
+                        <label>Song name: {targetSong?.title}</label>
                         <label>new title</label>
                         <input
                             type="text"
-                            placeholder={targetSong.title}
+                            placeholder={targetSong?.title}
                             min="2"
                             required
                             value={title}
@@ -113,14 +115,14 @@ const EditSongModal = ({ targetSong }) => {
                         <label>audio URL</label>
                         <input
                             type="text"
-                            placeholder={targetSong.url}
+                            placeholder={targetSong?.url}
                             min="2"
                             value={url}
                             onChange={updateUrl} />
                         <label>image URL</label>
                         <input
                             type="text"
-                            placeholder={targetSong.previewImage}
+                            placeholder={targetSong?.previewImage}
                             value={previewImage}
                             onChange={updateImageUrl} />
                         <label>description:</label>
@@ -130,7 +132,7 @@ const EditSongModal = ({ targetSong }) => {
                             min="2"
                             value={description}
                             onChange={updateDescription} />
-                        <div className="button-container" id={targetSong.id}>
+                        <div className="button-container" id={targetSong?.id}>
                             <button type='submit' onClick={handleEdit}>Update</button>
                             <button type='button' onClick={() => setShowModal(false)}>Cancel Edit</button>
                             <button type='button' onClick={handleDelete}>Delete Song</button>

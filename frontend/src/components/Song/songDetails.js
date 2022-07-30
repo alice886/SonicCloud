@@ -6,6 +6,7 @@ import EditSongModal from '../SongFormModal/edit-index'
 import LoginForm from '../LoginFormModal/LoginForm'
 
 function SongDetails() {
+
     const dispatch = useDispatch();
     const { songId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
