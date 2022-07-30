@@ -10,7 +10,6 @@ function AlbumDetails() {
     const { albumId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const targetAlbum = useSelector(state => (state.album));
-    const [showModalForm, setShowModalForm] = useState(false);
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
