@@ -96,6 +96,7 @@ const EditAlbumModal = ({ targetAlbum }) => {
                             value={name}
                             onChange={updateName} />
                         <label>Image URL</label>
+                        <label>(not required)</label>
                         {/* <label>{targetAlbum.previewImage}</label> */}
                         <input
                             type="text"

@@ -55,11 +55,11 @@ const EditSongModal = ({ targetSong }) => {
         }
     }
 
+    const closeModal = () => setShowModal(false);
 
-    // const albumSelected = async e => {
+    // const handleCancel = async e => {
     //     e.preventDefault();
-    //     // setAlbumId(e.target.value);
-    //     updateAlbum();
+    //     errors.reset();
     // }
 
     const handleEdit = async e => {
@@ -74,8 +74,7 @@ const EditSongModal = ({ targetSong }) => {
             url,
             previewImage
         };
-        // if (!title) alert('song title is required')
-        // if (!url) alert('song url is required')
+
         if (!title || !url || !albumId) {
             setErrors([]);
             return dispatch(editOneSong(payload)).catch(
@@ -133,12 +132,14 @@ const EditSongModal = ({ targetSong }) => {
                             value={url}
                             onChange={updateUrl} />
                         <label>image URL</label>
+                        <label>(not required)</label>
                         <input
                             type="text"
                             placeholder={targetSong?.previewImage}
                             value={previewImage}
                             onChange={updateImageUrl} />
                         <label>description:</label>
+                        <label>(not required)</label>
                         <input
                             type="text"
                             placeholder='edit description here'
@@ -147,7 +148,7 @@ const EditSongModal = ({ targetSong }) => {
                             onChange={updateDescription} />
                         <div className="button-container" id={targetSong?.id}>
                             <button type='submit' onClick={handleEdit}>Update</button>
-                            <button type='button' onClick={() => setShowModal(false)}>Cancel Edit</button>
+                            <button type='button' onClick={closeModal}>Cancel Edit</button>
                             <button type='button' onClick={handleDelete}>Delete Song</button>
                         </div>
                     </form>
