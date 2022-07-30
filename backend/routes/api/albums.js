@@ -6,6 +6,14 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 
+const AlbumValidate = [
+    check('name')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Album name is required and must be 2 characters or more'),
+    handleValidationErrors
+]
+
 // Create a Song for an Album based on the Album's id
 // DONE
 // router.post('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res, next) => {
@@ -91,23 +99,24 @@ router.get('/myalbums', restoreUser, requireAuth, async (req, res) => {
 
 // Create an Album
 // DONE
-router.post('/myalbums', restoreUser, requireAuth, async (req, res) => {
+router.post('/myalbums', restoreUser, requireAuth, AlbumValidate, async (req, res) => {
     const userId = req.user.id;
     const { name, previewImage } = req.body;
-    if (name === undefined) {
-        const e = new Error("Album title is required");
-        e.title = "Album title is required";
-        e.status = 404;
-        return res.send(e);
-        // res.status(400);
-        // return res.send({
-        //     "message": "Validation Error",
-        //     "statusCode": 400,
-        //     "errors": {
-        //         "title": "Album title is required"
-        //     }
-        // });
-    }
+    // if (name === undefined) {
+    //     const e = new Error("Album title is required");
+    //     e.title = "Album title is required";
+    //     e.status = 404;
+    //     return res.send(e);
+
+    // res.status(400);
+    // return res.send({
+    //     "message": "Validation Error",
+    //     "statusCode": 400,
+    //     "errors": {
+    //         "title": "Album title is required"
+    //     }
+    // });
+    // }
     let newAlbum = await Album.create({
         name,
         userId,
@@ -121,19 +130,19 @@ router.post('/myalbums', restoreUser, requireAuth, async (req, res) => {
 
 // Edit an Album
 // DONE
-router.put('/myalbums', restoreUser, requireAuth, async (req, res, next) => {
+router.put('/myalbums', restoreUser, requireAuth, AlbumValidate, async (req, res, next) => {
     const userId = req.user.id;
     const { id, name, previewImage } = req.body
 
     if (!id) res.json('please specify the album id to proceed')
-    if (name === undefined) return res.status(400).send({
-        "message": "Validation Error",
-        "statusCode": 400,
-        "errors": {
-            "title": "Album title is required"
-        }
-    }
-    );
+    // if (name === undefined) return res.status(400).send({
+    //     "message": "Validation Error",
+    //     "statusCode": 400,
+    //     "errors": {
+    //         "title": "Album title is required"
+    //     }
+    // }
+    // );
     const thealbum = await Album.findByPk(id)
     if (!thealbum) return res.status(404).send({
         "message": "Album couldn't be found",

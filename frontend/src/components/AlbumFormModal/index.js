@@ -20,10 +20,10 @@ const CreateAlbumModal = () => {
         dispatch(getMyAlbums())
     }, [dispatch])
 
-    const handleCloseModal = async e => {
-        e.preventDefault();
-        setShowModal()
-    }
+    // const handleCloseModal = async e => {
+    //     e.preventDefault();
+    //     setShowModal()
+    // }
 
 
     const handleSubmitNewAlbum = async e => {
@@ -42,7 +42,15 @@ const CreateAlbumModal = () => {
         //             if (data && data.errors) setErrors(data.errors);
         //         });
         // }
-
+        if (!name) {
+            setErrors([]);
+            return dispatch(addNewAlbum(payload)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
+        }
 
         let createNewAlbum = await dispatch(addNewAlbum(payload));
         if (createNewAlbum) {
