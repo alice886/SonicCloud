@@ -12,6 +12,7 @@ const EditAlbumModal = ({ targetAlbum }) => {
     const [name, setName] = useState(targetAlbum?.name);
     const [previewImage, setPreviewImage] = useState(targetAlbum?.previewImage);
     const [showModal, setShowModal] = useState(false);
+    const [errors, setErrors] = useState([]);
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
@@ -22,7 +23,7 @@ const EditAlbumModal = ({ targetAlbum }) => {
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    }, [dispatch, name, previewImage, showModal]);
+    }, [dispatch, name, previewImage, showModal, errors]);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object
@@ -51,7 +52,15 @@ const EditAlbumModal = ({ targetAlbum }) => {
             previewImage
         };
 
-        if (!name) alert('album title is required')
+        if (!name) {
+            setErrors([]);
+            return dispatch(editOneAlbum(payload)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
+        }
 
         const closeModal = () => { setShowModal(false) }
 
@@ -69,6 +78,9 @@ const EditAlbumModal = ({ targetAlbum }) => {
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={showModal} id='album-form'>
                         <label>Album name: {targetAlbum.name}</label>
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
                         {/* <label>Album Id: {targetAlbum.id}</label> */}
                         {/* <input
                             type="text"
@@ -84,6 +96,7 @@ const EditAlbumModal = ({ targetAlbum }) => {
                             value={name}
                             onChange={updateName} />
                         <label>Image URL</label>
+                        <label>(not required)</label>
                         {/* <label>{targetAlbum.previewImage}</label> */}
                         <input
                             type="text"

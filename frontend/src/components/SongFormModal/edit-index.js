@@ -11,15 +11,12 @@ const EditSongModal = ({ targetSong }) => {
     const { songId } = useParams();
     const history = useHistory();
     const [title, setTitle] = useState(targetSong?.title);
-    const [albumId, setAlbumId] = useState(targetSong?.albumId);
+    const [albumId, setAlbumId] = useState('');
     const [description, setDescription] = useState(targetSong?.description);
     const [url, setUrl] = useState(targetSong?.url);
     const [previewImage, setPreviewImage] = useState(targetSong?.previewImage);
     const [showModal, setShowModal] = useState(false);
-
-    useEffect(() => {
-        dispatch(getMyAlbums())
-    }, [dispatch]);
+    const [errors, setErrors] = useState([]);
 
     const myAlbums = useSelector(state => Object.values(state.album));
 
@@ -31,11 +28,16 @@ const EditSongModal = ({ targetSong }) => {
 
     useEffect(() => {
         dispatch(getOneSong(songId))
-    }, [dispatch, title, description, url, previewImage]);
+    }, [dispatch, title, albumId, description, url, previewImage, showModal, errors]);
 
-    console.log('target song is ---', targetSong)
-    console.log('target song name is ---', targetSong?.title)
-    console.log('target song img is ---', targetSong?.previewImage)
+    useEffect(() => {
+        dispatch(getMyAlbums())
+    }, [dispatch]);
+
+
+    // console.log('target song is ---', targetSong)
+    // console.log('target song name is ---', targetSong?.title)
+    // console.log('target song img is ---', targetSong?.previewImage)
 
 
     const handleDelete = async (e) => {
@@ -53,11 +55,12 @@ const EditSongModal = ({ targetSong }) => {
         }
     }
 
+    const closeModal = () => setShowModal(false);
 
-    const albumSelected = async e => {
-        e.preventDefault();
-        setAlbumId(e.target.value);
-    }
+    // const handleCancel = async e => {
+    //     e.preventDefault();
+    //     errors.reset();
+    // }
 
     const handleEdit = async e => {
         e.preventDefault();
@@ -71,8 +74,16 @@ const EditSongModal = ({ targetSong }) => {
             url,
             previewImage
         };
-        if (!title) alert('song title is required')
-        if (!url) alert('song url is required')
+
+        if (!title || !url || !albumId) {
+            setErrors([]);
+            return dispatch(editOneSong(payload)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
+        }
 
         const closeModal = () => { setShowModal(false) }
 
@@ -90,19 +101,22 @@ const EditSongModal = ({ targetSong }) => {
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={showModal} id='song-form'>
                         {/* <label>Song Id: {targetSong.id}</label> */}
-                        <label>Song name: {targetSong.title}</label>
+                        <label>Song name: {targetSong?.title}</label>
+                        <ul>
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
                         <label>new title</label>
                         <input
                             type="text"
-                            placeholder={targetSong.title}
+                            placeholder={targetSong?.title}
                             min="2"
                             required
                             value={title}
                             onChange={updateTitle} />
                         <br></br>
-                        <label>pick an album</label>
-                        <select id="mydropdown" className="dropdown-content" onChange={albumSelected} >
-                            <option value='' selected disabled hidden> designated album</option>
+                        <label>choose an album</label>
+                        <select id="mydropdown" className="dropdown-content" onChange={updateAlbum} >
+                            <option value='' selected disabled hidden> your albums ...</option>
                             {myAlbums && myAlbums.map(album => {
 
                                 return <option key={album.id} value={album.id}>{album.name}</option>
@@ -113,26 +127,28 @@ const EditSongModal = ({ targetSong }) => {
                         <label>audio URL</label>
                         <input
                             type="text"
-                            placeholder={targetSong.url}
+                            placeholder={targetSong?.url}
                             min="2"
                             value={url}
                             onChange={updateUrl} />
                         <label>image URL</label>
+                        <label>(not required)</label>
                         <input
                             type="text"
-                            placeholder={targetSong.previewImage}
+                            placeholder={targetSong?.previewImage}
                             value={previewImage}
                             onChange={updateImageUrl} />
                         <label>description:</label>
+                        <label>(not required)</label>
                         <input
                             type="text"
                             placeholder='edit description here'
                             min="2"
                             value={description}
                             onChange={updateDescription} />
-                        <div className="button-container" id={targetSong.id}>
+                        <div className="button-container" id={targetSong?.id}>
                             <button type='submit' onClick={handleEdit}>Update</button>
-                            <button type='button' onClick={() => setShowModal(false)}>Cancel Edit</button>
+                            <button type='button' onClick={closeModal}>Cancel Edit</button>
                             <button type='button' onClick={handleDelete}>Delete Song</button>
                         </div>
                     </form>
