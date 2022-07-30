@@ -10,6 +10,7 @@ function AlbumDetails() {
     const { albumId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const targetAlbum = useSelector(state => (state.album));
+    const [showModalForm, setShowModalForm] = useState(false);
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
@@ -37,7 +38,10 @@ function AlbumDetails() {
                 <div>
                     <img src={targetAlbum.previewImage} alt={targetAlbum.name} width="200" height="200" />
                     <h2>{targetAlbum.name}</h2>
-                    <EditAlbumModal targetAlbum={targetAlbum} />
+                    <EditAlbumModal
+                        targetAlbum={targetAlbum}
+                    // hideForm={() => setShowModalForm(true)}
+                    />
                     <br></br>
                     <h3>Artist: </h3>
                     <div>{targetAlbum?.Artist?.username}</div>

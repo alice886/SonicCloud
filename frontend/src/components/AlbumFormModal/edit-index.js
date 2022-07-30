@@ -53,8 +53,11 @@ const EditAlbumModal = ({ targetAlbum }) => {
 
         if (!name) alert('album title is required')
 
+        const closeModal = () => { setShowModal(false) }
+
         let editAlbum = await dispatch(editOneAlbum(payload));
         if (editAlbum) {
+            closeModal();
             window.alert('album was edited');
         }
     }
