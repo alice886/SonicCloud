@@ -24,7 +24,7 @@ const songnotfound = {
 
 // Get all Songs
 // DONE
-router.get('/all', restoreUser, requireAuth, async (req, res) => {
+router.get('/all', restoreUser, async (req, res) => {
     const allSongs = await Song.findAll({
         where: {},
         include: [],
@@ -125,14 +125,26 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     const { id, albumId, title, description, url, previewImage } = req.body
 
     if (!id) return res.json('please specify the song id to proceed')
-    if (!title || !url) return res.status(400).send({
-        "message": "Validation Error",
-        "statusCode": 400,
-        "errors": {
-            "title": "Song title is required",
-            "url": "Audio is required"
-        }
-    });
+    if (!title || !url) {
+        res.status(400);
+        return res.send({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "title": "Song title is required"
+            }
+        });
+    }
+    if (!url) {
+        res.status(400);
+        return res.send({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "url": "Audio is required"
+            }
+        });
+    }
 
     const thesong = await Song.findByPk(id)
     if (!thesong) return res.status(404).send({
@@ -151,6 +163,7 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
     if (previewImage) { thesong.previewImage = previewImage; };
 
     await thesong.save();
+    res.status(201);
     return res.json(thesong)
 
 
@@ -194,7 +207,7 @@ router.put('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
 
 // Create a Song for an Album based on the Album's id
 // DONE
-router.post('/mysongs', restoreUser, requireAuth, async (req, res, next) => {
+router.post('/mysongs/', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { albumId, title, description, url, previewImage } = req.body;
     // const e = new Error('Validation Error');

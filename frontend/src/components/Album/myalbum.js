@@ -13,7 +13,6 @@ function MyAlbums() {
         dispatch(getMyAlbums())
     }, [dispatch])
 
-
     return (
         <div className="album-container">
             <CreateAlbumModal />

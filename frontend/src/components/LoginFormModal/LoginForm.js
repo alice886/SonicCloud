@@ -12,9 +12,15 @@ function LoginForm() {
 
   const demoLogin = (e) => {
     e.preventDefault();
-    setCredential('Riri');
-    setPassword('password3')
-    return dispatch(sessionActions.login({ credential, password }))
+    // setCredential('Riri');
+    // setPassword('password3');
+    // return dispatch(sessionActions.login({ credential, password })).catch(
+    return dispatch(sessionActions.login({ credential: 'Riri', password: 'password3' })).catch(
+      async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      }
+    );
   }
 
   const handleSubmit = (e) => {
@@ -41,9 +47,9 @@ function LoginForm() {
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
-          // required
-          placeholder={'enter your username here'}
-          disabled={true}
+          required
+          placeholder={'your username here'}
+        // disabled={true}
         />
       </label>
       <label>
@@ -52,9 +58,9 @@ function LoginForm() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          // required
-          placeholder={'enter your password here'}
-          disabled={true}
+          required
+          placeholder={'your password here'}
+        // disabled={true}
         />
       </label>
       <button type="submit">Log In</button>

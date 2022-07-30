@@ -69,14 +69,14 @@ function App() {
             <MyPlaylists />
           </Route> 
           */}
-              <Route>
-                <PageNotFound />
-              </Route>
-            </Switch>
+          <Route>
+            <PageNotFound />
+          </Route>
+        </Switch>
       )}
       <ButtomNavigation />
-          </>
-          );
+    </>
+  );
 }
 
-          export default App;
+export default App;

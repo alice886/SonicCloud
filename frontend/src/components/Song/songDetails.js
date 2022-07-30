@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 import EditSongModal from '../SongFormModal/edit-index'
+import LoginForm from '../LoginFormModal/LoginForm'
 
 function SongDetails() {
     const dispatch = useDispatch();
@@ -10,11 +11,24 @@ function SongDetails() {
     const { songId } = useParams();
     const [hideEditform, setHideEditForm] = useState(true);
 
+    const sessionUser = useSelector(state => state.session.user);
+
     useEffect(() => {
         dispatch(getOneSong(songId))
     }, [dispatch]);
 
     const targetSong = useSelector(state => (state.song));
+
+    if (!sessionUser) {
+        return (
+            <div>
+                <h2>Join SonicCloud to discover more </h2>
+                <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
+                <h3> or log in below </h3>
+                <LoginForm />
+            </div>
+        )
+    }
 
     return (
         <>
