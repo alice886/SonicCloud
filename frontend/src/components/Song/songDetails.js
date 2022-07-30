@@ -31,9 +31,8 @@ function SongDetails() {
         <>
             {targetSong && (
                 <div>
-                    <img src={targetSong.previewImage} alt={targetSong.title} width="200" height="200" />
-                    <h3>{targetSong.title}</h3>
-                    <br></br>
+                    <img src={targetSong?.previewImage} alt={targetSong?.title} width="200" height="200" />
+                    <h3>{targetSong?.title}</h3>
                     <EditSongModal
                         targetSong={targetSong}
                     />
@@ -50,7 +49,7 @@ function SongDetails() {
                     <h4>Artist: {targetSong?.Artist?.username}</h4>
                     <h4>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
                     {/* <h3>audio url id: {targetSong.url}</h3> */}
-                    <h4>Description: {targetSong.description}</h4>
+                    <h4>Description: {targetSong?.description}</h4>
                 </div>
             )}
         </>

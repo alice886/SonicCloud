@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { Modal } from '../../context/Modal';
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
+import { getMyAlbums } from '../../store/album';
 
 const EditSongModal = ({ targetSong }) => {
 
@@ -10,14 +11,22 @@ const EditSongModal = ({ targetSong }) => {
     const { songId } = useParams();
     const history = useHistory();
     const [title, setTitle] = useState(targetSong?.title);
+    const [albumId, setAlbumId] = useState(targetSong?.albumId);
     const [description, setDescription] = useState(targetSong?.description);
-    const [url, setAudioUrl] = useState(targetSong?.url);
+    const [url, setUrl] = useState(targetSong?.url);
     const [previewImage, setPreviewImage] = useState(targetSong?.previewImage);
     const [showModal, setShowModal] = useState(false);
 
+    useEffect(() => {
+        dispatch(getMyAlbums())
+    }, [dispatch]);
+
+    const myAlbums = useSelector(state => Object.values(state.album));
+
     const updateTitle = e => setTitle(e.target.value);
+    const updateAlbum = e => setAlbumId(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
-    const updateUrl = e => setAudioUrl(e.target.value);
+    const updateUrl = e => setUrl(e.target.value);
     const updateImageUrl = e => setPreviewImage(e.target.value);
 
     useEffect(() => {
@@ -44,6 +53,12 @@ const EditSongModal = ({ targetSong }) => {
         }
     }
 
+
+    const albumSelected = async e => {
+        e.preventDefault();
+        setAlbumId(e.target.value);
+    }
+
     const handleEdit = async e => {
         e.preventDefault();
 
@@ -51,6 +66,7 @@ const EditSongModal = ({ targetSong }) => {
             ...targetSong,
             id: songId,
             title,
+            albumId,
             description,
             url,
             previewImage
@@ -73,7 +89,7 @@ const EditSongModal = ({ targetSong }) => {
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={showModal} id='song-form'>
-                        <label>Song Id: {targetSong.id}</label>
+                        {/* <label>Song Id: {targetSong.id}</label> */}
                         <label>Song name: {targetSong.title}</label>
                         <label>new title</label>
                         <input
@@ -83,6 +99,17 @@ const EditSongModal = ({ targetSong }) => {
                             required
                             value={title}
                             onChange={updateTitle} />
+                        <br></br>
+                        <label>pick an album</label>
+                        <select id="mydropdown" className="dropdown-content" onChange={albumSelected} >
+                            <option value='' selected disabled hidden> designated album</option>
+                            {myAlbums && myAlbums.map(album => {
+
+                                return <option key={album.id} value={album.id}>{album.name}</option>
+                            })
+                            }
+                        </select>
+                        <br></br>
                         <label>audio URL</label>
                         <input
                             type="text"

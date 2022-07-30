@@ -35,7 +35,7 @@ function AlbumDetails() {
         <>
             {targetAlbum && (
                 <div>
-                    <img src={targetAlbum.previewImage} alt={targetAlbum.name} width="200" height="200" />
+                    <img src={targetAlbum?.previewImage} alt={targetAlbum?.name} width="200" height="200" />
                     <h2>{targetAlbum.name}</h2>
                     <EditAlbumModal
                         targetAlbum={targetAlbum}
