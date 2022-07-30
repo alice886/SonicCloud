@@ -13,7 +13,7 @@ function AlbumDetails() {
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    }, [dispatch, albumId, targetAlbum]);
+    }, [dispatch, albumId]);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object

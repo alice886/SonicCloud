@@ -59,8 +59,8 @@ const CreateSongModal = () => {
 
         let newSong = await dispatch(addNewSong(payload));
         if (newSong) {
-            window.alert('new song created!');
-            history.push(`/songs/mysongs`);
+            history.push(`/songs/${newSong.id}`);
+            window.alert(`new song ♪  ${newSong.title}  ♪ is created!`);
         }
     }
 

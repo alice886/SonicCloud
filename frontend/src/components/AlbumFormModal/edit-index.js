@@ -32,7 +32,7 @@ const EditAlbumModal = () => {
             id: albumId
         }
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
-        history.push(`/albums/myalbums/${albumId}`);
+        history.push(`/albums/myalbums/`);
         // push to history first then reload
         // window.location.reload();
         if (deleteAlbum) {
@@ -44,6 +44,7 @@ const EditAlbumModal = () => {
         e.preventDefault();
 
         const payload = {
+            ...targetAlbum,
             id: albumId,
             name,
             previewImage

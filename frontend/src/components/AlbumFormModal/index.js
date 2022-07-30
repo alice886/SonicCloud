@@ -12,7 +12,6 @@ const CreateAlbumModal = () => {
     const [previewImage, setPreviewImage] = useState('');
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [hideEditform, setHideEditForm] = useState(true);
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
@@ -20,6 +19,11 @@ const CreateAlbumModal = () => {
     useEffect(() => {
         dispatch(getMyAlbums())
     }, [dispatch])
+
+    const handleCloseModal = async e => {
+        e.preventDefault();
+        setShowModal()
+    }
 
 
     const handleSubmitNewAlbum = async e => {
@@ -30,21 +34,22 @@ const CreateAlbumModal = () => {
             previewImage
         };
 
-        if (name || previewImage) {
-            setErrors([]);
-            return dispatch(addNewAlbum({ name, previewImage }))
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
-        }
+        // if (name || previewImage) {
+        //     setErrors([]);
+        //     return dispatch(addNewAlbum({ name, previewImage }))
+        //         .catch(async (res) => {
+        //             const data = await res.json();
+        //             if (data && data.errors) setErrors(data.errors);
+        //         });
+        // }
+
 
         let createNewAlbum = await dispatch(addNewAlbum(payload));
         if (createNewAlbum) {
-            window.alert('new album created!');
-            history.push(`/albums/myalbums`);
-            setShowModal(false);
+            history.push(`/albums/${createNewAlbum.id}`);
+            window.alert(`new album ♪  ${createNewAlbum.name}  ♪ is created!`);
         }
+
         // https://i.pinimg.com/originals/24/63/b9/2463b906bc43583f0c86681bb166782b.jpg
     }
 
@@ -52,9 +57,8 @@ const CreateAlbumModal = () => {
         <>
             <button onClick={() => setShowModal(true)}>Create New Album</button>
             {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    {/* <CreateAlbumForm /> */}
-                    <form className='new-album-form' hidden={hideEditform}>
+                <Modal onClose={() => setShowModal(false)} >
+                    <form className='new-album-form' hidden={showModal}>
                         Create a New Album:
                         <ul>
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}

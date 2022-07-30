@@ -67,6 +67,7 @@ export const editOneSong = (song) => async dispatch => {
     if (response.ok) {
         const editedSong = await response.json();
         await dispatch(updateOneSong(editedSong));
+        return editedSong;
     }
 };
 
@@ -92,7 +93,7 @@ export const addNewSong = (song) => async dispatch => {
     if (response.ok) {
         const newSong = await response.json();
         await dispatch(addOneSong(newSong));
-        // console.log('detail of the new song ---', newSong)
+        return newSong;
     }
 };
 
