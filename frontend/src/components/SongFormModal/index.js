@@ -56,7 +56,7 @@ const CreateSongModal = () => {
                 });
 
         };
-        console.log('errors are what ++++ ', errors)
+        // console.log('errors are what ++++ ', errors)
         let newSong = await dispatch(addNewSong(payload));
         // console.log('what is data')
         // console.log('what is data', typeof newSong)
@@ -114,11 +114,10 @@ const CreateSongModal = () => {
                             value={previewImage}
                             onChange={updateImageUrl} />
                         <label>description:</label>
-                        <label>(not required)</label>
+                        {/* <label>(not required)</label> */}
                         <input
                             type="text"
                             placeholder='add description here'
-                            min="2"
                             value={description}
                             onChange={updateDescription} />
                         <div className="button-container" id='buttons'>

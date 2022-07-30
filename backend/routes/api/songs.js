@@ -17,6 +17,10 @@ const createSongValidate = [
         .exists({ checkFalsy: true })
         .isLength({ min: 4 })
         .withMessage('Audio url is required and must be 4 characters or more'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Description is required and must be 2 characters or more'),
     handleValidationErrors
 ]
 const editSongValidate = [
