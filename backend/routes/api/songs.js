@@ -12,7 +12,7 @@ const createSongValidate = [
         .withMessage('Song title is required and must be 2 characters or more'),
     check('albumId')
         .exists({ checkFalsy: true })
-        .withMessage('please choose the designated album to proceed'),
+        .withMessage('Please choose the designated album to proceed'),
     check('url')
         .exists({ checkFalsy: true })
         .isLength({ min: 4 })
@@ -22,7 +22,7 @@ const createSongValidate = [
 const editSongValidate = [
     check('albumId')
         .exists({ checkFalsy: true })
-        .withMessage('please choose the designated album to proceed'),
+        .withMessage('Please choose the designated album to proceed'),
     check('title')
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })

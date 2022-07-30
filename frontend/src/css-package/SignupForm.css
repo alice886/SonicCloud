@@ -29,7 +29,7 @@ body {
   align-items: left;
 }
 
-form {
+#sign-up-form {
   border-radius: 1rem;
   background-color: hsl(0, 0%, 100%);
   border: 4px solid hsl(0, 0%, 90%);
