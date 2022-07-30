@@ -52,3 +52,15 @@ form {
     margin: 5px;
 
 }
+body,
+head,
+ul,
+body {
+    justify-content: left;
+    margin: auto;
+    list-style-type: none;
+}
+
+html {
+    height: max-content;
+}

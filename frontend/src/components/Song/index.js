@@ -26,7 +26,7 @@ function AllSongs() {
     // }
 
     return (
-        <div className="song-container">
+        <div className="all-song-container">
             <ul>
                 {allsongs && allsongs.map((song) => {
                     return <div className="eachsong" key={song.id}>

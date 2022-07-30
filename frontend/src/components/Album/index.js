@@ -20,7 +20,7 @@ function AllAlbums() {
 
 
     return (
-        <section className="album-container">
+        <section className="all-album-container">
             <div>
                 {allAlbums && allAlbums.map((album) => {
                     return <div className="eachalbum" key={album.id}>

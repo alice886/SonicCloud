@@ -55,12 +55,12 @@ const EditSongModal = ({ targetSong }) => {
         }
     }
 
-    const closeModal = () => setShowModal(false);
+    const closeModal = () => { setShowModal(false) };
 
-    // const handleCancel = async e => {
-    //     e.preventDefault();
-    //     errors.reset();
-    // }
+    const handleCancel = async e => {
+        e.preventDefault();
+        closeModal();
+    }
 
     const handleEdit = async e => {
         e.preventDefault();
@@ -99,9 +99,10 @@ const EditSongModal = ({ targetSong }) => {
             <button onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <form hidden={showModal} id='song-form'>
+                    <form hidden={showModal} id='edit-song-form'>
                         {/* <label>Song Id: {targetSong.id}</label> */}
-                        <label>Song name: {targetSong?.title}</label>
+                        <label> - Edit Song - </label>
+                        <label>{targetSong?.title}</label>
                         <ul>
                             {errors.map((error, idx) => {
                                 if (error !== 'Invalid value') {
@@ -153,7 +154,7 @@ const EditSongModal = ({ targetSong }) => {
                             onChange={updateDescription} />
                         <div className="button-container" id={targetSong?.id}>
                             <button type='submit' onClick={handleEdit}>Update</button>
-                            <button type='button' onClick={closeModal}>Cancel Edit</button>
+                            <button type='button' onClick={handleCancel}>Cancel Edit</button>
                             <button type='button' onClick={handleDelete}>Delete Song</button>
                         </div>
                     </form>

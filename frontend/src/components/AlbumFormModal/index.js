@@ -66,8 +66,8 @@ const CreateAlbumModal = () => {
             <button onClick={() => setShowModal(true)}>Create New Album</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
-                    <form className='new-album-form' hidden={showModal}>
-                        Create a New Album:
+                    <form id='new-album-form' hidden={showModal}>
+                        <label> - Create New Album - </label>
                         <ul>
                             {errors.map((error, idx) => {
                                 if (error !== 'Invalid value') {

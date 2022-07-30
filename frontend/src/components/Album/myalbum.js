@@ -14,7 +14,7 @@ function MyAlbums() {
     }, [dispatch])
 
     return (
-        <div className="album-container">
+        <div className="all-album-container">
             <CreateAlbumModal />
             <div>
                 {myAlbums && myAlbums.map((album) => {

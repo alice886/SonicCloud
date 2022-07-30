@@ -24,7 +24,7 @@ body {
     display: flex;
     align-items: flex-end;
     flex-direction: row;
-    text-align: center;
+    /* text-align: center; */
 
 }
 
@@ -51,7 +51,7 @@ div {
     /* border: solid 3px #f50; */
     /* position: fixed;
     width: 100%; */
-    align-items: flex-start;
+    text-align: center;
     justify-content: space-evenly;
     display: flex;
     /* left: 0px;

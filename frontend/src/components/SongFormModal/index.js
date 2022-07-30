@@ -8,7 +8,7 @@ import { getMyAlbums } from '../../store/album';
 const CreateSongModal = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [albumId, setAlbumId] = useState();
+    const [albumId, setAlbumId] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [url, setAudioUrl] = useState('');
@@ -47,7 +47,7 @@ const CreateSongModal = () => {
             previewImage
         };
 
-        if (!title || !albumId || !url) {
+        if (!title || !albumId || !description || !url) {
             setErrors([]);
             return dispatch(addNewSong({ albumId, title, description, url, previewImage }))
                 .catch(async (res) => {
@@ -73,6 +73,7 @@ const CreateSongModal = () => {
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <form id='new-song-form' hidden={hideEditform}>
+                        <label> - Create New Song - </label>
                         <ul >
                             {errors && errors.map((error, idx) => {
                                 if (error !== 'Invalid value') {
@@ -82,7 +83,7 @@ const CreateSongModal = () => {
                         </ul>
                         <br></br>
                         <label>pick an album</label>
-                        <select id="mydropdown" className="dropdown-content" onChange={albumSelected} >
+                        <select id="mydropdown" className="dropdown-content" onChange={albumSelected} value={albumId} >
                             <option value='' selected disabled hidden> Choose your album</option>
                             {myAlbums && myAlbums.map(album => {
 
