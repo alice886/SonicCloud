@@ -65,6 +65,7 @@ export const editOneAlbum = (album) => async dispatch => {
     if (response.ok) {
         const editedAlbum = await response.json();
         await dispatch(updateOneAlbum(editedAlbum));
+        return editedAlbum;
     }
 };
 
@@ -92,7 +93,7 @@ export const addNewAlbum = (album) => async dispatch => {
     if (response.ok) {
         const newAlbum = await response.json();
         await dispatch(addOneAlbum(newAlbum));
-        console.log('detail of the new album ---', newAlbum)
+        return newAlbum;
     }
 };
 

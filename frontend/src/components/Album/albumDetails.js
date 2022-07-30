@@ -13,11 +13,12 @@ function AlbumDetails() {
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    }, [dispatch, albumId, targetAlbum]);
+    }, [dispatch]);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object
     // console.log('sessionUser is ---', sessionUser)
+    // console.log('target album is --- in detail page --', targetAlbum)
 
     if (!sessionUser) {
         return (
@@ -36,7 +37,10 @@ function AlbumDetails() {
                 <div>
                     <img src={targetAlbum.previewImage} alt={targetAlbum.name} width="200" height="200" />
                     <h2>{targetAlbum.name}</h2>
-                    <EditAlbumModal />
+                    <EditAlbumModal
+                        targetAlbum={targetAlbum}
+                    // hideForm={() => setShowModalForm(true)}
+                    />
                     <br></br>
                     <h3>Artist: </h3>
                     <div>{targetAlbum?.Artist?.username}</div>

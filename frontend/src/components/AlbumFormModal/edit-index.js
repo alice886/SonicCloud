@@ -4,27 +4,28 @@ import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { Modal } from '../../context/Modal';
 import { getOneAlbum, deleteOneAlbum, editOneAlbum } from '../../store/album';
 
-const EditAlbumModal = () => {
-    const [showModal, setShowModal] = useState(false);
+const EditAlbumModal = ({ targetAlbum }) => {
 
     const dispatch = useDispatch();
     const { albumId } = useParams();
     const history = useHistory();
-    const [name, setName] = useState('');
-    const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState(true)
+    const [name, setName] = useState(targetAlbum?.name);
+    const [previewImage, setPreviewImage] = useState(targetAlbum?.previewImage);
+    const [showModal, setShowModal] = useState(false);
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
 
+    // console.log('target album is ---', targetAlbum)
+    // console.log('target album name is ---', targetAlbum?.name)
+    // console.log('target album img is ---', targetAlbum?.previewImage)
 
     useEffect(() => {
         dispatch(getOneAlbum(albumId))
-    }, [dispatch, albumId]);
+    }, [dispatch, name, previewImage, showModal]);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object
-    const targetAlbum = useSelector(state => (state.album));
 
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -32,11 +33,11 @@ const EditAlbumModal = () => {
             id: albumId
         }
         let deleteAlbum = await dispatch(deleteOneAlbum(payload))
-        history.push(`/albums/myalbums/${albumId}`);
+        history.push(`/albums/myalbums/`);
         // push to history first then reload
         // window.location.reload();
         if (deleteAlbum) {
-            alert(`album is now deleted`)
+            window.alert(`album is now deleted`)
         }
     }
 
@@ -44,32 +45,29 @@ const EditAlbumModal = () => {
         e.preventDefault();
 
         const payload = {
+            ...targetAlbum,
             id: albumId,
             name,
             previewImage
         };
 
         if (!name) alert('album title is required')
+
+        const closeModal = () => { setShowModal(false) }
+
         let editAlbum = await dispatch(editOneAlbum(payload));
-        // history.push(`/albums/myalbums/${editAlbum.id}`);
-        history.push(`/albums/myalbums/`);
-        // history.push(`/albums/myalbums/${editAlbum.id}/`);
         if (editAlbum) {
-            window.alert('album was edited')
+            closeModal();
+            window.alert('album was edited');
         }
     }
-
-    const handleCancel = e => {
-        e.preventDefault();
-        setHideEditForm(true);
-    };
 
     return (
         <>
             <button onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <form hidden={hideEditform} id='album-form'>
+                    <form hidden={showModal} id='album-form'>
                         <label>Album name: {targetAlbum.name}</label>
                         {/* <label>Album Id: {targetAlbum.id}</label> */}
                         {/* <input

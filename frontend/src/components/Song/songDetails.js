@@ -7,17 +7,14 @@ import LoginForm from '../LoginFormModal/LoginForm'
 
 function SongDetails() {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { songId } = useParams();
-    const [hideEditform, setHideEditForm] = useState(true);
-
     const sessionUser = useSelector(state => state.session.user);
+    const targetSong = useSelector(state => (state.song));
 
     useEffect(() => {
         dispatch(getOneSong(songId))
     }, [dispatch]);
 
-    const targetSong = useSelector(state => (state.song));
 
     if (!sessionUser) {
         return (
@@ -37,7 +34,9 @@ function SongDetails() {
                     <img src={targetSong.previewImage} alt={targetSong.title} width="200" height="200" />
                     <h3>{targetSong.title}</h3>
                     <br></br>
-                    <EditSongModal />
+                    <EditSongModal
+                        targetSong={targetSong}
+                    />
                     <br></br>
                     <audio src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls>
                         {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}

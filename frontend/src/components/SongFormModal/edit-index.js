@@ -4,16 +4,16 @@ import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { Modal } from '../../context/Modal';
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 
-const EditSongModal = () => {
-    const [showModal, setShowModal] = useState(false);
+const EditSongModal = ({ targetSong }) => {
+
     const dispatch = useDispatch();
-    const history = useHistory();
     const { songId } = useParams();
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [url, setAudioUrl] = useState('');
-    const [previewImage, setPreviewImage] = useState('');
-    const [hideEditform, setHideEditForm] = useState(true);
+    const history = useHistory();
+    const [title, setTitle] = useState(targetSong?.title);
+    const [description, setDescription] = useState(targetSong?.description);
+    const [url, setAudioUrl] = useState(targetSong?.url);
+    const [previewImage, setPreviewImage] = useState(targetSong?.previewImage);
+    const [showModal, setShowModal] = useState(false);
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
@@ -22,9 +22,12 @@ const EditSongModal = () => {
 
     useEffect(() => {
         dispatch(getOneSong(songId))
-    }, [dispatch]);
+    }, [dispatch, title, description, url, previewImage]);
 
-    const targetSong = useSelector(state => (state.song));
+    console.log('target song is ---', targetSong)
+    console.log('target song name is ---', targetSong?.title)
+    console.log('target song img is ---', targetSong?.previewImage)
+
 
     const handleDelete = async (e) => {
         e.preventDefault();
@@ -45,6 +48,7 @@ const EditSongModal = () => {
         e.preventDefault();
 
         const payload = {
+            ...targetSong,
             id: songId,
             title,
             description,
@@ -53,15 +57,13 @@ const EditSongModal = () => {
         };
         if (!title) alert('song title is required')
         if (!url) alert('song url is required')
+
+        const closeModal = () => { setShowModal(false) }
+
         let editSong = await dispatch(editOneSong(payload));
-        console.log('what is payload.id', payload.id)
-        console.log('what is id', songId)
-
-
-        history.push(`/songs/${songId}`);
         if (editSong) {
-            alert('song is now updated!')
-            // history.go()
+            closeModal();
+            window.alert('song is now updated!')
         }
     }
 
@@ -70,7 +72,7 @@ const EditSongModal = () => {
             <button onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <form hidden={hideEditform} id='song-form'>
+                    <form hidden={showModal} id='song-form'>
                         <label>Song Id: {targetSong.id}</label>
                         <label>Song name: {targetSong.title}</label>
                         <label>new title</label>
