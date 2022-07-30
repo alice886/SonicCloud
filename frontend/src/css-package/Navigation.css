@@ -1,7 +1,6 @@
 body,
 head,
 ul,
-form,
 body {
     justify-content: left;
     margin: auto;
@@ -70,17 +69,6 @@ div {
     padding: 5px 10px;
     text-decoration: none;
     font-size: 17px;
-}
-
-form {
-    position: relative;
-    top: 90px;
-    width: 400px;
-    height: max-content;
-    overflow: auto;
-    align-items: left;
-    flex-direction: column;
-
 }
 
 #user-dropdown,

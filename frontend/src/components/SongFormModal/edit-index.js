@@ -103,7 +103,12 @@ const EditSongModal = ({ targetSong }) => {
                         {/* <label>Song Id: {targetSong.id}</label> */}
                         <label>Song name: {targetSong?.title}</label>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {errors.map((error, idx) => {
+                                if (error !== 'Invalid value') {
+                                    return <li key={idx}>{error}</li>
+                                }
+                            }
+                            )}
                         </ul>
                         <label>new title</label>
                         <input

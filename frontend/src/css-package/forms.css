@@ -1,0 +1,18 @@
+#new-song-form li {
+    float: left;
+    display: block;
+    font-size: medium;
+}
+form {
+    justify-content: left;
+    margin: auto;
+    list-style-type: none;
+    position: static;
+    top: 90px;
+    width: 70%;
+    height: max-content;
+    /* overflow: auto; */
+    align-items: center;
+    flex-direction: column;
+
+}

@@ -79,7 +79,12 @@ const EditAlbumModal = ({ targetAlbum }) => {
                     <form hidden={showModal} id='album-form'>
                         <label>Album name: {targetAlbum.name}</label>
                         <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {errors.map((error, idx) => {
+                                if (error !== 'Invalid value') {
+                                    return <li key={idx}>{error}</li>
+                                }
+                            }
+                            )}
                         </ul>
                         {/* <label>Album Id: {targetAlbum.id}</label> */}
                         {/* <input

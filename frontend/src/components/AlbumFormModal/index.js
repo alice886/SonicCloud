@@ -69,7 +69,12 @@ const CreateAlbumModal = () => {
                     <form className='new-album-form' hidden={showModal}>
                         Create a New Album:
                         <ul>
-                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            {errors.map((error, idx) => {
+                                if (error !== 'Invalid value') {
+                                    return <li key={idx}>{error}</li>
+                                }
+                            }
+                            )}
                         </ul>
                         <input
                             type="text"

@@ -47,7 +47,7 @@ const CreateSongModal = () => {
             previewImage
         };
 
-        if (!title) {
+        if (!title || !albumId || !url) {
             setErrors([]);
             return dispatch(addNewSong({ albumId, title, description, url, previewImage }))
                 .catch(async (res) => {
@@ -56,7 +56,7 @@ const CreateSongModal = () => {
                 });
 
         };
-
+        console.log('errors are what ++++ ', errors)
         let newSong = await dispatch(addNewSong(payload));
         // console.log('what is data')
         // console.log('what is data', typeof newSong)
@@ -73,8 +73,12 @@ const CreateSongModal = () => {
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <form id='new-song-form' hidden={hideEditform}>
-                        <ul>
-                            {errors && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        <ul >
+                            {errors && errors.map((error, idx) => {
+                                if (error !== 'Invalid value') {
+                                    return <li key={idx}>{error}</li>
+                                }
+                            })}
                         </ul>
                         <br></br>
                         <label>pick an album</label>
@@ -103,12 +107,14 @@ const CreateSongModal = () => {
                             value={url}
                             onChange={updateUrl} />
                         <label>image URL</label>
+                        <label>(not required)</label>
                         <input
                             type="text"
                             placeholder='add image link here'
                             value={previewImage}
                             onChange={updateImageUrl} />
                         <label>description:</label>
+                        <label>(not required)</label>
                         <input
                             type="text"
                             placeholder='add description here'
