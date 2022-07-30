@@ -89,7 +89,7 @@ const EditSongModal = ({ targetSong }) => {
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={showModal} id='song-form'>
-                        <label>Song Id: {targetSong.id}</label>
+                        {/* <label>Song Id: {targetSong.id}</label> */}
                         <label>Song name: {targetSong.title}</label>
                         <label>new title</label>
                         <input
@@ -102,7 +102,7 @@ const EditSongModal = ({ targetSong }) => {
                         <br></br>
                         <label>pick an album</label>
                         <select id="mydropdown" className="dropdown-content" onChange={albumSelected} >
-                            <option value='' selected disabled hidden> choose an album</option>
+                            <option value='' selected disabled hidden> designated album</option>
                             {myAlbums && myAlbums.map(album => {
 
                                 return <option key={album.id} value={album.id}>{album.name}</option>
