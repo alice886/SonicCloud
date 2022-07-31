@@ -9,7 +9,7 @@ a {
   color: navy;
   margin: 0;
   background-color: hsl(0, 0%, 98%);
-  padding: 1px;
+  /* padding: 1px; */
   align-items: left;
 }
 

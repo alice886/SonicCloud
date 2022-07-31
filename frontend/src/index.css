@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Bitter:wght@100;200;400&family=Grape+Nuts&family=Macondo&family=Manrope:wght@200&family=Square+Peg&family=Syncopate&display=swap');
+
 #root {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     width: 100%;
+    font-family: 'Manrope', sans-serif;
 }
 
 body,
@@ -37,7 +40,6 @@ head {
 
 body {
     width: 90%;
-    border-top: 4px solid #f50;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -70,4 +72,16 @@ form {
     height: 80%;
     margin: 5px;
 
+}
+
+/* @media only screen and (max-width: 1026px) {
+    #topnav-container {
+        display: none;
+    }
+} */
+
+
+div.public-present {
+    padding: 10%;
+    height: 100%;
 }

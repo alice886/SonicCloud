@@ -25,7 +25,7 @@ function AlbumDetails() {
 
     if (!sessionUser) {
         return (
-            <div>
+            <div className='public-present'>
                 <h2>Join SonicCloud to discover more </h2>
                 <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
                 <h3> or log in below </h3>
