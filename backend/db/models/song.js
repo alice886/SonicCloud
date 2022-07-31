@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Song.hasMany(models.Comment, { foreignKey: 'songId', hooks: true, onDelete: 'CASCADE' });
       Song.belongsTo(models.Album, { foreignKey: 'albumId', onDelete: 'CASCADE' });
       Song.belongsTo(models.User, { foreignKey: 'userId', as: 'Artist', onDelete: 'CASCADE' });
-      Song.belongsToMany(models.Playlist, { through: models.playlistSong, foreignKey: 'songId', otherKey: 'playlistId' , onDelete: 'CASCADE' });
+      Song.belongsToMany(models.Playlist, { through: models.playlistSong, foreignKey: 'songId', otherKey: 'playlistId', onDelete: 'CASCADE' });
     }
   }
   Song.init({
@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     description: {
       type: DataTypes.STRING,

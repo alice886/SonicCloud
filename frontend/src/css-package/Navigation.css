@@ -81,20 +81,26 @@ div {
 #topnav-container a {
     position: relative;
     top: 0;
-    float: none;
+    float: left;
+    text-align: center;
+    padding: 3px 40px;
     color: white;
     background-color: black;
     border-radius: 10%;
     border-style: white solid 1px;
-    text-align: center;
     /* margin: 2.7em; */
     text-decoration: none;
-    font-size: 23px;
+    font-size: 22px;
     flex: 1;
     vertical-align: center;
     /* justify-content: center; */
     justify-content: space-evenly;
     overflow: hidden;
+}
+
+#topnav-container a:hover {
+    background-color: #7B241C;
+    color: white;
 }
 
 #user-dropdown,

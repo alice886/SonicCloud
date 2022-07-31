@@ -34,9 +34,9 @@ function SongDetails() {
                 <div>
                     <img src={targetSong?.previewImage} alt={targetSong?.title} width="200" height="200" />
                     <h3>{targetSong?.title}</h3>
-                    <EditSongModal
+                    {(sessionUser.username === targetSong?.Artist?.username) && <EditSongModal
                         targetSong={targetSong}
-                    />
+                    />}
                     <br></br>
                     <audio src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls>
                         {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}

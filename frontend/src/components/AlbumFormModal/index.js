@@ -12,6 +12,7 @@ const CreateAlbumModal = () => {
     const [previewImage, setPreviewImage] = useState('');
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const myAlbums = useSelector(state => Object.values(state.album));
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
@@ -47,7 +48,9 @@ const CreateAlbumModal = () => {
             return dispatch(addNewAlbum(payload)).catch(
                 async (res) => {
                     const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
+                    if (data && data.errors) {
+                        setErrors(data.errors)
+                    };
                 }
             );
         }
