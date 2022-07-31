@@ -4,10 +4,11 @@
 } */
 div.song-page {
     height: 100%;
+    width: 100%;
 }
 
 div.song-present {
-    width: 100%;
+    width: 50%;
     display: block;
     /* grid-template-rows: (4, 1fr); */
     /* gap: 5px; */
@@ -22,16 +23,52 @@ div.song-present {
     size: 30px;
     box-sizing: border-box;
     padding: 20px;
-    background-color: #F5EEF8;
+    background-color: white;
 }
 
 div.song-details {
-    padding: 50px;
-    background-color: #EAF2F8;
+    /* width: 50%; */
+    display: block;
+    /* grid-template-rows: (4, 1fr); */
+    /* gap: 5px; */
+    /* grid-auto-flow: row; */
+    position: static;
+    margin: 2px;
+    top: 800px;
+    height: 300px;
+    margin: auto;
+    border-style: black 5px solid;
+    height: 100%;
+    size: 20px;
+    box-sizing: border-box;
+    /* padding: 20px; */
+    background-color: white;
+}
+
+div.song-audio {
+    /* padding: 5px; */
+    background-color: rgba(241, 243, 244, 255);
+    width: 100%;
+    display: flex;
+    vertical-align: center;
+    justify-content: center;
+    height: fit-content;
+
+}
+
+div.edit-button {
+    width: 20%;
+    position: relative;
+    vertical-align: center;
+    padding: auto;
+    float: center;
+    bottom: 30px;
+    align-items: center;
 }
 
 img.song-cover {
-    width: 100%;
+    /* width: 50%; */
+    width: 30px;
     position: relative;
     align-items: center;
     top: 0px;
@@ -39,12 +76,14 @@ img.song-cover {
     width: 300px;
     height: 300px;
     box-sizing: border-box;
-    padding: 30px;
+    padding: 20px;
     /* background-color: aqua; */
 }
 
 audio {
     width: 100%;
+    padding: 0px;
+    bottom: 30px;
 }
 
 /* #eachsong {

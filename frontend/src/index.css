@@ -54,7 +54,6 @@ div {
     justify-content: left;
     width: 100%;
     box-sizing: border-box;
-
 }
 
 
@@ -66,11 +65,12 @@ form {
     box-sizing: border-box;
     border-radius: 1rem;
     background-color: hsl(0, 0%, 100%);
-    border: 4px solid hsl(0, 0%, 90%);
+    border: 10px solid hsl(0, 0%, 90%);
     gap: 3px;
     width: 90%;
     height: 80%;
-    margin: 5px;
+    margin: 20px;
+    padding: 20px;
 
 }
 
@@ -84,4 +84,42 @@ form {
 div.public-present {
     padding: 10%;
     height: 100%;
+}
+
+div.public-home {
+    padding: 2%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.public-down {
+    padding: 3%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div#home-middle {
+    height: max-content;
+}
+
+div#buttomnav {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+img.landing-pic {
+    width: 100%;
+    /* height: 100%; */
+    /* width: 1268px */
+}
+
+img.landing-box-pic {
+    width: 100%;
 }

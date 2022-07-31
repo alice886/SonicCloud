@@ -11,6 +11,12 @@ const AlbumValidate = [
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage('Album name is required and must be 2 characters or more'),
+    check('name')
+        .custom(async function (name) {
+            const existedName = await Album.findOne({ where: { name } })
+            if (existedName) return Promise.reject('Plese choose another name')
+        })
+        .withMessage('Plese choose another name'),
     handleValidationErrors
 ]
 

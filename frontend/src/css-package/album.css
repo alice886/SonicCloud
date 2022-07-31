@@ -19,3 +19,71 @@
     height: 60%;
     size: 30px;
 } */
+
+div.album-page {
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+}
+
+div.album-page {
+    height: 100%;
+}
+
+div.album-details {
+    width: 50%;
+    display: block;
+    /* grid-template-rows: (4, 1fr); */
+    /* gap: 5px; */
+    /* grid-auto-flow: row; */
+    position: static;
+    margin: 2px;
+    top: 800px;
+    height: 300px;
+    margin: auto;
+    border-style: black 5px solid;
+    height: 100%;
+    size: 20px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+}
+
+div.album-songs {
+    /* width: 50%; */
+    display: block;
+    /* grid-template-rows: (4, 1fr); */
+    /* gap: 5px; */
+    /* grid-auto-flow: row; */
+    position: static;
+    margin: 2px;
+    top: 800px;
+    height: 300px;
+    margin: auto;
+    border-style: black 5px solid;
+    height: 100%;
+    size: 20px;
+    box-sizing: border-box;
+    /* padding: 20px; */
+    background-color: white;
+}
+
+img.album-cover {
+    /* width: 50%; */
+    width: 30px;
+    position: relative;
+    align-items: center;
+    top: 0px;
+    right: 20px;
+    width: 300px;
+    height: 300px;
+    box-sizing: border-box;
+    padding: 20px;
+    /* background-color: aqua; */
+}
+
+form #new-album-form {
+    padding: 10px;
+    margin: 10px;
+    gap: 10px;
+}

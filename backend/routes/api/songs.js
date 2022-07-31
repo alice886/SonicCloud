@@ -10,6 +10,12 @@ const createSongValidate = [
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage('Song title is required and must be 2 characters or more'),
+    check('title')
+        .custom(async function (title) {
+            const existedTitle = await Song.findOne({ where: { title } })
+            if (existedTitle) return Promise.reject('Plese choose another name')
+        })
+        .withMessage('Plese choose another name'),
     check('albumId')
         .exists({ checkFalsy: true })
         .withMessage('Please choose the designated album to proceed'),

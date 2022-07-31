@@ -55,24 +55,30 @@ const CreateSongModal = () => {
 
 
 
-        if (!title || !albumId || !description || !url) {
-            setErrors([]);
-            return dispatch(addNewSong({ albumId, title, description, url, previewImage }))
-                .catch(async (res) => {
+        setErrors([]);
+        dispatch(addNewSong(payload))
+            .then((res) => {
+                history.push(`/songs/${res.id}`);
+                window.alert(`new song ♪  ${res.title}  ♪ is created!`);
+            })
+            .catch(
+                async (res) => {
                     const data = await res.json();
-                    if (data && data?.errors) setErrors(data.errors);
-                });
+                    if (data && data.errors) {
+                        setErrors(data.errors)
+                    };
+                }
+            );
 
-        };
         // console.log('errors are what ++++ ', errors)
-        let newSong = await dispatch(addNewSong(payload));
+        // let newSong = await dispatch(addNewSong(payload));
         // console.log('what is data')
         // console.log('what is data', typeof newSong)
         // console.log('what is newsong', newSong.message)
-        if (newSong) {
-            history.push(`/songs/${newSong.id}`);
-            window.alert(`new song ♪  ${newSong.title}  ♪ is created!`);
-        }
+        // if (newSong) {
+        //     history.push(`/songs/${newSong.id}`);
+        //     window.alert(`new song ♪  ${newSong.title}  ♪ is created!`);
+        // }
     }
 
     return (

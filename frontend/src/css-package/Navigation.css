@@ -53,13 +53,6 @@ label {
 
 }
 
-div {
-    /* height: 100px; */
-    top: 30px;
-    justify-content: left;
-    width: 100%;
-}
-
 .profile-dropdown {
     position: absolute;
     right: 10%;
@@ -67,10 +60,13 @@ div {
     height: max-content;
 }
 
-#topnav-container {
+div#topnav-container {
     /* border: solid 3px #f50; */
     /* position: fixed;
     width: 100%; */
+    top: 30px;
+    justify-content: left;
+    width: 90%;
     text-align: center;
     justify-content: space-evenly;
     display: inline-block;
