@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getAllSongs } from '../../store/song'
 import '../../css-package/forms.css'
+import '../../css-package/song.css'
 
 function AllSongs() {
     const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function AllSongs() {
     // }
 
     return (
-        <div className="song-container">
+        <div className="all-song-container">
             <ul>
                 {allsongs && allsongs.map((song) => {
                     return <div className="eachsong" key={song.id}>

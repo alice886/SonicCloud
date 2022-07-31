@@ -33,7 +33,8 @@ function Navigation({ isLoaded }) {
     return (
         <div className='topnav'>
             <div id='topnav-container' >
-                <a name="top"></a>
+                {/* <a name="top"></a> */}
+                <a name="top" href='http://trystangrisham.com/wp-content/uploads/2019/05/music-icon-white-png-wwwimgkidcom-the-image-kid-has-it-10042.png' to='/'><img src='http://trystangrisham.com/wp-content/uploads/2019/05/music-icon-white-png-wwwimgkidcom-the-image-kid-has-it-10042.png' height='30' alt='logo' to='/' /></a>
                 <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>
                 <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>
                 {/* <NavLink to="/playlists" className={'nav-discover'}>Playlists</NavLink>| */}

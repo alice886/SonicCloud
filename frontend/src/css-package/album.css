@@ -1,10 +1,10 @@
-#eachalbum {
+/* #eachalbum {
     size: 20px;
     border: solid brown 5px;
-}
+} */
 
 
-div#album-container {
+/* div#album-container {
     width: 80%;
     display: grid;
     grid-template-rows: (4, 1fr);
@@ -18,4 +18,4 @@ div#album-container {
     border-style: black 5px solid;
     height: 60%;
     size: 30px;
-}
+} */

@@ -35,37 +35,40 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} >
-      <ul id='loginform'>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-          placeholder={'your username here'}
-        // disabled={true}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          placeholder={'your password here'}
-        // disabled={true}
-        />
-      </label>
-      <button type="submit">Log In</button>
-      <button type="submit" onClick={demoLogin} >Demo User</button>
-    </form>
+    <div className="log-in-form">
+      <form onSubmit={handleSubmit}>
+        <label> - Log In - </label>
+        <ul id='loginform'>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <label>
+          Username or Email
+          <input
+            type="text"
+            value={credential}
+            onChange={(e) => setCredential(e.target.value)}
+            required
+            placeholder={'your username here'}
+          // disabled={true}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder={'your password here'}
+          // disabled={true}
+          />
+        </label>
+        <button type="submit">Log In</button>
+        <button type="submit" onClick={demoLogin} >Demo User</button>
+      </form>
+    </div>
   );
 }
 

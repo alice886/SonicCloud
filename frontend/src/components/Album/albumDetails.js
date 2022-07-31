@@ -15,6 +15,9 @@ function AlbumDetails() {
         dispatch(getOneAlbum(albumId))
     }, [dispatch]);
 
+    console.log(sessionUser.username);
+    console.log(targetAlbum?.Artist?.username);
+
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object
     // console.log('sessionUser is ---', sessionUser)
@@ -37,10 +40,10 @@ function AlbumDetails() {
                 <div>
                     <img src={targetAlbum?.previewImage} alt={targetAlbum?.name} width="200" height="200" />
                     <h2>{targetAlbum.name}</h2>
-                    <EditAlbumModal
+                    {(sessionUser.username === targetAlbum?.Artist?.username) && <EditAlbumModal
                         targetAlbum={targetAlbum}
                     // hideForm={() => setShowModalForm(true)}
-                    />
+                    />}
                     <br></br>
                     <h3>Artist: </h3>
                     <div>{targetAlbum?.Artist?.username}</div>

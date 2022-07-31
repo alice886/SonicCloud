@@ -1,14 +1,31 @@
 body,
+html {
+    height: max-content;
+}
+
 head,
 ul,
 body {
     justify-content: left;
     margin: auto;
     list-style-type: none;
+    height: 100%;
 }
 
-html {
-    height: max-content;
+ul {
+    justify-content: left;
+    margin: auto;
+    list-style-type: none;
+}
+
+body {
+    width: 90%;
+    border-top: 4px solid #f50;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    /* text-align: center; */
+
 }
 
 div.buttomnav {
@@ -18,15 +35,6 @@ div.buttomnav {
     align-items: flex-end;
 }
 
-body {
-    width: 100%;
-    border-top: 4px solid #f50;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: row;
-    text-align: center;
-
-}
 
 label {
     width: 100%;
@@ -43,32 +51,56 @@ div {
     top: 30px;
     justify-content: left;
     width: 100%;
-    padding: 5px;
-
 }
 
-#topnav {
+.profile-dropdown {
+    position: absolute;
+    right: 5%;
+    background-color: white;
+    height: max-content;
+}
+
+#topnav-container {
     /* border: solid 3px #f50; */
     /* position: fixed;
     width: 100%; */
-    align-items: flex-start;
+    text-align: center;
     justify-content: space-evenly;
-    display: flex;
+    display: inline-block;
+    zoom: 1;
+    width: 100%;
+    height: 35px;
     /* left: 0px;
     list-style: none;
     color: white; */
     /* background: url(https://miro.medium.com/max/1400/1*FEZUIg9R5gaEKsCCq8VabQ.png) 60%/cover no-repeat; */
-    background-color: #333;
+    background-color: black;
     overflow: hidden;
 }
 
-.topnav a {
-    float: none;
-    color: black;
+#topnav-container a {
+    position: relative;
+    top: 0;
+    float: left;
     text-align: center;
-    padding: 5px 10px;
+    padding: 3px 40px;
+    color: white;
+    background-color: black;
+    border-radius: 10%;
+    border-style: white solid 1px;
+    /* margin: 2.7em; */
     text-decoration: none;
-    font-size: 17px;
+    font-size: 22px;
+    flex: 1;
+    vertical-align: center;
+    /* justify-content: center; */
+    justify-content: space-evenly;
+    overflow: hidden;
+}
+
+#topnav-container a:hover {
+    background-color: #7B241C;
+    color: white;
 }
 
 #user-dropdown,
@@ -89,14 +121,14 @@ li {
 
 }
 
-button {
-    background-color: rgba(255, 85, 0, 0.7);
+#topnav-container button {
+    background-color: black;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
-    border-style: solid 3px white;
-    margin: 5px;
-    /* height: 13px; */
+    border-style: solid 1px white;
+    /* margin: 1px; */
+    padding-bottom: 0px;
 }
 
 a {

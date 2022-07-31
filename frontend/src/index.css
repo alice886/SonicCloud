@@ -1,8 +1,29 @@
-/* TODO Add site wide styles */
 #root {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+body,
+head,
+ul,
+body {
+    justify-content: left;
+    margin: auto;
+    list-style-type: none;
+}
+
+html {
+    height: 100%;
+    margin: auto;
+    position: relative;
+    min-height: 100vh;
+    background-color: #E1E8EE;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
 }
 
 body,
@@ -15,7 +36,7 @@ head {
 }
 
 body {
-    width: 100%;
+    width: 90%;
     border-top: 4px solid #f50;
     display: flex;
     align-items: flex-end;
@@ -30,7 +51,6 @@ div {
     top: 30px;
     justify-content: left;
     width: 100%;
-    padding: 5px;
     box-sizing: border-box;
 
 }
@@ -48,7 +68,6 @@ form {
     gap: 3px;
     width: 90%;
     height: 80%;
-    padding: 5px;
     margin: 5px;
 
 }

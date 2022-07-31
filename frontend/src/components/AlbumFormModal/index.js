@@ -12,6 +12,7 @@ const CreateAlbumModal = () => {
     const [previewImage, setPreviewImage] = useState('');
     const [errors, setErrors] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const myAlbums = useSelector(state => Object.values(state.album));
 
     const updateName = e => setName(e.target.value);
     const updatePreviewImage = e => setPreviewImage(e.target.value);
@@ -47,7 +48,9 @@ const CreateAlbumModal = () => {
             return dispatch(addNewAlbum(payload)).catch(
                 async (res) => {
                     const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
+                    if (data && data.errors) {
+                        setErrors(data.errors)
+                    };
                 }
             );
         }
@@ -66,8 +69,8 @@ const CreateAlbumModal = () => {
             <button onClick={() => setShowModal(true)}>Create New Album</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
-                    <form className='new-album-form' hidden={showModal}>
-                        Create a New Album:
+                    <form id='new-album-form' hidden={showModal}>
+                        <label> - Create New Album - </label>
                         <ul>
                             {errors.map((error, idx) => {
                                 if (error !== 'Invalid value') {

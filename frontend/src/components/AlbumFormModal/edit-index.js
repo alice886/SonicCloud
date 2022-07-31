@@ -76,7 +76,8 @@ const EditAlbumModal = ({ targetAlbum }) => {
             <button onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <form hidden={showModal} id='album-form'>
+                    <form hidden={showModal} id='edit-album-form'>
+                        <label> - Edit Song - </label>
                         <label>Album name: {targetAlbum.name}</label>
                         <ul>
                             {errors.map((error, idx) => {

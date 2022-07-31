@@ -23,6 +23,21 @@
     border: solid brown 5px;
 } */
 
+.all-song-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#eachsong {
+    width: 32%;
+    padding-bottom: 32%;
+    position: relative;
+    flex: 0 32%;
+    height: 150px;
+    margin-bottom: 2%;
+}
+
 audio {
     background-color: rgba(241, 243, 244, 255);
 }
