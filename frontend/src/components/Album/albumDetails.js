@@ -15,8 +15,8 @@ function AlbumDetails() {
         dispatch(getOneAlbum(albumId))
     }, [dispatch]);
 
-    console.log(sessionUser.username);
-    console.log(targetAlbum?.Artist?.username);
+    // console.log(sessionUser.username);
+    // console.log(targetAlbum?.Artist?.username);
 
     // const targetAlbum = useSelector(state => Object.values(state.album));
     // no need of Object.values since it's already an object

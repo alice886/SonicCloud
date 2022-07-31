@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
         <ul className="profile-dropdown">
           <li className="user-dropdown">{user.username}</li>
           <li className="user-dropdown">{user.email}</li>
-          <li className="user-dropdown">
+          {/* <li className="user-dropdown">
             <Link to='/songs/mysongs'>
               My Songs
             </Link>
@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
             <Link to='/albums/myalbums'>
               My Albums
             </Link>
-          </li>
+          </li> */}
           {/* <li className="user-dropdown">
             <Link to='/playlists/myplaylists'>
               My Playlists
