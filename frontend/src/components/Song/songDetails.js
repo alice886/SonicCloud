@@ -19,7 +19,7 @@ function SongDetails() {
 
     if (!sessionUser) {
         return (
-            <div>
+            <div className='public-present'>
                 <h2>Join SonicCloud to discover more </h2>
                 <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
                 <h3> or log in below </h3>
@@ -31,26 +31,33 @@ function SongDetails() {
     return (
         <>
             {targetSong && (
-                <div>
-                    <img src={targetSong?.previewImage} alt={targetSong?.title} width="200" height="200" />
-                    <h3>{targetSong?.title}</h3>
-                    {(sessionUser.username === targetSong?.Artist?.username) && <EditSongModal
-                        targetSong={targetSong}
-                    />}
-                    <br></br>
-                    <audio src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls>
-                        {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}
-                        {/* <p>Fallback content goes here.</p> */}
-                    </audio>
-                    <br></br>
-                    {/* <iframe width="187" height="105" src="https://www.youtube.com/embed/BnasLOCpTEs" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
-                    <h4>Artist: {targetSong?.Artist?.username}</h4>
-                    <h4>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
-                    {/* <h3>audio url id: {targetSong.url}</h3> */}
-                    <h4>Description: {targetSong?.description}</h4>
+                <div className="song-page">
+                    <div className='song-present'>
+                        {/* <img src={targetSong?.previewImage} alt={targetSong?.title} width="200" height="200" className='song-cover'/> */}
+                        <img src={targetSong?.previewImage} alt={targetSong?.title} className='song-cover' />
+                        {/* <br></br> */}
+                        <div className='song-details'>
+                            <h3>{targetSong?.title}</h3>
+                            <h4>Artist: {targetSong?.Artist?.username}</h4>
+                            <h4>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
+                            <h4>Description: {targetSong?.description}</h4>
+                        </div>
+                        {(sessionUser.username === targetSong?.Artist?.username) && (
+                            <div className='edit-button'>
+                                <EditSongModal
+                                    targetSong={targetSong}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className="song-audio">
+                        <div className='song-player'>
+                            <audio src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls >
+                                {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}
+                            </audio>
+                        </div>
+
+                    </div>
                 </div>
             )}
         </>

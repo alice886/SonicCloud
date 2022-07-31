@@ -43,9 +43,14 @@ const CreateAlbumModal = () => {
         //             if (data && data.errors) setErrors(data.errors);
         //         });
         // }
-        if (!name) {
-            setErrors([]);
-            return dispatch(addNewAlbum(payload)).catch(
+
+        setErrors([]);
+        dispatch(addNewAlbum(payload))
+            .then((res) => {
+                history.push(`/albums/${res.id}`);
+                window.alert(`new album ♪  ${res.name}  ♪ is created!`);
+            })
+            .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) {
@@ -53,13 +58,13 @@ const CreateAlbumModal = () => {
                     };
                 }
             );
-        }
 
-        let createNewAlbum = await dispatch(addNewAlbum(payload));
-        if (createNewAlbum) {
-            history.push(`/albums/${createNewAlbum.id}`);
-            window.alert(`new album ♪  ${createNewAlbum.name}  ♪ is created!`);
-        }
+
+        // let createNewAlbum = await dispatch(addNewAlbum(payload));
+        // if (createNewAlbum) {
+        //     history.push(`/albums/${createNewAlbum.id}`);
+        //     window.alert(`new album ♪  ${createNewAlbum.name}  ♪ is created!`);
+        // }
 
         // https://i.pinimg.com/originals/24/63/b9/2463b906bc43583f0c86681bb166782b.jpg
     }
@@ -91,8 +96,10 @@ const CreateAlbumModal = () => {
                             placeholder="Image URL"
                             value={previewImage}
                             onChange={updatePreviewImage} />
-                        <button type='submit' onClick={handleSubmitNewAlbum}>Create new Album</button>
-                        <button type='button' onClick={() => setShowModal(false)}>Cancel</button>
+                        <div className="button-container">
+                            <button type='submit' onClick={handleSubmitNewAlbum}>Create new Album</button>
+                            <button type='button' onClick={() => setShowModal(false)}>Cancel</button>
+                        </div>
                     </form>
                 </Modal>
             )

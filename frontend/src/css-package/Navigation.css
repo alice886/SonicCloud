@@ -19,7 +19,7 @@ ul {
 }
 
 body {
-    width: 90%;
+    width: 100%;
     border-top: 4px solid #f50;
     display: flex;
     align-items: flex-end;
@@ -31,8 +31,15 @@ body {
 div.buttomnav {
     right: 2px;
     display: flex;
-    text-align: left;
+    text-align: right;
     align-items: flex-end;
+    color: white;
+    background-color: black;
+}
+
+a.back-to-top {
+    background-color: black;
+    color: white;
 }
 
 
@@ -46,24 +53,20 @@ label {
 
 }
 
-div {
-    /* height: 100px; */
-    top: 30px;
-    justify-content: left;
-    width: 100%;
-}
-
 .profile-dropdown {
     position: absolute;
-    right: 5%;
+    right: 10%;
     background-color: white;
     height: max-content;
 }
 
-#topnav-container {
+div#topnav-container {
     /* border: solid 3px #f50; */
     /* position: fixed;
     width: 100%; */
+    top: 30px;
+    justify-content: left;
+    width: 90%;
     text-align: center;
     justify-content: space-evenly;
     display: inline-block;
@@ -83,7 +86,7 @@ div {
     top: 0;
     float: left;
     text-align: center;
-    padding: 3px 40px;
+    padding: 0% 4%;
     color: white;
     background-color: black;
     border-radius: 10%;
@@ -112,6 +115,10 @@ div {
     size: 10px;
 }
 
+/* button.logout-button {
+    size: 20px;
+} */
+
 li {
     padding: 5px;
     margin: 5px;
@@ -124,11 +131,12 @@ li {
 #topnav-container button {
     background-color: black;
     color: white;
-    font-size: 30px;
+    font-size: 28px;
     font-family: Arial, Helvetica, sans-serif;
     border-style: solid 1px white;
     /* margin: 1px; */
     padding-bottom: 0px;
+    right: 5px;
 }
 
 a {

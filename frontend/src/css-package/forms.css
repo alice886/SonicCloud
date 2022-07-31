@@ -69,3 +69,25 @@ form li {
     color: black;
     text-align: left;
 }
+
+div#buttons.button-container {
+    padding: 10px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button-container {
+    padding: 10px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+
+button {
+    margin: auto;
+}

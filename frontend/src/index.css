@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Bitter:wght@100;200;400&family=Grape+Nuts&family=Macondo&family=Manrope:wght@200&family=Square+Peg&family=Syncopate&display=swap');
+
 #root {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
     width: 100%;
+    font-family: 'Manrope', sans-serif;
 }
 
 body,
@@ -37,7 +40,6 @@ head {
 
 body {
     width: 90%;
-    border-top: 4px solid #f50;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -52,7 +54,6 @@ div {
     justify-content: left;
     width: 100%;
     box-sizing: border-box;
-
 }
 
 
@@ -64,10 +65,61 @@ form {
     box-sizing: border-box;
     border-radius: 1rem;
     background-color: hsl(0, 0%, 100%);
-    border: 4px solid hsl(0, 0%, 90%);
+    border: 10px solid hsl(0, 0%, 90%);
     gap: 3px;
     width: 90%;
     height: 80%;
-    margin: 5px;
+    margin: 20px;
+    padding: 20px;
 
+}
+
+/* @media only screen and (max-width: 1026px) {
+    #topnav-container {
+        display: none;
+    }
+} */
+
+
+div.public-present {
+    padding: 10%;
+    height: 100%;
+}
+
+div.public-home {
+    padding: 2%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div.public-down {
+    padding: 3%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+div#home-middle {
+    height: max-content;
+}
+
+div#buttomnav {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+img.landing-pic {
+    width: 100%;
+    /* height: 100%; */
+    /* width: 1268px */
+}
+
+img.landing-box-pic {
+    width: 100%;
 }
