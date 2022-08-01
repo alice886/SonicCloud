@@ -14,19 +14,20 @@ function MyAlbums() {
     }, [dispatch])
 
     return (
-        <div className="all-album-container">
+        <>
             <CreateAlbumModal />
-            <div>
+            <div className="all-song-container">
                 {myAlbums && myAlbums.map((album) => {
-                    return <div className="eachalbum" id={album.id}>
+                    return <div className="eachsong" id={album.id}>
                         <img src={album.previewImage} width='150' ></img>
                         <br></br>
+                        <h4>album name:</h4>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
                     </div>
                 })}
-            </div>
 
-        </div>
+            </div>
+        </>
     )
 }
 

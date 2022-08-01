@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Bitter:wght@100;200;400&family=Grape+Nuts&family=Macondo&family=Manrope:wght@200&family=Square+Peg&family=Syncopate&display=swap');
+
 html,
 input,
 textarea,
-button,
 select,
 a {
-  font-family: 'Open Sans';
+  font-family: 'Manrope', sans-serif;
   font-size: 20px;
   color: navy;
   margin: 0;
@@ -13,20 +14,22 @@ a {
   align-items: left;
 }
 
-div {
+div#root {
   /* width: 600px; */
   width: 100%;
   height: 100%;
-  padding: 0px 5px;
+  margin: 0px 4%;
+  background-color: white;
 }
 
 body {
-  width: 90%;
+  /* width: 90%; */
   position: static;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: left;
   color: black;
   align-items: left;
+  background-color: #D5D8DC;
 }
 
 #sign-up-form {

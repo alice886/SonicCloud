@@ -1,29 +1,48 @@
-/* #eachalbum {
-    size: 20px;
-    border: solid brown 5px;
-} */
-
-
-/* div#album-container {
-    width: 80%;
-    display: grid;
-    grid-template-rows: (4, 1fr);
-    gap: 5px;
-    position: fixed;
-    grid-auto-flow: row;
-    margin: 2px;
-    top: 800px;
-    height: fit-content;
+.all-album-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: auto;
-    border-style: black 5px solid;
-    height: 60%;
-    size: 30px;
-} */
+    justify-content: space-evenly;
+}
+
+div.eachalbum {
+    width: 25%;
+    /* height: fit-content; */
+    padding: 10px;
+    margin: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    /* border: #E5E8E8 solid 1px;
+    border-radius: 10%; */
+    font-size: 20px;
+    position: relative;
+    background: white;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+    color: black;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15);
+    transition: all .4s ease;
+}
+
+#eachalbum {
+    width: 32%;
+    padding-bottom: 32%;
+    position: relative;
+    flex: 0 32%;
+    height: 150px;
+    margin-bottom: 2%;
+    gap: 5px;
+}
+
+div.eachsong:hover {
+    border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;
+    box-shadow: 10px 10px rgba(211, 84, 0, .5);
+}
 
 div.album-page {
     height: 100%;
     width: 100%;
-    padding: 50px;
 }
 
 div.album-page {

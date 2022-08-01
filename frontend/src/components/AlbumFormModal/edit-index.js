@@ -73,7 +73,7 @@ const EditAlbumModal = ({ targetAlbum }) => {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Edit</button>
+            <button className='album-edit-button' onClick={() => setShowModal(true)}>Edit</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <form hidden={showModal} id='edit-album-form'>

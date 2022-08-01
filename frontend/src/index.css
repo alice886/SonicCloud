@@ -1,45 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Bitter:wght@100;200;400&family=Grape+Nuts&family=Macondo&family=Manrope:wght@200&family=Square+Peg&family=Syncopate&display=swap');
 
+html {
+    background-color: #D5D8DC;
+    list-style-type: none;
+    /* background-color: black; */
+}
+
+html,
+body,
+div #root {
+    min-height: 100%;
+    /* height: 100%; */
+    padding: 0;
+    margin: 0;
+}
+
 #root {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
     width: 100%;
     font-family: 'Manrope', sans-serif;
-}
-
-body,
-head,
-ul,
-body {
-    justify-content: left;
-    margin: auto;
     list-style-type: none;
+
 }
 
-html {
-    height: 100%;
-    margin: auto;
-    position: relative;
-    min-height: 100vh;
-    background-color: #E1E8EE;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-}
-
-body,
-head {
+body {
+    min-height: 100%;
     justify-content: center;
     margin: auto;
-    width: 90%;
     display: flex;
     box-sizing: border-box;
-}
-
-body {
-    width: 90%;
+    width: 100%;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
@@ -49,8 +42,7 @@ body {
 }
 
 div {
-    /* height: 100px; */
-    top: 30px;
+    /* top: 30px; */
     justify-content: left;
     width: 100%;
     box-sizing: border-box;
@@ -94,12 +86,23 @@ div.public-home {
     flex-direction: column;
 }
 
-div.public-down {
-    padding: 3%;
-    height: 100%;
+div.landing-box {
+    position: relative;
+}
+
+div.landing-box-content {
+    color: white;
+    font-weight: 800px;
+    position: absolute;
+    top: 10%;
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+
+img.landing-box-pic {
+    width: 100%;
 }
 
 div#home-middle {
@@ -118,8 +121,4 @@ img.landing-pic {
     width: 100%;
     /* height: 100%; */
     /* width: 1268px */
-}
-
-img.landing-box-pic {
-    width: 100%;
 }

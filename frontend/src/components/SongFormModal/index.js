@@ -83,7 +83,7 @@ const CreateSongModal = () => {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Create New Song</button>
+            <button className='create-new-button' onClick={() => setShowModal(true)}>Create New Song</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <form id='new-song-form' hidden={hideEditform}>

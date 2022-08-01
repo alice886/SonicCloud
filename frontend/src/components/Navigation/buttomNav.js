@@ -10,7 +10,7 @@ function ButtomNavigation({ isLoaded }) {
     return (
         <div className='buttomnav'>
 
-            <a className='back-to-top' href="#top">⬆</a>
+            <a className='back-to-top' href="#top">back to top⬆</a>
 
         </div>
     );

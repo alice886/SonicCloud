@@ -1,0 +1,96 @@
+div.song-page {
+    /* min-height: 100%; */
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: auto;
+}
+
+div.song-player-detail {
+    position: relative;
+    text-align: right;
+    align-items: flex-end;
+}
+
+div.song-audio-detial {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    background-color: orange;
+}
+
+div.edit-button {
+    width: 20%;
+    position: relative;
+    vertical-align: center;
+    padding: auto;
+    float: center;
+    bottom: 30px;
+    align-items: center;
+}
+
+div.song-player-detail {
+    /* padding: 5px; */
+    background-color: rgba(241, 243, 244, 255);
+    width: 80%;
+    display: flex;
+    vertical-align: center;
+    justify-content: center;
+    height: fit-content;
+
+}
+
+
+
+div.song-present {
+    width: 50%;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    top: 800px;
+    height: 300px;
+    margin: auto;
+    border-style: black 5px solid;
+    height: 60%;
+    size: 30px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: white;
+}
+
+
+
+div.song-details,
+div.song-cover {
+    width: 200px;
+    float: left;
+    margin: auto;
+    padding: 18px;
+    border-style: black 5px solid;
+    size: 20px;
+}
+
+
+img.song-cover {
+    /* width: 50%; */
+    position: relative;
+    align-items: center;
+    top: 0px;
+    right: 20px;
+    width: 400px;
+    height: 400px;
+    box-sizing: border-box;
+    padding: 20px;
+    /* background-color: aqua; */
+}
+
+audio.song-player-general {
+    width: 100%;
+    padding: 0px;
+    bottom: 30px;
+    height: 40px;
+    border-radius: 7%;
+}
