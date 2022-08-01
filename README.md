@@ -17,7 +17,10 @@
 * CSS
 * React
 * Redux
+* SQLite
 * PostgreSQL
+* Heroku
+* GitHub
 
 ## How to run it locally
   * git clone the project
