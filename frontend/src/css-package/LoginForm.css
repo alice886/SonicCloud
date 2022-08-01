@@ -1,6 +1,6 @@
 /* #loginform, */
-div.log-in-form {
-  /* position: absolute;
+/* div.log-in-form { */
+/* position: absolute;
   top: 50%;
   left: 50%;
   width: 400px;
@@ -10,12 +10,14 @@ div.log-in-form {
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px; */
-  /* width: 100%; */
-  justify-content: center;
+/* width: 100%; */
+
+
+/* justify-content: center;
   margin: auto;
   position: fixed;
   top: 50%;
   left: 50%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7); */
 
-}
+/* } */

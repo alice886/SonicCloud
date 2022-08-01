@@ -109,7 +109,8 @@ img.landing-box-pic {
 }
 
 div#home-middle {
-    height: max-content;
+    height: 900px;
+    align-items: center;
 }
 
 div#buttomnav {
@@ -146,10 +147,12 @@ div.log-in-form {
     box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
     border-radius: 10px; */
     /* width: 100%; */
+
     justify-content: center;
     margin: auto;
-    position: fixed;
-    top: 20%;
+    position: relative;
+    top: 60%;
+
     /* left: 50%; */
 
 }
