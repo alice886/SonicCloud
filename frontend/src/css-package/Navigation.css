@@ -70,10 +70,10 @@ div#topnav-container {
     width: 100%; */
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
     top: 30px;
     width: 90%;
     text-align: center;
-    justify-content: space-evenly;
     display: inline-block;
     zoom: 1;
     width: 100%;

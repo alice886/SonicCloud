@@ -1,5 +1,5 @@
 /* #loginform, */
-.log-in-form {
+div.log-in-form {
   /* position: absolute;
   top: 50%;
   left: 50%;
@@ -10,14 +10,12 @@
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px; */
-  width: 100%;
+  /* width: 100%; */
   justify-content: center;
   margin: auto;
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
   background-color: rgba(0, 0, 0, 0.7);
-  margin: auto;
+
 }
