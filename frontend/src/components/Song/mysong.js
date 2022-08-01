@@ -27,20 +27,22 @@ function MySongs() {
     // }
 
     return (
-        <div className="my-song-container">
+        <>
             <CreateSongModal />
-            <ul>
+            <div className="all-song-container">
                 {allmysongs && allmysongs.map((song) => {
                     return <div className="eachsong" key={song.id}>
                         {/* <i>🎼</i> */}
                         <img src={song.previewImage} width='150' ></img>
                         <br></br>
+                        <h4>song name:</h4>
                         <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+
                     </div>
                 })}
-            </ul>
 
-        </div>
+            </div>
+        </>
     )
 }
 

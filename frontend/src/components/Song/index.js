@@ -28,19 +28,20 @@ function AllSongs() {
 
     return (
         <div className="all-song-container">
-            <ul>
-                {allsongs && allsongs.map((song) => {
-                    return <div className="eachsong" key={song.id}>
-                        <img src={song.previewImage} width='150' ></img>
-                        <br></br>
-                        song name:
-                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                        <br></br>
-                        <p>album: {song.albumId}</p>
-                    </div>
-                })}
+            {allsongs && allsongs.map((song) => {
+                return <div className="eachsong" key={song.id}>
+                    <img src={song.previewImage} width='150' ></img>
+                    <br></br>
+                    song name:
+                    <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                    <br></br>
+                    <p>album: {song.albumId}</p>
+                    <audio className='song-player-general' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls >
+                        {/* <audio src="https://www.computerhope.com/jargon/m/example.mp3" controls> */}
+                    </audio>
+                </div>
+            })}
 
-            </ul>
         </div>
     )
 }

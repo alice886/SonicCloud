@@ -71,7 +71,7 @@ const CreateAlbumModal = () => {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Create New Album</button>
+            <button className='create-new-button' onClick={() => setShowModal(true)}>Create New Album</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <form id='new-album-form' hidden={showModal}>
