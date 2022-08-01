@@ -39,7 +39,7 @@ export const getAllSongs = () => async dispatch => {
     }
 };
 export const getMySongs = () => async dispatch => {
-    const response = await csrfFetch(`/api/songs/mysongs`);
+    const response = await csrfFetch(`/api/songs/mysongs/`);
     if (response.ok) {
         const songs = await response.json();
         // console.log('what do we receive here',songs)
@@ -72,7 +72,7 @@ export const editOneSong = (song) => async dispatch => {
 };
 
 export const deleteOneSong = (songId) => async dispatch => {
-    const response = await csrfFetch(`/api/songs/mysongs`, {
+    const response = await csrfFetch(`/api/songs/mysongs/`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(songId)
@@ -85,7 +85,7 @@ export const deleteOneSong = (songId) => async dispatch => {
 };
 
 export const addNewSong = (song) => async dispatch => {
-    const response = await csrfFetch(`/api/songs/mysongs`, {
+    const response = await csrfFetch(`/api/songs/mysongs/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(song)

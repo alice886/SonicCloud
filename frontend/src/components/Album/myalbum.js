@@ -7,6 +7,7 @@ import CreateAlbumModal from '../AlbumFormModal/index'
 function MyAlbums() {
     const dispatch = useDispatch();
 
+    const sessionUser = useSelector(state => state.session.user);
     const myAlbums = useSelector(state => Object.values(state.album));
 
     useEffect(() => {
@@ -18,12 +19,14 @@ function MyAlbums() {
             <CreateAlbumModal />
             <div className="all-song-container">
                 {myAlbums && myAlbums.map((album) => {
-                    return <div className="eachsong" id={album.id}>
-                        <img src={album.previewImage} width='150' ></img>
-                        <br></br>
-                        <h4>album name:</h4>
-                        <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                    </div>
+                    if (album?.userId === sessionUser?.id) {
+                        return <div className="eachsong" id={album.id}>
+                            <img src={album.previewImage} width='150' ></img>
+                            <br></br>
+                            <h4>album name:</h4>
+                            <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
+                        </div>
+                    }
                 })}
 
             </div>
