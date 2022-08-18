@@ -1,5 +1,5 @@
 # SonicCloud - A portfolio clone of SoundCloud
-[Explore the website >>> SonicCloud](https://soniccloud.herokuapp.com/)
+[Explore the website >>> SonicCloud](https://github.com/alice886/SonicCloud)
 
 #### SonicCloud is a fullstack clone of SoundCloud which allows enrolled users to enjoy, and contribute original music creations and inspirations.
 ### On SonicCloud, you can:
