@@ -24,11 +24,11 @@
 
 ## How to run it locally
   * git clone the project
-  * cd to "backend" and "frontend" folder, run - ``` npm start ```- in terminal
+  * cd to "backend" and "frontend" folder, run -  ``` npm install ``` && ``` npm start ```- in terminal
 ## To build up a local database
 * run below codes in order in "backend"'s terminal
-* ``` dotenv npx sequelize db:migrate ```
-* ``` dotenv npx sequelize db:seed:all ```
+* ``` npx dotenv sequelize db:migrate ```
+* ``` npx dotenv sequelize db:seed:all ```
 
 ## Usage
 * User can signup and login to use SonicCloud.
