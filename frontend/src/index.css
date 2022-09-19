@@ -3,20 +3,19 @@
 html {
     background-color: #D5D8DC;
     list-style-type: none;
-    /* background-color: black; */
+    /* max-height: 100vh; */
 }
 
 html,
 body,
 div #root {
-    min-height: 100%;
-    /* height: 100%; */
+    /* max-height: 100vh; */
     padding: 0;
     margin: 0;
 }
 
 #root {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,7 +108,7 @@ img.landing-box-pic {
 }
 
 div#home-middle {
-    height: 900px;
+    min-height: 100vh;
     align-items: center;
 }
 
@@ -146,12 +145,11 @@ div.log-in-form {
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
     border-radius: 10px; */
-    /* width: 100%; */
-
+    width: fit-content;
     justify-content: center;
-    margin: auto;
-    position: relative;
-    top: 60%;
+    margin-top: 30%;
+    margin: 10em auto;
+    /* position: relative; */
 
     /* left: 50%; */
 
@@ -159,7 +157,7 @@ div.log-in-form {
 
 form.sign-up-form {
     padding: 40px;
-    margin: 110px;
+    margin: 110px auto auto;
     width: 480px;
     display: flex;
     flex-direction: column;

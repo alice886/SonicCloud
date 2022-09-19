@@ -21,7 +21,7 @@ const TestUserHome = () => {
                         <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
                         <h3> or log in below </h3>
                     </div>
-                    <LoginForm />
+                    {/* <LoginForm /> */}
                 </div>
             </div>
         )

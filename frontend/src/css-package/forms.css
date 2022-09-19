@@ -1,9 +1,9 @@
 form {
     justify-content: left;
-    margin: auto;
+    /* margin: auto; */
     list-style-type: none;
     position: static;
-    top: 20%;
+    top: 50%;
     width: 600px;
     height: max-content;
     /* overflow: auto; */
@@ -19,6 +19,10 @@ form li {
     justify-content: center;
 }
 
+#new-song-form{
+    margin: auto;
+    margin-top: 10%;
+}
 
 #new-song-form li {
     float: left;
@@ -85,4 +89,3 @@ div#buttons.button-container {
     align-items: center;
     justify-content: space-around;
 }
-

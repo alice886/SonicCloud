@@ -1,6 +1,6 @@
 This favicon was generated using the following font:
 
-- Font Title: Koh Santepheap
-- Font Author: Copyright 2020 The Koh Santepheap Project Authors (https://github.com/danhhong/KohSantepheap)
-- Font Source: http://fonts.gstatic.com/s/kohsantepheap/v9/gNMeW3p6SJbwyGj2rBZyeOrTjNtdOHy5mD9ASHz5.ttf
+- Font Title: Jacques Francois Shadow
+- Font Author: Copyright (c) 2011, Cyreal (www.cyreal.org) with Reserved Font Name 'Jacques Francois'
+- Font Source: http://fonts.gstatic.com/s/jacquesfrancoisshadow/v21/KR1FBtOz8PKTMk-kqdkLVrvR0ECFrB6Pin-2_q8VsHuV5ULS.ttf
 - Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
