@@ -85,16 +85,33 @@ export const deleteOneSong = (songId) => async dispatch => {
 };
 
 export const addNewSong = (song) => async dispatch => {
+    const { albumId, title, description, url, previewImage} = song;
+    const formData = new FormData();
+    formData.append("albumId",albumId);
+    formData.append("title",title);
+    formData.append("description",description);
+    formData.append("previewImage",previewImage);
+    if(url) formData.append("url",url);
+    // console.log('what is the albumId-------------??',albumId)
+    // console.log('what is the title-------------??',title)
+    // console.log('what is the formdata-------------??',formData)
+    // console.log('what is the formdata-------------??',formData['albumId'])
+    // console.log('what is the formdata-------------??',formData['url'])
+
     const response = await csrfFetch(`/api/songs/mysongs/`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(song)
+        method: "POST",
+        headers: {  "Content-Type": "multipart/form-data" },
+        // headers: { 'Content-Type': 'application/json' },
+        // body: JSON.stringify(song)
+        body: formData,
     });
-    if (response.ok) {
+    // if (response.ok) {
         const newSong = await response.json();
         await dispatch(addOneSong(newSong));
+        // console.log('what is the newSong', newSong)
         return newSong;
-    }
+    // }
+
 };
 
 const initialState = {};
