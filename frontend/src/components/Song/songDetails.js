@@ -46,7 +46,9 @@ function SongDetails() {
                     </div>
                     <div className="song-audio-detail">
                         <div className='song-player-detail'>
-                            <audio className='song-player-detail' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls >
+                            {/* <audio className='song-player-detail' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}
+                            <audio className='song-player-detail' src={targetSong.url} controls > 
+                            {/* no cant do --> forbidden */}
                             </audio>
                         </div>
                         {(sessionUser.username === targetSong?.Artist?.username) && (

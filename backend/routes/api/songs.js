@@ -242,11 +242,13 @@ router.put('/mysongs', restoreUser, requireAuth, editSongValidate, async (req, r
 
 // Create a Song for an Album based on the Album's id
 // DONE
-router.post('/mysongs/', restoreUser, singleMulterUpload("url"), requireAuth, createSongValidate, async (req, res, next) => {
+// router.post('/mysongs/', restoreUser, singleMulterUpload("url"), requireAuth, createSongValidate, async (req, res, next) => {
+router.post('/mysongs/', restoreUser, singleMulterUpload("url"), requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { albumId, title, description, previewImage } = req.body;
     // const { albumId, title, description, url, previewImage } = req.body;
-    const url = await singlePublicFileUpload(req.file);
+    // const url = await singlePublicFileUpload(req.file);
+    const url = 'https://soniccloud886.s3.amazonaws.com/%E8%88%92%E6%9B%BC%EF%BC%9A%E5%BF%AB%E4%B9%90%E7%9A%84%E5%86%9C%E5%A4%AB.mp3'
 
     // if (!title || !url) return res.send({
     //     "message": "Validation Error",
