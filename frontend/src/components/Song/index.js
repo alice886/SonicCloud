@@ -26,7 +26,13 @@ function AllSongs({ playing, setPlaying }) {
     //     )
     // }
 
-    console.log("what's playing ~~~", playing)
+    const handleSongPlay = async e => {
+        e.preventDefault();
+        await setPlaying(e.target.value);
+        let homePlayer = document.getElementById('botton-player-bar');
+        homePlayer.load();
+        homePlayer.play();
+    }
 
     return (
         <div className="all-song-container">
@@ -35,7 +41,7 @@ function AllSongs({ playing, setPlaying }) {
                     <img src={song.previewImage} width='150' ></img>
                     <br></br>
                     <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                    <button className="songplay-button" value={song.url} onClick={e => setPlaying(e.target.value)} >▶</button>
+                    <button className="songplay-button" value={song.url} onClick={handleSongPlay} >▶</button>
                     <br></br>
                     {/* <p>album: {song.albumId}</p> */}
                     {/* <audio className='song-player-general' src={song.url} controls >

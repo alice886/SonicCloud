@@ -7,6 +7,7 @@ import LoginForm from '../LoginFormModal/LoginForm'
 
 const TestUserHome = ({ playing, setPlaying }) => {
     const dispatch = useDispatch();
+    // const [played, setPlayed] = ('false')
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
@@ -14,7 +15,17 @@ const TestUserHome = ({ playing, setPlaying }) => {
         dispatch(getAllSongs())
     }, [dispatch])
 
-    console.log("what's playing at home page~~~", playing)
+
+    const handleHomePlay = async e => {
+        e.preventDefault();
+        await setPlaying(e.target.value);
+        // played ? setPlayed('false') : setPlayed('true');
+        let homePlayer = document.getElementById('botton-player-bar');
+        homePlayer.load();
+        homePlayer.play();
+    }
+
+    // const ppbutton = played ?'❚ ❚':'▶'
 
     if (!sessionUser) {
         return (
@@ -39,7 +50,7 @@ const TestUserHome = ({ playing, setPlaying }) => {
                             <img src={song.previewImage} width='150' ></img>
                             <br></br>
                             <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                            <button className="songplay-button" value={song.url} onClick={e => {setPlaying(e.target.value)}} >▶</button>
+                            <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
                             <br></br>
                             {/* <p>album: {song.albumId}</p> */}
                             {/* <audio className='song-player-general' src={song.url} controls >
