@@ -11,11 +11,17 @@ const CreateSongModal = () => {
     const [albumId, setAlbumId] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [url, setAudioUrl] = useState('');
+    const [url, setAudioUrl] = useState('http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg');
     const [previewImage, setPreviewImage] = useState('');
     const [errors, setErrors] = useState();
     const [showModal, setShowModal] = useState(false);
     const [hideEditform, setHideEditForm] = useState(true);
+
+    console.log(albumId)
+    console.log(title)
+    console.log(url)
+    console.log(previewImage)
+    console.log(description)
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
@@ -37,14 +43,20 @@ const CreateSongModal = () => {
     // firstAlbumVal = Object.values(myAlbums)[0]?.id;
     // console.log('firstAlbumVal ---', firstAlbumVal)
 
-    const albumSelected = async e => {
-        e.preventDefault();
-        setAlbumId(e.target.value);
-    }
+    // const albumSelected = async e => {
+    //     e.preventDefault();
+    //     setAlbumId(e.target.value);
+    // }
+
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setAudioUrl(file);
+    };
 
     const handleCreateSong = async e => {
         e.preventDefault();
 
+        // setAlbumId(e.target.value);
         const payload = {
             albumId,
             title,
@@ -53,11 +65,11 @@ const CreateSongModal = () => {
             previewImage
         };
 
-
-
-        setErrors([]);
-        dispatch(addNewSong(payload))
+        // setErrors([]);
+        // dispatch(addNewSong(payload))
+        dispatch(addNewSong({ albumId, title, description, url, previewImage }))
             .then((res) => {
+                console.log('able to dispatch')
                 history.push(`/songs/${res.id}`);
                 window.alert(`new song ♪  ${res.title}  ♪ is created!`);
             })
@@ -69,6 +81,9 @@ const CreateSongModal = () => {
                     };
                 }
             );
+
+        // const { albumId, title, description, url, previewImage} = payload;
+
 
         // console.log('errors are what ++++ ', errors)
         // let newSong = await dispatch(addNewSong(payload));
@@ -97,7 +112,7 @@ const CreateSongModal = () => {
                         </ul>
                         <br></br>
                         <label>pick an album</label>
-                        <select id="mydropdown" className="dropdown-content" onChange={albumSelected} value={albumId} >
+                        <select id="mydropdown" className="dropdown-content" onChange={(e) => setAlbumId(e.target.value)} value={albumId} >
                             <option value='' selected disabled> Choose your album</option>
                             {myAlbums && myAlbums.map(album => {
 
@@ -116,11 +131,10 @@ const CreateSongModal = () => {
                             onChange={updateTitle} />
                         <label>audio URL</label>
                         <input
-                            type="text"
+                            type="file"
                             placeholder='add audio link here'
                             min="2"
-                            value={url}
-                            onChange={updateUrl} />
+                            onChange={updateFile} />
                         <label>image URL</label>
                         <label>(not required)</label>
                         <input

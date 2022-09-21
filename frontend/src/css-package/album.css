@@ -38,6 +38,7 @@ div.eachalbum {
 div.eachsong:hover {
     border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;
     box-shadow: 10px 10px rgba(211, 84, 0, .5);
+    cursor: pointer;
 }
 
 div.album-page {

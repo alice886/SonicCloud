@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
+import { NavLink, Link, Route, useParams, useHistory, Redirect } from "react-router-dom";
 import { editOneSong, getMySongs } from '../../store/song'
 import CreateSongModal from '../SongFormModal/index';
 
@@ -27,27 +27,31 @@ function MySongs() {
     //     }
     // }
 
-    return (
-        <>
-            <CreateSongModal />
-            <div className="all-song-container">
-                {allmysongs && allmysongs.map((song) => {
-                    if (song?.userId === sessionUser?.id) {
-                        return <div className="eachsong" key={song.id}>
-                            {/* <i>🎼</i> */}
-                            <img src={song.previewImage} width='150' ></img>
-                            <br></br>
-                            <h4>song name:</h4>
-                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+    if (!sessionUser) {
+        history.push('/');
+    }
+
+            return (
+            <>
+                {sessionUser && <CreateSongModal />}
+                <div className="all-song-container">
+                    {allmysongs && allmysongs.map((song) => {
+                        if (song?.userId === sessionUser?.id) {
+                            return <div className="eachsong" key={song.id}>
+                                {/* <i>🎼</i> */}
+                                <img src={song.previewImage} width='150' ></img>
+                                <br></br>
+                                <h4>song name:</h4>
+                                <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
 
 
-                        </div>
-                    }
-                })}
+                            </div>
+                        }
+                    })}
 
-            </div>
-        </>
-    )
+                </div>
+            </>
+            )
 }
 
-export default MySongs;
+            export default MySongs;

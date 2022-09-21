@@ -80,7 +80,7 @@ router.get('/:albumId(\\d+)', restoreUser, requireAuth, async (req, res) => {
 router.get('/', restoreUser, async (req, res) => {
     const allAlbums = await Album.findAll({
         where: {},
-        include: [],
+        include: [{ model: User, as: 'Artist' }, { model: Song }],
     });
     res.json(allAlbums);
 });
@@ -93,7 +93,8 @@ router.get('/myalbums', restoreUser, requireAuth, async (req, res) => {
         where: {
             userId: currentuserId,
         },
-        include: Song
+        include: [{ model: User, as: 'Artist' }, { model: Song }]
+        // include: Song
     })
     if (!myAlbums) {
         res.status(404);

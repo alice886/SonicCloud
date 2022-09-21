@@ -1,19 +1,30 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, useParams } from 'react-router-dom';
+import { getAllSongs } from '../../store/song'
 import { getUserDetail } from '../../store/user'
 import LoginForm from '../LoginFormModal/LoginForm'
 
-const TestUserHome = () => {
+const TestUserHome = ({ playing, setPlaying }) => {
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const allsongs = useSelector(state => Object.values(state.song))
+
+    useEffect(() => {
+        dispatch(getAllSongs())
+    }, [dispatch])
+
+    console.log("what's playing at home page~~~", playing)
 
     if (!sessionUser) {
         return (
             <div className='public-home'>
                 <h2 className='public-greeting'>Welcome to SonicCloud! </h2>
                 <img className="landing-pic" src='https://va.sndcdn.com/bg/soundcloud:sounds:416933784/VisualTrack_Oshun_01_1.jpg' ></img>
+                <br></br>
                 <h3>Hear what’s trending for free in the SoundCloud community</h3>
-                <div className="landing-box">
+                <br></br>
+                {/* <div className="landing-box">
                     <img className="landing-box-pic" src='https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists-8081257b.jpg' ></img>
                     <div className='landing-box-content'>
                         <h2>Thanks for visiting. Now join in to unlock more.</h2>
@@ -21,7 +32,22 @@ const TestUserHome = () => {
                         <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
                         <h3> or log in below </h3>
                     </div>
-                    {/* <LoginForm /> */}
+                </div> */}
+                <div className="all-home-song-container">
+                    {allsongs && allsongs.map((song) => {
+                        return <div className="eachhomesong" key={song.id}>
+                            <img src={song.previewImage} width='150' ></img>
+                            <br></br>
+                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                            <button className="songplay-button" value={song.url} onClick={e => {setPlaying(e.target.value)}} >▶</button>
+                            <br></br>
+                            {/* <p>album: {song.albumId}</p> */}
+                            {/* <audio className='song-player-general' src={song.url} controls >
+                    </audio> */}
+                            {/* <audio className='song-player-general' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}
+                        </div>
+                    })}
+
                 </div>
             </div>
         )
