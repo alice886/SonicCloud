@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams } from "react-router-dom";
-import { getAllSongs } from '../../store/song'
-import '../../css-package/forms.css'
-import '../../css-package/song.css'
+import { getAllSongs } from '../../store/song';
+import WaveSurfer from "wavesurfer.js";
+import '../../css-package/forms.css';
+import '../../css-package/song.css';
 
 function AllSongs({ playing, setPlaying }) {
     const dispatch = useDispatch();
@@ -25,6 +26,15 @@ function AllSongs({ playing, setPlaying }) {
     //         </div>
     //     )
     // }
+    // var WaveSurfer = require("wavesurfer.js");
+    // const wavePlayer = document.getElementById('waveform');
+    const wavePlayer2 = document.getElementsByClassName('waveform2');
+
+    // var wavesurfer = WaveSurfer.create({
+    //     container: wavePlayer2,
+    //     waveColor: 'violet',
+    //     progressColor: 'purple'
+    // });
 
     const handleSongPlay = async e => {
         e.preventDefault();
@@ -32,21 +42,31 @@ function AllSongs({ playing, setPlaying }) {
         let homePlayer = document.getElementById('botton-player-bar');
         homePlayer.load();
         homePlayer.play();
+        // wavesurfer.load(e.target.value);
     }
+
+    // console.log('hello waveform ???', wavePlayer)
+    console.log('hello waveform ???', wavePlayer2)
+
 
     return (
         <div className="all-song-container">
             {allsongs && allsongs.map((song) => {
                 return <div className="eachsong" key={song.id}>
-                    <img src={song.previewImage} width='150' ></img>
-                    <br></br>
-                    <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                    <button className="songplay-button" value={song.url} onClick={handleSongPlay} >▶</button>
-                    <br></br>
-                    {/* <p>album: {song.albumId}</p> */}
-                    {/* <audio className='song-player-general' src={song.url} controls >
-                    </audio> */}
-                    {/* <audio className='song-player-general' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}
+                    <div>
+                        <img src={song.previewImage} width='150' ></img>
+                        <button className="all-songplay-button" value={song.url} onClick={handleSongPlay} >▶</button>
+                    </div>
+                    <div>
+                        <div className="song-r">
+                            <div><NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                            </div>
+                            <div>in album <NavLink to={`/albums/${song.Album.id}`}>{song.Album.name}</NavLink> | by {song.Artist.username}</div>
+                            {/* <div id="waveform" className="waveform2">waveformwaveformwaveform</div> */}
+                            <audio className='song-player-general' src={song.url} controls ></audio>
+                        </div>
+
+                    </div>
                 </div>
             })}
 

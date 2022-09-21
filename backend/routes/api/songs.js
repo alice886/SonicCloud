@@ -62,7 +62,7 @@ const songnotfound = {
 router.get('/all', restoreUser, async (req, res) => {
     const allSongs = await Song.findAll({
         where: {},
-        include: [],
+        include: [{ model: User, as: 'Artist' }, { model: Album }],
     });
     // console.log('/all  -- testing')
     res.json(allSongs);

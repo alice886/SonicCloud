@@ -1,35 +1,63 @@
 /* ------- song containers and songs ------- */
 .all-song-container {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 100%;
+    flex-direction: column;
     overflow-y: scroll;
     min-width: 1130px;
-    margin: 30px 2em;
-    padding: 0px 60px;
+    margin: 10px 1em;
+    padding: 5px 60px;
     width: 100%;
 }
 
 div.eachsong {
-    width: 20%;
-    height: 320px;
-    /* height: fit-content; */
+    width: 78%;
     padding: 10px;
     margin: 20px;
+    height: 200px;
+    display: grid;
     align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    /* border: #E5E8E8 solid 1px;
-    border-radius: 10%; */
+    flex-direction: row;
+    grid-template-columns: 2fr 7fr;
     font-size: 18px;
     position: relative;
     background: white;
-    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
     color: black;
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15);
     transition: all .4s ease;
+    border-radius: 5px;
+}
+/* div.eachsong:hover {
+    border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
+    box-shadow: 10px 10px rgba(211, 84, 0, .2);
+} */
+
+.all-songplay-button {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    top: 10px;
+    left: 38px;
+    padding: 2em;
+    background-color: transparent;
+    border-style: none;
+    color: transparent;
+    z-index: 90;
+}
+
+.all-songplay-button:hover {
+    background-color: rgba(241,90,34,0.45);
+    font-size: 30px;
+    color: white;
+}
+
+.song-r {
+    height: 90px;
+    padding: 10px;
+
+}
+
+.song-r>audio {
+    height: 0px;
 }
 
 /* ------- album containers and albums ------- */
@@ -63,11 +91,6 @@ div.eachalbum {
     color: black;
     box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15);
     transition: all .4s ease;
-}
-
-div.eachsong:hover{
-    border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;
-    box-shadow: 10px 10px rgba(211, 84, 0, .5);
 }
 
 div.song-audio {
@@ -147,8 +170,8 @@ div.song-details {
 }
 
 div.song-details:hover {
-    border-radius: 10% 10% 10% 10% / 20% 20% 20% 20%;
-    box-shadow: 30px 30px 30px rgba(243, 156, 18, .45);
+    border-radius: 10px 10px 10px 10px / 20px 20px 20px 20px;
+    box-shadow: 30px 30px 30px rgba(243, 156, 18, .15);
     cursor: pointer;
 }
 
@@ -246,7 +269,7 @@ button.songplay-button {
     border: 2px solid orange;
     border-radius: 5px;
     margin-top: 10px;
-    z-index: 998;
+    /* z-index: 98; */
 }
 
 button.songplay-button:hover {

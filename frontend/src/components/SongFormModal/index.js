@@ -17,11 +17,11 @@ const CreateSongModal = () => {
     const [showModal, setShowModal] = useState(false);
     const [hideEditform, setHideEditForm] = useState(true);
 
-    console.log(albumId)
-    console.log(title)
-    console.log(url)
-    console.log(previewImage)
-    console.log(description)
+    // console.log(albumId)
+    // console.log(title)
+    // console.log(url)
+    // console.log(previewImage)
+    // console.log(description)
 
     const updateTitle = e => setTitle(e.target.value);
     const updateDescription = e => setDescription(e.target.value);
