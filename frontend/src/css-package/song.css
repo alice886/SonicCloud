@@ -26,11 +26,13 @@ div.eachsong {
     transition: all .4s ease;
     border-radius: 5px;
 }
+
 /* div.eachsong:hover {
     border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
     box-shadow: 10px 10px rgba(211, 84, 0, .2);
 } */
 
+/* .eachsong>div>img, */
 .all-songplay-button {
     position: absolute;
     height: 150px;
@@ -45,7 +47,7 @@ div.eachsong {
 }
 
 .all-songplay-button:hover {
-    background-color: rgba(241,90,34,0.45);
+    background-color: rgba(241, 90, 34, 0.45);
     font-size: 30px;
     color: white;
 }
