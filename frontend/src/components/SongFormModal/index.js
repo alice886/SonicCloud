@@ -11,7 +11,7 @@ const CreateSongModal = () => {
     const [albumId, setAlbumId] = useState('');
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [url, setAudioUrl] = useState('');
+    const [url, setAudioUrl] = useState('http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg');
     const [previewImage, setPreviewImage] = useState('');
     const [errors, setErrors] = useState();
     const [showModal, setShowModal] = useState(false);

@@ -1,26 +1,29 @@
+/* ------- song containers and songs ------- */
 .all-song-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: auto;
-    justify-content: space-evenly;
     height: 100%;
     overflow-y: scroll;
+    min-width: 1130px;
+    margin: 30px 2em;
+    padding: 0px 60px;
+    width: 100%;
 }
 
 div.eachsong {
-    width: 25%;
-    height: 360px;
+    width: 20%;
+    height: 320px;
     /* height: fit-content; */
-    padding: 15px;
-    margin: 40px;
+    padding: 10px;
+    margin: 20px;
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     /* border: #E5E8E8 solid 1px;
     border-radius: 10%; */
-    font-size: 16px;
+    font-size: 18px;
     position: relative;
     background: white;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
@@ -29,10 +32,42 @@ div.eachsong {
     transition: all .4s ease;
 }
 
-div.eachsong:hover {
+/* ------- album containers and albums ------- */
+.all-album-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: scroll;
+    min-width: 1130px;
+    margin: 30px 2em;
+    padding: 0px 60px;
+    width: 100%;
+}
+
+div.eachalbum {
+    width: 90%;
+    height: 320px;
+    /* height: fit-content; */
+    padding: 30px;
+    margin: 20px;
+    align-items: center;
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 2fr 4fr 2fr 5fr;
+    /* border: #E5E8E8 solid 1px;
+    border-radius: 10%; */
+    font-size: 18px;
+    position: relative;
+    background: white;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+    color: black;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15);
+    transition: all .4s ease;
+}
+
+div.eachsong:hover{
     border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;
     box-shadow: 10px 10px rgba(211, 84, 0, .5);
-    cursor: pointer;
 }
 
 div.song-audio {
@@ -203,6 +238,21 @@ button {
     background-color: hsl(0, 0%, 98%);
     /* padding: 1px; */
     align-items: left;
+}
+
+button.songplay-button {
+    color: orange;
+    background-color: white;
+    border: 2px solid orange;
+    border-radius: 5px;
+    margin-top: 10px;
+    z-index: 998;
+}
+
+button.songplay-button:hover {
+    color: white;
+    background-color: orange;
+    cursor: pointer;
 }
 
 button.album-edit-button {

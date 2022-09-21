@@ -78,12 +78,49 @@ div.public-present {
 }
 
 div.public-home {
-    padding: 2%;
+    /* padding: 2%; */
     height: 100%;
+    min-height: fit-content;
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow-y: scroll;
 }
+
+.all-home-song-container {
+    display: flex;
+    flex-direction: row;
+    /* max-width: 1000px; */
+    /* margin: 30px 1em; */
+    /* padding: 0px 20px; */
+    /* overflow-x: scroll; */
+    margin-bottom: 60px;
+}
+
+div.eachhomesong {
+    width: 20%;
+    height: 300px;
+    /* height: fit-content; */
+    padding: 10px;
+    margin: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* border: #E5E8E8 solid 1px;
+    border-radius: 10%; */
+    font-size: 18px;
+    position: relative;
+    background: white;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+    color: black;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15);
+    transition: all .4s ease;
+}
+
+
+
+
 
 div.landing-box {
     position: relative;
@@ -108,8 +145,9 @@ img.landing-box-pic {
 }
 
 div#home-middle {
-    min-height: 100vh;
+    min-height: 89%;
     align-items: center;
+    padding-top: 7em;
 }
 
 div#buttomnav {

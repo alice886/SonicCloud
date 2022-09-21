@@ -20,19 +20,30 @@ function AllAlbums() {
 
 
     return (
-            <div className="all-song-container">
-                {allAlbums && allAlbums.map((album) => {
-                    return <div className="eachsong" key={album.id}>
-                        <img src={album.previewImage} width='150' ></img>
+        <div className="all-album-container">
+            {allAlbums && allAlbums.map((album) => {
+                return <div className="eachalbum" key={album.id}>
+                    <img src={album.previewImage} width='150' ></img>
+                    <div> Album:
                         <br></br>
                         <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
-                        <br></br>
-                        <p>album id: {album.id}  | artist id: {album.userId}</p>
-                        {/* <img className="albumImage" src={`album.previewImage`} alt={"album Image"} width={50} height={60} > */}
                     </div>
-                })}
+                    <div>Artist:
+                        <br></br>
+                        {album.Artist.username}</div>
+                    <div>Sound Tracks:
+                        {album?.Songs?.map(each => {
+                            return <div>
+                                <NavLink to={`/songs/${each.id}`}>{each.title}</NavLink>
+                            </div>
+                        })}
+                    </div>
+                    {/* <p>album id: {album.id}  | artist id: {album.userId}</p> */}
+                    {/* <img className="albumImage" src={`album.previewImage`} alt={"album Image"} width={50} height={60} > */}
+                </div>
+            })}
 
-            </div>
+        </div>
     )
 }
 
