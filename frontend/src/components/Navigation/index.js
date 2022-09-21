@@ -34,7 +34,7 @@ function Navigation({ isLoaded }) {
         <div className='topnav'>
             <div id='topnav-container' >
                 {/* <a name="top"></a> */}
-                <a name="top" href='/' to='/'><img src={scicon} height='30' alt='logo' /></a>
+                <a name="top" href='/' to='/'><img src={scicon} height='40' alt='logo' /></a>
                 <NavLink exact to="/" className={'nav-home'}> Home </NavLink>
                 <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>
                 <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>
