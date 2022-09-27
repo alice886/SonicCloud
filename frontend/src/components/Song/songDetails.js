@@ -64,6 +64,14 @@ function SongDetails({ playing, setPlaying }) {
                             <h4 className='song-details'>Description: {targetSong?.description}</h4>
                         </div>
                     </div>
+                        <div>
+                            {targetSong?.Comments.map(comment =>{
+                                return <div key={comment.id}>
+                                    <div>{comment.userId}</div>
+                                    <div>{comment.body}</div>
+                                </div>
+                            })}
+                        </div>
                     <div className="song-audio-detail">
                         <div className='song-player-detail'>
                             {/* <audio className='song-player-detail' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}

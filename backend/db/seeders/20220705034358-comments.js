@@ -13,29 +13,69 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Comments', [
       {
-        userId: 1,
-        songId: 2,
+        userId: 3,
+        songId: 1,
         body: 'we should collab again'
       },
       {
-        userId: 2,
-        songId: 1,
-        body: 'love your work Riri!'
-      },
-      {
-        userId: 4,
+        userId: 3,
         songId: 2,
-        body: 'all time fav, 10/10'
+        body: 'love your work Riri!'
       },
       {
         userId: 3,
         songId: 3,
+        body: 'all time fav, 10/10'
+      },
+      {
+        userId: 3,
+        songId: 4,
         body: 'Confused, Izzo or Lizzo ??'
       },
       {
         userId: 3,
-        songId: 6,
+        songId: 5,
         body: 'my jam!'
+      },
+      {
+        userId: 1,
+        songId: 6,
+        body: 'my jam so good!'
+      },
+      {
+        userId: 1,
+        songId: 7,
+        body: 'great study music!'
+      },
+      {
+        userId: 1,
+        songId: 8,
+        body: 'need more'
+      },
+      {
+        userId: 1,
+        songId: 9,
+        body: 'catchy <3'
+      },
+      {
+        userId: 1,
+        songId: 10,
+        body: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        userId: 1,
+        songId: 11,
+        body: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        userId: 1,
+        songId: 12,
+        body: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        userId: 1,
+        songId: 14,
+        body: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
       },
     ], {});
   },

@@ -94,7 +94,7 @@ router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
 router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const { songId } = req.params;
     const theSong = await Song.findByPk(songId, {
-        include: [{ model: User, as: 'Artist' }, { model: Album }]
+        include: [{ model: User, as: 'Artist' }, { model: Album },{ model: Comment }]
     });
     if (!theSong) {
         res.status(404);
