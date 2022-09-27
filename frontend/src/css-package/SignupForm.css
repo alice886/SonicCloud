@@ -13,11 +13,11 @@ a {
   align-items: left;
 }
 
-div#root {
+#root {
   /* width: 600px; */
+  min-height: 100vh;
   width: 100%;
-  height: 100vh;
-  margin: 0px 4%;
+  margin: 0px 18%;
   background-color: white;
 }
 
@@ -28,7 +28,7 @@ body {
   align-items: left;
   color: black;
   align-items: left;
-  background-color: #D5D8DC;
+  background-color: lightgray;
 }
 
 #sign-up-form {

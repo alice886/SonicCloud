@@ -22,7 +22,6 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <>
-                <> ► Welcome to SonicCloud ◄ </>
                 <NavLink to="/signup">Sign Up</NavLink>
                 <LoginFormModal />
             </>

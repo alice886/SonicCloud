@@ -28,7 +28,7 @@ import AllPlaylists from "./components/Playlist";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [playing, setPlaying] = useState('https://soniccloud886.s3.amazonaws.com/1663729705412.mp3');
+  const [playing, setPlaying] = useState('https://soniccloud886.s3.amazonaws.com/tunetank.com_6037_gameboy_by_omka.mp3');
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -52,7 +52,7 @@ function App() {
             <AllSongs playing={playing} setPlaying={setPlaying}/>
           </Route>
           <Route path="/songs/:songId">
-            <SongDetails />
+            <SongDetails playing={playing} setPlaying={setPlaying}/>
           </Route>
           <Route path="/playlists">
             <AllPlaylists />
@@ -61,10 +61,10 @@ function App() {
             <MyAlbums />
           </Route>
           <Route exact path="/albums">
-            <AllAlbums />
+            <AllAlbums playing={playing} setPlaying={setPlaying}/>
           </Route>
           <Route path="/albums/:albumId">
-            <AlbumDetails />
+            <AlbumDetails playing={playing} setPlaying={setPlaying}/>
           </Route>
           {/*
           <Route path="/playlists/myplaylists">

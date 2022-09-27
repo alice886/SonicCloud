@@ -7,15 +7,14 @@ html {
 }
 
 html,
-body,
-div #root {
+body{
     /* max-height: 100vh; */
     padding: 0;
     margin: 0;
 }
 
 #root {
-    min-height: 100vh;
+    /* min-height: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,17 +78,30 @@ div.public-present {
 
 div.public-home {
     /* padding: 2%; */
-    height: 100%;
+    /* height: fit-content; */
+    width: 100%;
     min-height: fit-content;
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow-y: scroll;
+    position: relative;
+    /* overflow-y: scroll; */
+}
+
+.public-greeting{
+    position: absolute;
+    top: 5.4em;
+    color: white;
+    font-size: 3em;
+    font-weight: 100;
 }
 
 .all-home-song-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: auto;
     /* max-width: 1000px; */
     /* margin: 30px 1em; */
     /* padding: 0px 20px; */
@@ -145,27 +157,29 @@ img.landing-box-pic {
 }
 
 div#home-middle {
-    min-height: 89%;
+    /* min-height: 100vh; */
     align-items: center;
-    padding-top: 7em;
+    /* padding-top: 7em; */
+    margin: auto;
 }
 
 div#buttomnav {
-    position: fixed;
-    z-index: 100;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom:0;
+    position:absolute;
+    min-height: 100%;
+    z-index:150;
+
 }
 
 img.landing-pic {
     width: 100%;
+    object-fit: cover;
     /* height: 100%; */
     /* width: 1268px */
 }
 
 button.login-button {
-    position: absolute;
+    /* position: absolute; */
     float: right;
     margin: 0 5%;
     height: 30px;
