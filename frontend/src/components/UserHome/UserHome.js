@@ -32,7 +32,7 @@ const TestUserHome = ({ playing, setPlaying }) => {
         return (
             <div className='public-home'>
                 <h2 className='public-greeting'>Welcome to SonicCloud </h2>
-                <img className="landing-pic" src={bg} height={'600px'} ></img>
+                <img className="landing-pic" src={bg}></img>
                 <br></br>
                 <h3>Hear what’s trending for free in the SoundCloud community</h3>
                 <br></br>

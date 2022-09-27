@@ -7,7 +7,7 @@
 body {
     justify-content: left;
     list-style-type: none;
-    height: 100vh;
+    height: fit-content;
 }
 
 ul {
@@ -30,7 +30,7 @@ div.buttomnav {
     align-items: flex-end;
     color: white;
     background-color: black;
-    position: relative;
+    position: sticky;
     bottom: 0;
     height: fit-content;
     /* transform: translateY(-100%);
@@ -55,6 +55,11 @@ label {
 
 }
 
+.topnav{
+    margin: 0px;
+    padding: 0px;
+    height: 36px;
+}
 
 div#topnav-container {
     /* border: solid 3px #f50; */
@@ -67,7 +72,8 @@ div#topnav-container {
     text-align: center;
     display: inline-block;
     width: 100%;
-    height: 40px;
+    height: 39px;
+    background-color: black;
     /* align-items: center; */
     /* left: 0px;
     list-style: none;

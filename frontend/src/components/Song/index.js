@@ -52,18 +52,18 @@ function AllSongs({ playing, setPlaying }) {
     return (
         <div className="all-song-container">
             {allsongs && allsongs.map((song) => {
-                return <div className="eachsong" key={song.id}>
+                return <div className="eachsong" key={song?.id}>
                     <div>
-                        <img src={song.previewImage} width='150' ></img>
-                        <button className="all-songplay-button" value={song.url} onClick={handleSongPlay} >▶</button>
+                        <img src={song?.previewImage} width='150' ></img>
+                        <button className="all-songplay-button" value={song?.url} onClick={handleSongPlay} >▶</button>
                     </div>
                     <div>
                         <div className="song-r">
-                            <div><NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                            <div><NavLink to={`/songs/${song?.id}`}>{song?.title}</NavLink>
                             </div>
-                            <div>in album <NavLink to={`/albums/${song.Album.id}`}>{song.Album.name}</NavLink> | by {song.Artist.username}</div>
+                            <div>in album <NavLink to={`/albums/${song?.Album?.id}`}>{song?.Album?.name}</NavLink> | by {song?.Artist?.username}</div>
                             {/* <div id="waveform" className="waveform2">waveformwaveformwaveform</div> */}
-                            <audio className='song-player-general' src={song.url} controls ></audio>
+                            <audio className='song-player-general' src={song?.url} controls ></audio>
                         </div>
 
                     </div>

@@ -7,7 +7,7 @@ module.exports = {
       {
         name: 'Coffee at 5a.m.',
         userId: 1,
-        previewImage: 'https://image.winudf.com/v2/image1/eHRrc3BuLmxvZmlfaWNvbl8xNTU0OTg4MTY0XzA4MQ/icon.png?w=&fakeurl=1',
+        previewImage: 'https://cdn.shopify.com/s/files/1/0502/9517/7415/files/Danes-specialty-coffee-espresso_1024x1024.jpg?v=1613762762',
       },
       {
         name: 'Relax Vinyl',
@@ -17,7 +17,7 @@ module.exports = {
       {
         name: 'Lofi Chill Mix',
         userId: 3,
-        previewImage: 'https://images.news18.com/ibnlive/uploads/2016/10/coffee-feautred-1.jpg',
+        previewImage: 'https://image.winudf.com/v2/image1/eHRrc3BuLmxvZmlfaWNvbl8xNTU0OTg4MTY0XzA4MQ/icon.png?w=&fakeurl=1',
       },
     ], {});
 
