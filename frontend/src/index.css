@@ -7,15 +7,14 @@ html {
 }
 
 html,
-body,
-div #root {
+body{
     /* max-height: 100vh; */
     padding: 0;
     margin: 0;
 }
 
 #root {
-    min-height: 100vh;
+    /* min-height: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -158,9 +157,10 @@ img.landing-box-pic {
 }
 
 div#home-middle {
-    min-height: 89%;
+    /* min-height: 100vh; */
     align-items: center;
-    padding-top: 7em;
+    /* padding-top: 7em; */
+    margin: auto;
 }
 
 div#buttomnav {
@@ -179,7 +179,7 @@ img.landing-pic {
 }
 
 button.login-button {
-    position: absolute;
+    /* position: absolute; */
     float: right;
     margin: 0 5%;
     height: 30px;

@@ -8,7 +8,8 @@ import LoginForm from '../LoginFormModal/LoginForm'
 
 const TestUserHome = ({ playing, setPlaying }) => {
     const dispatch = useDispatch();
-    // const [played, setPlayed] = ('false')
+    const [played, setPlayed] = ('false')
+    const [ppbutton, setPPbutton] = useState('▶')
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
@@ -20,10 +21,18 @@ const TestUserHome = ({ playing, setPlaying }) => {
     const handleHomePlay = async e => {
         e.preventDefault();
         await setPlaying(e.target.value);
-        // played ? setPlayed('false') : setPlayed('true');
         let homePlayer = document.getElementById('botton-player-bar');
-        homePlayer.load();
-        homePlayer.play();
+        if (played === 'true') {
+            homePlayer.pause();
+            setPPbutton('▶');
+            setPlayed('false');
+        }
+        else {
+            homePlayer.load();
+            homePlayer.play();
+            setPPbutton('||');
+            setPlayed('true');
+        }
     }
 
     // const ppbutton = played ?'❚ ❚':'▶'
@@ -68,11 +77,19 @@ const TestUserHome = ({ playing, setPlaying }) => {
     return sessionUser && (
         <div id='home-middle'>
             <h2>Hello {sessionUser?.username}! Welcome back!</h2>
-            {/* <img className='landing-pic'  src='https://va.sndcdn.com/bg/soundcloud:sounds:162983976/soudn-image.jpg'></img> */}
-            {/* <img id='rounded' src='https://media0.giphy.com/avatars/Packly/C4AvqGR2zXrN.gif' height='200px'></img> */}
-            {/* <NavLink to={`/songs`}>Songs on 🎶🌩️</NavLink>
-            <NavLink to={`/albums`}>Albums on 🎶🌩️</NavLink> */}
-            {/* <NavLink to={`/playlists`}>Playlists on 🎶🌩️</NavLink> */}
+            <div className="all-home-song-container">
+                    {allsongs && allsongs.map((song) => {
+                        return <div className="eachhomesong" key={song.id}>
+                            <img src={song.previewImage} width='150' ></img>
+                            <br></br>
+                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                            <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
+                            <br></br>
+                            
+                        </div>
+                    })}
+
+                </div>
 
         </div>
     )

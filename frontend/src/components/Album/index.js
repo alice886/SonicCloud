@@ -4,7 +4,7 @@ import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getAllAlbums } from '../../store/album'
 
 
-function AllAlbums() {
+function AllAlbums({playing, setPlaying}) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,6 +17,14 @@ function AllAlbums() {
     const allAlbums = useSelector(state => Object.values(state.album))
     const sessionUser = useSelector(state => state.session.user);
 
+    const handleHomePlay = async e => {
+        e.preventDefault();
+        await setPlaying(e.target.value);
+        // played ? setPlayed('false') : setPlayed('true');
+        let homePlayer = document.getElementById('botton-player-bar');
+        homePlayer.load();
+        homePlayer.play();
+    }
 
 
     return (
@@ -34,7 +42,7 @@ function AllAlbums() {
                     <div>Sound Tracks:
                         {album?.Songs?.map(each => {
                             return <div>
-                                <NavLink to={`/songs/${each.id}`}>{each.title}</NavLink>
+                                <button className="songplay-button" value={each.url} onClick={handleHomePlay} >▶</button><NavLink to={`/songs/${each.id}`}>{each.title}</NavLink> 
                             </div>
                         })}
                     </div>

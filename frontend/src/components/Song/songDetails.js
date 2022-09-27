@@ -5,10 +5,12 @@ import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 import EditSongModal from '../SongFormModal/edit-index'
 import LoginForm from '../LoginFormModal/LoginForm'
 
-function SongDetails() {
+function SongDetails({ playing, setPlaying }) {
 
     const dispatch = useDispatch();
     const { songId } = useParams();
+    const [played, setPlayed] = useState(false)
+    const [ppbutton, setPPbutton] = useState('▶')
     const sessionUser = useSelector(state => state.session.user);
     const targetSong = useSelector(state => (state.song));
 
@@ -28,6 +30,23 @@ function SongDetails() {
         )
     }
 
+    const handleHomePlay = async e => {
+        e.preventDefault();
+        await setPlaying(e.target.value);
+        let homePlayer = document.getElementById('botton-player-bar');
+        if (played) {
+            homePlayer.pause();
+            setPlayed(false);
+            setPPbutton('▶');
+        }
+        else {
+            homePlayer.load();
+            homePlayer.play();
+            setPlayed(true);
+            setPPbutton('||');
+        }
+    }
+
     return (
         <>
             {targetSong && (
@@ -37,6 +56,7 @@ function SongDetails() {
                             <img src={targetSong?.previewImage} alt={targetSong?.title} />
                             {/* <br></br> */}
                         </div>
+                        <button className="songplay-button" value={targetSong.url} onClick={handleHomePlay} >{ppbutton}</button>
                         <div className='song-details'>
                             <h3 className='song-details'>{targetSong?.title}</h3>
                             <h4 className='song-details'>Artist: {targetSong?.Artist?.username}</h4>
@@ -47,9 +67,9 @@ function SongDetails() {
                     <div className="song-audio-detail">
                         <div className='song-player-detail'>
                             {/* <audio className='song-player-detail' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}
-                            <audio className='song-player-detail' src={targetSong.url} controls > 
+                            {/* <audio className='song-player-detail' src={targetSong.url} controls > 
+                            </audio> */}
                             {/* no cant do --> forbidden */}
-                            </audio>
                         </div>
                         {(sessionUser.username === targetSong?.Artist?.username) && (
                             <div className='edit-button'>

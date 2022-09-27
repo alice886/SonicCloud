@@ -2,8 +2,9 @@
 .all-song-container {
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     min-width: 1130px;
+    min-height: 90vh;
     margin: 10px 1em;
     padding: 5px 60px;
     width: 100%;
@@ -66,12 +67,12 @@ div.eachsong {
 .all-album-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     min-width: 1130px;
     margin: 30px 2em;
     padding: 0px 60px;
     width: 100%;
+    min-height: 89vh;
 }
 
 div.eachalbum {

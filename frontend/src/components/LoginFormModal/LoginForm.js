@@ -16,7 +16,7 @@ function LoginForm() {
     // setCredential('Riri');
     // setPassword('password3');
     // return dispatch(sessionActions.login({ credential, password })).catch(
-    return dispatch(sessionActions.login({ credential: 'Riri', password: 'password3' }))
+    return dispatch(sessionActions.login({ credential: 'cookiemonster', password: 'password' }))
       .then(() => {
         history.push('/');
         window.alert('you are successfully signed in');

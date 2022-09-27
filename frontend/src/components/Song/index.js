@@ -8,6 +8,8 @@ import '../../css-package/song.css';
 
 function AllSongs({ playing, setPlaying }) {
     const dispatch = useDispatch();
+    const [played, setPlayed] = useState(false)
+    const [ppbutton, setPPbutton] = useState('▶')
     const allsongs = useSelector(state => Object.values(state.song))
     const sessionUser = useSelector(state => state.session.user);
     // console.log('allsongs ---1.1---', typeof mysongs)
