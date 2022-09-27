@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { getAllSongs } from '../../store/song'
+import bg from '../../images/sunrise.jpeg'
 import { getUserDetail } from '../../store/user'
 import LoginForm from '../LoginFormModal/LoginForm'
 
@@ -30,8 +31,8 @@ const TestUserHome = ({ playing, setPlaying }) => {
     if (!sessionUser) {
         return (
             <div className='public-home'>
-                <h2 className='public-greeting'>Welcome to SonicCloud! </h2>
-                <img className="landing-pic" src='https://va.sndcdn.com/bg/soundcloud:sounds:416933784/VisualTrack_Oshun_01_1.jpg' ></img>
+                <h2 className='public-greeting'>Welcome to SonicCloud </h2>
+                <img className="landing-pic" src={bg} height={'600px'} ></img>
                 <br></br>
                 <h3>Hear what’s trending for free in the SoundCloud community</h3>
                 <br></br>
