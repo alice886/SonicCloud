@@ -170,7 +170,9 @@ button.login-button {
     margin: 0 5%;
     height: 30px;
 }
-
+button:hover{
+    cursor: pointer;
+}
 
 div.log-in-form {
     /* position: absolute;

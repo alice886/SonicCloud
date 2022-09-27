@@ -5,19 +5,19 @@ module.exports = {
 
     await queryInterface.bulkInsert('Albums', [
       {
-        name: 'The Hits Collection, Volume One',
+        name: 'Coffee at 5a.m.',
         userId: 1,
-        previewImage: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c9/TheHitsVol1Cover.jpg/220px-TheHitsVol1Cover.jpg',
+        previewImage: 'https://image.winudf.com/v2/image1/eHRrc3BuLmxvZmlfaWNvbl8xNTU0OTg4MTY0XzA4MQ/icon.png?w=&fakeurl=1',
       },
       {
-        name: 'Good Girl Gone Bad',
+        name: 'Relax Vinyl',
+        userId: 2,
+        previewImage: 'https://www.furnacemfg.com/wp-content/uploads/2018/12/transp_yellow_vinyl.jpg',
+      },
+      {
+        name: 'Lofi Chill Mix',
         userId: 3,
-        previewImage: 'https://upload.wikimedia.org/wikipedia/en/f/f7/Good_Girl_Gone_Bad.png',
-      },
-      {
-        name: 'As I Am',
-        userId: 4,
-        previewImage: 'https://upload.wikimedia.org/wikipedia/en/0/0a/Alicia_Keys_-_As_I_Am.png',
+        previewImage: 'https://images.news18.com/ibnlive/uploads/2016/10/coffee-feautred-1.jpg',
       },
     ], {});
 

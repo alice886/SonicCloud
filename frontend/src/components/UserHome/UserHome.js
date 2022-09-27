@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { getAllSongs } from '../../store/song'
+import bg from '../../images/sunrise.jpeg'
 import { getUserDetail } from '../../store/user'
 import LoginForm from '../LoginFormModal/LoginForm'
 
 const TestUserHome = ({ playing, setPlaying }) => {
     const dispatch = useDispatch();
+    // const [played, setPlayed] = ('false')
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
@@ -14,13 +16,23 @@ const TestUserHome = ({ playing, setPlaying }) => {
         dispatch(getAllSongs())
     }, [dispatch])
 
-    console.log("what's playing at home page~~~", playing)
+
+    const handleHomePlay = async e => {
+        e.preventDefault();
+        await setPlaying(e.target.value);
+        // played ? setPlayed('false') : setPlayed('true');
+        let homePlayer = document.getElementById('botton-player-bar');
+        homePlayer.load();
+        homePlayer.play();
+    }
+
+    // const ppbutton = played ?'❚ ❚':'▶'
 
     if (!sessionUser) {
         return (
             <div className='public-home'>
-                <h2 className='public-greeting'>Welcome to SonicCloud! </h2>
-                <img className="landing-pic" src='https://va.sndcdn.com/bg/soundcloud:sounds:416933784/VisualTrack_Oshun_01_1.jpg' ></img>
+                <h2 className='public-greeting'>Welcome to SonicCloud </h2>
+                <img className="landing-pic" src={bg} height={'600px'} ></img>
                 <br></br>
                 <h3>Hear what’s trending for free in the SoundCloud community</h3>
                 <br></br>
@@ -39,7 +51,7 @@ const TestUserHome = ({ playing, setPlaying }) => {
                             <img src={song.previewImage} width='150' ></img>
                             <br></br>
                             <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                            <button className="songplay-button" value={song.url} onClick={e => {setPlaying(e.target.value)}} >▶</button>
+                            <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
                             <br></br>
                             {/* <p>album: {song.albumId}</p> */}
                             {/* <audio className='song-player-general' src={song.url} controls >

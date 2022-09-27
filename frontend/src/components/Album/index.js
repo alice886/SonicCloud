@@ -30,7 +30,7 @@ function AllAlbums() {
                     </div>
                     <div>Artist:
                         <br></br>
-                        {album.Artist.username}</div>
+                        {album?.Artist?.username}</div>
                     <div>Sound Tracks:
                         {album?.Songs?.map(each => {
                             return <div>
