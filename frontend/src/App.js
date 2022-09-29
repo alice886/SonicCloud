@@ -28,6 +28,8 @@ import AllPlaylists from "./components/Playlist";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [songName, setSongName] = useState('Gameboy');
+  const [artistName, setArtistName] = useState('alice');
   const [playing, setPlaying] = useState('https://soniccloud886.s3.amazonaws.com/tunetank.com_6037_gameboy_by_omka.mp3');
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -76,7 +78,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      <ButtomNavigation playing={playing}/>
+      <ButtomNavigation playing={playing} songName={songName} artistName={artistName}/>
     </>
   );
 }

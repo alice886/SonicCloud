@@ -41,8 +41,8 @@ function AllAlbums({playing, setPlaying}) {
                         {album?.Artist?.username}</div>
                     <div>Sound Tracks:
                         {album?.Songs?.map(each => {
-                            return <div>
-                                <button className="songplay-button" value={each.url} onClick={handleHomePlay} >▶</button><NavLink to={`/songs/${each.id}`}>{each.title}</NavLink> 
+                            return <div >
+                                <button value={each.url} onClick={handleHomePlay} >▶</button><NavLink to={`/songs/${each.id}`}>{each.title}</NavLink> 
                             </div>
                         })}
                     </div>

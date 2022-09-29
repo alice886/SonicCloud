@@ -31,7 +31,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className="profile-icon">
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (
@@ -41,7 +41,7 @@ function ProfileButton({ user }) {
           {/* <li className="user-dropdown">{user.email}</li> */}
           <li className="profile-dropdown">
             <NavLink to='/songs/mysongs'>
-              My Song
+              My Songs
             </NavLink>
           </li>
           <li className="profile-dropdown">
@@ -49,13 +49,13 @@ function ProfileButton({ user }) {
               My Albums
             </NavLink>
           </li>
-          {/* <li className="user-dropdown">
+          <li className="user-dropdown">
             <Link to='/playlists/myplaylists'>
               My Playlists
             </Link>
-          </li> */}
+          </li>
           <li className="profile-dropdown">
-            <button onClick={logout} className='logout-button'>Log Out</button>
+            <button onClick={logout} className='logout-button'>Log out</button>
           </li>
         </ul>
       )}
