@@ -32,6 +32,7 @@ router.get('/', restoreUser, (req, res) => {
 // Log In a User
 // logging in to an existing account
 // url -- http://localhost:8000/api/session/login
+// postman login -- http://localhost:8000/api/session
 // token url -- http://localhost:8000/api/csrf/restore
 router.post('/', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;

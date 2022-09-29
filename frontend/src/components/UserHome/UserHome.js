@@ -37,59 +37,33 @@ const TestUserHome = ({ playing, setPlaying }) => {
 
     // const ppbutton = played ?'❚ ❚':'▶'
 
-    if (!sessionUser) {
-        return (
-            <div className='public-home'>
-                <h2 className='public-greeting'>Welcome to SonicCloud </h2>
-                <img className="landing-pic" src={bg}></img>
-                <br></br>
-                <h3>Hear what’s trending for free in the SoundCloud community</h3>
-                <br></br>
-                {/* <div className="landing-box">
-                    <img className="landing-box-pic" src='https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists-8081257b.jpg' ></img>
-                    <div className='landing-box-content'>
-                        <h2>Thanks for visiting. Now join in to unlock more.</h2>
-                        <h3>Save tracks, follow artists and build playlists. All for free.</h3>
-                        <h3> free sign up <NavLink to='/signup'> here </NavLink> </h3>
-                        <h3> or log in below </h3>
-                    </div>
-                </div> */}
-                <div className="all-home-song-container">
-                    {allsongs && allsongs.map((song) => {
-                        return <div className="eachhomesong" key={song.id}>
-                            <img src={song.previewImage} width='150' ></img>
-                            <br></br>
-                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                            <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
-                            <br></br>
-                            {/* <p>album: {song.albumId}</p> */}
-                            {/* <audio className='song-player-general' src={song.url} controls >
-                    </audio> */}
-                            {/* <audio className='song-player-general' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}
-                        </div>
-                    })}
-
-                </div>
-            </div>
-        )
-    }
-
-    return sessionUser && (
+    return (
         <div id='home-middle'>
-            <h2>Hello {sessionUser?.username}! Welcome back!</h2>
-            <div className="all-home-song-container">
-                    {allsongs && allsongs.map((song) => {
-                        return <div className="eachhomesong" key={song.id}>
-                            <img src={song.previewImage} width='150' ></img>
-                            <br></br>
-                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                            <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
-                            <br></br>
-                            
-                        </div>
-                    })}
-
+            {sessionUser ? (
+                <div className='public-home'>
+                    <h2 className='public-greeting'>Welcome back {sessionUser?.username}! </h2>
+                    <img className="landing-pic" src={bg}></img>
                 </div>
+            ) : (
+                <div className='public-home'>
+                    <h2 className='public-greeting'>Welcome to SonicCloud! </h2>
+                    <img className="landing-pic" src={bg}></img>
+                </div>
+
+            )}
+            <div className="all-home-song-container">
+                {allsongs && allsongs.map((song) => {
+                    return <div className="eachhomesong" key={song.id}>
+                        <img src={song.previewImage} width='150' ></img>
+                        <br></br>
+                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                        <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
+                        <br></br>
+
+                    </div>
+                })}
+
+            </div>
 
         </div>
     )

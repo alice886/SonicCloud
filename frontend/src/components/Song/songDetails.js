@@ -4,6 +4,7 @@ import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 import EditSongModal from '../SongFormModal/edit-index'
 import LoginForm from '../LoginFormModal/LoginForm'
+import SongComments from '../Comments/index'
 
 function SongDetails({ playing, setPlaying }) {
 
@@ -64,6 +65,7 @@ function SongDetails({ playing, setPlaying }) {
                             <h4 className='song-details'>Description: {targetSong?.description}</h4>
                         </div>
                     </div>
+                    <SongComments songId={songId}/>
                     <div className="song-audio-detail">
                         <div className='song-player-detail'>
                             {/* <audio className='song-player-detail' src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg" controls > */}

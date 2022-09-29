@@ -9,7 +9,7 @@ const {
     singlePublicFileUpload,
     multipleMulterUpload,
     multiplePublicFileUpload,
-  } = require("../../awsS3");
+} = require("../../awsS3");
 
 const createSongValidate = [
     check('title')
@@ -94,7 +94,7 @@ router.get('/mysongs', restoreUser, requireAuth, async (req, res) => {
 router.get('/:songId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const { songId } = req.params;
     const theSong = await Song.findByPk(songId, {
-        include: [{ model: User, as: 'Artist' }, { model: Album }]
+        include: [{ model: User, as: 'Artist' }, { model: Album }, { model: Comment }]
     });
     if (!theSong) {
         res.status(404);
@@ -113,7 +113,11 @@ router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
     const allComments = await Comment.findAll({
         where: {
             songId: thesongId,
-        }
+        },
+        include: [{ model: User }],
+        order: [
+            ['id', 'DESC']
+        ]
     })
     if (!allComments.length) {
         res.status(404);
