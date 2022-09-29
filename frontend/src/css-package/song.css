@@ -135,7 +135,9 @@ audio.song-player-general {
 
 
 /* ==========================*/
-
+.song-page{
+    min-height: 100vh;
+}
 
 div.song-present {
     width: 100%;
@@ -144,7 +146,7 @@ div.song-present {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    height: 780px;
+    min-height: fit-content;
     padding: 31px;
 }
 

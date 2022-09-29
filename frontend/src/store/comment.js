@@ -50,11 +50,11 @@ export const addComment = (songId, comment) => async dispatch => {
     if (response.ok) {
         const newComment = await response.json();
         await dispatch(addOneComment(newComment));
-        // return newComment;
+        return newComment;
     }
 };
 
-export const editComment = (comment) => async dispatch => {
+export const editMyComment = (comment) => async dispatch => {
     const response = await csrfFetch(`/api/comments/mycomments`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -78,7 +78,7 @@ export const deleteComment = (commentId) => async dispatch => {
         await dispatch(deleteOneComment(commentId));
         return message;
     }
-    
+
 };
 
 
@@ -95,7 +95,10 @@ const commentReducer = (state = initialState, action) => {
             return state;
         case ADD_ONE:
             {
-                const newState = { ...state, ...action.payload }
+                // const newState = { ...state, ...action.payload }
+                // return newState;
+                const newState = { ...state }
+                newState[action.payload.id] = action.payload
                 return newState;
             }
         case EDIT_ONE:

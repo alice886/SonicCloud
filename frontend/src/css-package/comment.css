@@ -1,0 +1,52 @@
+.comment-container{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 2em 4em;
+    font-size: 22px;
+}
+
+.comment-top-box{
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid lightgrey;
+    margin: 2em 0px;
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+}
+
+.comment-top-box>input{
+    /* padding: 0px; */
+    margin: 0px;
+    width: 100%;
+}
+
+.comment-count{
+    color: grey;
+}
+
+.each-comment{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+    border-bottom: 1px lightsalmon solid;
+}
+.each-comment-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ago-box{
+    text-align: right;
+}
+
+.edit-delete-box{
+    text-align: right;
+    min-height: 2em;
+}
+
+.edit-delete-box>button{
+    border-style: none;
+    background-color: transparent;
+}

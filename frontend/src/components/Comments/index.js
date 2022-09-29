@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { addComment, getSongComments, editComment, deleteComment } from "../../store/comment";
+import { addComment, getSongComments, editMyComment, deleteComment } from "../../store/comment";
+import '../../css-package/comment.css'
 
 function SongComments({ songId }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const comments = useSelector(state => Object.values(state.comment));
     const sessionUser = useSelector(state => state.session.user);
+    const [commentLoaded, setCommentLoaded] = useState(false)
     const [inputComment, setInputComment] = useState();
     const [showEditText, setShowEditText] = useState(true);
     const [editComment, setEditComment] = useState();
@@ -16,8 +18,8 @@ function SongComments({ songId }) {
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
-        dispatch(getSongComments(songId))
-    }, [dispatch, history, confrimDelete, comments?.length])
+        dispatch(getSongComments(songId)).then(() => setCommentLoaded(true))
+    }, [dispatch, history, confrimDelete, showEditText, commentLoaded, comments?.length])
 
     const d = new Date();
     // const egtime = new Date('2022-09-28T04:57:41.000Z');
@@ -77,19 +79,22 @@ function SongComments({ songId }) {
     const handleEditExpand = async e => {
         e.preventDefault();
         showEditText ? setShowEditText(false) : setShowEditText(true);
-        setEditComment(e.target.value);
+        setCommentSelected(e.target.value);
     }
 
-    const handleEditComment = async e => {
+    const handleEditComment = async (e, id) => {
         e.preventDefault();
+        setCommentLoaded(false);
         const payload = {
-            id: e.target.value,
+            id: id,
             body: editComment,
         }
-
         setErrors([]);
-        dispatch(addComment(payload))
+        dispatch(editMyComment(payload))
             .then((res) => {
+                setShowEditText(false);
+                setEditComment();
+                setCommentSelected();
                 history.push(`/songs/${songId}`);
             })
             .catch(
@@ -106,6 +111,7 @@ function SongComments({ songId }) {
     // const testtime = new Date("2022-09-28T18:59:33.464Z")
     // console.log('just posted as ---- ', testtime.getHours())
     // console.log('just posted as ---- ', testtime.getMinutes())
+
     const handleDeleteConfirm = async e => {
         e.preventDefault();
         confrimDelete ? setConfirmDelete(false) : setConfirmDelete(true);
@@ -121,6 +127,7 @@ function SongComments({ songId }) {
         dispatch(deleteComment(payload))
             .then((res) => {
                 setConfirmDelete(false);
+                setCommentSelected();
                 history.push(`/songs/${songId}`);
             })
             .catch(
@@ -135,17 +142,9 @@ function SongComments({ songId }) {
 
     }
 
-    return comments && (
-        <div>
-            <form>
-                <ul>
-                    {errors.map((error, idx) => {
-                        if (error !== 'Invalid value') {
-                            return <li key={idx}>{error}</li>
-                        }
-                    }
-                    )}
-                </ul>
+    return comments && commentLoaded && (
+        <div className="comment-container">
+            <form className="comment-top-box">
                 <input
                     type="text"
                     placeholder="Write a comment"
@@ -154,41 +153,68 @@ function SongComments({ songId }) {
                     value={inputComment}
                     onChange={e => setInputComment(e.target.value)} />
                 <button onClick={handlePostComment}>Post</button>
+                <ul>
+                    {errors.map((error, idx) => {
+                        if (error !== 'Invalid value') {
+                            return <li key={idx}>{error}</li>
+                        }
+                    }
+                    )}
+                </ul>
             </form>
-            <div>{comments.length} comment(s)</div>
+            <div className="comment-count">{comments.length} comment(s)</div>
 
             {comments && comments.map(comment => {
                 if (comment?.User?.id === sessionUser?.id) {
-                    return <div key={comment.id} >
-                        <div>
-                            You at {getHrMi(comment?.updatedAt)}
+                    return <div key={comment?.id} className='each-comment'>
+                        <div className="each-comment-top">
+                            <div className="at-box">
+                                You at {getHrMi(comment?.updatedAt)}
+                            </div>
+                            <div className="ago-box">
+                                {calTime(comment?.updatedAt)}
+                            </div>
                         </div>
-                        <div>
-                            {calTime(comment?.updatedAt)}
+                        <div className="each-comment-buttom">
+                            <div className="comment-body-box">{comment?.body}</div>
+                            <div className="edit-delete-box">
+                                <button value={comment?.id} onClick={handleEditExpand}>✏️</button>
+                                <button value={comment?.id} onClick={handleDeleteConfirm}>🗑️</button>
+
+                                {confrimDelete && (commentSelected == comment?.id) && <div className="delete-confirm-bubble" > Do you really want to remove this comment?
+                                    <button onClick={() => setConfirmDelete(false)}>Cancel</button>
+                                    <button onClick={e => handleDeleteComment(e, comment?.id)} >Yes</button>
+                                </div>}
+                                {showEditText ? (<div></div>)
+                                    : (commentSelected == comment?.id) && (<div>
+                                        <input
+                                            type="text"
+                                            min="1"
+                                            placeholder='update comment here'
+                                            value={editComment}
+                                            onChange={e => setEditComment(e.target.value)} />
+                                        <button onClick={() => { setShowEditText(true); setEditComment(); }}>Cancel Edit</button>
+                                        <button onClick={e => handleEditComment(e, comment?.id)}>Update</button>
+                                    </div>
+                                    )}
+                            </div>
                         </div>
-                        {!showEditText && <div>
-                            {comment?.body}
-                        </div>}
-                        <button value={comment?.id} onClick={handleEditComment}>✏️</button>
-                        <button value={comment?.id} onClick={handleDeleteConfirm}>🗑️</button>
-                        {confrimDelete && (commentSelected == comment?.id) && <div className="delete-confirm-bubble" > Do you really want to remove this comment?
-                            <button onClick={() => setConfirmDelete(false)}>Cancel</button>
-                            <button onClick={e => handleDeleteComment(e, comment?.id)} >Yes</button>
-                        </div>}
                     </div>
                 }
 
             })}
             {comments && comments.map(comment => {
                 if (comment?.User?.id !== sessionUser?.id) {
-                    return <div key={comment?.id}>
-                        <div>
-                            {comment?.User?.username} at {getHrMi(comment?.updatedAt)}
+                    return <div key={comment?.id} className='each-comment'>
+                        <div className="each-comment-top">
+                            <div className="at-box">
+                                {comment?.User?.username} at {getHrMi(comment?.updatedAt)}
+                            </div>
+                            <div className="ago-box">
+                                {calTime(comment?.updatedAt)}
+                            </div>
                         </div>
-                        <div>
-                            {calTime(comment?.updatedAt)}
-                        </div>
-                        <div>
+                        <div className="comment-body-box">
                             {comment?.body}
                         </div>
                     </div>

@@ -114,7 +114,10 @@ router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
         where: {
             songId: thesongId,
         },
-        include: [{ model: User }]
+        include: [{ model: User }],
+        order: [
+            ['id', 'DESC']
+        ]
     })
     if (!allComments.length) {
         res.status(404);
