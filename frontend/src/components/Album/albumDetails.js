@@ -34,36 +34,45 @@ function AlbumDetails() {
         )
     }
 
+    const getReleaseDate = timeStamp => {
+        const converted = new Date(timeStamp);
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return (converted.getDate() + 1) + ' ' + months[(converted.getUTCMonth())] + ' ' + converted.getFullYear();
+    }
+
     return (
         <>
             {targetAlbum && (
                 <div className='album-page'>
-                    <div className='song-present'>
-                        <img className='album-cover' src={targetAlbum?.previewImage} alt={targetAlbum?.name} width="200" height="200" />
+                    <div className='album-present'>
                         <div className="album-details">
                             <h2>{targetAlbum.name}</h2>
-                            <br></br>
-                            <h3>Artist: </h3>
-                            <div>{targetAlbum?.Artist?.username}</div>
-                            <div className='album-songs'>
-                                <h3>Songs: </h3>
-                                <div className="album-song-container">
-                                    {(targetAlbum?.Songs?.length > 0) ?
-                                        targetAlbum?.Songs?.map((song) => {
-                                            return <div className="albumSongs" key={song.id}>
-                                                <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                                            </div>
-                                        }) : ' -- no song in this album yet --'
-                                    }
-                                </div>
-                            </div>
+                            <h3>{targetAlbum?.Artist?.username}</h3>
+                            <div className='album-songs'>{targetAlbum?.Songs?.length} Track(s)</div>
                         </div>
+                        <img className='album-cover' src={targetAlbum?.previewImage} alt={targetAlbum?.name} width="200" height="200" />
                     </div>
                     <div className="album-edit-button">
                         {(sessionUser.username === targetAlbum?.Artist?.username) && <EditAlbumModal
                             targetAlbum={targetAlbum}
                         // hideForm={() => setShowModalForm(true)}
                         />}
+                    </div>
+                    <div className="album-details-bottom">
+                        <div>Album release date: {getReleaseDate(targetAlbum?.createdAt)}</div>
+                        {/* <div>{targetAlbum?.Artist?.username}</div> */}
+                        <div>
+                            {(targetAlbum?.Songs?.length > 0) ?
+                                targetAlbum?.Songs?.map((song, index) => {
+                                    // for (let i = 1; i <= targetAlbum?.Songs?.length; i++) {
+                                    return <div className="albumSongs" key={song.id}>
+                                        {index + 1} &nbsp; <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                                    </div>
+                                    // }
+                                }
+                                ) : ' -- no song in this album yet --'
+                            }
+                        </div>
                     </div>
 
                 </div>

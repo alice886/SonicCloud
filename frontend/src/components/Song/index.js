@@ -10,6 +10,7 @@ function AllSongs({ playing, setPlaying }) {
     const dispatch = useDispatch();
     const [played, setPlayed] = useState(false)
     const [ppbutton, setPPbutton] = useState('▶')
+    const [allSongLoaded, setAllSongLoaded] = useState(false)
     const allsongs = useSelector(state => Object.values(state.song))
     const sessionUser = useSelector(state => state.session.user);
     // console.log('allsongs ---1.1---', typeof mysongs)
@@ -18,7 +19,7 @@ function AllSongs({ playing, setPlaying }) {
     // const currentUser = useSelector(state => state.session.user);
     // console.log('current user --',currentUser)
     useEffect(() => {
-        dispatch(getAllSongs())
+        dispatch(getAllSongs()).then(() => setAllSongLoaded(true))
     }, [dispatch])
 
     // if (!sessionUser) {
@@ -51,7 +52,7 @@ function AllSongs({ playing, setPlaying }) {
     console.log('hello waveform ???', wavePlayer2)
 
 
-    return (
+    return allSongLoaded && (
         <div className="all-song-container">
             {allsongs && allsongs.map((song) => {
                 return <div className="eachsong" key={song?.id}>

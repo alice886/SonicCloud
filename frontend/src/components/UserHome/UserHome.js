@@ -9,12 +9,13 @@ import LoginForm from '../LoginFormModal/LoginForm'
 const TestUserHome = ({ playing, setPlaying }) => {
     const dispatch = useDispatch();
     const [played, setPlayed] = ('false')
+    const [homesongloaded, setHomesongloaded] = useState(false)
     const [ppbutton, setPPbutton] = useState('▶')
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
     useEffect(() => {
-        dispatch(getAllSongs())
+        dispatch(getAllSongs()).then(()=>setHomesongloaded(true))
     }, [dispatch])
 
 
@@ -37,7 +38,7 @@ const TestUserHome = ({ playing, setPlaying }) => {
 
     // const ppbutton = played ?'❚ ❚':'▶'
 
-    return (
+    return homesongloaded && (
         <div id='home-middle'>
             {sessionUser ? (
                 <div className='public-home'>
@@ -54,11 +55,11 @@ const TestUserHome = ({ playing, setPlaying }) => {
             <div className="all-home-song-container">
                 {allsongs && allsongs.map((song) => {
                     return <div className="eachhomesong" key={song.id}>
-                        <img src={song.previewImage} width='150' ></img>
-                        <br></br>
-                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                        <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
-                        <br></br>
+                            <img src={song.previewImage} width='150' ></img>
+                            <button className="home-songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
+                        <div className='home-song-title'>
+                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                        </div>
 
                     </div>
                 })}
