@@ -50,7 +50,7 @@ export const addComment = (songId, comment) => async dispatch => {
     if (response.ok) {
         const newComment = await response.json();
         await dispatch(addOneComment(newComment));
-        return newComment;
+        // return newComment;
     }
 };
 
@@ -78,6 +78,7 @@ export const deleteComment = (commentId) => async dispatch => {
         await dispatch(deleteOneComment(commentId));
         return message;
     }
+    
 };
 
 

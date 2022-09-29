@@ -9,6 +9,7 @@ function SongComments({ songId }) {
     const comments = useSelector(state => Object.values(state.comment));
     const sessionUser = useSelector(state => state.session.user);
     const [inputComment, setInputComment] = useState();
+    const [showEditText, setShowEditText] = useState(true);
     const [editComment, setEditComment] = useState();
     const [commentSelected, setCommentSelected] = useState();
     const [confrimDelete, setConfirmDelete] = useState(false);
@@ -16,7 +17,7 @@ function SongComments({ songId }) {
 
     useEffect(() => {
         dispatch(getSongComments(songId))
-    }, [dispatch])
+    }, [dispatch, history, confrimDelete, comments?.length])
 
     const d = new Date();
     // const egtime = new Date('2022-09-28T04:57:41.000Z');
@@ -52,6 +53,7 @@ function SongComments({ songId }) {
         setErrors([]);
         dispatch(addComment(songId, payload))
             .then((res) => {
+                setInputComment('');
                 history.push(`/songs/${songId}`);
             })
             .catch(
@@ -67,21 +69,16 @@ function SongComments({ songId }) {
 
     const getHrMi = timeString => {
         let converted = new Date(timeString);
-        let hr = converted.getHours();
-        let min = converted.getMinutes();
+        let hr = ('0' + converted.getHours()).slice(-2);
+        let min = ('0' + converted.getMinutes()).slice(-2);
         return hr + ":" + min;
     }
 
-    // const testtime = new Date("2022-09-28T18:59:33.464Z")
-    // console.log('just posted as ---- ', testtime.getHours())
-    // console.log('just posted as ---- ', testtime.getMinutes())
-    const handleDeleteConfirm = async e => {
+    const handleEditExpand = async e => {
         e.preventDefault();
-        confrimDelete ? setConfirmDelete(false) : setConfirmDelete(true);
-        setCommentSelected(e.target.value);
+        showEditText ? setShowEditText(false) : setShowEditText(true);
+        setEditComment(e.target.value);
     }
-
-    console.log(commentSelected)
 
     const handleEditComment = async e => {
         e.preventDefault();
@@ -106,17 +103,30 @@ function SongComments({ songId }) {
 
     }
 
+    // const testtime = new Date("2022-09-28T18:59:33.464Z")
+    // console.log('just posted as ---- ', testtime.getHours())
+    // console.log('just posted as ---- ', testtime.getMinutes())
+    const handleDeleteConfirm = async e => {
+        e.preventDefault();
+        confrimDelete ? setConfirmDelete(false) : setConfirmDelete(true);
+        setCommentSelected(e.target.value);
+    }
 
-    const handleDeleteComment = async e => {
+    const handleDeleteComment = async (e, id) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(deleteComment(e.target.value))
+        const payload = {
+            id: id
+        }
+        dispatch(deleteComment(payload))
             .then((res) => {
+                setConfirmDelete(false);
                 history.push(`/songs/${songId}`);
             })
             .catch(
                 async (res) => {
                     const data = await res.json();
+                    console.log(data)
                     if (data && data.errors) {
                         setErrors(data.errors)
                     };
@@ -125,7 +135,7 @@ function SongComments({ songId }) {
 
     }
 
-    return (
+    return comments && (
         <div>
             <form>
                 <ul>
@@ -151,19 +161,19 @@ function SongComments({ songId }) {
                 if (comment?.User?.id === sessionUser?.id) {
                     return <div key={comment.id} >
                         <div>
-                            {comment?.User?.username} at {getHrMi(comment?.updatedAt)}
+                            You at {getHrMi(comment?.updatedAt)}
                         </div>
                         <div>
                             {calTime(comment?.updatedAt)}
                         </div>
-                        <div>
+                        {!showEditText && <div>
                             {comment?.body}
-                        </div>
-                        <button value={comment.id} onClick={handleEditComment}>✏️</button>
-                        <button value={comment.id} onClick={handleDeleteConfirm}>🗑️</button>
-                        {confrimDelete && (commentSelected == comment.id) && <div className="delete-confirm-bubble" > Do you really want to remove this comment?
-                            <button>Cancel</button>
-                            <button>Yes</button>
+                        </div>}
+                        <button value={comment?.id} onClick={handleEditComment}>✏️</button>
+                        <button value={comment?.id} onClick={handleDeleteConfirm}>🗑️</button>
+                        {confrimDelete && (commentSelected == comment?.id) && <div className="delete-confirm-bubble" > Do you really want to remove this comment?
+                            <button onClick={() => setConfirmDelete(false)}>Cancel</button>
+                            <button onClick={e => handleDeleteComment(e, comment?.id)} >Yes</button>
                         </div>}
                     </div>
                 }
@@ -171,7 +181,7 @@ function SongComments({ songId }) {
             })}
             {comments && comments.map(comment => {
                 if (comment?.User?.id !== sessionUser?.id) {
-                    return <div key={comment.id}>
+                    return <div key={comment?.id}>
                         <div>
                             {comment?.User?.username} at {getHrMi(comment?.updatedAt)}
                         </div>
