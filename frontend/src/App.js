@@ -51,10 +51,10 @@ function App() {
             <MySongs />
           </Route>
           <Route exact path="/songs">
-            <AllSongs playing={playing} setPlaying={setPlaying}/>
+            <AllSongs playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
           </Route>
           <Route path="/songs/:songId">
-            <SongDetails playing={playing} setPlaying={setPlaying}/>
+            <SongDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
           </Route>
           <Route path="/playlists">
             <AllPlaylists />
@@ -63,7 +63,7 @@ function App() {
             <MyAlbums />
           </Route>
           <Route exact path="/albums">
-            <AllAlbums playing={playing} setPlaying={setPlaying}/>
+            <AllAlbums playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
           </Route>
           <Route path="/albums/:albumId">
             <AlbumDetails playing={playing} setPlaying={setPlaying}/>

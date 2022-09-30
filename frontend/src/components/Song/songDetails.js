@@ -6,7 +6,7 @@ import EditSongModal from '../SongFormModal/edit-index'
 import LoginForm from '../LoginFormModal/LoginForm'
 import SongComments from '../Comments/index'
 
-function SongDetails({ playing, setPlaying }) {
+function SongDetails({ playing, setPlaying ,setSongName, setArtistName}) {
 
     const dispatch = useDispatch();
     const { songId } = useParams();
@@ -43,6 +43,8 @@ function SongDetails({ playing, setPlaying }) {
         else {
             homePlayer.load();
             homePlayer.play();
+            setSongName(targetSong?.title);
+            setArtistName(targetSong?.Artist?.username)
             setPlayed(true);
             setPPbutton('||');
         }

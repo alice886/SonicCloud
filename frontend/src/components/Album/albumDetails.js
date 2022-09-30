@@ -44,8 +44,8 @@ function AlbumDetails() {
         <>
             {targetAlbum && (
                 <div className='album-page'>
-                    <div className='album-present'>
-                        <div className="album-details">
+                    <div className="album-details">
+                        <div className="album-d-left">
                             <h2>{targetAlbum.name}</h2>
                             <h3>{targetAlbum?.Artist?.username}</h3>
                             <div className='album-songs'>{targetAlbum?.Songs?.length} Track(s)</div>

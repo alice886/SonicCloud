@@ -149,7 +149,7 @@ div.eachhomesong {
 
 .home-songplay-button:hover{
     color: rgba(249, 105, 14);
-    background-color: rgba(255, 255, 255, 0.5);;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .home-song-title {
