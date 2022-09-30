@@ -8,7 +8,6 @@ import '../../css-package/song.css';
 
 function AllSongs({ playing, setPlaying }) {
     const dispatch = useDispatch();
-    const [played, setPlayed] = useState(false)
     const [ppbutton, setPPbutton] = useState('▶')
     const [allSongLoaded, setAllSongLoaded] = useState(false)
     const allsongs = useSelector(state => Object.values(state.song))

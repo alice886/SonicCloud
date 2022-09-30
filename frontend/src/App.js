@@ -42,7 +42,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/" >
-            <TestUserHome playing={playing} setPlaying={setPlaying}/>
+            <TestUserHome playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
           </Route>
           <Route path="/signup">
             <SignupFormPage />

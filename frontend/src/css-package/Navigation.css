@@ -26,12 +26,20 @@ body {
 
 }
 
+.buttomnav{
+    align-items: flex-end;
+    position: sticky;
+    bottom: 0;
+    height: fit-content;
+}
+
 .buttom-info-bar{
     align-items: flex-end;
     position: sticky;
     bottom: 0;
     height: fit-content;
-    background-color: #faeaff;
+    background-color: #5b5b5b;
+    color: white;
     /* transform: translateY(-100%);
     position: absolute;
     bottom: 0; */
