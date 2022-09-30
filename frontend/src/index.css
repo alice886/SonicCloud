@@ -7,7 +7,7 @@ html {
 }
 
 html,
-body{
+body {
     /* max-height: 100vh; */
     padding: 0;
     margin: 0;
@@ -88,7 +88,7 @@ div.public-home {
     /* overflow-y: scroll; */
 }
 
-.public-greeting{
+.public-greeting {
     position: absolute;
     top: 5.4em;
     color: white;
@@ -100,21 +100,20 @@ div.public-home {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: space-evenly;
     margin: auto;
     /* max-width: 1000px; */
     /* margin: 30px 1em; */
-    /* padding: 0px 20px; */
     /* overflow-x: scroll; */
     margin-bottom: 60px;
+    padding: 2em;
 }
 
 div.eachhomesong {
-    width: 20%;
-    height: 300px;
+    width: 15%;
+    height: 220px;
     /* height: fit-content; */
-    padding: 10px;
-    margin: 20px;
+    margin: 10px;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -126,11 +125,42 @@ div.eachhomesong {
     background: white;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
     color: black;
-    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15);
+    /* box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15); */
     transition: all .4s ease;
+    /* position: relative; */
 }
 
+.eachhomesong>img {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    
+}
 
+.home-songplay-button {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    background-color: transparent;
+    color: transparent;
+    font-size: 60px;
+    border-color: transparent;
+}
+
+.home-songplay-button:hover{
+    color: rgba(249, 105, 14);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.home-song-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height:30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 
 
@@ -164,10 +194,10 @@ div#home-middle {
 }
 
 div#buttomnav {
-    bottom:0;
-    position:absolute;
+    bottom: 0;
+    position: absolute;
     min-height: 100%;
-    z-index:150;
+    z-index: 150;
 
 }
 
@@ -184,7 +214,8 @@ button.login-button {
     margin: 0 5%;
     height: 30px;
 }
-button:hover{
+
+button:hover {
     cursor: pointer;
 }
 

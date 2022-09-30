@@ -4,8 +4,11 @@ import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getAllAlbums } from '../../store/album'
 
 
-function AllAlbums({playing, setPlaying}) {
+function AllAlbums({ playing, setPlaying, setSongName, setArtistName }) {
     const dispatch = useDispatch();
+    const [played, setPlayed] = useState(false)
+    const [homesongloaded, setHomesongloaded] = useState(false)
+    const [songSelect, setSongSelect]=useState();
 
     useEffect(() => {
         dispatch(getAllAlbums())
@@ -17,13 +20,23 @@ function AllAlbums({playing, setPlaying}) {
     const allAlbums = useSelector(state => Object.values(state.album))
     const sessionUser = useSelector(state => state.session.user);
 
-    const handleHomePlay = async e => {
+    const handleHomePlay = async (e, song, album) => {
         e.preventDefault();
         await setPlaying(e.target.value);
-        // played ? setPlayed('false') : setPlayed('true');
+        await setSongName(song.title);
+        await setArtistName(album.Artist.username);
         let homePlayer = document.getElementById('botton-player-bar');
-        homePlayer.load();
-        homePlayer.play();
+        if (played && songSelect == song.id) {
+            homePlayer.pause();
+            setPlayed(false);
+            setSongSelect();
+        }
+        else {
+            homePlayer.load();
+            homePlayer.play();
+            setSongSelect(song.id)
+            setPlayed(true);
+        }
     }
 
 
@@ -31,18 +44,16 @@ function AllAlbums({playing, setPlaying}) {
         <div className="all-album-container">
             {allAlbums && allAlbums.map((album) => {
                 return <div className="eachalbum" key={album.id}>
-                    <img src={album.previewImage} width='150' ></img>
-                    <div> Album:
-                        <br></br>
-                        <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
+                    <div>
+                        <NavLink to={`/albums/${album.id}`}><img src={album.previewImage} width='150' ></img>{album.name}</NavLink>
                     </div>
-                    <div>Artist:
+                    {/* <div>Artist:
                         <br></br>
-                        {album?.Artist?.username}</div>
-                    <div>Sound Tracks:
+                        {album?.Artist?.username}</div> */}
+                    <div>
                         {album?.Songs?.map(each => {
-                            return <div>
-                                <button className="songplay-button" value={each.url} onClick={handleHomePlay} >▶</button><NavLink to={`/songs/${each.id}`}>{each.title}</NavLink> 
+                            return <div className="song-in-album">
+                                <button value={each.url} onClick={e=>handleHomePlay(e,each, album)} >{(songSelect === each?.id)?'||':'▶'}</button>&nbsp;  &nbsp; <NavLink to={`/songs/${each.id}`}>{each.title}</NavLink>
                             </div>
                         })}
                     </div>

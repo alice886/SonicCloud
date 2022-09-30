@@ -6,10 +6,11 @@ import WaveSurfer from "wavesurfer.js";
 import '../../css-package/forms.css';
 import '../../css-package/song.css';
 
-function AllSongs({ playing, setPlaying }) {
+function AllSongs({ playing, setPlaying, setSongName, setArtistName }) {
     const dispatch = useDispatch();
-    const [played, setPlayed] = useState(false)
-    const [ppbutton, setPPbutton] = useState('▶')
+    const [played, setPlayed] = useState(false);
+    const [allSongLoaded, setAllSongLoaded] = useState(false);
+    const [songSelect, setSongSelect]=useState();
     const allsongs = useSelector(state => Object.values(state.song))
     const sessionUser = useSelector(state => state.session.user);
     // console.log('allsongs ---1.1---', typeof mysongs)
@@ -18,7 +19,7 @@ function AllSongs({ playing, setPlaying }) {
     // const currentUser = useSelector(state => state.session.user);
     // console.log('current user --',currentUser)
     useEffect(() => {
-        dispatch(getAllSongs())
+        dispatch(getAllSongs()).then(() => setAllSongLoaded(true))
     }, [dispatch])
 
     // if (!sessionUser) {
@@ -38,26 +39,32 @@ function AllSongs({ playing, setPlaying }) {
     //     progressColor: 'purple'
     // });
 
-    const handleSongPlay = async e => {
+    const handleSongPlay = async (e, song) => {
         e.preventDefault();
         await setPlaying(e.target.value);
+        await setSongName(song.title);
+        await setArtistName(song.Artist.username);
         let homePlayer = document.getElementById('botton-player-bar');
-        homePlayer.load();
-        homePlayer.play();
-        // wavesurfer.load(e.target.value);
+        if (played && songSelect == song.id) {
+            homePlayer.pause();
+            setPlayed(false);
+            setSongSelect();
+        }
+        else {
+            homePlayer.load();
+            homePlayer.play();
+            setSongSelect(song.id)
+            setPlayed(true);
+        }
     }
 
-    // console.log('hello waveform ???', wavePlayer)
-    console.log('hello waveform ???', wavePlayer2)
-
-
-    return (
+    return allSongLoaded && (
         <div className="all-song-container">
             {allsongs && allsongs.map((song) => {
                 return <div className="eachsong" key={song?.id}>
-                    <div>
-                        <img src={song?.previewImage} width='150' ></img>
-                        <button className="all-songplay-button" value={song?.url} onClick={handleSongPlay} >▶</button>
+                    <div className="allsongs-cover-butt">
+                        <img className="all-songplay-cover" src={song?.previewImage} height={'60px'} width={'60px'}></img>
+                        <button className="all-songplay-button" value={song?.url} onClick={e=>handleSongPlay(e,song)} >{(songSelect === song?.id)?'||':'▶'}</button>
                     </div>
                     <div>
                         <div className="song-r">
@@ -65,7 +72,7 @@ function AllSongs({ playing, setPlaying }) {
                             </div>
                             <div>in album <NavLink to={`/albums/${song?.Album?.id}`}>{song?.Album?.name}</NavLink> | by {song?.Artist?.username}</div>
                             {/* <div id="waveform" className="waveform2">waveformwaveformwaveform</div> */}
-                            <audio className='song-player-general' src={song?.url} controls ></audio>
+                            {/* <audio className='song-player-general' src={song?.url} controls ></audio> */}
                         </div>
 
                     </div>

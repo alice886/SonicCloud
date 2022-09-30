@@ -1,43 +1,48 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, useParams } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import Coverflow from 'react-coverflow';
 import { getAllSongs } from '../../store/song'
 import bg from '../../images/sunrise.jpeg'
 import { getUserDetail } from '../../store/user'
 import LoginForm from '../LoginFormModal/LoginForm'
 
-const TestUserHome = ({ playing, setPlaying }) => {
+const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     const dispatch = useDispatch();
-    const [played, setPlayed] = ('false')
-    const [ppbutton, setPPbutton] = useState('▶')
+    const [played, setPlayed] = useState(false)
+    const [homesongloaded, setHomesongloaded] = useState(false)
+    const [songSelect, setSongSelect]=useState();
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
     useEffect(() => {
-        dispatch(getAllSongs())
+        dispatch(getAllSongs()).then(() => setHomesongloaded(true))
     }, [dispatch])
 
 
-    const handleHomePlay = async e => {
+    const handleHomePlay = async (e, song) => {
         e.preventDefault();
         await setPlaying(e.target.value);
+        await setSongName(song.title);
+        await setArtistName(song.Artist.username);
         let homePlayer = document.getElementById('botton-player-bar');
-        if (played === 'true') {
+        if (played && songSelect == song.id) {
             homePlayer.pause();
-            setPPbutton('▶');
-            setPlayed('false');
+            setPlayed(false);
+            setSongSelect();
         }
         else {
             homePlayer.load();
             homePlayer.play();
-            setPPbutton('||');
-            setPlayed('true');
+            setSongSelect(song.id)
+            setPlayed(true);
         }
     }
 
     // const ppbutton = played ?'❚ ❚':'▶'
 
-    return (
+    return homesongloaded && (
         <div id='home-middle'>
             {sessionUser ? (
                 <div className='public-home'>
@@ -55,17 +60,18 @@ const TestUserHome = ({ playing, setPlaying }) => {
                 {allsongs && allsongs.map((song) => {
                     return <div className="eachhomesong" key={song.id}>
                         <img src={song.previewImage} width='150' ></img>
-                        <br></br>
-                        <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
-                        <button className="songplay-button" value={song.url} onClick={handleHomePlay} >▶</button>
-                        <br></br>
+                        <button className="home-songplay-button" value={song.url} onClick={e=>handleHomePlay(e,song)} >{(songSelect === song?.id)?'||':'▶'}</button>
+                        <div className='home-song-title'>
+                            <NavLink to={`/songs/${song.id}`}>{song.title}</NavLink>
+                        </div>
 
                     </div>
                 })}
 
             </div>
-
+            
         </div>
+
     )
 }
 

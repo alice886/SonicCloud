@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 2em 4em;
     font-size: 22px;
 }
 
@@ -10,15 +9,30 @@
     width: 100%;
     border-radius: 5px;
     border: 2px solid lightgrey;
-    margin: 2em 0px;
+    margin: 0px 0px 30px;
     display: grid;
     grid-template-columns: 9fr 1fr;
+    padding: 8px;
+    background-color: #f1f1f1;
 }
 
 .comment-top-box>input{
     /* padding: 0px; */
     margin: 0px;
     width: 100%;
+    min-height: 3em;
+
+}
+
+.comment-top-box> button{
+    font-size: 20px;
+    padding: 5px 15px;
+    width: fit-content;
+    margin: auto;
+    border-radius: 20px;
+    background-color: #909090;
+    color: white;
+    border-style: none;
 }
 
 .comment-count{

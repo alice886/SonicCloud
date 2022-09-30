@@ -6,21 +6,30 @@ import CreateAlbumModal from '../AlbumFormModal/index'
 
 function MyAlbums() {
     const dispatch = useDispatch();
-
+    const history = useHistory();
+    const [myalbumLoaded, setMyalbumLoaded] = useState(false);
     const sessionUser = useSelector(state => state.session.user);
     const myAlbums = useSelector(state => Object.values(state.album));
 
     useEffect(() => {
-        dispatch(getMyAlbums())
-    }, [dispatch])
+        dispatch(getMyAlbums()).then(() => setMyalbumLoaded(true))
+    }, [dispatch, myAlbums?.length])
 
-    return (
-        <>
-            <CreateAlbumModal />
-            <div className="all-song-container">
+    if (!sessionUser) {
+        history.push('/');
+    }
+
+
+    return myalbumLoaded && (
+        <div className="myalbums-container">
+            <div className="myalbums-left">
+                {sessionUser && <CreateAlbumModal />}
+                <div>You have {myAlbums?.length} albums</div>
+            </div>
+            <div className="myalbums-right">
                 {myAlbums && myAlbums.map((album) => {
                     if (album?.userId === sessionUser?.id) {
-                        return <div className="eachsong" id={album.id}>
+                        return <div className="myalbums-each" id={album.id}>
                             <img src={album.previewImage} width='150' ></img>
                             <br></br>
                             <h4>album name:</h4>
@@ -30,7 +39,7 @@ function MyAlbums() {
                 })}
 
             </div>
-        </>
+        </div>
     )
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 
 function ProfileButton({ user }) {
@@ -31,30 +31,31 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button onClick={openMenu} className="profile-icon">
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
           <li className="user-dropdown">{user.username}</li>
-          <li className="user-dropdown">{user.email}</li>
-          {/* <li className="user-dropdown">
-            <Link to='/songs/mysongs'>
+
+          {/* <li className="user-dropdown">{user.email}</li> */}
+          <li className="profile-dropdown">
+            <NavLink to='/songs/mysongs'>
               My Songs
-            </Link>
+            </NavLink>
+          </li>
+          <li className="profile-dropdown">
+            <NavLink to='/albums/myalbums'>
+              My Albums
+            </NavLink>
           </li>
           <li className="user-dropdown">
-            <Link to='/albums/myalbums'>
-              My Albums
-            </Link>
-          </li> */}
-          {/* <li className="user-dropdown">
             <Link to='/playlists/myplaylists'>
               My Playlists
             </Link>
-          </li> */}
-          <li>
-            <button onClick={logout} className='logout-button'>Log Out</button>
+          </li>
+          <li className="profile-dropdown">
+            <button onClick={logout} className='logout-button'>Log out</button>
           </li>
         </ul>
       )}
