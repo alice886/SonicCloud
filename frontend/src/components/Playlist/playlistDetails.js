@@ -4,7 +4,7 @@ import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getAllPlaylists } from '../../store/playlist'
 import '../../css-package/playlist.css'
 
-function AllPlaylists() {
+function PlaylistsDetails() {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -14,7 +14,7 @@ function AllPlaylists() {
     // const currentUser = useSelector(state => state.session.user);
     // console.log('current user --',currentUser)
 
-    const allplaylists = useSelector(state => Object.values(state.playlist))
+    const oneplaylist = useSelector(state => Object.values(state.playlist))
     // const allsongs2 = useSelector(state => state.song)
     // allsongs.forEach(song => songArray.push(song))
     // console.log('allsongs ---1.1---', typeof allsongs)
@@ -22,7 +22,7 @@ function AllPlaylists() {
     return (
         <div className="playlist-container">
             <ul>
-                {allplaylists && allplaylists.map((playlist) => {
+                {oneplaylist && oneplaylist.map((playlist) => {
                     return <li className="eachplaylist" key={playlist.id}>
                         <NavLink to={`/playlists/${playlist.id}`}>{playlist.name}</NavLink>
                     </li>
