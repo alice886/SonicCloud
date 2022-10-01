@@ -20,7 +20,7 @@ module.exports = {
       {
         userId: 3,
         songId: 2,
-        body: 'love your work Riri!'
+        body: 'love your work!'
       },
       {
         userId: 3,
@@ -30,11 +30,11 @@ module.exports = {
       {
         userId: 3,
         songId: 4,
-        body: 'Confused, Izzo or Lizzo ??'
+        body: 'WOW, just WOW'
       },
       {
         userId: 3,
-        songId: 5,
+        songId: 1,
         body: 'my jam!'
       },
       {

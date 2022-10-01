@@ -29,14 +29,34 @@ module.exports = {
       },
       {
         songId: 6,
-        playlistId: 4,
-      },
-      {
-        songId: 4,
         playlistId: 5,
       },
       {
-        songId: 5,
+        songId: 7,
+        playlistId: 5,
+      },
+      {
+        songId: 8,
+        playlistId: 6,
+      },
+      {
+        songId: 9,
+        playlistId: 6,
+      },
+      {
+        songId: 10,
+        playlistId: 6,
+      },
+      {
+        songId: 11,
+        playlistId: 6,
+      },
+      {
+        songId: 12,
+        playlistId: 6,
+      },
+      {
+        songId: 13,
         playlistId: 6,
       },
     ], {});

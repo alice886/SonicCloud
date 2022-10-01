@@ -19,7 +19,7 @@ form li {
     justify-content: center;
 }
 
-#new-song-form{
+#new-song-form {
     margin: auto;
     margin-top: 10%;
 }
@@ -38,6 +38,15 @@ form li {
     flex-direction: column;
     float: left;
     color: black;
+}
+
+#new-album-form {
+    margin: auto;
+    margin-top: 10%;
+    /* position: absolute;
+    top: 35%;
+    left: 35%; */
+
 }
 
 #new-album-form li {

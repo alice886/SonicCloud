@@ -16,6 +16,7 @@ function Navigation({ isLoaded }) {
                 {/* <NavLink to="/songs/mysongs" className={'nav-library'}>My Songs</NavLink>
                 <NavLink to="/albums/myalbums" className={'nav-library'}>My Albums</NavLink> */}
                 {/* <NavLink to="/playlists/myplaylists" className={'nav-library'}>My Playlists</NavLink>| */}
+                <NavLink to="/playlists" className={'nav-discover'}>Playlists</NavLink>
                 < ProfileButton user={sessionUser} />
             </>
         );
@@ -35,9 +36,8 @@ function Navigation({ isLoaded }) {
                 {/* <a name="top"></a> */}
                 <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a>
                 <NavLink exact to="/" className={'nav-home'}> Home </NavLink>
-                <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>
                 <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>
-                {/* <NavLink to="/playlists" className={'nav-discover'}>Playlists</NavLink>| */}
+                <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>
                 {isLoaded && sessionLinks}
                 {/* <input type="text" placeholder="search    "></input> */}
             </div>

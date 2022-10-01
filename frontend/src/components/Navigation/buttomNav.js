@@ -15,7 +15,7 @@ function ButtomNavigation({ playing, songName, artistName }) {
     return (
         <div className='buttomnav'>
 
-            <div className='buttom-info-bar'>🎧 &nbsp;&nbsp;&nbsp;Now playing  &nbsp; &nbsp; &nbsp;...... &nbsp; &nbsp; &nbsp; {songName} &nbsp;&nbsp; &nbsp;...... &nbsp; &nbsp;&nbsp; by &nbsp;{artistName}</div>
+            <div className='buttom-info-bar'>🎧 &nbsp;&nbsp;&nbsp;Now playing  &nbsp; &nbsp; &nbsp; ---->   &nbsp; &nbsp; &nbsp; {songName} &nbsp;&nbsp; &nbsp;,      &nbsp; &nbsp;&nbsp; by &nbsp;{artistName}</div>
             {/* <a className='back-to-top' href="#top">back to top⬆</a> */}
             <div className="container-audio">
                 <audio controls loop className='botton-player' id='botton-player-bar'>

@@ -4,6 +4,26 @@ const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = requi
 const { User, Song, Album, Playlist, Comment, playlistSong } = require('../../db/models');
 
 
+// Get all Playlists created by the Current User
+// DONE
+router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
+    // const { user } = req;
+    const currentuserId = req.user.id;
+    if (currentuserId) {
+        const myplaylists = await Playlist.findAll({
+            where: {
+                userId: currentuserId,
+                // userId: user.dataValues.id,
+            },
+            include: [{ model: Song }]
+        })
+        return res.json(myplaylists);
+    } else {
+        res.status(404);
+        return res.json('playlist not found');
+    }
+})
+
 // getting all Playlists
 // DONE
 router.get('/', restoreUser, requireAuth, async (req, res) => {
@@ -43,7 +63,10 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
     const userId = req.user.id;
     const { songId, playlistId } = req.body
 
-    const theplaylist = await Playlist.findByPk(playlistId);
+    const theplaylist = await Playlist.findByPk(playlistId, {
+        include: [{ model: Song }]
+    }
+    );
     if (!theplaylist) return res.status(404).json({
         "message": "Playlist couldn't be found",
         "statusCode": 404
@@ -57,6 +80,18 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
         res.status(404);
         return next(authorizationRequire());
     }
+    const songinPlaylist = await playlistSong.findAll(
+        {
+            where: {
+                playlistId: playlistId,
+                songId: songId,
+            }
+        }
+    );
+    if (songinPlaylist) return res.status(400).json({
+        "message": "Song already added to playlist",
+        "statusCode": 400
+    });
     const songtoPlaylist = await playlistSong.create({
         songId,
         playlistId
@@ -65,12 +100,52 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
     return res.json(songtoPlaylist)
 })
 
+// Delete a Song in a Playlist based on the song's id
+// DONE
+router.delete('/myplaylists/', restoreUser, requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+    const { songId, playlistId } = req.body
+
+    const songinPlaylist = await playlistSong.findAll(
+        {
+            where: {
+                playlistId: playlistId,
+                songId: songId,
+            }
+        }
+    );
+    if (!songinPlaylist) return res.status(404).json({
+        "message": "Couldn't found the song in this playlist",
+        "statusCode": 404
+    });
+
+    const theplaylist = await Playlist.findByPk(playlistId);
+    if (userId !== theplaylist.userId) {
+        res.status(404);
+        return next(authorizationRequire());
+    }
+
+    await playlistSong.destroy({
+        where: {
+            playlistId: playlistId,
+            songId: songId,
+        }
+    });
+
+    return res.json({
+        message: "Song in playlist successfully deleted",
+        statusCode: 200
+    })
+})
+
 
 // Get details of a Playlist from an id
 // DONE
 router.get('/:playlistId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const theplaylistId = req.params.playlistId;
-    const thatPlaylist = await Playlist.findByPk(theplaylistId);
+    const thatPlaylist = await Playlist.findByPk(theplaylistId, {
+        include: [{ model: Song }]
+    });
     if (!thatPlaylist) return res.status(404).json({
         "message": "Playlist couldn't be found",
         "statusCode": 404
@@ -142,23 +217,7 @@ router.delete('/myplaylists', restoreUser, requireAuth, async (req, res, next) =
 })
 
 
-// Get all Playlists created by the Current User
-// DONE
-router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
-    const { user } = req;
-    if (user) {
-        const myplaylists = await Playlist.findAll({
-            where: {
-                userId: user.dataValues.id,
-            },
-            // include: Song
-        })
-        return res.json(myplaylists);
-    } else {
-        res.status(404);
-        return res.json('playlist not found');
-    }
-})
+
 
 
 

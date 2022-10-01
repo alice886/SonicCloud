@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getAllPlaylists } from '../../store/playlist'
+import '../../css-package/playlist.css'
 
 function AllPlaylists() {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function AllPlaylists() {
     // console.log('allsongs ---1.1---', typeof allsongs)
 
     return (
-        <div className="playlist-container"> ...... all playlists on SonicCloud ......
+        <div className="playlist-container">
             <ul>
                 {allplaylists && allplaylists.map((playlist) => {
                     return <li className="eachplaylist" key={playlist.id}>
