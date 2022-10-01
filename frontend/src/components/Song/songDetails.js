@@ -6,11 +6,12 @@ import EditSongModal from '../SongFormModal/edit-index'
 import LoginForm from '../LoginFormModal/LoginForm'
 import SongComments from '../Comments/index'
 
-function SongDetails({ playing, setPlaying ,setSongName, setArtistName}) {
+function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
 
     const dispatch = useDispatch();
     const { songId } = useParams();
     const [played, setPlayed] = useState(false)
+    const [showPlaylistSelect, setShowPlaylistSelect] = useState(false);
     const [ppbutton, setPPbutton] = useState('▶')
     const sessionUser = useSelector(state => state.session.user);
     const targetSong = useSelector(state => (state.song));
@@ -50,6 +51,11 @@ function SongDetails({ playing, setPlaying ,setSongName, setArtistName}) {
         }
     }
 
+    const handleAddToPlaylist = async e => {
+        e.preventDefault();
+        showPlaylistSelect ? setShowPlaylistSelect(false) : setShowPlaylistSelect(true);
+    }
+
     const getReleaseDate = timeStamp => {
         const converted = new Date(timeStamp);
         const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -65,6 +71,8 @@ function SongDetails({ playing, setPlaying ,setSongName, setArtistName}) {
                         <div className='song-details'>
                             <h3 className='song-details'>{targetSong?.title}</h3>
                             <h4 className='song-details'>by {targetSong?.Artist?.username}</h4>
+                            <button onClick={handleAddToPlaylist}>+</button>
+                            {showPlaylistSelect && <>select lalalalalla</>}
                         </div>
                         <div className="song-cover">
                             <img src={targetSong?.previewImage} alt={targetSong?.title} />

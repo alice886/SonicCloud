@@ -47,16 +47,15 @@ export const getOnePlaylist = (playlistId) => async dispatch => {
     }
 };
 
-export const deleteOnePlaylist = (playlistId) => async dispatch => {
-    const response = await csrfFetch(`/api/playlists/myplaylists`, {
+export const deleteSonginPlaylist = (playload) => async dispatch => {
+    const response = await csrfFetch(`/api/playlists/myplaylists/`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(playlistId)
+        body: JSON.stringify(playload)
     });
-    // console.log('album id --', albumId);
     if (response.ok) {
         const message = await response.json();
-        await dispatch(removeOne(playlistId));
+        await dispatch(removeOne(playload));
         return message;
     }
     console.log('what is the response ---', response.ok)

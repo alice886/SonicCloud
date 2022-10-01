@@ -7,6 +7,7 @@ import '../../css-package/playlist.css'
 function MyPlaylists() {
     const dispatch = useDispatch();
     const [myplaylistLoaded, setMyPlaylistLoaded] = useState(false)
+    const [previewImage, setPreviewImage] = useState();
     const sessionUser = useSelector(state => state.session.user);
     const myPlaylists = useSelector(state => Object.values(state.playlist))
 
@@ -15,9 +16,21 @@ function MyPlaylists() {
         dispatch(getMyPlaylists()).then(() => setMyPlaylistLoaded(true))
     }, [dispatch, myPlaylists?.length])
 
+    const handleCreatePlaylist = async e =>{
+        e.preventDefault();
+        const payload = {
+            userId: sessionUser.id,
+            previewImage,
+        }
+        
+    }
+
     return myplaylistLoaded && (
         <div className="playlist-container">
-            <div>You have {myPlaylists.length} playlists</div>
+            <div>
+                <button>Create New Playlist</button>
+                <div>You have {myPlaylists.length} playlists</div>
+            </div>
             <div>
                 <ul>
                     {myPlaylists && myPlaylists.map((playlist) => {

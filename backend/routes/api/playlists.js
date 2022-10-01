@@ -39,7 +39,6 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
 // DONE
 router.post('/', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
-    console.log('userid is whattttt', req.user)
     const { name, previewImage } = req.body;
     if (name === undefined) return res.status(404).json({
         "message": "Validation Error",
@@ -81,12 +80,62 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
         res.status(404);
         return next(authorizationRequire());
     }
+    const songinPlaylist = await playlistSong.findAll(
+        {
+            where: {
+                playlistId: playlistId,
+                songId: songId,
+            }
+        }
+    );
+    if (songinPlaylist) return res.status(400).json({
+        "message": "Song already added to playlist",
+        "statusCode": 400
+    });
     const songtoPlaylist = await playlistSong.create({
         songId,
         playlistId
     })
     await songtoPlaylist.save();
     return res.json(songtoPlaylist)
+})
+
+// Delete a Song in a Playlist based on the song's id
+// DONE
+router.delete('/myplaylists/', restoreUser, requireAuth, async (req, res, next) => {
+    const userId = req.user.id;
+    const { songId, playlistId } = req.body
+
+    const songinPlaylist = await playlistSong.findAll(
+        {
+            where: {
+                playlistId: playlistId,
+                songId: songId,
+            }
+        }
+    );
+    if (!songinPlaylist) return res.status(404).json({
+        "message": "Couldn't found the song in this playlist",
+        "statusCode": 404
+    });
+
+    const theplaylist = await Playlist.findByPk(playlistId);
+    if (userId !== theplaylist.userId) {
+        res.status(404);
+        return next(authorizationRequire());
+    }
+
+    await playlistSong.destroy({
+        where: {
+            playlistId: playlistId,
+            songId: songId,
+        }
+    });
+
+    return res.json({
+        message: "Song in playlist successfully deleted",
+        statusCode: 200
+    })
 })
 
 
