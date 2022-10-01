@@ -12,6 +12,10 @@ const loadOne = (playlist) => ({
     type: LOAD_ONE,
     payload: playlist
 })
+const removeOne = (id) => ({
+    type: REMOVE_ONE,
+    payload: id
+})
 
 
 export const getAllPlaylists = () => async dispatch => {
@@ -43,6 +47,21 @@ export const getOnePlaylist = (playlistId) => async dispatch => {
     }
 };
 
+export const deleteOnePlaylist = (playlistId) => async dispatch => {
+    const response = await csrfFetch(`/api/playlists/myplaylists`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(playlistId)
+    });
+    // console.log('album id --', albumId);
+    if (response.ok) {
+        const message = await response.json();
+        await dispatch(removeOne(playlistId));
+        return message;
+    }
+    console.log('what is the response ---', response.ok)
+};
+
 const initialState = {};
 
 
@@ -57,6 +76,12 @@ const playlistReducer = (state = initialState, action) => {
             let newState = { ...action.payload }
             return newState;
         }
+        case REMOVE_ONE:
+            {
+                const newState = { ...state };
+                delete newState[action.payload];
+                return newState;
+            }
         default:
             return state;
     }
