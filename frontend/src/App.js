@@ -15,7 +15,8 @@ import SignupFormPage from "./components/SignupFormPage/index";
 import AllSongs from "./components/Song/index";
 import MySongs from "./components/Song/mysong";
 import SongDetails from "./components/Song/songDetails";
-import MyPlaylists from "./components/Playlist/index";
+import MyPlaylists from "./components/Playlist/myPlaylist";
+import PlaylistsDetails from "./components/Playlist/playlistDetails";
 import TestUserHome from "./components/UserHome/UserHome";
 import Navigation from "./components/Navigation/index";
 import ButtomNavigation from "./components/Navigation/buttomNav";
@@ -42,7 +43,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/" >
-            <TestUserHome playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
+            <TestUserHome playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
@@ -51,10 +52,16 @@ function App() {
             <MySongs />
           </Route>
           <Route exact path="/songs">
-            <AllSongs playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
+            <AllSongs playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
           </Route>
           <Route path="/songs/:songId">
-            <SongDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
+            <SongDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
+          </Route>
+          <Route exact path="/playlists/myplaylists">
+            <MyPlaylists />
+          </Route>
+          <Route exact path="/playlists/:playlistId">
+            <PlaylistsDetails />
           </Route>
           <Route path="/playlists">
             <AllPlaylists />
@@ -63,10 +70,10 @@ function App() {
             <MyAlbums />
           </Route>
           <Route exact path="/albums">
-            <AllAlbums playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName}/>
+            <AllAlbums playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
           </Route>
           <Route path="/albums/:albumId">
-            <AlbumDetails playing={playing} setPlaying={setPlaying}/>
+            <AlbumDetails playing={playing} setPlaying={setPlaying} />
           </Route>
           {/*
           <Route path="/playlists/myplaylists">
@@ -78,7 +85,7 @@ function App() {
           </Route>
         </Switch>
       )}
-      <ButtomNavigation playing={playing} songName={songName} artistName={artistName}/>
+      <ButtomNavigation playing={playing} songName={songName} artistName={artistName} />
     </>
   );
 }

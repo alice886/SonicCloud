@@ -1,35 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams } from "react-router-dom";
-import { getAllPlaylists } from '../../store/playlist'
+import { getOnePlaylist } from '../../store/playlist'
 import '../../css-package/playlist.css'
 
 function PlaylistsDetails() {
     const dispatch = useDispatch();
+    const [listLoaded, setListLoaded] = useState(false)
+    const { playlistId } = useParams();
+    // const theList = useSelector(state => Object.values(state.playlist));
+    const theList = useSelector(state => state.playlist);
 
     useEffect(() => {
-        dispatch(getAllPlaylists())
-    }, [dispatch])
+        dispatch(getOnePlaylist(playlistId)).then(() => setListLoaded(true))
+    }, [dispatch, playlistId])
 
-    // const currentUser = useSelector(state => state.session.user);
-    // console.log('current user --',currentUser)
+    const handleRemove = async e =>{
+        
+    }
 
-    const oneplaylist = useSelector(state => Object.values(state.playlist))
-    // const allsongs2 = useSelector(state => state.song)
-    // allsongs.forEach(song => songArray.push(song))
-    // console.log('allsongs ---1.1---', typeof allsongs)
-
-    return (
+    return listLoaded && (
         <div className="playlist-container">
-            <ul>
-                {oneplaylist && oneplaylist.map((playlist) => {
-                    return <li className="eachplaylist" key={playlist.id}>
-                        <NavLink to={`/playlists/${playlist.id}`}>{playlist.name}</NavLink>
-                    </li>
+            <div>
+                <img src={theList.previewImage}></img>
+                <div>{theList?.name}</div>
+            </div>
+            {(theList?.Songs?.length === 0) ? (
+                <div>you have not added songs to this playlist</div>
+            ) : <div>
+                {theList.Songs.map(each => {
+                    return <div key={each.id}><button>playbutt</button><NavLink to={`/songs/${each?.id}`}>{each.title}</NavLink><button>X</button></div>
                 })}
-            </ul>
+            </div>
+            }
         </div>
     )
 }
 
-export default AllPlaylists;
+export default PlaylistsDetails;

@@ -63,22 +63,22 @@ label {
 
 .topnav{
     margin: 0px;
-    padding: 0px;
-    height: 36px;
+    height: 43px;
     /* width: 100vw;
     left: 0;
     top: 0; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 div#topnav-container {
     /* border: solid 3px #f50; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
     width: 100%;
     text-align: center;
     display: inline-block;
-    height: 39px;
+    height: 42px;
     background-color: black;
     /* align-items: center; */
     /* left: 0px;
@@ -114,7 +114,6 @@ a.scicon {
     top: 0;
     float: left;
     text-align: center;
-    padding: 0% 4%;
     color: white;
     background-color: black;
     border-radius: 10%;
@@ -122,13 +121,15 @@ a.scicon {
     /* margin: 2.7em; */
     text-decoration: none;
     font-size: 21px;
-    font-weight: 200;
+    font-weight: 100;
+    padding: 0px;
     flex: 1;
     vertical-align: center;
     /* justify-content: center; */
     justify-content: space-evenly;
     overflow: hidden;
     width: 7em;
+    height: 100%;
 }
 
 #topnav-container > ul > li> a{

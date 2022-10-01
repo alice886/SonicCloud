@@ -4,6 +4,26 @@ const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = requi
 const { User, Song, Album, Playlist, Comment, playlistSong } = require('../../db/models');
 
 
+// Get all Playlists created by the Current User
+// DONE
+router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
+    // const { user } = req;
+    const currentuserId = req.user.id;
+    if (currentuserId) {
+        const myplaylists = await Playlist.findAll({
+            where: {
+                userId: currentuserId,
+                // userId: user.dataValues.id,
+            },
+            include: [{ model: Song }]
+        })
+        return res.json(myplaylists);
+    } else {
+        res.status(404);
+        return res.json('playlist not found');
+    }
+})
+
 // getting all Playlists
 // DONE
 router.get('/', restoreUser, requireAuth, async (req, res) => {
@@ -19,6 +39,7 @@ router.get('/', restoreUser, requireAuth, async (req, res) => {
 // DONE
 router.post('/', restoreUser, requireAuth, async (req, res) => {
     const userId = req.user.id;
+    console.log('userid is whattttt', req.user)
     const { name, previewImage } = req.body;
     if (name === undefined) return res.status(404).json({
         "message": "Validation Error",
@@ -43,7 +64,10 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
     const userId = req.user.id;
     const { songId, playlistId } = req.body
 
-    const theplaylist = await Playlist.findByPk(playlistId);
+    const theplaylist = await Playlist.findByPk(playlistId, {
+        include: [{ model: Song }]
+    }
+    );
     if (!theplaylist) return res.status(404).json({
         "message": "Playlist couldn't be found",
         "statusCode": 404
@@ -70,7 +94,9 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
 // DONE
 router.get('/:playlistId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const theplaylistId = req.params.playlistId;
-    const thatPlaylist = await Playlist.findByPk(theplaylistId);
+    const thatPlaylist = await Playlist.findByPk(theplaylistId, {
+        include: [{ model: Song }]
+    });
     if (!thatPlaylist) return res.status(404).json({
         "message": "Playlist couldn't be found",
         "statusCode": 404
@@ -142,23 +168,7 @@ router.delete('/myplaylists', restoreUser, requireAuth, async (req, res, next) =
 })
 
 
-// Get all Playlists created by the Current User
-// DONE
-router.get('/myplaylists', restoreUser, requireAuth, async (req, res) => {
-    const { user } = req;
-    if (user) {
-        const myplaylists = await Playlist.findAll({
-            where: {
-                userId: user.dataValues.id,
-            },
-            // include: Song
-        })
-        return res.json(myplaylists);
-    } else {
-        res.status(404);
-        return res.json('playlist not found');
-    }
-})
+
 
 
 
