@@ -3,6 +3,8 @@ const router = express.Router();
 const { setTokenCookie, restoreUser, requireAuth, authorizationRequire } = require('../../utils/auth');
 const { User, Song, Album, Playlist, Comment, playlistSong } = require('../../db/models');
 
+const { Op } = require("sequelize");
+
 
 // Get all Playlists created by the Current User
 // DONE
@@ -83,13 +85,15 @@ router.post('/myplaylists', restoreUser, requireAuth, async (req, res, next) => 
     const songinPlaylist = await playlistSong.findAll(
         {
             where: {
-                playlistId: playlistId,
-                songId: songId,
+                [Op.and]:
+                    [{ playlistId: playlistId },
+                    { songId: songId }]
             }
         }
     );
-    if (songinPlaylist) return res.status(400).json({
-        "message": "Song already added to playlist",
+    if (songinPlaylist.length > 0) return res.status(400).json({
+        "message": "Song already in this playlist",
+        // "message": songinPlaylist,
         "statusCode": 400
     });
     const songtoPlaylist = await playlistSong.create({
@@ -193,7 +197,7 @@ router.put('/myplaylists', restoreUser, requireAuth, async (req, res, next) => {
 
 // Delete a Playlist
 // DONE
-router.delete('/myplaylists', restoreUser, requireAuth, async (req, res, next) => {
+router.delete('/myplaylists/delete', restoreUser, requireAuth, async (req, res, next) => {
     const userId = req.user.id;
     const { id } = req.body;
     const theplaylist = await Playlist.findByPk(id)
