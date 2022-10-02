@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
 import EditSongModal from '../SongFormModal/edit-index'
+import AddingSongtoPlaylist from '../Playlist/addToPlaylist'
 import LoginForm from '../LoginFormModal/LoginForm'
 import SongComments from '../Comments/index'
 
@@ -10,7 +11,8 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
 
     const dispatch = useDispatch();
     const { songId } = useParams();
-    const [played, setPlayed] = useState(false)
+    const [played, setPlayed] = useState(false);
+    const [showPorCollapse, setShowPorCollapse] = useState('+')
     const [showPlaylistSelect, setShowPlaylistSelect] = useState(false);
     const [ppbutton, setPPbutton] = useState('▶')
     const sessionUser = useSelector(state => state.session.user);
@@ -54,6 +56,7 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
     const handleAddToPlaylist = async e => {
         e.preventDefault();
         showPlaylistSelect ? setShowPlaylistSelect(false) : setShowPlaylistSelect(true);
+        showPlaylistSelect ? setShowPorCollapse('+') : setShowPorCollapse('-');
     }
 
     const getReleaseDate = timeStamp => {
@@ -71,8 +74,8 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
                         <div className='song-details'>
                             <h3 className='song-details'>{targetSong?.title}</h3>
                             <h4 className='song-details'>by {targetSong?.Artist?.username}</h4>
-                            <button onClick={handleAddToPlaylist}>+</button>
-                            {showPlaylistSelect && <>select lalalalalla</>}
+                            <button onClick={handleAddToPlaylist}>{showPorCollapse}</button>
+                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect}/>}
                         </div>
                         <div className="song-cover">
                             <img src={targetSong?.previewImage} alt={targetSong?.title} />
