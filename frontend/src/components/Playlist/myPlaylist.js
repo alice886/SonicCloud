@@ -54,9 +54,8 @@ function MyPlaylists() {
     }
 
     return myplaylistLoaded && sessionUser && (
-        <div className="playlist-container">
-            <div>
-                <div>You have {myPlaylists.length} playlists</div>
+        <div className="playlist-home-container">
+            <div className="playlist-home-container-left">
                 <form>
                     Create a New Playlist
                     <input
@@ -74,7 +73,8 @@ function MyPlaylists() {
                     <button onClick={handleCreatePlaylist}>Create</button>
                 </form>
             </div>
-            <div>
+            <div className="playlist-home-container-right">
+                <div>You have {myPlaylists.length} playlists</div>
                 <ul>
                     {myPlaylists && myPlaylists.map((playlist) => {
                         return <li className="eachplaylist" key={playlist.id}>

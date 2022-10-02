@@ -61,7 +61,7 @@ function App() {
             <MyPlaylists />
           </Route>
           <Route exact path="/playlists/:playlistId">
-            <PlaylistsDetails />
+            <PlaylistsDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
           </Route>
           <Route path="/playlists">
             <AllPlaylists />
