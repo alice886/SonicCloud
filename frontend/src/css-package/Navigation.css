@@ -250,16 +250,16 @@ audio:nth-child(6) {
 /* About toggle show */
 .about-butt {
     background-color: black;
-    color: aliceblue;
-    font-size: 20px;
-    margin: 0px 55px;
+    color:chocolate;
+    font-size: 22px;
+    margin: 0px 40px;
     border-style: none;
 }
 
 .sidenav {
     height: 100%;
     /* width: 14%; */
-    width: 280px;
+    width: 0px;
     position: fixed;
     z-index: 1;
     top: 0;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -44,9 +44,9 @@ function Navigation({ isLoaded }) {
 
     return (
         <div className='topnav'>
-            <button onClick={showAbout} className='about-butt'>About</button>
             {/* {showSider &&  */}
-            <div id="mySidenav" class="sidenav">
+            <button onClick={showAbout} className='about-butt'>About</button>
+            <div id="mySidenav" class="sidenav" >
                 <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a>
                 <a href="javascript:void(0)" class="closebtn" onClick={hideAbout}>&times;</a>
                 <br></br>
@@ -56,7 +56,7 @@ function Navigation({ isLoaded }) {
                 <a href="#">About the Developer</a>
                 <a href="https://alice886.github.io/" className='sidebar-links'>
                     <img src={portfolioimg} height={'50px'}></img>
-                    <br></br> Portfolio
+                    <br></br>Alice's Portfolio
                 </a>
                 <a href="https://www.linkedin.com/in/alice886/" className='sidebar-links'>
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" height={'50px'} />
@@ -75,7 +75,6 @@ function Navigation({ isLoaded }) {
                 <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>
                 <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>
                 {isLoaded && sessionLinks}
-
                 {/* <input type="text" placeholder="search    "></input> */}
             </div>
         </div>

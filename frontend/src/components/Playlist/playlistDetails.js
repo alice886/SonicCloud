@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link, Route, useParams } from "react-router-dom";
 import { getOnePlaylist, deleteSonginPlaylist, editOnePlaylist } from '../../store/playlist'
+import PlaylistsPlay from "./playlistPlay";
 import '../../css-package/playlist.css'
 
 function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
@@ -11,6 +12,7 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
     const sessionUser = useSelector(state => state.session.user);
     const [listLoaded, setListLoaded] = useState(false);
     const [songSelect, setSongSelect] = useState();
+    const [playPlaylist, setPlayPlaylist] = useState(false);
     const [played, setPlayed] = useState(false);
 
     useEffect(() => {
@@ -123,6 +125,7 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
                 })}
             </div>
             }
+            {!playPlaylist && <PlaylistsPlay />}
         </div>
     )
 }
