@@ -71,11 +71,11 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
                 <div className="song-page">
                     <div className='song-present'>
                         <button className="songplay-button" value={targetSong.url} onClick={handleHomePlay} >{ppbutton}</button>
+                        <button onClick={handleAddToPlaylist} className='songaddtolist-button'>{showPorCollapse}</button>
                         <div className='song-details'>
                             <h3 className='song-details'>{targetSong?.title}</h3>
                             <h4 className='song-details'>by {targetSong?.Artist?.username}</h4>
-                            <button onClick={handleAddToPlaylist}>{showPorCollapse}</button>
-                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect}/>}
+                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect} />}
                         </div>
                         <div className="song-cover">
                             <img src={targetSong?.previewImage} alt={targetSong?.title} />

@@ -70,17 +70,19 @@ function MyPlaylists() {
                         value={previewImage}
                         onChange={e => setPreviewImage(e.target.value)}
                     ></input>
+                    <div>* Length of Playlist name must be within 2 and 80.</div>
+                    <br></br>
                     <button onClick={handleCreatePlaylist}>Create</button>
                 </form>
             </div>
             <div className="playlist-home-container-right">
-                <div>You have {myPlaylists.length} playlists</div>
+                <div className="myplaylist-summary">You have {myPlaylists.length} playlists</div>
                 <ul>
                     {myPlaylists && myPlaylists.map((playlist) => {
                         return <li className="eachplaylist" key={playlist.id}>
-                            <img src={playlist?.previewImage} height={'170px'}></img>
-                            <NavLink to={`/playlists/${playlist.id}`}>{playlist.name}</NavLink>
-                            <button value={playlist.id} onClick={handleDeletePlaylist}>Delete this Playlist</button>
+                            <div className="eachplaylist-img"><img src={playlist?.previewImage} height={'170px'}></img></div>
+                            <div className="eachplaylist-name"><NavLink to={`/playlists/${playlist.id}`}>{playlist.name}</NavLink></div>
+                            <div className="eachplaylist-delete"><button value={playlist.id} onClick={handleDeletePlaylist}>Delete this Playlist</button></div>
                         </li>
                     })}
                 </ul>

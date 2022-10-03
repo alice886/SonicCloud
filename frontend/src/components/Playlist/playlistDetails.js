@@ -93,6 +93,7 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
                             value={newPreviewImage}
                             onChange={e => setnewPreviewImage(e.target.value)}
                         ></input>
+                        <div>* Length of Playlist name must be within 2 and 80.</div>
                         <div>
                             <button onClick={handleEditPlaylist}>Update Now</button>
                             <button onClick={() => setReadyEdit(false)}>Cancel Update</button>
