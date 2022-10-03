@@ -19,7 +19,6 @@ import MyPlaylists from "./components/Playlist/myPlaylist";
 import PlaylistsDetails from "./components/Playlist/playlistDetails";
 import TestUserHome from "./components/UserHome/UserHome";
 import Navigation from "./components/Navigation/index";
-import Sider from './components/Navigation/Side'
 import ButtomNavigation from "./components/Navigation/buttomNav";
 import PageNotFound from "./components/PageNotFound";
 import AllAlbums from "./components/Album/index";
@@ -88,7 +87,6 @@ function App() {
         </Switch>
       )}
       <ButtomNavigation playing={playing} songName={songName} artistName={artistName} />
-      {/* {showSider && <Sider />} */}
     </>
   );
 }
