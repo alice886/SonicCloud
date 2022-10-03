@@ -28,9 +28,6 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
     const [readyEdit, setReadyEdit] = useState(false);
     // const theList = useSelector(state => Object.values(state.playlist));
 
-    console.log(theList.Songs)
-    console.log(typeof theList.Songs)
-
     const handlePlaylistPlay = async (e, song) => {
         e.preventDefault();
         await setPlaying(e.target.value);
@@ -50,15 +47,54 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
         }
     }
 
+    let playlistSongs = [];
+    theList.Songs.map(each => {
+        playlistSongs.push(each.url)
+    });
+    let songload = theList?.Songs[0].url;
+    let playlistvid = document?.getElementById("playlist-player-bar");
+
+    const handlePlayList = async e => {
+        e.preventDefault();
+        document.getElementById("playlistSidenav").style.width = "280px";
+        let fvid = document?.getElementById("playlist-player-bar");
+        let playindex = 0;
+        songload = theList?.Songs[playindex].url;
+        fvid.play();
+        console.log('it can capture the ended ====>>111', playlistvid)
+        fvid?.addEventListener('ended', async e => {
+            e.preventDefault();
+            playindex++;
+            if (playindex == theList?.Songs?.length) {
+                playindex = 0;
+            }
+            fvid.src = theList?.Songs[playindex]?.url;
+            fvid?.play();
+        },)
+    }
+
+    const hidePlaylist = async e => {
+        e.preventDefault();
+        document.getElementById("playlistSidenav").style.width = "0";
+    }
+
+    if (playlistvid) {
+        playlistvid.volume = 0.1;
+    }
+
     return listLoaded && (
-        <div className="playplaylist-container">
+        <div className="playplaylist-container" id="playlistSidenav" >
             {/* <div className="playplaylist-audio">
                 <audio controls loop className='botton-player' id='botton-player-bar'>
                     <source src={playing} type="audio/mp3"></source>
                 </audio>
             </div> */}
             <div>Now Playing playlist : {theList?.name}</div>
+            <button onClick={handlePlayList}>Play this Playlist</button>
             <img src={fakewaves} height={'90px'}></img>
+            <audio controls id='playlist-player-bar'>
+                <source src={songload} type="audio/mp3" ></source>
+            </audio>
             {theList?.Songs?.length && <div className="mylist-right-yes">
                 {theList.Songs.map(each => {
                     return <div key={each.id} className='playplaylist-each'>
