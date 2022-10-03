@@ -32,15 +32,16 @@ div.eachsong {
     border-radius: 15px 15px 15px 15px / 15px 15px 15px 15px;
     box-shadow: 10px 10px rgba(211, 84, 0, .2);
 } */
-.allsongs-cover-butt{
+.allsongs-cover-butt {
     position: relative;
 }
 
-.all-songplay-cover{
+.all-songplay-cover {
     /* position: absolute; */
     top: 10px;
     left: 10px;
 }
+
 .all-songplay-button {
     position: absolute;
     padding: 0px;
@@ -99,37 +100,39 @@ div.eachalbum {
     position: relative;
     color: black;
     transition: all .4s ease;
-    background: rgb(223,220,220);
-    background: linear-gradient(297deg, rgba(223,220,220,1) 55%, rgba(175,175,175,1) 100%, rgba(0,212,255,1) 100%, rgba(107,107,107,1) 100%);
+    background: rgb(223, 220, 220);
+    background: linear-gradient(297deg, rgba(223, 220, 220, 1) 55%, rgba(175, 175, 175, 1) 100%, rgba(0, 212, 255, 1) 100%, rgba(107, 107, 107, 1) 100%);
 }
 
-.song-in-album{
+.song-in-album {
     text-align: left;
     width: 100%;
     padding: 10px 30px;
     border-bottom: .5px solid white;
 }
 
-.song-in-album> a,
-.eachalbum>div>a{
+.song-in-album>a,
+.eachalbum>div>a {
     color: lightslategrey;
     text-decoration: none;
 }
-.eachalbum>div>a:hover{
+
+.eachalbum>div>a:hover {
     color: black;
     font-size: 22px;
 }
-.song-in-album> a:hover{
+
+.song-in-album>a:hover {
     color: black;
 }
 
-.song-in-album>button{
+.song-in-album>button {
     background-color: transparent;
     border-style: none;
     color: white;
 }
 
-.song-in-album>button:hover{
+.song-in-album>button:hover {
     color: #ff6600;
 }
 
@@ -277,8 +280,61 @@ div.edit-button {
     font-size: 24px;
 }
 
+.songaddtolist-button {
+    background-color: transparent;
+    color: #ff6600;
+    font-size: 60px;
+    border-style: none;
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+}
 
+.addtoplaylist-container {
+    position: absolute;
+    display: flex;
+    left: -70px;
+    bottom: -150px;
+    flex-direction: column;
+    width: 400px;
+    background-color: #cccccc;
+    height: 130px;
+    overflow-y: scroll;
+    padding: 10px;
+    
+}
 
+.playlist-radio {
+    font-size: 20px;
+    color: black;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    height: 30px;
+}
+
+.playlist-radio>input {
+    width: 20px;
+    height: 20px;
+    margin: 0px 10px;
+}
+
+.playlist-radio-add{
+    width: 140px;
+    font-size: 18px;
+    margin:  25px 5px 10px;
+    background-color: #800000;
+    border-style: none;
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.playlist-radio-name{
+    width: 380px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
 
 /* ==========================*/
@@ -328,7 +384,7 @@ div.album-details {
     background: linear-gradient(to top, #660033 0%, #993300 100%);
 }
 
-.album-d-left{
+.album-d-left {
     text-align: left;
 }
 
@@ -420,7 +476,7 @@ button.create-new-button {
 
 
 /* mysong container */
-.mysongs-container{
+.mysongs-container {
     display: grid;
     grid-template-columns: 2fr 5fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -428,29 +484,32 @@ button.create-new-button {
     padding: 1em;
 }
 
-.mysongs-container>div>button{
+.mysongs-container>div>button {
     font-size: 18px;
-    padding:  10px 20px;
+    padding: 10px 20px;
     margin: auto;
     margin-bottom: 20px;
 }
-.mysongs-left{
+
+.mysongs-left {
     text-align: left;
     flex-direction: column;
 }
-.mysongs-right{
+
+.mysongs-right {
     display: grid;
     grid-template-columns: 30% 30% 30%;
 }
 
-.mysongs-each{
+.mysongs-each {
     width: fit-content;
     display: flex;
     flex-direction: column;
     height: fit-content;
 }
+
 /* myalbum container */
-.myalbums-container{
+.myalbums-container {
     display: grid;
     grid-template-columns: 2fr 5fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -458,22 +517,24 @@ button.create-new-button {
     padding: 1em;
 }
 
-.myalbums-container>div>button{
+.myalbums-container>div>button {
     font-size: 18px;
-    padding:  10px 20px;
+    padding: 10px 20px;
     margin: auto;
     margin-bottom: 20px;
 }
-.myalbums-left{
+
+.myalbums-left {
     text-align: left;
     flex-direction: column;
 }
-.myalbums-right{
+
+.myalbums-right {
     display: grid;
     grid-template-columns: 30% 30% 30%;
 }
 
-.myalbums-each{
+.myalbums-each {
     width: fit-content;
     display: flex;
     flex-direction: column;

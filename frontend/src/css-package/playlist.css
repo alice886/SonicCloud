@@ -1,3 +1,201 @@
-.playlist-container{
+.playlist-container {
     min-height: 100vh;
+}
+
+.myplaylist-container {
+    display: grid;
+    grid-template-columns: 3fr 4fr;
+    font-size: 24px;
+    min-height: 100vh;
+}
+
+
+.mylist-one,
+.mylist-two {
+    width: 100%;
+    object-fit: cover;
+    height: fit-content;
+    padding: 30px;
+}
+
+.mylist-two>form {
+    width: 100%;
+    border-style: none;
+}
+
+.mylist-two>form>input {
+    margin: 5px;
+    padding: 10px;
+}
+
+.mylist-two>form>div {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px 0px;
+}
+
+.mylist-one>img {
+    width: 100%;
+    height: 100%;
+}
+
+.mylist-right-no,
+.mylist-right-yes {
+    width: 100%;
+    padding: 60px 30px;
+    text-align: left;
+    background: rgb(98, 96, 96);
+    background: radial-gradient(circle, rgba(98, 96, 96, 1) 0%, rgba(66, 66, 66, 1) 100%);
+}
+
+.mylist-right-no,
+.mylist-right-yes>div>a {
+    color: white;
+    font-size: 26px;
+    font-weight: lighter;
+    text-decoration: none;
+    font-family: unset;
+}
+
+.mylist-right-yes-each {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    justify-content: space-between;
+    position: relative;
+    margin: 10px 0px;
+}
+
+.mylist-yes-details {
+    width: 100%;
+    border-bottom: solid .5px lightgray;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.mylist-yes-details>a {
+    color: white;
+    font-size: 26px;
+    font-weight: lighter;
+    text-decoration: none;
+    font-family: unset;
+}
+
+
+.mylist-yes-remove>button {
+    font-size: 19px;
+    background-color: transparent;
+    color: orange;
+    border-radius: 10px;
+}
+
+.mylist-yes-details>button {
+    font-size: 19px;
+    background-color: transparent;
+    color: orange;
+    border-style: none;
+    margin: 0px 10px;
+
+}
+
+
+/* my plsylist home page */
+.playlist-home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    text-align: left;
+    min-height: 100vh;
+}
+
+.playlist-home-container-left {
+    box-sizing: border-box;
+    align-items: center;
+    background-color: #f1f1f1;
+}
+
+.playlist-home-container-left>form {
+    width: 100%;
+    border-style: none;
+    padding: 85px 15px;
+    margin: 0% 0px;
+    top: 50%;
+    text-align: center;
+    /* background-color: rgb(255,255,255,0.2); */
+    background-color: transparent;
+}
+
+.playlist-home-container-left>form>input {
+    width: 100%;
+    margin: 10px 0px;
+
+}
+
+.playlist-home-container-right {
+    padding: 20px 30px;
+    width: 100%;
+}
+
+.myplaylist-summary{
+    margin-top: 40px;
+    font-size: 26px;
+}
+
+.eachplaylist {
+    width: 100%;
+    margin: 30px 0px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: #f1f1f1;
+}
+
+.eachplaylist-img {
+    height: 100%;
+    width: 90px;
+    background-color: white;
+    overflow: hidden;
+    object-fit:cover;
+    margin-right: 30px;
+}
+
+.eachplaylist-img>img {
+    height: 100%;
+    /* object-fit: cover; */
+}
+
+.eachplaylist-name {
+    width: 700px;
+    display: flex;
+    align-items: center;
+    font-size: 26px; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.eachplaylist-name >a{
+    font-size: 24px;
+    text-decoration: none;
+}
+.eachplaylist-name >a:hover{
+    color: orangered;
+    text-decoration: underline;
+
+}
+
+.eachplaylist-delete {
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    width: 180px;
+}
+.eachplaylist-delete>button{
+    font-size: 18px;
+    padding: 10px 5px;
+    border-style: none;
+    border-radius: 5px;
+    color: black;
+}
+.eachplaylist-delete>button:hover{
+    color: orangered;
 }

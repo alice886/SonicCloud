@@ -148,7 +148,7 @@ router.delete('/myplaylists/', restoreUser, requireAuth, async (req, res, next) 
 router.get('/:playlistId(\\d+)', restoreUser, requireAuth, async (req, res) => {
     const theplaylistId = req.params.playlistId;
     const thatPlaylist = await Playlist.findByPk(theplaylistId, {
-        include: [{ model: Song }]
+        include: [{ model: Song, include: [{ model: User, as: 'Artist' }] }, { model: User, as: 'Artist' }]
     });
     if (!thatPlaylist) return res.status(404).json({
         "message": "Playlist couldn't be found",

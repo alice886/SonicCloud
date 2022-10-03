@@ -43,17 +43,15 @@ function AddingSongtoPlaylist({ setShowPlaylistSelect }) {
     console.log('chosen songid number is ---', songId);
 
     return myplaylistLoaded && sessionUser && (
-        <div className="playlist-container">
-            <fieldset>
-                <legend>Please select your preferred playlist:</legend>
+        <div className="addtoplaylist-container">
+                {/* <legend>Please select your preferred playlist:</legend> */}
                 {myPlaylists && myPlaylists.map((playlist) => {
-                    return <div>
-                        <input type='radio' key={playlist?.id} value={playlist?.id} name='playlistchoice' onClick={e => setChosenPlaylist(e.target.value)}></input>
-                        <label>{playlist?.name}</label>
+                    return <div className="playlist-radio">
+                            <input type='radio' key={playlist?.id} value={playlist?.id} name='playlistchoice' onClick={e => setChosenPlaylist(e.target.value)}></input>
+                            <div className="playlist-radio-name">{playlist?.name}</div>
                     </div>
                 })}
-                <button onClick={handleAddtoPlaylist}>Add to Playlist</button>
-            </fieldset>
+                <button onClick={handleAddtoPlaylist} className="playlist-radio-add">Add to Playlist</button>
         </div>
     )
 }

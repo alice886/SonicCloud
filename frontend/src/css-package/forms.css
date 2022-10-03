@@ -98,3 +98,11 @@ div#buttons.button-container {
     align-items: center;
     justify-content: space-around;
 }
+
+
+#edit-album-form,
+#edit-song-form{
+    margin: auto;
+    position: static;
+    margin-top: 10%;
+}

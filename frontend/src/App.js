@@ -19,6 +19,7 @@ import MyPlaylists from "./components/Playlist/myPlaylist";
 import PlaylistsDetails from "./components/Playlist/playlistDetails";
 import TestUserHome from "./components/UserHome/UserHome";
 import Navigation from "./components/Navigation/index";
+import Sider from './components/Navigation/Side'
 import ButtomNavigation from "./components/Navigation/buttomNav";
 import PageNotFound from "./components/PageNotFound";
 import AllAlbums from "./components/Album/index";
@@ -29,6 +30,7 @@ import AllPlaylists from "./components/Playlist";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  // const [showSider, setShowSider] = useState(false)
   const [songName, setSongName] = useState('Gameboy');
   const [artistName, setArtistName] = useState('alice');
   const [playing, setPlaying] = useState('https://soniccloud886.s3.amazonaws.com/tunetank.com_6037_gameboy_by_omka.mp3');
@@ -36,10 +38,10 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-
+      <Navigation isLoaded={isLoaded}  />
       {isLoaded && (
         <Switch>
           <Route exact path="/" >
@@ -61,7 +63,7 @@ function App() {
             <MyPlaylists />
           </Route>
           <Route exact path="/playlists/:playlistId">
-            <PlaylistsDetails />
+            <PlaylistsDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
           </Route>
           <Route path="/playlists">
             <AllPlaylists />
@@ -86,6 +88,7 @@ function App() {
         </Switch>
       )}
       <ButtomNavigation playing={playing} songName={songName} artistName={artistName} />
+      {/* {showSider && <Sider />} */}
     </>
   );
 }

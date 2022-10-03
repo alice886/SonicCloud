@@ -16,6 +16,7 @@ function SongComments({ songId }) {
     const [commentSelected, setCommentSelected] = useState();
     const [confrimDelete, setConfirmDelete] = useState(false);
     const [errors, setErrors] = useState([]);
+    const [isDisabled, setIsDisabled] = useState(true)
 
     useEffect(() => {
         dispatch(getSongComments(songId)).then(() => setCommentLoaded(true))
@@ -44,12 +45,29 @@ function SongComments({ songId }) {
         }
     }
 
+    const newErrors = [];
+    useEffect(() => {
+        if (inputComment?.length === 0) {
+            newErrors.push('Please enter your commment')
+        }
+        setErrors(newErrors)
+        if (!errors.length) setIsDisabled(false);
+        else setIsDisabled(true)
+    }, [errors.length, newErrors.length, inputComment])
+
+    console.log('what is the length of errors', errors.length)
+
     const handlePostComment = async e => {
         e.preventDefault();
         const payload = {
             songId,
             userId: sessionUser.id,
             body: inputComment
+        }
+
+        if (!inputComment) {
+            window.alert('please enter your comment!')
+            history.push(`/songs/${songId}`);
         }
 
         setErrors([]);
@@ -152,15 +170,15 @@ function SongComments({ songId }) {
                     required
                     value={inputComment}
                     onChange={e => setInputComment(e.target.value)} />
-                <button onClick={handlePostComment}>Post</button>
-                <ul>
+                <button onClick={handlePostComment} disabled={isDisabled}>Post</button>
+                {/* <ul>
                     {errors.map((error, idx) => {
                         if (error !== 'Invalid value') {
                             return <li key={idx}>{error}</li>
                         }
                     }
                     )}
-                </ul>
+                </ul> */}
             </form>
             <div className="comment-count">{comments.length} comment(s)</div>
 
