@@ -103,6 +103,7 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
                     </form>
                 </div>) :
                 <div className="mylist-one">
+                    {!playPlaylist && <PlaylistsPlay />}
                     <img src={theList.previewImage} height={'600px'}></img>
                     <div>{theList?.name}</div>
                     {(sessionUser?.id === theList?.userId) && <button onClick={() => setReadyEdit(true)}>Edit This Playlist</button>}
@@ -125,7 +126,6 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
                 })}
             </div>
             }
-            {!playPlaylist && <PlaylistsPlay />}
         </div>
     )
 }

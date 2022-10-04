@@ -75,7 +75,7 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
                         <div className='song-details'>
                             <h3 className='song-details'>{targetSong?.title}</h3>
                             <h4 className='song-details'>by {targetSong?.Artist?.username}</h4>
-                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect} />}
+                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect} setShowPorCollapse={setShowPorCollapse}/>}
                         </div>
                         <div className="song-cover">
                             <img src={targetSong?.previewImage} alt={targetSong?.title} />

@@ -133,11 +133,11 @@ div.public-home {
     /* margin: 30px 1em; */
     /* overflow-x: scroll; */
     margin-bottom: 60px;
-    padding: 2em;
+    padding: 20px 40px;
 }
 
 div.eachhomesong {
-    width: 15%;
+    width: 13%;
     height: 220px;
     /* height: fit-content; */
     margin: 10px;

@@ -11,18 +11,19 @@
 }
 
 div.eachsong {
-    width: 50%;
+    width: 100%;
     padding: 10px;
-    margin: 20px;
-    display: grid;
+    margin: 10px;
+    /* display: grid; */
+    display: flex;
     align-items: center;
     flex-direction: row;
-    grid-template-columns: 2fr 7fr;
+    /* grid-template-columns: 2fr 7fr; */
     font-size: 18px;
     position: relative;
-    background: white;
+    background: rgb(241, 241, 241);
     color: black;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .15);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .15);
     transition: all .4s ease;
     border-radius: 5px;
     text-align: left;
@@ -34,6 +35,7 @@ div.eachsong {
 } */
 .allsongs-cover-butt {
     position: relative;
+    width: fit-content;
 }
 
 .all-songplay-cover {
@@ -65,7 +67,10 @@ div.eachsong {
 .song-r {
     /* height: 90px; */
     /* padding: 10px; */
-
+    margin-left: 50px;
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    font-size: 22px;
 }
 
 .song-r>audio {
@@ -87,21 +92,21 @@ div.eachsong {
 div.eachalbum {
     width: 90%;
     /* height: fit-content; */
-    padding: 15px 20px;
+    padding: 35px 20px;
     margin: 20px;
     align-items: center;
     display: grid;
     flex-direction: row;
     grid-template-columns: 1fr 6fr;
     gap: 20px;
-    /* border: #E5E8E8 solid 1px;
-    border-radius: 10%; */
+    /* border: #E5E8E8 solid 1px; */
+    border-radius: 5px;
     font-size: 18px;
     position: relative;
     color: black;
     transition: all .4s ease;
-    background: rgb(223, 220, 220);
-    background: linear-gradient(297deg, rgba(223, 220, 220, 1) 55%, rgba(175, 175, 175, 1) 100%, rgba(0, 212, 255, 1) 100%, rgba(107, 107, 107, 1) 100%);
+    background: rgb(239, 238, 238);
+    background: linear-gradient(200deg, rgb(223, 223, 223) 95%, rgba(175, 175, 175, 1) 100%, rgba(0, 212, 255, 1) 100%, rgb(51, 48, 48) 100%);
 }
 
 .song-in-album {
@@ -113,7 +118,7 @@ div.eachalbum {
 
 .song-in-album>a,
 .eachalbum>div>a {
-    color: lightslategrey;
+    color: rgb(102, 101, 101);
     text-decoration: none;
 }
 

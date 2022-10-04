@@ -18,7 +18,7 @@ function Navigation({ isLoaded }) {
                 {/* <NavLink to="/songs/mysongs" className={'nav-library'}>My Songs</NavLink>
                 <NavLink to="/albums/myalbums" className={'nav-library'}>My Albums</NavLink> */}
                 {/* <NavLink to="/playlists/myplaylists" className={'nav-library'}>My Playlists</NavLink>| */}
-                <NavLink to="/playlists" className={'nav-discover'}>Playlists</NavLink>
+                {/* <NavLink to="/playlists" className={'nav-discover'}>Playlists</NavLink> */}
                 < ProfileButton user={sessionUser} />
             </>
         );
