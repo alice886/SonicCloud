@@ -44,13 +44,13 @@
     width: 100%;
     padding: 60px 30px;
     text-align: left;
-    background: rgb(98, 96, 96);
-    background: radial-gradient(circle, rgba(98, 96, 96, 1) 0%, rgba(66, 66, 66, 1) 100%);
+    /* background: #f4f4f4 */
+    background-color: rgb(238, 238, 238);
 }
 
 .mylist-right-no,
 .mylist-right-yes>div>a {
-    color: white;
+    color: black;
     font-size: 26px;
     font-weight: lighter;
     text-decoration: none;
@@ -75,7 +75,7 @@
 }
 
 .mylist-yes-details>a {
-    color: white;
+    color: black;
     font-size: 26px;
     font-weight: lighter;
     text-decoration: none;
@@ -86,6 +86,7 @@
 .mylist-yes-remove>button {
     font-size: 19px;
     background-color: transparent;
+    border-color: burlywood;
     color: orange;
     border-radius: 10px;
 }
@@ -136,7 +137,7 @@
     width: 100%;
 }
 
-.myplaylist-summary{
+.myplaylist-summary {
     margin-top: 40px;
     font-size: 26px;
 }
@@ -156,7 +157,7 @@
     width: 90px;
     background-color: white;
     overflow: hidden;
-    object-fit:cover;
+    object-fit: cover;
     margin-right: 30px;
 }
 
@@ -169,15 +170,17 @@
     width: 700px;
     display: flex;
     align-items: center;
-    font-size: 26px; 
+    font-size: 26px;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-.eachplaylist-name >a{
+
+.eachplaylist-name>a {
     font-size: 24px;
     text-decoration: none;
 }
-.eachplaylist-name >a:hover{
+
+.eachplaylist-name>a:hover {
     color: orangered;
     text-decoration: underline;
 
@@ -189,13 +192,127 @@
     align-items: center;
     width: 180px;
 }
-.eachplaylist-delete>button{
+
+.eachplaylist-delete>button {
     font-size: 18px;
     padding: 10px 5px;
     border-style: none;
     border-radius: 5px;
     color: black;
 }
-.eachplaylist-delete>button:hover{
+
+.eachplaylist-delete>button:hover {
     color: orangered;
+}
+
+
+/* playlist toggle  */
+
+/* .about-butt {
+    background-color: black;
+    color:chocolate;
+    font-size: 22px;
+    margin: 0px 40px;
+    border-style: none;
+} */
+.playPlaylist-component {
+    height: 50px;
+    left: -15px;
+    position: relative;
+    text-align: center;
+    width: 100%
+}
+
+.playPlaylistButt {
+    left: 0px;
+    position: absolute;
+    margin: auto;
+    font-size: 50px;
+    border-radius: 50% 50%;
+    height: 100px;
+    width: 100px;
+    background-color: rgb(238, 238, 238, .85);
+    color: orangered;
+    border-style: none;
+}
+
+.playlist-closebtn {
+    position: absolute;
+    right: 0px;
+    top: -30px;
+    font-size: 10px;
+    padding-left: 5px;
+}
+
+.playlist-closebtn:hover {
+    cursor: pointer;
+}
+
+.playPlaylistButt:hover {
+    color: orange;
+}
+
+#playlistSidenav {
+    height: 100%;
+    width: 30px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+#playlistSidenav>img {
+    width: 100%;
+}
+
+.mylist-right-yes-side {
+    margin-top: 30px;
+    text-align: left;
+    min-width: 100%;
+    padding-left: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#playlistSidenav a {
+    padding: 38px 5px 5px 2px;
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+    /* color: #818181; */
+    display: block;
+    transition: 0.3s;
+}
+
+#playlistSidenav>a {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+#playlistSidenav a:hover {
+    color: orangered;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
 }
