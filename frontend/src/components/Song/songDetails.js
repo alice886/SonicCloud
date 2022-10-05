@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
-import { getSongComments } from "../../store/comment";
+// import { getSongComments } from "../../store/comment";
 import EditSongModal from '../SongFormModal/edit-index'
 import AddingSongtoPlaylist from '../Playlist/addToPlaylist'
 import LoginForm from '../LoginFormModal/LoginForm'
@@ -24,9 +24,9 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
         dispatch(getOneSong(songId))
     }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getSongComments(songId))
-    }, [dispatch, songId])
+    // useEffect(() => {
+    //     dispatch(getSongComments(songId))
+    // }, [dispatch, songId])
 
     if (!sessionUser) {
         return (
@@ -101,7 +101,7 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
                             <h4 className='song-details'>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
                             <h4 className='song-details'>About this song: {targetSong?.description}</h4>
                         </div>
-                        <SongComments songId={songId} comments={comments}/>
+                        <SongComments songId={songId}/>
                     </div>
 
                     {/* <div className="song-audio-detail">
