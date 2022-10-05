@@ -63,7 +63,8 @@
 # Logged-in user
 ## Album/Song detail page
 ![Screen Shot 2022-10-04 at 6 29 13 PM](https://user-images.githubusercontent.com/93701088/193960275-6ca59518-e1f7-4b7a-a68f-e68ea576c3ec.png)
-![Screen Shot 2022-10-04 at 6 34 09 PM](https://user-images.githubusercontent.com/93701088/193960530-b93e1d1e-3be2-4163-9f8d-1b5b4666f6c3.png)
+![Screen Shot 2022-10-04 at 8 28 18 PM](https://user-images.githubusercontent.com/93701088/193975280-811dc4ab-44dd-45f8-9278-7c11d2a77b58.png)
+
 
 ## My Playlists
 ![Screen Shot 2022-10-04 at 6 34 59 PM](https://user-images.githubusercontent.com/93701088/193960637-f211ca07-50c5-4608-886f-095c01b9d41e.png)
