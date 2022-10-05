@@ -4,10 +4,10 @@ import { useHistory, useParams } from "react-router-dom";
 import { addComment, getSongComments, editMyComment, deleteComment } from "../../store/comment";
 import '../../css-package/comment.css'
 
-function SongComments({ songId, comments }) {
+function SongComments({ songId }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    // const comments = useSelector(state => Object.values(state.comment));
+    const comments = useSelector(state => Object.values(state.comment));
     const sessionUser = useSelector(state => state.session.user);
     const [commentLoaded, setCommentLoaded] = useState(false)
     const [inputComment, setInputComment] = useState();
@@ -23,11 +23,11 @@ function SongComments({ songId, comments }) {
     }, [])
 
     console.log('songId isssss', songId)
-    console.log('comments isssss', comments)
+    console.log('sessionUser?.id isssss', sessionUser?.id)
 
-    // useEffect(() => {
-    //     dispatch(getSongComments(songId)).then(() => setCommentLoaded(true))
-    // }, [dispatch,songId, confrimDelete, showEditText, commentLoaded, comments?.length])
+    useEffect(() => {
+        dispatch(getSongComments(songId)).then(() => setCommentLoaded(true))
+    }, [dispatch,songId, confrimDelete, showEditText, commentLoaded, comments?.length])
 
     const d = new Date();
     // const egtime = new Date('2022-09-28T04:57:41.000Z');
@@ -190,7 +190,7 @@ function SongComments({ songId, comments }) {
             <div className="comment-count">{comments.length} comment(s)</div>
 
             {commentLoaded && comments.map(comment => {
-                if (comment?.User?.id === sessionUser?.id) {
+                if (comment?.userId == sessionUser?.id) {
                     return <div key={comment?.id} className='each-comment'>
                         <div className="each-comment-top">
                             <div className="at-box">
