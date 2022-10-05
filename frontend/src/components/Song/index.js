@@ -31,7 +31,7 @@ function AllSongs({ playing, setPlaying, setSongName, setArtistName }) {
     // }
     // var WaveSurfer = require("wavesurfer.js");
     // const wavePlayer = document.getElementById('waveform');
-    const wavePlayer2 = document.getElementsByClassName('waveform2');
+    // const wavePlayer2 = document.getElementsByClassName('waveform2');
 
     // var wavesurfer = WaveSurfer.create({
     //     container: wavePlayer2,

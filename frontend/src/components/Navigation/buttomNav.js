@@ -4,12 +4,16 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import '../../css-package/Navigation.css';
 
-function ButtomNavigation({ playing, songName, artistName }) {
+function ButtomNavigation({ playing, songName, artistName, constPlaylist }) {
     const sessionUser = useSelector(state => state.session.user);
 
     let vid = document?.getElementById("botton-player-bar");
-    if(vid){
+    if (vid) {
         vid.volume = 0.1;
+    }
+
+    if (constPlaylist?.Songs?.length === 0) {
+        return;
     }
 
     return (

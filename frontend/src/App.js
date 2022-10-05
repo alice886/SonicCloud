@@ -17,6 +17,7 @@ import MySongs from "./components/Song/mysong";
 import SongDetails from "./components/Song/songDetails";
 import MyPlaylists from "./components/Playlist/myPlaylist";
 import PlaylistsDetails from "./components/Playlist/playlistDetails";
+import PlaylistsPlay from "./components/Playlist/playlistPlay"
 import TestUserHome from "./components/UserHome/UserHome";
 import Navigation from "./components/Navigation/index";
 import ButtomNavigation from "./components/Navigation/buttomNav";
@@ -33,6 +34,8 @@ function App() {
   const [songName, setSongName] = useState('Gameboy');
   const [artistName, setArtistName] = useState('alice');
   const [playing, setPlaying] = useState('https://soniccloud886.s3.amazonaws.com/tunetank.com_6037_gameboy_by_omka.mp3');
+  const [constPlaylist, setConstPlaylist] = useState();
+  const [constPlaylist1st, setConstPlaylist1st] = useState();
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -40,7 +43,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded}  />
+      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
           <Route exact path="/" >
@@ -62,7 +65,7 @@ function App() {
             <MyPlaylists />
           </Route>
           <Route exact path="/playlists/:playlistId">
-            <PlaylistsDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} />
+            <PlaylistsDetails playing={playing} setPlaying={setPlaying} setSongName={setSongName} setArtistName={setArtistName} constPlaylist={constPlaylist} setConstPlaylist={setConstPlaylist} constPlaylist1st={constPlaylist1st} setConstPlaylist1st={setConstPlaylist1st}/>
           </Route>
           <Route path="/playlists">
             <AllPlaylists />
@@ -86,7 +89,8 @@ function App() {
           </Route>
         </Switch>
       )}
-      <ButtomNavigation playing={playing} songName={songName} artistName={artistName} />
+      <PlaylistsPlay constPlaylist={constPlaylist} constPlaylist1st={constPlaylist1st} setConstPlaylist1st={setConstPlaylist1st}/>
+      <ButtomNavigation playing={playing} songName={songName} artistName={artistName} constPlaylist={constPlaylist} />
     </>
   );
 }

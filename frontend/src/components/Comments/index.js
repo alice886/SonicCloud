@@ -160,7 +160,8 @@ function SongComments({ songId }) {
 
     }
 
-    return comments && commentLoaded && (
+
+    return (
         <div className="comment-container">
             <form className="comment-top-box">
                 <input

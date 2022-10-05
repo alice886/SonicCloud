@@ -5,25 +5,25 @@ import { getOnePlaylist, deleteSonginPlaylist, editOnePlaylist } from '../../sto
 import fakewaves from '../../images/soundwaves02.gif'
 import '../../css-package/playlist.css'
 
-function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
+function PlaylistsPlay({ constPlaylist, constPlaylist1st, setConstPlaylist1st }) {
     const dispatch = useDispatch();
     const { playlistId } = useParams();
-    const theList = useSelector(state => state.playlist);
+    // const theList = useSelector(state => state.playlist);
     const sessionUser = useSelector(state => state.session.user);
-    const [listLoaded, setListLoaded] = useState(false);
+    // const [listLoaded, setListLoaded] = useState(false);
     const [songSelect, setSongSelect] = useState();
     const [played, setPlayed] = useState(false);
 
-    useEffect(() => {
-        dispatch(getOnePlaylist(playlistId)).then(() => {
-            setListLoaded(true);
-            setnewPlaylistName(theList?.name);
-            setnewPreviewImage(theList?.previewImage);
-        })
-    }, [dispatch, playlistId, theList?.Songs?.length])
+    // useEffect(() => {
+    //     dispatch(getOnePlaylist(playlistId)).then(() => {
+    //         setListLoaded(true);
+    //         setnewPlaylistName(theList?.name);
+    //         setnewPreviewImage(theList?.previewImage);
+    //     })
+    // }, [dispatch, playlistId, theList?.Songs?.length])
 
-    const [newPlaylistName, setnewPlaylistName] = useState(theList?.name);
-    const [newPreviewImage, setnewPreviewImage] = useState(theList?.previewImage);
+    // const [newPlaylistName, setnewPlaylistName] = useState(theList?.name);
+    // const [newPreviewImage, setnewPreviewImage] = useState(theList?.previewImage);
 
     const [readyEdit, setReadyEdit] = useState(false);
     // const theList = useSelector(state => Object.values(state.playlist));
@@ -49,37 +49,55 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
 
     let playlistvid = document?.getElementById("playlist-player-bar");
 
-    if (theList?.Songs.length === 0) {
+    if (constPlaylist?.Songs?.length === 0) {
         document.getElementById("playlistSidenav").style.width = "0px";
         return (<div className="playplaylist-container" id="playlistSidenav" class="playlistSidenav">
             -
         </div>)
     }
+    // else {
+    //     if (document.getElementById("playlistSidenav")) {
 
-    let playlistSongs = [];
-    theList.Songs.map(each => {
-        playlistSongs.push(each.url)
-    });
-    let songload = theList?.Songs[0].url;
+    //         document.getElementById("playlistSidenav").style.width = "290px";
+    //         let fvid = document?.getElementById("playlist-player-bar");
+    //         let playindex = 0;
+    //         fvid.play();
+    //         fvid?.addEventListener('ended', async e => {
+    //             e.preventDefault();
+    //             playindex++;
+    //             if (playindex == constPlaylist?.Songs?.length) {
+    //                 playindex = 0;
+    //             }
+    //             fvid.src = constPlaylist?.Songs[playindex]?.url;
+    //             fvid?.play();
+    //         })
+    //     }
+    // }
 
-    const handlePlayList = async e => {
-        e.preventDefault();
-        document.getElementById("playlistSidenav").style.width = "290px";
-        let fvid = document?.getElementById("playlist-player-bar");
-        let playindex = 0;
-        songload = theList?.Songs[playindex].url;
-        fvid.play();
-        console.log('it can capture the ended ====>>111', playlistvid)
-        fvid?.addEventListener('ended', async e => {
-            e.preventDefault();
-            playindex++;
-            if (playindex == theList?.Songs?.length) {
-                playindex = 0;
-            }
-            fvid.src = theList?.Songs[playindex]?.url;
-            fvid?.play();
-        },)
-    }
+    // let playlistSongs = [];
+    // theList.Songs.map(each => {
+    //     playlistSongs.push(each.url)
+    // });
+    // let songload = theList?.Songs[0].url;
+
+    // const handlePlayList = async e => {
+    //     e.preventDefault();
+    //     document.getElementById("playlistSidenav").style.width = "290px";
+    //     let fvid = document?.getElementById("playlist-player-bar");
+    //     let playindex = 0;
+    //     songload = theList?.Songs[playindex].url;
+    //     fvid.play();
+    //     console.log('it can capture the ended ====>>111', playlistvid)
+    //     fvid?.addEventListener('ended', async e => {
+    //         e.preventDefault();
+    //         playindex++;
+    //         if (playindex == theList?.Songs?.length) {
+    //             playindex = 0;
+    //         }
+    //         fvid.src = theList?.Songs[playindex]?.url;
+    //         fvid?.play();
+    //     },)
+    // }
 
 
     const hidePlaylist = async e => {
@@ -91,13 +109,35 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
         document.getElementById("playlistSidenav").style.width = "290px";
     }
 
-    if (playlistvid) {
-        playlistvid.volume = 0.1;
+    console.log('what is the src???????', constPlaylist1st)
+
+    let slideplay = document.getElementById("playlistSidenav");
+    let fvid = document?.getElementById("playlist-player-bar");
+
+    if (constPlaylist1st) {
+        let playindex = 0;
+        fvid.play();
+        fvid?.addEventListener('ended', async e => {
+            e.preventDefault();
+            playindex++;
+            if (playindex == constPlaylist?.Songs?.length) {
+                playindex = 0;
+            }
+            fvid.src = constPlaylist?.Songs[playindex]?.url;
+            fvid?.play();
+        },)
     }
 
-    return listLoaded && (
+    var resp = fvid?.play();
+
+    if (constPlaylist?.Songs?.length === 0) {
+        return;
+    }
+
+
+    return (
         <div className='playPlaylist-component'>
-            <button onClick={handlePlayList} className='playPlaylistButt'>▶</button>
+            {/* <button onClick={handlePlayList} className='playPlaylistButt'>▶</button> */}
             <div className="playplaylist-container" id="playlistSidenav" class="playlistSidenav">
                 {/* <div className="playplaylist-audio">
                 <audio controls loop className='botton-player' id='botton-player-bar'>
@@ -107,13 +147,13 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
                 <a onClick={toShowPlaylist} class="playlist-closebtn">{'<'}</a>
                 <a href="javascript:void(0)" class="playlist-openbtn" onClick={hidePlaylist}>&times;</a>
                 <div>Now Playing playlist :
-                    <NavLink to={`/songs/${theList?.id}`}> {theList?.name}</NavLink></div>
+                    <NavLink to={`/songs/${constPlaylist?.id}`}> {constPlaylist?.name}</NavLink></div>
                 <img src={fakewaves} height={'90px'}></img>
-                <audio controls id='playlist-player-bar'>
-                    <source src={songload} type="audio/mp3" ></source>
+                <audio controls id='playlist-player-bar' autoPlay loop>
+                    <source src={constPlaylist1st} type="audio/mp3" ></source>
                 </audio>
-                {theList?.Songs?.length && <div className="mylist-right-yes-side">
-                    {theList.Songs.map(each => {
+                {constPlaylist?.Songs?.length && <div className="mylist-right-yes-side">
+                    {constPlaylist?.Songs?.map(each => {
                         return <div key={each.id} className='playplaylist-each'>
                             <div className="mylist-yes-details">
                                 <NavLink to={`/songs/${each?.id}`}>🎵 &nbsp; {each.title}</NavLink>

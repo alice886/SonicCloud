@@ -5,7 +5,7 @@ import { getOnePlaylist, deleteSonginPlaylist, editOnePlaylist } from '../../sto
 import PlaylistsPlay from "./playlistPlay";
 import '../../css-package/playlist.css'
 
-function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
+function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName, constPlaylist, setConstPlaylist, setConstPlaylist1st }) {
     const dispatch = useDispatch();
     const { playlistId } = useParams();
     const theList = useSelector(state => state.playlist);
@@ -76,9 +76,32 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
             setPlayed(true);
         }
     }
+    if (theList?.Songs){
+        setConstPlaylist1st(theList?.Songs[0].url);
+    }
+
+    const handlePlayList = async e => {
+        e.preventDefault();
+        document.getElementById("playlistSidenav").style.width = "290px";
+        let fvid = document?.getElementById("playlist-player-bar");
+        let playindex = 0;
+        setConstPlaylist(theList);
+        setConstPlaylist1st(theList?.Songs[playindex].url);
+        fvid.play();
+        fvid?.addEventListener('ended', async e => {
+            e.preventDefault();
+            playindex++;
+            if (playindex == theList?.Songs?.length) {
+                playindex = 0;
+            }
+            fvid.src = theList?.Songs[playindex]?.url;
+            fvid?.play();
+        },)
+    }
 
     return listLoaded && (
         <div className="myplaylist-container">
+            <button onClick={handlePlayList} className='playPlaylistButt'>▶</button>
             {readyEdit ?
                 (<div className="mylist-two">
                     <form>
@@ -103,7 +126,7 @@ function PlaylistsDetails({ playing, setPlaying, setSongName, setArtistName }) {
                     </form>
                 </div>) :
                 <div className="mylist-one">
-                    {!playPlaylist && <PlaylistsPlay />}
+                    {/* {!playPlaylist && <PlaylistsPlay />} */}
                     <img src={theList.previewImage} height={'600px'}></img>
                     <div>{theList?.name}</div>
                     {(sessionUser?.id === theList?.userId) && <button onClick={() => setReadyEdit(true)}>Edit This Playlist</button>}
