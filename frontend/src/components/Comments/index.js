@@ -4,10 +4,10 @@ import { useHistory, useParams } from "react-router-dom";
 import { addComment, getSongComments, editMyComment, deleteComment } from "../../store/comment";
 import '../../css-package/comment.css'
 
-function SongComments({ songId }) {
+function SongComments({ songId, comments }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const comments = useSelector(state => Object.values(state.comment));
+    // const comments = useSelector(state => Object.values(state.comment));
     const sessionUser = useSelector(state => state.session.user);
     const [commentLoaded, setCommentLoaded] = useState(false)
     const [inputComment, setInputComment] = useState();
@@ -19,8 +19,15 @@ function SongComments({ songId }) {
     const [isDisabled, setIsDisabled] = useState(true)
 
     useEffect(() => {
-        dispatch(getSongComments(songId)).then(() => setCommentLoaded(true))
-    }, [dispatch, history, confrimDelete, showEditText, commentLoaded, comments?.length])
+        dispatch(getSongComments(songId))
+    }, [])
+
+    console.log('songId isssss', songId)
+    console.log('comments isssss', comments)
+
+    // useEffect(() => {
+    //     dispatch(getSongComments(songId)).then(() => setCommentLoaded(true))
+    // }, [dispatch,songId, confrimDelete, showEditText, commentLoaded, comments?.length])
 
     const d = new Date();
     // const egtime = new Date('2022-09-28T04:57:41.000Z');
@@ -160,7 +167,7 @@ function SongComments({ songId }) {
 
     }
 
-    return comments && commentLoaded && (
+    return (
         <div className="comment-container">
             <form className="comment-top-box">
                 <input
@@ -182,7 +189,7 @@ function SongComments({ songId }) {
             </form>
             <div className="comment-count">{comments.length} comment(s)</div>
 
-            {comments && comments.map(comment => {
+            {commentLoaded && comments.map(comment => {
                 if (comment?.User?.id === sessionUser?.id) {
                     return <div key={comment?.id} className='each-comment'>
                         <div className="each-comment-top">

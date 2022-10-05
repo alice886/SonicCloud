@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import { getOneSong, deleteOneSong, editOneSong } from '../../store/song';
+import { getSongComments } from "../../store/comment";
 import EditSongModal from '../SongFormModal/edit-index'
 import AddingSongtoPlaylist from '../Playlist/addToPlaylist'
 import LoginForm from '../LoginFormModal/LoginForm'
@@ -17,11 +18,15 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
     const [ppbutton, setPPbutton] = useState('▶')
     const sessionUser = useSelector(state => state.session.user);
     const targetSong = useSelector(state => (state.song));
+    const comments = useSelector(state => Object.values(state.comment));
 
     useEffect(() => {
         dispatch(getOneSong(songId))
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(getSongComments(songId))
+    }, [dispatch, songId])
 
     if (!sessionUser) {
         return (
@@ -75,7 +80,7 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
                         <div className='song-details'>
                             <h3 className='song-details'>{targetSong?.title}</h3>
                             <h4 className='song-details'>by {targetSong?.Artist?.username}</h4>
-                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect} setShowPorCollapse={setShowPorCollapse}/>}
+                            {showPlaylistSelect && <AddingSongtoPlaylist setShowPlaylistSelect={setShowPlaylistSelect} setShowPorCollapse={setShowPorCollapse} />}
                         </div>
                         <div className="song-cover">
                             <img src={targetSong?.previewImage} alt={targetSong?.title} />
@@ -96,7 +101,7 @@ function SongDetails({ playing, setPlaying, setSongName, setArtistName }) {
                             <h4 className='song-details'>Album: <NavLink to={`/albums/${targetSong?.Album?.id}`}>{targetSong?.Album?.name}</NavLink></h4>
                             <h4 className='song-details'>About this song: {targetSong?.description}</h4>
                         </div>
-                        <SongComments songId={songId} />
+                        <SongComments songId={songId} comments={comments}/>
                     </div>
 
                     {/* <div className="song-audio-detail">

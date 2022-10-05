@@ -119,10 +119,10 @@ router.get('/:songId/comments', restoreUser, requireAuth, async (req, res) => {
             ['id', 'DESC']
         ]
     })
-    if (!allComments.length) {
-        res.status(404);
-        return res.send(songnotfound);
-    }
+    // if (!allComments.length) {
+    //     res.status(404);
+    //     return res.send(songnotfound);
+    // }
     return res.json(allComments)
 })
 
