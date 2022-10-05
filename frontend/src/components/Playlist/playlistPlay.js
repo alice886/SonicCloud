@@ -49,7 +49,7 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
 
     let playlistvid = document?.getElementById("playlist-player-bar");
 
-    if (theList?.Songs.length === 0) {
+    if (theList?.Songs.length === 0 && document.getElementById("playlistSidenav")) {
         document.getElementById("playlistSidenav").style.width = "0px";
         return (<div className="playplaylist-container" id="playlistSidenav" class="playlistSidenav">
             -
@@ -60,7 +60,7 @@ function PlaylistsPlay({ playing, setPlaying, setSongName, setArtistName }) {
     theList.Songs.map(each => {
         playlistSongs.push(each.url)
     });
-    let songload = theList?.Songs[0].url;
+    let songload = theList?.Songs[0]?.url;
 
     const handlePlayList = async e => {
         e.preventDefault();
