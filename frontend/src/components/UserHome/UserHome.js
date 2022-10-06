@@ -55,7 +55,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
             ) : (
                 <div className='public-home' >
                     <div className='public-greeting'>Welcome to SonicCloud! </div>
-                    <div className='public-greeting'>Join us to discover more <NavLink className='home-signup' to='/signup' >Sign Up</NavLink> </div>
+                    <div className='public-greeting'>Join us to discover more  or <NavLink className='home-signup' to='/signup' >Sign Up Now</NavLink> </div>
                     <img className="landing-pic" src={bg}></img>
                 </div>
 
