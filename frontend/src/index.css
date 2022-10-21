@@ -78,7 +78,6 @@ div.public-present {
 
 div.public-home {
     /* padding: 2%; */
-    height: 450px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -88,7 +87,7 @@ div.public-home {
 
 #home-middle>div.public-home>div:nth-child(1) {
     position: absolute;
-    top: 1.5em;
+    top: 3.5em;
     color: white;
     font-size: 3.8em;
     font-weight: 700;
@@ -99,7 +98,7 @@ div.public-home {
 
 #home-middle>div.public-home>div:nth-child(2) {
     position: absolute;
-    top: 7.8em;
+    top: 13.8em;
     color: white;
     font-size: 1.5em;
     font-weight: 100;
