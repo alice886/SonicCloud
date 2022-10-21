@@ -15,7 +15,7 @@
     width: 100%;
     object-fit: cover;
     height: fit-content;
-    padding: 30px;
+    padding: 4em;
 }
 
 .mylist-two>form {
@@ -42,7 +42,7 @@
 .mylist-right-no,
 .mylist-right-yes {
     width: 100%;
-    padding: 60px 30px;
+    padding: 60px 7em;
     text-align: left;
     /* background: #f4f4f4 */
     background-color: rgb(238, 238, 238);
@@ -254,13 +254,13 @@
 
 #playlistSidenav {
     height: 100%;
-    width: 30px;
+    width: 50px;
     position: fixed;
-    z-index: 1;
+    z-index: 100000;
     top: 0;
     right: 0;
-    background-color: #f4f4f4;
-    overflow-x: hidden;
+    background-color: white;
+    /* overflow-x: hidden; */
     transition: 0.3s;
     padding-top: 20px;
     padding-left: 30px;
@@ -281,9 +281,9 @@
 }
 
 #playlistSidenav a {
-    padding: 38px 5px 5px 2px;
+    padding: 30px 5px 5px 2px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 20px;
     color: black;
     /* color: #818181; */
     display: block;
@@ -291,7 +291,7 @@
 }
 
 #playlistSidenav>a {
-    font-size: 36px;
+    font-size: 30px;
     margin-bottom: 20px;
 }
 

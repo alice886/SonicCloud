@@ -136,14 +136,13 @@ a.scicon {
     /* justify-content: space-evenly; */
     overflow: hidden;
     width: 150px;
-    height: 100%;
+    /* height: 100%; */
     margin: auto;
 
 }
 
-#topnav-container > a.nav-home.active{
-    height: 25px;
-}
+
+#topnav-container > a:nth-child(2),
 #topnav-container > a:nth-child(4),
 #topnav-container > a:nth-child(5),
 #topnav-container > a:nth-child(6){

@@ -244,6 +244,9 @@ img.landing-pic {
     height: 400px;
     /* bottom: 0; */
     /* width: 1268px */
+    width: 100%;
+    object-fit: cover;
+    bottom: 0;
 }
 
 button.login-button {
