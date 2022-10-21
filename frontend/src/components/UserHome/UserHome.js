@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Coverflow from 'react-coverflow';
 import { getAllSongs } from '../../store/song'
 // import bg from '../../images/red-vinyl.gif'
-import bg from '../../images/bluerecorder.gif'
+import bg from '../../images/drum.gif'
 // import bg from '../../images/vinyl-gif.gif'
 // import bg from '../../images/sunrise.jpeg'
 import { getUserDetail } from '../../store/user'

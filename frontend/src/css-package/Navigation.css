@@ -32,15 +32,22 @@ body {
     position: sticky;
     bottom: 0;
     height: fit-content;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
 }
 
 .buttom-info-bar {
     align-items: flex-end;
     position: sticky;
     bottom: 0;
-    height: fit-content;
-    background-color: #5b5b5b;
-    color: white;
+    height: 50px;
+    background-color: #f4f4f4;
+    color: black;
+    font-size: 16px;
+    overflow: hidden;
+    text-align: left;
+    padding-left: 5%;
     /* transform: translateY(-100%);
     position: absolute;
     bottom: 0; */
@@ -79,7 +86,8 @@ label {
 
 div#topnav-container {
     /* border: solid 3px #f50; */
-    width: 800px;
+    width: 100%;
+    /* width: 800px; */
     text-align: center;
     display: flex;
     /* justify-content: space-evenly; */
@@ -113,12 +121,12 @@ a.scicon {
 }
 
 #topnav-container a {
-    position: relative;
+    /* position: relative; */
     top: 0;
     float: left;
     text-align: center;
     color: white;
-    background-color: black;
+    /* background-color: black; */
     /* border-style: white solid 1px; */
     text-decoration: none;
     font-size: 21px;
@@ -159,25 +167,31 @@ a.scicon {
 } */
 
 li {
-    padding: 5px;
-    margin: 5px;
+    padding: 25px;
+    margin: auto;
     font-size: 20px;
-    /* position: relative; */
 
+}
+
+#topnav-container > button.profile-icon > i{
+    height: 30px;
+    top: 0px;
 }
 
 .profile-icon {
     background-color: black;
+    /* background-color: rgb(191, 94, 94); */
     color: orange;
     font-size: 21px;
     font-family: Arial, Helvetica, sans-serif;
-    /* border-style: solid 1px white; */
-    padding-bottom: 0px;
+    border-style: unset;
     /* right: 18.5%; */
     vertical-align: center;
-    margin-top: 5px;
-    right: 80px;
-    position: absolute;
+    /* margin-top: 5px; */
+    right: 0px;
+    /* position: absolute; */
+    z-index: 1000;
+    width: 230px;
 }
 
 #topnav-container button:hover {
@@ -186,14 +200,14 @@ li {
 
 
 ul.profile-dropdown {
-    position: absolute;
+    /* position: absolute; */
     min-width: 4em;
-    right: 18.5%;
+    /* right: 18.5%; */
     /* font-size: 90px; */
     border: 2px solid black;
     background-color: rgb(0, 0, 0, 0.8);
     word-wrap: break-word;
-    z-index: 98;
+    z-index: 1000;
     top: 42px;
     border-radius: 5px;
     display: flex;
@@ -228,7 +242,7 @@ a {
 
 .container-audio {
     width: 100%;
-    height: fit-content;
+    height: 50px;
     padding: 0px;
     background-color: #f4f4f4;
     color: #444;

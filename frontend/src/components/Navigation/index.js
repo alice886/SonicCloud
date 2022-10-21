@@ -69,11 +69,12 @@ function Navigation({ isLoaded }) {
             {/*  } */}
             <div id='topnav-container' >
                 {/* <a name="top"></a> */}
-                <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a>
+                <a className='scicon' to='/'><img src={scicon} alt='logo' /></a>
+                {/* <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a> */}
+                <button onClick={showAbout} className='about-butt'>About</button>
                 <NavLink exact to="/" className={'nav-home'}> Home </NavLink>
                 <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>
                 <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>
-                <button onClick={showAbout} className='about-butt'>About</button>
                 {isLoaded && sessionLinks}
                 {/* <input type="text" placeholder="search    "></input> */}
             </div>

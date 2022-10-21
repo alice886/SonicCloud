@@ -90,25 +90,27 @@ div.public-home {
 
 #home-middle>div.public-home>div:nth-child(1) {
     position: absolute;
-    top: 1em;
+    top: 1.5em;
     color: white;
     font-size: 3.8em;
-    font-weight: 100;
+    font-weight: 700;
     width: 100%;
     flex-wrap: nowrap;
+    text-shadow: 1px 1px 2px rgb(14, 12, 12), 0 0 1em rgb(210, 204, 204), 0 0 1em black;
 }
 
 #home-middle>div.public-home>div:nth-child(2) {
     position: absolute;
-    top: 5.3em;
+    top: 7.8em;
     color: white;
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-weight: 100;
+    text-shadow: 1px 1px 2px rgb(18, 16, 16), 0 0 1em rgb(215, 203, 203), 0 0 0.1em rgb(252, 246, 246);
 }
 
 .home-signup {
-    color: blue;
-    font-size: .8em;
+    color: rgb(244, 158, 11);
+    font-size: .7em;
     font-weight: 100;
     /* text-decoration: none; */
 }
@@ -133,12 +135,12 @@ div.public-home {
     /* margin: 30px 1em; */
     /* overflow-x: scroll; */
     margin-bottom: 60px;
-    padding: 20px 40px;
+    padding: 20px 8em;
 }
 
 div.eachhomesong {
-    width: 13%;
-    height: 220px;
+    width: 9%;
+    height: 180px;
     /* height: fit-content; */
     margin: 10px;
     align-items: center;
@@ -149,7 +151,6 @@ div.eachhomesong {
     border-radius: 10%; */
     font-size: 18px;
     position: relative;
-    background: white;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
     color: black;
     /* box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, .15); */
@@ -159,15 +160,17 @@ div.eachhomesong {
 
 .eachhomesong>img {
     position: absolute;
-    height: 150px;
-    width: 150px;
+    /* height: 120px;
+    width: 120px; */
+    /* height: 100%; */
+    width: 100%;
 
 }
 
 .home-songplay-button {
     position: absolute;
-    height: 150px;
-    width: 150px;
+    height: 90%;
+    width: 100%;
     background-color: transparent;
     color: transparent;
     font-size: 60px;
@@ -181,15 +184,21 @@ div.eachhomesong {
 
 .home-song-title {
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     width: 100%;
     height: 30px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-
-
+.home-song-title >a{
+    font-size: 1em;
+    color: rgb(156, 101, 0);
+    text-decoration: none;
+}
+.home-song-title >a:hover{
+    color: orange;
+}
 
 div.landing-box {
     position: relative;
@@ -220,6 +229,8 @@ div#home-middle {
     margin: auto;
 }
 
+
+
 div#buttomnav {
     bottom: 0;
     position: absolute;
@@ -231,14 +242,14 @@ div#buttomnav {
 img.landing-pic {
     width: 100%;
     object-fit: cover;
-    height: 460px;
-    bottom: 0;
+    height: 390px;
+    /* bottom: 0; */
     /* width: 1268px */
 }
 
 button.login-button {
-    position: absolute;
-    /* float: right; */
+    /* position: absolute; */
+    right: 0px;
     margin: 0 1%;
     height: 30px;
     min-width: 85px;
