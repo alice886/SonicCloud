@@ -45,11 +45,10 @@ function Navigation({ isLoaded }) {
     return (
         <div className='topnav'>
             {/* {showSider &&  */}
-            <button onClick={showAbout} className='about-butt'>About</button>
             <div id="mySidenav" class="sidenav" >
                 <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a>
                 <a href="javascript:void(0)" class="closebtn" onClick={hideAbout}>&times;</a>
-                <br></br>
+                <div></div>
                 <a href="#">About SonicCloud</a>
                 <a href="https://github.com/alice886/SonicCloud" className='sidebar-links'>GitHub Repo</a>
                 <a href="https://github.com/alice886/SonicCloud/wiki" className='sidebar-links'>Wiki Page</a>
@@ -70,7 +69,9 @@ function Navigation({ isLoaded }) {
             {/*  } */}
             <div id='topnav-container' >
                 {/* <a name="top"></a> */}
-                <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a>
+                <a className='scicon' to='/'><img src={scicon} alt='logo' /></a>
+                {/* <a className='scicon' href='/' to='/'><img src={scicon} alt='logo' /></a> */}
+                <button onClick={showAbout} className='about-butt'>About</button>
                 <NavLink exact to="/" className={'nav-home'}> Home </NavLink>
                 <NavLink to="/albums" className={'nav-discover'}>Albums</NavLink>
                 <NavLink to="/songs" className={'nav-discover'}>Songs</NavLink>

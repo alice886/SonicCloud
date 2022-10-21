@@ -8,7 +8,7 @@ function AllAlbums({ playing, setPlaying, setSongName, setArtistName }) {
     const dispatch = useDispatch();
     const [played, setPlayed] = useState(false)
     const [homesongloaded, setHomesongloaded] = useState(false)
-    const [songSelect, setSongSelect]=useState();
+    const [songSelect, setSongSelect] = useState();
 
     useEffect(() => {
         dispatch(getAllAlbums())
@@ -45,7 +45,9 @@ function AllAlbums({ playing, setPlaying, setSongName, setArtistName }) {
             {allAlbums && allAlbums.map((album) => {
                 return <div className="eachalbum" key={album.id}>
                     <div>
-                        <NavLink to={`/albums/${album.id}`}><img src={album.previewImage} width='150' ></img>{album.name}</NavLink>
+                        <NavLink to={`/albums/${album.id}`}><img src={album.previewImage} width='150' ></img>
+                            <br></br>
+                            {album.name}</NavLink>
                     </div>
                     {/* <div>Artist:
                         <br></br>
@@ -53,7 +55,7 @@ function AllAlbums({ playing, setPlaying, setSongName, setArtistName }) {
                     <div>
                         {album?.Songs?.map(each => {
                             return <div className="song-in-album">
-                                <button value={each.url} onClick={e=>handleHomePlay(e,each, album)} >{(songSelect === each?.id)?'||':'▶'}</button>&nbsp;  &nbsp; <NavLink to={`/songs/${each.id}`}>{each.title}</NavLink>
+                                <button value={each.url} onClick={e => handleHomePlay(e, each, album)} >{(songSelect === each?.id) ? '||' : '▶'}</button>&nbsp;  &nbsp; <NavLink to={`/songs/${each.id}`}>{each.title}</NavLink>
                             </div>
                         })}
                     </div>

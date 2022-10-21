@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Coverflow from 'react-coverflow';
 import { getAllSongs } from '../../store/song'
 // import bg from '../../images/red-vinyl.gif'
-import bg from '../../images/bluerecorder.gif'
+import bg from '../../images/drum.gif'
 // import bg from '../../images/vinyl-gif.gif'
 // import bg from '../../images/sunrise.jpeg'
 import { getUserDetail } from '../../store/user'
@@ -55,7 +55,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
             ) : (
                 <div className='public-home' >
                     <div className='public-greeting'>Welcome to SonicCloud! </div>
-                    <div className='public-greeting'>Join us to discover more <NavLink className='home-signup' to='/signup' >Sign Up</NavLink> </div>
+                    <div className='public-greeting'>Join us to discover more  or <NavLink className='home-signup' to='/signup' >Sign Up Now</NavLink> </div>
                     <img className="landing-pic" src={bg}></img>
                 </div>
 
