@@ -1,12 +1,11 @@
 /* ------- song containers and songs ------- */
 .all-song-container {
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* overflow-y: scroll; */
     min-width: 1130px;
     min-height: 90vh;
     margin: 10px 1em;
-    padding: 5px 60px;
+    padding: 5px 10em;
     width: 100%;
 }
 
@@ -21,7 +20,7 @@ div.eachsong {
     /* grid-template-columns: 2fr 7fr; */
     font-size: 18px;
     position: relative;
-    background: rgb(241, 241, 241);
+    background: rgb(245, 245, 245);
     color: black;
     box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, .15);
     transition: all .4s ease;
@@ -70,7 +69,7 @@ div.eachsong {
     margin-left: 50px;
     display: grid;
     grid-template-columns: 3fr 7fr;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .song-r>audio {
@@ -83,30 +82,29 @@ div.eachsong {
     flex-direction: column;
     /* overflow-y: scroll; */
     min-width: 1130px;
-    margin: 30px 2em;
-    padding: 0px 60px;
+    margin: 30px 5em;
+    padding: 0px 80px;
     width: 100%;
     min-height: 89vh;
 }
 
 div.eachalbum {
-    width: 90%;
+    width: 80%;
     /* height: fit-content; */
     padding: 35px 20px;
-    margin: 20px;
+    margin: 10px;
     align-items: center;
     display: grid;
     flex-direction: row;
-    grid-template-columns: 1fr 6fr;
+    grid-template-columns: 1fr 3fr;
     gap: 20px;
     /* border: #E5E8E8 solid 1px; */
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
     position: relative;
     color: black;
     transition: all .4s ease;
-    background: rgb(239, 238, 238);
-    background: linear-gradient(200deg, rgb(223, 223, 223) 95%, rgba(175, 175, 175, 1) 100%, rgba(0, 212, 255, 1) 100%, rgb(51, 48, 48) 100%);
+    background: rgb(231, 231, 231);
 }
 
 .song-in-album {
@@ -302,8 +300,9 @@ div.edit-button {
     bottom: -150px;
     flex-direction: column;
     width: 400px;
-    background-color: #cccccc;
-    height: 130px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    height: fit-content;
     overflow-y: scroll;
     padding: 10px;
     
@@ -327,8 +326,8 @@ div.edit-button {
 .playlist-radio-add{
     width: 140px;
     font-size: 18px;
-    margin:  25px 5px 10px;
-    background-color: #800000;
+    margin:  15px 5px 5px;
+    background-color: #ca5b00;
     border-style: none;
     color: white;
     padding: 8px;
@@ -368,12 +367,12 @@ h4.album-details {
 
 .album-details-bottom {
     text-align: left;
-    padding: 1em 2em;
+    padding: 2em 7em;
 }
 
 div.album-details {
     width: 100%;
-    padding: 10px;
+    padding: 3em;
     position: relative;
     color: white;
     /* box-shadow: 10px 10px 10px rgba(33, 47, 61, .45); */
@@ -385,7 +384,7 @@ div.album-details {
     height: fit-content;
     min-height: 20vh;
     width: 100%;
-    padding: 1em 2em;
+    padding: 2em 7em;
     background: linear-gradient(to top, #660033 0%, #993300 100%);
 }
 
@@ -502,8 +501,10 @@ button.create-new-button {
 }
 
 .mysongs-right {
+    width: 100%;
     display: grid;
-    grid-template-columns: 30% 30% 30%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2em;
 }
 
 .mysongs-each {

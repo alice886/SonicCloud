@@ -131,7 +131,6 @@ a.scicon {
     text-decoration: none;
     font-size: 21px;
     font-weight: 100;
-    padding: 5px 0px 0px;
     vertical-align: center;
     /* justify-content: center; */
     /* justify-content: space-evenly; */
@@ -140,6 +139,15 @@ a.scicon {
     height: 100%;
     margin: auto;
 
+}
+
+#topnav-container > a.nav-home.active{
+    height: 25px;
+}
+#topnav-container > a:nth-child(4),
+#topnav-container > a:nth-child(5),
+#topnav-container > a:nth-child(6){
+    height: 25px;
 }
 
 #topnav-container>ul>li>a {
