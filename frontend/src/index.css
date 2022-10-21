@@ -78,8 +78,7 @@ div.public-present {
 
 div.public-home {
     /* padding: 2%; */
-    height: fit-content;
-    width: 100%;
+    height: 450px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -241,11 +240,8 @@ div#buttomnav {
 img.landing-pic {
     width: 100%;
     object-fit: cover;
-    height: 400px;
     /* bottom: 0; */
-    /* width: 1268px */
-    width: 100%;
-    object-fit: cover;
+    object-fit:contain;
     bottom: 0;
 }
 
