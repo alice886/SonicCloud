@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Link, Route, useParams } from "react-router-dom";
+import { NavLink, Link, Route, useParams, useHistory } from "react-router-dom";
 import { getMyPlaylists, createOnePlaylist, deleteOnePlaylist } from '../../store/playlist'
 import '../../css-package/playlist.css'
 
 function MyPlaylists() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [myplaylistLoaded, setMyPlaylistLoaded] = useState(false);
     const [playlistName, setPlaylistName] = useState();
     const [previewImage, setPreviewImage] = useState();
@@ -15,7 +16,7 @@ function MyPlaylists() {
 
     useEffect(() => {
         dispatch(getMyPlaylists()).then(() => setMyPlaylistLoaded(true))
-    }, [dispatch, myPlaylists?.length])
+    }, [dispatch, sessionUser,history, myPlaylists?.length])
 
 
     const handleCreatePlaylist = async e => {
@@ -53,7 +54,11 @@ function MyPlaylists() {
 
     }
 
-    return myplaylistLoaded && sessionUser && (
+    if (!sessionUser) {
+        history.push('/');
+    }
+
+    return sessionUser && myplaylistLoaded && sessionUser && (
         <div className="playlist-home-container">
             <div className="playlist-home-container-left">
                 <form>
