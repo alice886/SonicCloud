@@ -16,7 +16,7 @@ function MyPlaylists() {
 
     useEffect(() => {
         dispatch(getMyPlaylists()).then(() => setMyPlaylistLoaded(true))
-    }, [dispatch, sessionUser,history, myPlaylists?.length])
+    }, [dispatch, myPlaylists?.length])
 
 
     const handleCreatePlaylist = async e => {
@@ -56,9 +56,10 @@ function MyPlaylists() {
 
     if (!sessionUser) {
         history.push('/');
+        // window.alert('You are now logged out')
     }
 
-    return sessionUser && myplaylistLoaded && sessionUser && (
+    return myplaylistLoaded && sessionUser && (
         <div className="playlist-home-container">
             <div className="playlist-home-container-left">
                 <form>
