@@ -10,13 +10,34 @@ html {
 html,
 body {
     /* max-height: 100vh; */
-    padding: 0;
-    margin: 0;
+    padding: auto;
+    margin: auto;
 }
+
+#home-middle>div.carousel_container>div.carousel>div>div {
+    width: 10em;
+    border: NONE;
+}
+
+#home-middle>div.carousel_container>div.carousel>div>div>div,
+.carousel__slide-overlay {
+    height: 10em;
+
+}
+
+.carousel__container {
+    height: 30em;
+    transform: translateZ(-538px) rotateY(600deg);
+    /* transform: unset; */
+
+}
+
+
+
 
 #root {
     /* min-height: 100%; */
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
     /* min-width: 1200px; */
@@ -26,22 +47,16 @@ body {
 }
 
 
-#home-middle > div.carousel_container > div.carousel > div > div{
+
+#home-middle>div.carousel_container>div.carousel>div>div {
     transform: translateZ(-528px) rotateY(330deg);
-    
-}
-.carousel__container{
-    height: 20em;
-    padding-top: 2em;
-    background-color: aquamarine;
-    transform: translateZ(-528px) rotateY(350deg);
-    /* transform: unset; */
 
 }
 
 
 
-div.carousel_container > div.carousel__slide> div.carousel__slide-overlay{
+
+div.carousel_container>div.carousel__slide>div.carousel__slide-overlay {
     transform: rotateY(330deg) translateZ(528px);
 }
 
@@ -71,7 +86,7 @@ div.carousel_container > div.carousel__slide> div.carousel__slide-overlay{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
+}
 
 body {
     min-height: 100%;
@@ -94,7 +109,7 @@ body {
 div {
     /* top: 30px; */
     justify-content: left;
-    width: 100%;
+    /* width: 100%; */
     box-sizing: border-box;
 }
 
@@ -133,28 +148,27 @@ div.public-home {
     display: flex;
     align-items: center;
     flex-direction: column;
-    overflow: hidden;
     /* overflow-y: scroll; */
 }
 
 #home-middle>div.public-home>div:nth-child(1) {
     position: absolute;
-    top: 3.5em;
+    top: 3.2em;
     color: white;
-    font-size: 3.8em;
+    font-size: 2.7em;
     font-weight: 700;
-    width: 100%;
+    /* width: 100%; */
     flex-wrap: nowrap;
-    text-shadow: 1px 1px 2px rgb(14, 12, 12), 0 0 1em rgb(210, 204, 204), 0 0 1em black;
+    text-shadow: 1px 1px 2px rgb(14, 12, 12), 0 0 1em rgb(210, 204, 204), 0 0 1em rgb(255, 163, 4);
 }
 
 #home-middle>div.public-home>div:nth-child(2) {
     position: absolute;
-    top: 13.8em;
+    top: 14em;
     color: white;
-    font-size: 1.5em;
-    font-weight: 100;
-    text-shadow: 1px 1px 2px rgb(18, 16, 16), 0 0 1em rgb(215, 203, 203), 0 0 0.1em rgb(252, 246, 246);
+    font-size: 1.2em;
+    font-weight: 600;
+    text-shadow: 1px 1px 5px rgb(18, 16, 16), 0 0 1em rgb(210, 204, 204), 0 0 0.1em rgb(238, 113, 11);
 }
 
 .home-signup {
@@ -256,8 +270,8 @@ div.landing-box {
 }
 
 div.landing-box-content {
-    color: white;
-    padding: 40px;
+    color: rgb(255, 255, 255);
+    /* padding: 40px; */
     margin: 30px;
     font-size: 26px;
     font-weight: 800px;
@@ -275,9 +289,12 @@ img.landing-box-pic {
 
 div#home-middle {
     /* min-height: 100vh; */
+    background-color: black;
     align-items: center;
     /* padding-top: 7em; */
-    margin: auto;
+    min-width: 700px;
+    /* margin: 0 13em; */
+    margin: 0 11em;
 }
 
 
@@ -290,12 +307,24 @@ div#buttomnav {
 
 }
 
-img.landing-pic {
+#home-middle>div.public-home>div.landing-pic {
+    /* background-color: blue; */
+    
     width: 100%;
-    object-fit: cover;
-    /* bottom: 0; */
-    object-fit: contain;
-    bottom: 0;
+    background-color: indigo;
+
+}
+
+#home-middle>div.public-home>div.landing-pic>img {
+    width: 100%;
+
+}
+
+#home-middle>div.carousel_container {
+    background-image: radial-gradient(circle, rgb(255, 98, 0), rgb(255, 149, 0),rgb(130, 82, 16),rgb(40, 25, 5), rgb(36, 36, 36));
+    width: 100%;
+    padding: auto 0;
+    margin: 0 auto 3em;
 }
 
 button.login-button {

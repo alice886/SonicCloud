@@ -4,10 +4,7 @@ import { NavLink, Route, useParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import Coverflow from 'react-coverflow';
 import songReducer, { getAllSongs } from '../../store/song'
-// import bg from '../../images/red-vinyl.gif'
-import bg from '../../images/drum.gif'
-// import bg from '../../images/vinyl-gif.gif'
-// import bg from '../../images/sunrise.jpeg'
+import bg from '../../images/landing01.jpeg'
 import { getUserDetail } from '../../store/user'
 import LoginForm from '../LoginFormModal/LoginForm'
 
@@ -43,7 +40,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
         content: (
             <div>
                 <span>{song.title}</span>
-                    <button  className="home-songplay-button" value={song.url} onClick={e => handleHomePlay(e, song)} >{(songSelect === song?.id) ? '||' : '▶'}</button>
+                <button className="home-songplay-button" value={song.url} onClick={e => handleHomePlay(e, song)} >{(songSelect === song?.id) ? '||' : '▶'}</button>
             </div>
         )
     }));
@@ -88,12 +85,14 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                 <div className='public-home' >
                     <div className='public-greeting'>Welcome to SonicCloud! </div>
                     <div className='public-greeting'>Join us to discover more  or <NavLink className='home-signup' to='/signup' >Sign Up Now</NavLink> </div>
-                    <img className="landing-pic" src={bg}></img>
+                    <div className="landing-pic">
+                        <img  src={bg}></img>
+                    </div>
                 </div>
 
             )}
             <div className='carousel_container'>
-            <Carousel items={items}/>
+                <Carousel items={items} />
             </div>
             {/* <div className="all-home-song-container">
                 {allsongs && allsongs.map((song) => {

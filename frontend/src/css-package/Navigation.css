@@ -29,7 +29,8 @@ body {
 
 .buttomnav {
     align-items: flex-end;
-    position: sticky;
+    position: absolute;
+    width: 100%;
     bottom: 0;
     height: fit-content;
     display: grid;
