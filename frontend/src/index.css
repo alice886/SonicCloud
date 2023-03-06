@@ -322,8 +322,9 @@ div#buttomnav {
     /* background-color: blue; */
 
     width: 100%;
-    height: 10;
-    background-color: indigo;
+    height: 100%;
+    /* background-color: indigo; */
+    background-image: radial-gradient(circle, rgb(93, 9, 153), rgb(11, 10, 10), rgb(93, 9, 153));
     overflow-y: hidden;
 }
 
