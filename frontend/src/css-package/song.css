@@ -4,7 +4,7 @@
     /* overflow-y: scroll; */
     /* min-width: 1130px; */
     background-color: #f9f9f9;
-    margin: 0px 9em ;
+    margin: 0px 9em;
     padding: 2em 9em 5em;
     min-height: 89vh;
     background-color: #f9f9f9;
@@ -82,7 +82,7 @@ div.eachsong {
     display: flex;
     flex-direction: column;
     /* overflow-y: scroll; */
-    margin: 0px 9em ;
+    margin: 0px 9em;
     padding: 2em 9em 5em;
     min-height: 89vh;
     background-color: #f9f9f9;
@@ -307,7 +307,7 @@ div.edit-button {
     height: fit-content;
     overflow-y: scroll;
     padding: 10px;
-    
+
 }
 
 .playlist-radio {
@@ -325,10 +325,10 @@ div.edit-button {
     margin: 0px 10px;
 }
 
-.playlist-radio-add{
+.playlist-radio-add {
     width: 140px;
     font-size: 18px;
-    margin:  15px 5px 5px;
+    margin: 15px 5px 5px;
     background-color: #ca5b00;
     border-style: none;
     color: white;
@@ -336,7 +336,7 @@ div.edit-button {
     border-radius: 5px;
 }
 
-.playlist-radio-name{
+.playlist-radio-name {
     width: 380px;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -472,10 +472,10 @@ button.song-edit-button {
 
 button.create-new-button {
     font-family: 'Manrope', sans-serif;
-    font-size: 30px;
+    font-size: 25px;
     color: navy;
-    margin: 30px;
-    padding: 0 90px;
+    margin: 3em;
+    padding: 0 2em;
     background-color: hsl(0, 0%, 98%);
     /* padding: 1px; */
     align-items: left;
@@ -486,16 +486,18 @@ button.create-new-button {
 /* mysong container */
 .mysongs-container {
     display: grid;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 2fr 6fr;
     grid-template-rows: 1fr 1fr 1fr;
     min-height: 100vh;
-    padding: 1em;
+    padding: 1em 2em;
+    margin: .3em 10em;
+    background-color: white;
 }
 
 .mysongs-container>div>button {
     font-size: 18px;
-    padding: 10px 20px;
-    margin: auto;
+    padding: 10px 2em;
+    margin: .5em;
     margin-bottom: 20px;
 }
 
@@ -508,13 +510,13 @@ button.create-new-button {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 2em;
+    gap: 1em;
 }
 
 .mysongs-each {
     width: fit-content;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: fit-content;
 }
 
@@ -525,6 +527,8 @@ button.create-new-button {
     grid-template-rows: 1fr 1fr 1fr;
     min-height: 100vh;
     padding: 1em;
+    margin: .3em 10em;
+    background-color: white;
 }
 
 .myalbums-container>div>button {

@@ -7,6 +7,8 @@
     grid-template-columns: 3fr 4fr;
     font-size: 24px;
     min-height: 100vh;
+    margin: .3em 4em;
+    background-color: white;
 }
 
 
@@ -104,9 +106,11 @@
 /* my plsylist home page */
 .playlist-home-container {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1.5fr 3fr;
     text-align: left;
     min-height: 100vh;
+    margin: .3em 4em;
+    background-color: white;
 }
 
 .playlist-home-container-left {
@@ -153,12 +157,12 @@
 }
 
 .eachplaylist-img {
-    height: 100%;
-    width: 90px;
+    height: 3em;
+    width: 3em;
     background-color: white;
     overflow: hidden;
     object-fit: cover;
-    margin-right: 30px;
+    margin-right: .2em;
 }
 
 .eachplaylist-img>img {

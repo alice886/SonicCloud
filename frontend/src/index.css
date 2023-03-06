@@ -148,6 +148,7 @@ div.public-home {
     display: flex;
     align-items: center;
     flex-direction: column;
+    height: 58vh;
     /* overflow-y: scroll; */
 }
 
