@@ -4,7 +4,10 @@ import { NavLink, Route, useParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import Coverflow from 'react-coverflow';
 import songReducer, { getAllSongs } from '../../store/song'
-import bg from '../../images/landing01.jpeg'
+// import bg from '../../images/landing01.jpeg'
+import bg1 from '../../images/landing01.jpeg'
+import bg2 from '../../images/landing02.jpeg'
+import bg3 from '../../images/landing03.jpeg'
 import { getUserDetail } from '../../store/user'
 import LoginForm from '../LoginFormModal/LoginForm'
 
@@ -18,6 +21,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     const [played, setPlayed] = useState(false)
     const [homesongloaded, setHomesongloaded] = useState(false)
     const [songSelect, setSongSelect] = useState();
+    const [landingpic, setLandingpic] = useState(2);
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
@@ -34,6 +38,45 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     //             </div>
     //         )
     //     }));
+
+    const bg = [bg1, bg2, bg3]
+
+    useEffect(() => {
+        const changePic = () => {
+            if (landingpic < 2) {
+                setLandingpic(landingpic += 1)
+            }
+            else { setLandingpic(0) }
+        }
+        const timer = setInterval(changePic, 3000)
+        return () => clearInterval(timer)
+    }, [])
+
+    // if (landingpic) {
+    //     const changePic = () => {
+    //         if (landingpic < 2) {
+    //             setLandingpic(landingpic += 1)
+    //         }
+    //         else { setLandingpic(0) }
+    //     }
+    //     const timer = setInterval(changePic, 3000)
+    // }
+
+
+    // useEffect(() => {
+    //     const changePic = () => {
+    //         if (landingpic < 2) {
+    //             setLandingpic(landingpic += 1)
+    //         }
+    //         else { setLandingpic(0) }
+    //     }
+    //     const timer = setInterval(changePic, 3000)
+    //     return () => clearInterval(timer)
+    // }, [])
+
+
+
+
     const items: CarouselItem[] = allsongs?.map(song => ({
         alt: `${song.title}`,
         image: `${song.previewImage}`,
@@ -82,7 +125,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                         <div >Hello {sessionUser?.username} </div>
                         <div >- Welcome back -  </div>
                     </div>
-                    <img className="landing-pic" src={bg} ></img>
+                    <img className="landing-pic" src={bg[landingpic]} ></img>
                 </div>
             ) : (
                 <div className='public-home' >
@@ -92,7 +135,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                     </div>
                     <div></div>
                     <div className="landing-pic">
-                        <img src={bg}></img>
+                        <img src={bg[landingpic]}></img>
                     </div>
                 </div>
 
