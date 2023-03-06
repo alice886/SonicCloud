@@ -30,12 +30,13 @@ body {
 .container-audio,
 .buttomnav {
     align-items: flex-end;
-    /* position: absolute; */
+    position: sticky;
     width: 100%;
     bottom: 0;
     height: fit-content;
     display: grid;
     grid-template-columns: 4fr 1fr;
+
 
 }
 
@@ -144,10 +145,10 @@ a.scicon {
 }
 
 
-#topnav-container > a:nth-child(2),
-#topnav-container > a:nth-child(4),
-#topnav-container > a:nth-child(5),
-#topnav-container > a:nth-child(6){
+#topnav-container>a:nth-child(2),
+#topnav-container>a:nth-child(4),
+#topnav-container>a:nth-child(5),
+#topnav-container>a:nth-child(6) {
     height: 25px;
 }
 
@@ -182,7 +183,7 @@ li {
 
 }
 
-#topnav-container > button.profile-icon > i{
+#topnav-container>button.profile-icon>i {
     height: 30px;
     top: 0px;
 }
@@ -277,7 +278,7 @@ audio:nth-child(6) {
 /* About toggle show */
 .about-butt {
     background-color: black;
-    color:chocolate;
+    color: chocolate;
     font-size: 22px;
     margin: 0px 40px;
     border-style: none;

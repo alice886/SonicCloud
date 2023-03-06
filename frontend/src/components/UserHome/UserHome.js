@@ -78,7 +78,10 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
         <div id='home-middle'>
             {sessionUser ? (
                 <div className='public-home'>
-                    <h2 className='public-greeting'>Welcome back, {sessionUser?.username}! </h2>
+                    <div className='public-greeting'>
+                        <div >Hello {sessionUser?.username} </div>
+                        <div >- Welcome back -  </div>
+                    </div>
                     <img className="landing-pic" src={bg} ></img>
                 </div>
             ) : (
