@@ -265,6 +265,7 @@ a {
 audio {
     position: sticky;
     bottom: 0;
+    width: 125%;
 
 }
 
