@@ -321,13 +321,15 @@ div#buttomnav {
     /* background-color: blue; */
 
     width: 100%;
+    height: 10;
     background-color: indigo;
-
+    overflow-y: hidden;
 }
 
 #home-middle>div.public-home>div.landing-pic>img {
     width: 100%;
-
+    height: 55vh;
+    max-height: max-content;
 }
 
 #home-middle>div.carousel_container {

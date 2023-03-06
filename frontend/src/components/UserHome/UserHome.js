@@ -21,7 +21,9 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     const [played, setPlayed] = useState(false)
     const [homesongloaded, setHomesongloaded] = useState(false)
     const [songSelect, setSongSelect] = useState();
-    const [landingpic, setLandingpic] = useState(2);
+    const bg = [bg1, bg2, bg3]
+    const [landingpic, setLandingpic] = useState(bg[0]);
+    const [picInx, setPicInx] = useState(0)
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
@@ -39,40 +41,21 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     //         )
     //     }));
 
-    const bg = [bg1, bg2, bg3]
+    useEffect(() => {
+        setLandingpic(bg[picInx])
+    }, [picInx])
 
     useEffect(() => {
         const changePic = () => {
-            if (landingpic < 2) {
-                setLandingpic(landingpic += 1)
-            }
-            else { setLandingpic(0) }
+            // if (landingpic < 2) {
+            //     setLandingpic(landingpic += 1)
+            // }
+            // else { setLandingpic(0) }
+            setPicInx(picInx == 2 ? 0 : picInx + 1)
         }
         const timer = setInterval(changePic, 3000)
         return () => clearInterval(timer)
-    }, [])
-
-    // if (landingpic) {
-    //     const changePic = () => {
-    //         if (landingpic < 2) {
-    //             setLandingpic(landingpic += 1)
-    //         }
-    //         else { setLandingpic(0) }
-    //     }
-    //     const timer = setInterval(changePic, 3000)
-    // }
-
-
-    // useEffect(() => {
-    //     const changePic = () => {
-    //         if (landingpic < 2) {
-    //             setLandingpic(landingpic += 1)
-    //         }
-    //         else { setLandingpic(0) }
-    //     }
-    //     const timer = setInterval(changePic, 3000)
-    //     return () => clearInterval(timer)
-    // }, [])
+    }, [picInx])
 
 
 
@@ -125,7 +108,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                         <div >Hello {sessionUser?.username} </div>
                         <div >- Welcome back -  </div>
                     </div>
-                    <img className="landing-pic" src={bg[landingpic]} ></img>
+                    <img className="landing-pic" src={landingpic} ></img>
                 </div>
             ) : (
                 <div className='public-home' >
@@ -135,7 +118,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                     </div>
                     <div></div>
                     <div className="landing-pic">
-                        <img src={bg[landingpic]}></img>
+                        <img src={landingpic}></img>
                     </div>
                 </div>
 
