@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Bitter:wght@100;200;400&family=Grape+Nuts&family=Macondo&family=Manrope:wght@200&family=Square+Peg&family=Syncopate&display=swap');
 
-html,
+
 input,
 textarea,
 select,
@@ -18,7 +18,6 @@ a {
   min-height: 100vh;
   width: 100%;
   /* margin: 0px 18%; */
-  background-color: white;
 }
 
 body {

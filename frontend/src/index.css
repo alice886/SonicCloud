@@ -7,7 +7,7 @@ html {
     /* max-height: 100vh; */
 }
 
-html,
+/* html, */
 body {
     /* max-height: 100vh; */
     padding: auto;
@@ -151,22 +151,28 @@ div.public-home {
     /* overflow-y: scroll; */
 }
 
-#home-middle>div.public-home>div:nth-child(1) {
+#home-middle>div.public-home>div.public-greeting {
+    top: 20%;
     position: absolute;
-    top: 3.2em;
+}
+
+
+/* #home-middle > div.public-home > div.public-greeting>div:nth-child(1) */
+#home-middle>div.public-home>div:nth-child(1) {
     color: white;
-    font-size: 2.7em;
+    font-size: 2.3em;
     font-weight: 700;
     /* width: 100%; */
     flex-wrap: nowrap;
     text-shadow: 1px 1px 2px rgb(14, 12, 12), 0 0 1em rgb(210, 204, 204), 0 0 1em rgb(255, 163, 4);
 }
 
-#home-middle>div.public-home>div:nth-child(2) {
-    position: absolute;
-    top: 14em;
+/* #home-middle>div.public-home>div:nth-child(2) { */
+#home-middle>div.public-home>div.public-greeting>div:nth-child(2) {
+    margin-top: 1em;
     color: white;
-    font-size: 1.2em;
+    justify-content: center;
+    font-size: .6em;
     font-weight: 600;
     text-shadow: 1px 1px 5px rgb(18, 16, 16), 0 0 1em rgb(210, 204, 204), 0 0 0.1em rgb(238, 113, 11);
 }
@@ -292,9 +298,9 @@ div#home-middle {
     background-color: black;
     align-items: center;
     /* padding-top: 7em; */
-    min-width: 700px;
+    min-width: 900px;
     /* margin: 0 13em; */
-    margin: 0 11em;
+    margin: 0 12em;
 }
 
 
@@ -309,7 +315,7 @@ div#buttomnav {
 
 #home-middle>div.public-home>div.landing-pic {
     /* background-color: blue; */
-    
+
     width: 100%;
     background-color: indigo;
 
@@ -321,9 +327,9 @@ div#buttomnav {
 }
 
 #home-middle>div.carousel_container {
-    background-image: radial-gradient(circle, rgb(255, 98, 0), rgb(255, 149, 0),rgb(130, 82, 16),rgb(40, 25, 5), rgb(36, 36, 36));
+    background-image: radial-gradient(circle, rgb(255, 98, 0), rgb(255, 149, 0), rgb(130, 82, 16), rgb(40, 25, 5), rgb(36, 36, 36));
     width: 100%;
-    padding: auto 0;
+    padding: 2em 0;
     margin: 0 auto 3em;
 }
 
@@ -367,8 +373,8 @@ div.log-in-form {
 
 form.sign-up-form {
     padding: 40px;
-    margin: 110px auto auto;
-    width: 480px;
+    margin: 1em auto 1em;
+    width: 470px;
     display: flex;
     flex-direction: column;
 }

@@ -83,10 +83,13 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                 </div>
             ) : (
                 <div className='public-home' >
-                    <div className='public-greeting'>Welcome to SonicCloud! </div>
-                    <div className='public-greeting'>Join us to discover more  or <NavLink className='home-signup' to='/signup' >Sign Up Now</NavLink> </div>
+                    <div className='public-greeting'>
+                        <div >Welcome to SonicCloud! </div>
+                        <div>Join us to discover more  or <NavLink className='home-signup' to='/signup' >Sign Up Now</NavLink> </div>
+                    </div>
+                    <div></div>
                     <div className="landing-pic">
-                        <img  src={bg}></img>
+                        <img src={bg}></img>
                     </div>
                 </div>
 
