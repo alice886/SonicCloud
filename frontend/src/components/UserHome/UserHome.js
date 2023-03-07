@@ -27,6 +27,15 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     const sessionUser = useSelector(state => state.session.user);
     const allsongs = useSelector(state => Object.values(state.song))
 
+    useEffect(() => {
+        const changePic = () => {
+            setPicInx(picInx === 2 ? 0 : picInx + 1)
+        }
+        const timer = setInterval(changePic, 2500)
+        return () => clearInterval(timer)
+    }, [picInx])
+
+
     // Create an array of Carousel Items
     // const items: CarouselItem[] = Array(20)
     //     .fill('')
@@ -40,25 +49,6 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
     //             </div>
     //         )
     //     }));
-
-    useEffect(() => {
-        setLandingpic(bg[picInx])
-    }, [picInx])
-
-    useEffect(() => {
-        const changePic = () => {
-            // if (landingpic < 2) {
-            //     setLandingpic(landingpic += 1)
-            // }
-            // else { setLandingpic(0) }
-            setPicInx(picInx == 2 ? 0 : picInx + 1)
-        }
-        const timer = setInterval(changePic, 3000)
-        return () => clearInterval(timer)
-    }, [picInx])
-
-
-
 
     const items: CarouselItem[] = allsongs?.map(song => ({
         alt: `${song.title}`,
@@ -83,7 +73,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
         await setSongName(song.title);
         await setArtistName(song.Artist.username);
         let homePlayer = document.getElementById('botton-player-bar');
-        if (played && songSelect == song.id) {
+        if (played && songSelect === song.id) {
             homePlayer.pause();
             setPlayed(false);
             setSongSelect();
@@ -108,7 +98,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                         <div >Hello {sessionUser?.username} </div>
                         <div >- Welcome back -  </div>
                     </div>
-                    <img className="landing-pic" src={landingpic} ></img>
+                    <img className="landing-pic" src={bg[picInx]} ></img>
                 </div>
             ) : (
                 <div className='public-home' >
@@ -118,7 +108,7 @@ const TestUserHome = ({ playing, setPlaying, setSongName, setArtistName }) => {
                     </div>
                     <div></div>
                     <div className="landing-pic">
-                        <img src={landingpic}></img>
+                        <img src={bg[picInx]}></img>
                     </div>
                 </div>
 
